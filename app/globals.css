@@ -23,7 +23,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .contactButton { display: inline-flex; align-items: center; gap: 12px; background: white; color: #0756b7; border-radius: 999px; padding: 14px 22px; font-weight: 700; box-shadow: 0 10px 28px rgba(0,0,0,.18); }
 .mobileMenu { display:none; color:white; background:transparent; border:0; }
 .heroGrid { position: relative; z-index: 2; display: grid; grid-template-columns: 39% 40% 21%; gap: 0; padding-top: 38px; min-height: 640px; }
-.heroCopy { padding: 28px 34px 62px 0; align-self: center; position:relative; z-index:3; }
+.heroCopy { grid-column:1; padding: 28px 34px 62px 0; align-self: center; position:relative; z-index:3; }
 .eyebrow { display:flex; align-items:center; gap:14px; font-size:11px; letter-spacing: 2.2px; color:#d5edf4; margin-bottom: 24px; }
 .eyebrow span { width:48px; height:2px; background:var(--blue); display:inline-block; }
 .heroCopy h1 { margin: 0; font-size: clamp(54px, 5vw, 78px); line-height: .91; letter-spacing: -3.5px; font-weight: 800; }
@@ -36,7 +36,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .microTrust svg { color: var(--blue); }
 .heroVisual { position:absolute; inset:-120px -180px -80px -180px; z-index:-1; padding:0; pointer-events:none; }
 .chefPlaceholder { width:100%; height:100%; border:0; border-radius:0; box-shadow:none; background-size:cover !important; background-position:center center !important; }
-.benefitStack { display:flex; flex-direction:column; justify-content:center; gap:12px; padding: 0 0 48px 8px; position:relative; z-index:3; }
+.benefitStack { grid-column:3; display:flex; flex-direction:column; justify-content:center; gap:12px; padding: 0 0 48px 18px; position:relative; z-index:3; align-self:center; width:100%; }
 .benefitCard { display:grid; grid-template-columns: 50px 1fr; align-items:center; gap:12px; min-height:96px; padding: 18px 16px; background: rgba(5,42,73,.82); border:1px solid rgba(32,182,243,.28); border-radius: 20px; box-shadow: 0 12px 26px rgba(0,0,0,.14); backdrop-filter: blur(14px); }
 .benefitCard svg { color:var(--blue-2); }
 .benefitCard h3 { margin:0 0 5px; font-size:15px; }
@@ -79,6 +79,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .nav { grid-template-columns:1fr auto auto; }
   .mobileMenu { display:block; }
   .heroGrid { grid-template-columns: 48% 31% 21%; }
+  .benefitStack { grid-column:3; padding-left:12px; }
   .hero { min-height:auto; }
   .stats { grid-template-columns: repeat(2,1fr); }
   .stat { border-bottom:1px solid #d8e1e7; }
@@ -105,7 +106,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .microTrust { gap:12px 18px; font-size:12px; }
   .heroVisual { inset:0; z-index:-1; }
   .chefPlaceholder { background-position:58% center !important; }
-  .benefitStack { order:3; display:grid; grid-template-columns:1fr 1fr; padding:18px 0 76px; }
+  .benefitStack { grid-column:auto; order:3; display:grid; grid-template-columns:1fr 1fr; padding:18px 0 76px; }
   .benefitCard { grid-template-columns:40px 1fr; min-height:82px; padding:14px 12px; border-radius:16px; }
   .benefitCard svg { width:28px; }
   .benefitCard h3 { font-size:12px; }
