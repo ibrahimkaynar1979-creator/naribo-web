@@ -137,14 +137,48 @@ export default function Home() {
         <style>{`
           .approvedJourney{background:#031722;padding:34px 0;overflow:hidden}
           .approvedJourneyInner{width:min(1320px,calc(100% - 64px));margin:0 auto;overflow:hidden;border-radius:30px}
-          .approvedJourney img{display:block;width:100%;height:auto}
+          .approvedJourneyImage{display:block;width:100%;height:auto}
+          .approvedJourneyMobileNote{display:none}
+
           @media(max-width:760px){
-            .approvedJourney{padding:18px 0}
-            .approvedJourneyInner{width:calc(100% - 28px);border-radius:20px;overflow-x:auto}
-            .approvedJourney img{width:980px;max-width:none}
+            .approvedJourney{padding:18px 0 22px}
+            .approvedJourneyInner{
+              width:calc(100% - 28px);
+              border-radius:20px;
+              overflow-x:auto;
+              overflow-y:hidden;
+              -webkit-overflow-scrolling:touch;
+              scroll-snap-type:x mandatory;
+              scrollbar-width:none;
+              box-shadow:0 14px 34px rgba(0,0,0,.22);
+            }
+            .approvedJourneyInner::-webkit-scrollbar{display:none}
+            .approvedJourneyImage{
+              width:760px;
+              max-width:none;
+              height:auto;
+              scroll-snap-align:start;
+            }
+            .approvedJourneyMobileNote{
+              display:flex;
+              align-items:center;
+              justify-content:center;
+              gap:8px;
+              color:#9bc7d3;
+              font-size:12px;
+              font-weight:700;
+              letter-spacing:.3px;
+              margin-top:10px;
+            }
+            .approvedJourneyMobileNote span{color:#21d8f6}
+          }
+
+          @media(max-width:430px){
+            .approvedJourneyImage{width:700px}
           }
         `}</style>
-        <div className="approvedJourneyInner">
+
+        <div className="approvedJourneyInner" aria-label="Reklamdan siparişe akış görseli, mobilde yana kaydırılabilir">
           <Image
             src="/reklamdan-siparise.png"
             alt="Naribo reklamdan siparişe üç adım tasarımı"
@@ -153,6 +187,7 @@ export default function Home() {
             className="approvedJourneyImage"
           />
         </div>
+        <div className="approvedJourneyMobileNote"><span>←</span> Yana kaydırarak akışı inceleyin <span>→</span></div>
       </section>
     </main>
   );
