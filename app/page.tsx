@@ -25,18 +25,25 @@ const setupSteps = [
   { no: '06', icon: CircleCheckBig, title: 'SATIŞA HAZIR', text: 'Menünüz, fiyatınız ve platform yapınız sipariş almaya hazır hale geliyor.' },
 ];
 
-const heroPlatforms = [
-  { name: 'Yemeksepeti', src: 'https://kurumsal.yemeksepeti.com/wp-content/uploads/2023/04/yemek-logo.svg', className: 'logoYemeksepeti' },
-  { name: 'Trendyol Yemek', src: 'https://logowik.com/content/uploads/images/trendyol-yemek6327.logowik.com.webp', className: 'logoTrendyol' },
-  { name: 'GetirYemek', src: 'https://pbs.twimg.com/profile_images/1719459736595091456/bWpu1ZHv_400x400.jpg', className: 'logoGetir' },
-  { name: 'Migros Yemek', src: 'https://static.wixstatic.com/media/54acb8_8b2340ac49c54e88ab0cfc161ca706de~mv2.jpg/v1/fill/w_600,h_600,al_c,q_80/migros-yemek.jpg', className: 'logoMigros' },
-];
-
 function Logo() {
   return (
     <a className="brand" href="#" aria-label="Naribo ana sayfa">
       <Image src="/naribo-logo.png" alt="Naribo Restaurant Growth Partner" width={265} height={110} priority className="brandImage" />
     </a>
+  );
+}
+
+function PlatformStrip() {
+  return (
+    <div className="platformStrip" aria-label="Sipariş platformları">
+      <div className="wordmark wordmarkYemeksepeti">Yemeksepeti</div>
+      <div className="wordmarkDivider" />
+      <div className="wordmark wordmarkTrendyol"><span>trendyol</span><b>yemek</b></div>
+      <div className="wordmarkDivider" />
+      <div className="wordmark wordmarkGetir"><span>getir</span><b>yemek</b></div>
+      <div className="wordmarkDivider" />
+      <div className="wordmark wordmarkMigros"><small>MİGROS</small><b>yemek</b></div>
+    </div>
   );
 }
 
@@ -89,14 +96,8 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="platformWrap shell" aria-label="Sipariş platformları">
-        <div className="platformBar">
-          {heroPlatforms.map((platform) => (
-            <div className="platformLogoItem" key={platform.name}>
-              <img src={platform.src} alt={`${platform.name} logosu`} className={platform.className} />
-            </div>
-          ))}
-        </div>
+      <section className="platformWrap shell">
+        <PlatformStrip />
       </section>
 
       <section className="stats shell">
@@ -132,11 +133,9 @@ export default function Home() {
         </div>
 
         <div className="shell setupFoot">
-          <div className="setupPlatforms setupPlatformLogos">
+          <div className="setupPlatforms">
             <span>PLATFORM BAŞVURULARI</span>
-            <img src="https://kurumsal.yemeksepeti.com/wp-content/uploads/2023/04/yemek-logo.svg" alt="Yemeksepeti logosu" />
-            <img src="https://logowik.com/content/uploads/images/trendyol-yemek6327.logowik.com.webp" alt="Trendyol Yemek logosu" />
-            <img src="https://static.wixstatic.com/media/54acb8_8b2340ac49c54e88ab0cfc161ca706de~mv2.jpg/v1/fill/w_600,h_600,al_c,q_80/migros-yemek.jpg" alt="Migros Yemek logosu" />
+            <strong>Yemeksepeti</strong><i>•</i><strong>Trendyol Yemek</strong><i>•</i><strong>Migros Yemek</strong>
           </div>
           <div className="setupResult"><CircleCheckBig size={22} /> Başvurudan yayına kadar tek ekip.</div>
         </div>
