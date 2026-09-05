@@ -20,18 +20,20 @@
   .microTrust { position:absolute;left:50%;bottom:-10px;transform:translateX(-50%);display:flex;flex-wrap:nowrap;align-items:center;justify-content:center;gap:9px;width:330px;max-width:calc(100vw - 24px);margin:0;font-size:7.6px;white-space:nowrap;color:rgba(236,247,250,.94); }
   .microTrust span { gap:3px; }.microTrust svg { width:10px;height:10px; }
 
-  /* Fotograf artik dev bir cover alani degil: kendi oraninda, yatayda ortali. */
   .heroVisual { position:absolute;z-index:2;top:92px;left:0;right:0;bottom:auto;height:820px;pointer-events:none;overflow:hidden; }
   .chefPlaceholder { width:100%;height:100%;background-size:auto 100% !important;background-position:center top !important;background-repeat:no-repeat !important; }
 
   .benefitStack { position:relative;z-index:5;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;width:calc(100% + 36px);margin:16px -18px 0;padding:62px 18px 18px;background:#031722; }
   .benefitCard { min-height:70px;grid-template-columns:30px 1fr;gap:8px;padding:11px;border-radius:16px;background:linear-gradient(180deg,#073452,#052b45);border:1px solid rgba(33,216,246,.18);box-shadow:0 8px 20px rgba(0,0,0,.14);backdrop-filter:blur(12px); }
   .benefitCard svg { width:21px;height:21px; }.benefitCard h3 { margin-bottom:2px;font-size:9.4px; }.benefitCard p { font-size:8px;line-height:1.3;color:#dcebf1; }
-  .platformWrap { width:calc(100% - 24px);margin-top:12px;position:relative;z-index:10; }
-  .platformImageBar { height:86px;padding:10px 12px;border-radius:18px;background:#fff;box-shadow:0 14px 30px rgba(16,47,67,.11); }
-  .platformStripImage { width:100%;height:100%;object-fit:contain;object-position:center; }
+
+  .mobilePlatformBand { display:flex;align-items:center;justify-content:center;width:calc(100% + 36px);height:72px;margin:0 -18px;padding:9px 14px;background:#fff;border-radius:0 0 24px 24px;overflow:hidden;box-shadow:0 10px 26px rgba(16,47,67,.1); }
+  .mobilePlatformBand img { display:block;width:100%;height:100%;object-fit:contain;object-position:center; }
+
+  .platformWrap { display:none; }
+
   .stats { width:calc(100% - 28px);grid-template-columns:repeat(2,1fr);padding:18px 0 30px; }
   .stat { min-height:60px;gap:8px;padding:9px 8px;border-right:1px solid #d8e1e7;border-bottom:1px solid #d8e1e7; }.stat:nth-child(2n){border-right:0}.stat:nth-child(5){border-bottom:0}.stat svg{width:23px;height:23px}.stat h3{margin-bottom:2px;font-size:9.5px}.stat p{font-size:8.5px}
 }
-@media (min-width:761px){.growthBand{display:none}}
-@media (max-width:390px){.heroGrid{padding-left:15px;padding-right:15px}.heroCopy{max-width:272px;padding-top:24px;padding-bottom:475px}.heroCopy h1{max-width:265px;font-size:31px}.heroCopy>p{max-width:245px;font-size:12.4px}.primaryCta{width:238px}.microTrust{width:300px;gap:6px;font-size:7px}.heroVisual{height:790px}.benefitCard{min-height:68px}}
+@media (min-width:761px){.growthBand{display:none}.mobilePlatformBand{display:none}}
+@media (max-width:390px){.heroGrid{padding-left:15px;padding-right:15px}.heroCopy{max-width:272px;padding-top:24px;padding-bottom:475px}.heroCopy h1{max-width:265px;font-size:31px}.heroCopy>p{max-width:245px;font-size:12.4px}.primaryCta{width:238px}.microTrust{width:300px;gap:6px;font-size:7px}.heroVisual{height:790px}.benefitCard{min-height:68px}.mobilePlatformBand{width:calc(100% + 30px);margin-left:-15px;margin-right:-15px;height:68px}}
