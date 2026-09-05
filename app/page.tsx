@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { ArrowRight, BarChart3, Clock3, Eye, Headphones, Menu, ShieldCheck, ShoppingCart, Target, TrendingUp, Users } from 'lucide-react';
 
 const benefits = [
@@ -17,10 +18,9 @@ const stats = [
 
 function Logo() {
   return (
-    <div className="brand" aria-label="Naribo">
-      <div className="brandWord"><span>nari</span><b>bo</b></div>
-      <div className="brandTag">RESTAURANT GROWTH PARTNER</div>
-    </div>
+    <a className="brand" href="#" aria-label="Naribo ana sayfa">
+      <Image src="/naribo-logo.png" alt="Naribo Restaurant Growth Partner" width={265} height={110} priority className="brandImage" />
+    </a>
   );
 }
 
@@ -45,7 +45,7 @@ export default function Home() {
         <div className="heroGrid shell">
           <div className="heroCopy">
             <div className="eyebrow"><span /> RESTORANLARIN DİJİTAL BÜYÜME ORTAĞI</div>
-            <h1>DAHA FAZLA<br /><strong>SİPARİŞ.</strong><br /><em>DAHA KÂRLI<br />BÜYÜME.</em></h1>
+            <h1><span>DAHA FAZLA</span><br /><strong>SİPARİŞ.</strong><br /><em>DAHA KÂRLI<br />BÜYÜME.</em></h1>
             <p>Yemek platformlarındaki satışınızı ve kârlılığınızı birlikte büyütüyoruz.</p>
             <a className="primaryCta" href="#analiz">Ücretsiz Restoran Analizi <ArrowRight size={20} /></a>
             <div className="microTrust">
@@ -57,15 +57,15 @@ export default function Home() {
 
           <div className="heroVisual" aria-label="Restoran şefi görsel alanı">
             <div className="chefPlaceholder">
-              <div className="chefText">FINAL ŞEF FOTOĞRAFI</div>
-              <small>Bu alan gerçek fotoğraf ile değiştirilecek.</small>
+              <div className="chefText">ŞEF GÖRSELİ ALANI</div>
+              <small>Final fotoğraf yerleşiminde değiştirilecek.</small>
             </div>
           </div>
 
           <div className="benefitStack">
             {benefits.map(({ icon: Icon, title, text }) => (
               <article className="benefitCard" key={title}>
-                <Icon size={34} strokeWidth={1.7} />
+                <Icon size={32} strokeWidth={1.7} />
                 <div><h3>{title}</h3><p>{text}</p></div>
               </article>
             ))}
@@ -85,7 +85,7 @@ export default function Home() {
       <section className="stats shell">
         {stats.map(({ icon: Icon, title, text }) => (
           <article className="stat" key={title}>
-            <Icon size={36} strokeWidth={1.65} />
+            <Icon size={34} strokeWidth={1.65} />
             <div><h3>{title}</h3><p>{text}</p></div>
           </article>
         ))}
