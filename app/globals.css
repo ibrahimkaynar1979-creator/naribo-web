@@ -16,7 +16,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .hero { position: relative; min-height: 760px; overflow: hidden; color: white; background: radial-gradient(circle at 66% 36%, rgba(36,118,157,.35), transparent 30%), linear-gradient(110deg, #061b29 0%, #072b48 52%, #061d2b 100%); border-radius: 0 0 38px 38px; }
 .heroGlow { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,.22), transparent 45%, rgba(0,0,0,.18)); pointer-events: none; }
 .nav { position: relative; z-index: 5; display: grid; grid-template-columns: 250px 1fr auto; align-items: center; gap: 28px; padding-top: 22px; }
-.brand { display:flex; align-items:center; width:230px; height:82px; overflow:hidden; }
+.brand { display:flex; align-items:center; width:230px; min-height:82px; }
 .brandImage { width:230px; height:auto; object-fit:contain; }
 .desktopNav { display: flex; justify-content: center; gap: 36px; font-size: 14px; color: #eef7fa; }
 .desktopNav a:first-child { font-weight: 700; }
@@ -44,11 +44,18 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .benefitCard h3 { margin:0 0 5px; font-size:15px; }
 .benefitCard p { margin:0; font-size:13px; line-height:1.35; color:#e1edf3; }
 .platformWrap { margin-top:-50px; position:relative; z-index:10; }
-.platformBar { background:white; min-height:104px; border-radius: 26px; display:grid; grid-template-columns: repeat(4,1fr); align-items:center; padding:0 22px; box-shadow: 0 18px 35px rgba(16,47,67,.12); }
-.platformLogoItem { min-height:66px; display:flex; align-items:center; justify-content:center; padding:10px 28px; border-right:1px solid #e3e8ec; overflow:hidden; }
-.platformLogoItem:last-child { border-right:0; }
-.platformLogoItem img { display:block; width:auto; max-width:190px; max-height:50px; object-fit:contain; }
-.platformLogoItem .logoGetir, .platformLogoItem .logoMigros { max-height:58px; border-radius:10px; }
+.platformStrip { background:#fff; min-height:104px; border-radius:26px; display:grid; grid-template-columns:1fr 1px 1.35fr 1px 1.2fr 1px 1fr; align-items:center; padding:0 34px; box-shadow:0 18px 35px rgba(16,47,67,.12); }
+.wordmark { min-height:68px; display:flex; align-items:center; justify-content:center; white-space:nowrap; line-height:1; }
+.wordmarkDivider { width:1px; height:54px; background:#d5dce0; justify-self:center; }
+.wordmarkYemeksepeti { color:#ff0051; font-size:30px; font-weight:900; font-style:italic; letter-spacing:-1.8px; }
+.wordmarkTrendyol { gap:0; font-size:30px; font-weight:500; letter-spacing:-1.5px; color:#151515; }
+.wordmarkTrendyol b { color:#f01812; font-weight:650; }
+.wordmarkGetir { gap:0; font-size:31px; font-weight:800; letter-spacing:-1.8px; }
+.wordmarkGetir span { color:#ffd000; }
+.wordmarkGetir b { color:#54369a; }
+.wordmarkMigros { flex-direction:column; gap:1px; color:#f36a00; font-weight:900; }
+.wordmarkMigros small { font-size:13px; letter-spacing:.2px; }
+.wordmarkMigros b { font-size:34px; letter-spacing:-2px; }
 .stats { display:grid; grid-template-columns:repeat(5,1fr); gap:0; padding:42px 0 64px; }
 .stat { display:flex; gap:15px; align-items:center; padding: 10px 20px; border-right:1px solid #d8e1e7; }
 .stat:last-child { border-right:0; }
@@ -75,8 +82,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .setupFoot { margin-top:28px; min-height:72px; border-radius:18px; padding:16px 22px; display:flex; align-items:center; justify-content:space-between; gap:24px; background:#082c3c; color:white; }
 .setupPlatforms { display:flex; align-items:center; flex-wrap:wrap; gap:12px; font-size:13px; }
 .setupPlatforms span { color:#72d9eb; font-size:10px; font-weight:800; letter-spacing:1.7px; margin-right:5px; }
-.setupPlatformLogos img { display:block; width:auto; max-width:122px; height:28px; object-fit:contain; padding:4px 8px; background:#fff; border-radius:8px; }
-.setupPlatformLogos img:nth-of-type(3) { height:34px; }
+.setupPlatforms strong { font-weight:650; }
+.setupPlatforms i { color:#2d7890; font-style:normal; }
 .setupResult { display:flex; align-items:center; gap:9px; color:#d9f7fb; font-size:13px; white-space:nowrap; }
 .setupResult svg { color:#35d4ef; }
 @media (max-width: 1100px) {
@@ -88,6 +95,9 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .hero { min-height:auto; }
   .stats { grid-template-columns: repeat(2,1fr); }
   .stat { border-bottom:1px solid #d8e1e7; }
+  .platformStrip { padding:0 20px; }
+  .wordmarkYemeksepeti, .wordmarkTrendyol, .wordmarkGetir { font-size:23px; }
+  .wordmarkMigros b { font-size:27px; }
   .setupIntro { grid-template-columns:1fr; gap:24px; }
   .setupFlow { grid-template-columns:repeat(3,1fr); gap:18px; }
   .setupFlow:before, .setupConnector { display:none; }
@@ -98,7 +108,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .hero { border-radius: 0 0 26px 26px; }
   .nav { padding-top:14px; grid-template-columns:1fr auto; }
   .contactButton { display:none; }
-  .brand { width:170px; height:70px; }
+  .brand { width:170px; min-height:70px; }
   .brandImage { width:170px; }
   .heroGrid { display:flex; flex-direction:column; padding-top:20px; }
   .heroCopy { padding: 10px 0 24px; }
@@ -116,11 +126,13 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .benefitCard h3 { font-size:12px; }
   .benefitCard p { font-size:11px; }
   .platformWrap { margin-top:-46px; }
-  .platformBar { grid-template-columns:1fr 1fr; padding:10px; border-radius:20px; }
-  .platformLogoItem { min-height:68px; padding:10px 12px; border-bottom:1px solid #e5e9ec; }
-  .platformLogoItem:nth-child(2) { border-right:0; }
-  .platformLogoItem:nth-child(3), .platformLogoItem:nth-child(4) { border-bottom:0; }
-  .platformLogoItem img { max-width:130px; max-height:42px; }
+  .platformStrip { grid-template-columns:1fr 1fr; gap:0; padding:10px 12px; border-radius:20px; }
+  .wordmarkDivider { display:none; }
+  .wordmark { min-height:62px; border-bottom:1px solid #e5e9ec; }
+  .wordmark:nth-of-type(3), .wordmark:nth-of-type(4) { border-bottom:0; }
+  .wordmarkYemeksepeti, .wordmarkTrendyol, .wordmarkGetir { font-size:20px; letter-spacing:-1px; }
+  .wordmarkMigros small { font-size:9px; }
+  .wordmarkMigros b { font-size:24px; }
   .stats { grid-template-columns:1fr 1fr; padding:28px 0 42px; }
   .stat { padding:14px 10px; gap:10px; }
   .stat svg { width:28px; }
@@ -133,10 +145,10 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .setupFlow { grid-template-columns:1fr; gap:12px; }
   .setupCard { min-height:0; padding:18px; display:grid; grid-template-columns:62px 1fr; column-gap:14px; }
   .setupTop { grid-row:1 / span 2; display:block; margin:0; }
-  .setupIcon { width:54px; height:54px; border-radius:16px; }
-  .setupNo { margin-top:10px; font-size:20px; }
-  .setupCard h3 { min-height:0; margin:5px 0 7px; }
-  .setupCard p { grid-column:2; font-size:12.5px; }
+  .setupIcon { width:54px; height:54px; }
+  .setupNo { font-size:13px; margin-top:8px; text-align:center; }
+  .setupCard h3 { min-height:0; margin:5px 0 6px; }
+  .setupCard p { grid-column:2; }
   .setupFoot { align-items:flex-start; flex-direction:column; }
   .setupResult { white-space:normal; }
 }
