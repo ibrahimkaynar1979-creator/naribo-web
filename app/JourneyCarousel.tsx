@@ -4,9 +4,9 @@ import { useRef, useState } from 'react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 
 const slides = [
-  { no: '01', title: 'REKLAMI GÖRÜR', pos: 'left center' },
-  { no: '02', title: 'PLATFORMUNU SEÇER', pos: 'center center' },
-  { no: '03', title: 'SİPARİŞİNİ VERİR', pos: 'right center' },
+  { no: '01', title: 'REKLAMI GÖRÜR', pos: 'left 60%' },
+  { no: '02', title: 'PLATFORMUNU SEÇER', pos: 'center 60%' },
+  { no: '03', title: 'SİPARİŞİNİ VERİR', pos: 'right 60%' },
 ];
 
 export default function JourneyCarousel() {
@@ -18,18 +18,24 @@ export default function JourneyCarousel() {
   };
 
   return (
-    <div
-      className="journeyCarousel"
-      onTouchStart={(e) => { startX.current = e.touches[0].clientX; }}
-      onTouchEnd={(e) => {
-        if (startX.current === null) return;
-        const diff = e.changedTouches[0].clientX - startX.current;
-        if (diff < -45) go(active + 1);
-        if (diff > 45) go(active - 1);
-        startX.current = null;
-      }}
-    >
-      <div className="journeyCarouselViewport">
+    <div className="journeyCarousel">
+      <div className="journeyCarouselFixedHead">
+        <div className="journeyCarouselKicker"><span /> REKLAMDAN SİPARİŞE <span /></div>
+        <h2>REKLAMI GÖSTERMEK YETMEZ.<br /><em>SİPARİŞE</em> GÖTÜRMEK GEREKİR.</h2>
+        <p>Instagram’da başlayan ilgiyi, müşterinin tercih ettiği sipariş kanalına taşıyoruz.</p>
+      </div>
+
+      <div
+        className="journeyCarouselViewport"
+        onTouchStart={(e) => { startX.current = e.touches[0].clientX; }}
+        onTouchEnd={(e) => {
+          if (startX.current === null) return;
+          const diff = e.changedTouches[0].clientX - startX.current;
+          if (diff < -45) go(active + 1);
+          if (diff > 45) go(active - 1);
+          startX.current = null;
+        }}
+      >
         {slides.map((slide, index) => (
           <article
             key={slide.no}
