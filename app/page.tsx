@@ -135,11 +135,12 @@ export default function Home() {
 
       <section className="approvedJourney" id="hizmetler">
         <style>{`
-          .approvedJourney{background:#031722;padding:0;overflow:hidden}
-          .approvedJourneyInner{width:100%;margin:0 auto}
+          .approvedJourney{background:#031722;padding:34px 0;overflow:hidden}
+          .approvedJourneyInner{width:min(1320px,calc(100% - 64px));margin:0 auto;overflow:hidden;border-radius:30px}
           .approvedJourney img{display:block;width:100%;height:auto}
           @media(max-width:760px){
-            .approvedJourneyInner{overflow-x:auto}
+            .approvedJourney{padding:18px 0}
+            .approvedJourneyInner{width:calc(100% - 28px);border-radius:20px;overflow-x:auto}
             .approvedJourney img{width:980px;max-width:none}
           }
         `}</style>
