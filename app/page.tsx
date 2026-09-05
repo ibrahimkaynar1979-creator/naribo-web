@@ -136,36 +136,17 @@ export default function Home() {
       <section className="approvedJourney" id="hizmetler">
         <style>{`
           .approvedJourney{background:#031722;padding:34px 0;overflow:hidden}
-          .approvedJourneyDesktop{width:min(1320px,calc(100% - 64px));margin:0 auto;overflow:hidden;border-radius:30px}
-          .approvedJourneyDesktop img{display:block;width:100%;height:auto}
-          .approvedJourneyMobile{display:none}
+          .approvedJourneyInner{width:min(1320px,calc(100% - 64px));margin:0 auto;overflow:hidden;border-radius:30px}
+          .approvedJourneyImage{display:block;width:100%;height:auto}
 
           @media(max-width:760px){
-            .approvedJourney{padding:36px 0 44px}
-            .approvedJourneyDesktop{display:none}
-            .approvedJourneyMobile{display:block;width:calc(100% - 28px);margin:0 auto;color:white}
-            .mobileJourneyKicker{display:flex;align-items:center;justify-content:center;gap:10px;color:#8ee9f7;font-size:10px;font-weight:800;letter-spacing:4px;margin-bottom:10px}
-            .mobileJourneyKicker:before,.mobileJourneyKicker:after{content:'';width:38px;height:1px;background:#20cbe9}
-            .mobileJourneyTitle{text-align:center;font-size:30px;line-height:.98;letter-spacing:-1.4px;margin:0 0 10px;font-weight:900}
-            .mobileJourneyTitle span{color:#21d8f6}
-            .mobileJourneySub{text-align:center;color:#c7dbe3;font-size:13px;line-height:1.45;margin:0 auto 24px;max-width:360px}
-            .mobileJourneyStack{display:grid;gap:18px}
-            .mobileJourneyCard{position:relative;overflow:hidden;border-radius:22px;background:#061d2b;border:1px solid rgba(33,216,246,.18);box-shadow:0 18px 38px rgba(0,0,0,.28)}
-            .mobileJourneyCrop{width:100%;aspect-ratio:.74;background-image:url('/reklamdan-siparise.png');background-repeat:no-repeat;background-size:300% auto;background-position-y:64%;}
-            .mobileJourneyCard.step1 .mobileJourneyCrop{background-position-x:0%}
-            .mobileJourneyCard.step2 .mobileJourneyCrop{background-position-x:50%}
-            .mobileJourneyCard.step3 .mobileJourneyCrop{background-position-x:100%}
-            .mobileJourneyMeta{display:grid;grid-template-columns:54px 1fr;gap:12px;align-items:center;padding:14px 16px 16px;background:linear-gradient(180deg,#082535,#061d2b)}
-            .mobileJourneyNo{font-size:30px;line-height:1;font-weight:900;color:#20d4f2}
-            .mobileJourneyMeta h3{margin:0 0 4px;font-size:15px;line-height:1.05}
-            .mobileJourneyMeta p{margin:0;color:#9fbdc8;font-size:12px;line-height:1.45}
-            .mobileJourneyArrow{display:grid;place-items:center;width:42px;height:42px;margin:-8px auto -8px;border-radius:50%;border:1px solid rgba(32,212,242,.45);color:#20d4f2;background:#082738;box-shadow:0 0 20px rgba(32,212,242,.12)}
-            .mobileJourneyResult{margin-top:24px;padding:18px;border-top:1px solid rgba(32,212,242,.22);text-align:center}
-            .mobileJourneyResult strong{display:block;font-size:17px;margin-bottom:5px}.mobileJourneyResult strong span{color:#21d8f6}.mobileJourneyResult p{margin:0;color:#9fbdc8;font-size:12px}
+            .approvedJourney{padding:18px 0}
+            .approvedJourneyInner{width:calc(100% - 20px);border-radius:18px;overflow:hidden}
+            .approvedJourneyImage{width:100%;height:auto;max-width:100%}
           }
         `}</style>
 
-        <div className="approvedJourneyDesktop">
+        <div className="approvedJourneyInner">
           <Image
             src="/reklamdan-siparise.png"
             alt="Naribo reklamdan siparişe üç adım tasarımı"
@@ -173,35 +154,6 @@ export default function Home() {
             height={941}
             className="approvedJourneyImage"
           />
-        </div>
-
-        <div className="approvedJourneyMobile">
-          <div className="mobileJourneyKicker">REKLAMDAN SİPARİŞE</div>
-          <h2 className="mobileJourneyTitle">REKLAMI GÖSTERMEK YETMEZ.<br /><span>SİPARİŞE</span> GÖTÜRMEK GEREKİR.</h2>
-          <p className="mobileJourneySub">Instagram’da başlayan ilgiyi, müşterinin tercih ettiği sipariş kanalına taşıyoruz.</p>
-
-          <div className="mobileJourneyStack">
-            <article className="mobileJourneyCard step1">
-              <div className="mobileJourneyCrop" />
-              <div className="mobileJourneyMeta"><div className="mobileJourneyNo">01</div><div><h3>REKLAMI GÖRÜR</h3><p>Instagram’da sponsorlu reklam müşterinin karşısına çıkar.</p></div></div>
-            </article>
-
-            <div className="mobileJourneyArrow"><ArrowRight size={22} /></div>
-
-            <article className="mobileJourneyCard step2">
-              <div className="mobileJourneyCrop" />
-              <div className="mobileJourneyMeta"><div className="mobileJourneyNo">02</div><div><h3>PLATFORMUNU SEÇER</h3><p>Restoranınıza özel yönlendirme sayfasından sipariş kanalını seçer.</p></div></div>
-            </article>
-
-            <div className="mobileJourneyArrow"><ArrowRight size={22} /></div>
-
-            <article className="mobileJourneyCard step3">
-              <div className="mobileJourneyCrop" />
-              <div className="mobileJourneyMeta"><div className="mobileJourneyNo">03</div><div><h3>SİPARİŞİNİ VERİR</h3><p>Seçtiği platformda restoran sayfanıza gider ve siparişini tamamlar.</p></div></div>
-            </article>
-          </div>
-
-          <div className="mobileJourneyResult"><strong>Reklamdan <span>siparişe</span> giden yolu kısaltıyoruz.</strong><p>Müşteri aramaz. Kaybolmaz. Platformunu seçer ve siparişe gider.</p></div>
         </div>
       </section>
     </main>
