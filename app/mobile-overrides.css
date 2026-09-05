@@ -57,7 +57,7 @@
   .heroCopy {
     width: 100%;
     max-width: 294px;
-    padding: 28px 0 282px;
+    padding: 28px 0 355px;
     position: relative;
     z-index: 4;
   }
@@ -103,25 +103,33 @@
   }
 
   .primaryCta {
-    width: fit-content;
-    max-width: 76%;
-    margin-top: 16px;
-    padding: 12px 17px;
+    position: absolute;
+    left: 0;
+    bottom: 78px;
+    width: 228px;
+    max-width: none;
+    margin: 0;
+    padding: 13px 17px;
+    justify-content: space-between;
     gap: 14px;
     font-size: 12.8px;
     box-shadow: 0 10px 24px rgba(12,199,234,.2);
   }
 
   .microTrust {
+    position: absolute;
+    left: 0;
+    bottom: 42px;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     align-items: center;
-    gap: 7px 12px;
-    width: 275px;
-    margin-top: 16px;
-    font-size: 8.4px;
-    color: rgba(236,247,250,.92);
-    text-shadow: 0 1px 8px rgba(0,0,0,.35);
+    gap: 10px;
+    width: 286px;
+    margin: 0;
+    font-size: 8.2px;
+    white-space: nowrap;
+    color: rgba(236,247,250,.94);
+    text-shadow: 0 1px 8px rgba(0,0,0,.4);
   }
   .microTrust span { gap: 4px; }
   .microTrust svg { width: 11px; height: 11px; }
@@ -129,7 +137,7 @@
   .heroVisual {
     position: absolute;
     z-index: 2;
-    inset: 62px -118px 142px 0;
+    inset: 62px -118px 112px 0;
     pointer-events: none;
   }
 
@@ -146,7 +154,7 @@
     gap: 7px;
     width: 100%;
     padding: 0;
-    margin: -116px 0 0;
+    margin: -94px 0 0;
   }
 
   .benefitCard {
@@ -208,11 +216,11 @@
 
 @media (max-width: 390px) {
   .heroGrid { padding-left: 15px; padding-right: 15px; }
-  .heroCopy { max-width: 272px; padding-top: 24px; padding-bottom: 272px; }
+  .heroCopy { max-width: 272px; padding-top: 24px; padding-bottom: 342px; }
   .heroCopy h1 { max-width: 265px; font-size: 31px; }
   .heroCopy > p { max-width: 235px; font-size: 12.4px; }
-  .primaryCta { max-width: 82%; font-size: 12.2px; }
-  .microTrust { width: 250px; gap: 7px 9px; font-size: 7.8px; }
+  .primaryCta { width: 220px; bottom: 76px; font-size: 12.2px; }
+  .microTrust { width: 260px; bottom: 41px; gap: 7px; font-size: 7.6px; }
   .heroVisual { inset-right: -126px; }
   .benefitCard { min-height: 60px; }
 }
