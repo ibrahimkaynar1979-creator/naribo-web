@@ -42,15 +42,22 @@ export default function Home() {
           <button className="mobileMenu" aria-label="Menüyü aç"><Menu /></button>
         </header>
         <div className="growthBand"><span />RESTORANLARIN BÜYÜME ORTAĞI<span /></div>
+
         <div className="heroGrid shell">
+          <div className="heroVisual" aria-label="Naribo şef görseli">
+            <div className="chefPlaceholder" style={{backgroundImage:"url('/chef-naribo.png')"}} />
+          </div>
+
           <div className="heroCopy">
             <div className="eyebrow"><span /> RESTORANLARIN DİJİTAL BÜYÜME ORTAĞI</div>
             <h1><span>DAHA FAZLA</span><br /><strong>SİPARİŞ.</strong><br /><em>DAHA KÂRLI<br />BÜYÜME.</em></h1>
             <p>Yemek platformlarındaki satışınızı ve kârlılığınızı birlikte büyütüyoruz.</p>
-            <a className="primaryCta" href="#analiz">Ücretsiz Restoran Analizi <ArrowRight size={20} /></a>
-            <div className="microTrust"><span><TrendingUp size={16} /> Hızlı analiz</span><span><Clock3 size={16} /> Size özel strateji</span><span><ShieldCheck size={16} /> Ücretsiz danışmanlık</span></div>
+            <div className="heroActionDock">
+              <a className="primaryCta" href="#analiz">Ücretsiz Restoran Analizi <ArrowRight size={20} /></a>
+              <div className="microTrust"><span><TrendingUp size={16} /> Hızlı analiz</span><span><Clock3 size={16} /> Size özel strateji</span><span><ShieldCheck size={16} /> Ücretsiz danışmanlık</span></div>
+            </div>
           </div>
-          <div className="heroVisual" aria-label="Naribo şef görseli"><div className="chefPlaceholder" style={{backgroundImage:"linear-gradient(180deg, rgba(2,12,18,.02), rgba(2,12,18,.18)), url('/chef-naribo.png')",backgroundPosition:'center',backgroundSize:'cover'}} /></div>
+
           <div className="benefitStack">{benefits.map(({icon:Icon,title,text})=><article className="benefitCard" key={title}><Icon size={32} strokeWidth={1.7}/><div><h3>{title}</h3><p>{text}</p></div></article>)}</div>
         </div>
       </section>
