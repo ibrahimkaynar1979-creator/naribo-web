@@ -59,6 +59,10 @@ export default function Home() {
           </div>
 
           <div className="benefitStack">{benefits.map(({icon:Icon,title,text})=><article className="benefitCard" key={title}><Icon size={32} strokeWidth={1.7}/><div><h3>{title}</h3><p>{text}</p></div></article>)}</div>
+
+          <div className="mobilePlatformBand" aria-label="Sipariş platformları">
+            <Image src="/platforms/platform-strip.png" alt="Yemeksepeti, Trendyol Yemek, GetirYemek ve Migros Yemek" width={1320} height={104} priority />
+          </div>
         </div>
       </section>
 
