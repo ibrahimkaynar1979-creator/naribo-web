@@ -1,4 +1,6 @@
 @media (max-width: 760px) {
+  .shell { width: calc(100% - 24px); }
+
   .nav {
     position: fixed;
     top: 0;
@@ -8,116 +10,183 @@
     width: 100%;
     max-width: none;
     margin: 0;
-    padding: 10px 18px;
+    padding: 8px 16px;
     grid-template-columns: 1fr auto;
-    background: rgba(3, 23, 34, 0.88);
+    background: rgba(3, 23, 34, .94);
     border-bottom: 1px solid rgba(255,255,255,.08);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 8px 30px rgba(0,0,0,.16);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
   }
 
-  .brand {
-    width: 146px;
-    min-height: 54px;
-  }
-
-  .brandImage {
-    width: 146px;
-  }
+  .brand { width: 140px; min-height: 48px; }
+  .brandImage { width: 140px; height: auto; }
+  .desktopNav, .contactButton { display: none; }
 
   .mobileMenu {
     display: grid;
     place-items: center;
-    width: 42px;
-    height: 42px;
+    width: 40px;
+    height: 40px;
+    color: #fff;
     border-radius: 12px;
     background: rgba(255,255,255,.06);
-    border: 1px solid rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.1);
   }
 
   .hero {
-    border-radius: 0 0 24px 24px;
     min-height: auto;
+    padding-bottom: 18px;
+    border-radius: 0 0 24px 24px;
+    background: #031722;
   }
 
   .heroGlow {
     background:
-      linear-gradient(90deg, rgba(1,14,22,.92) 0%, rgba(1,14,22,.72) 48%, rgba(1,14,22,.22) 78%, rgba(1,14,22,.38) 100%),
-      linear-gradient(180deg, rgba(1,14,22,.12) 0%, rgba(1,14,22,.08) 58%, rgba(1,14,22,.62) 100%);
+      linear-gradient(90deg, rgba(1,14,22,.88) 0%, rgba(1,14,22,.62) 45%, rgba(1,14,22,.15) 82%, rgba(1,14,22,.24) 100%),
+      linear-gradient(180deg, rgba(1,14,22,.05) 0%, rgba(1,14,22,.12) 54%, rgba(1,14,22,.76) 82%, #031722 100%);
   }
 
   .heroGrid {
-    padding-top: 92px;
-    min-height: 820px;
+    display: block;
+    width: 100%;
+    min-height: 0;
+    padding: 88px 18px 0;
   }
 
   .heroCopy {
-    padding: 24px 0 14px;
-    max-width: 92%;
+    width: 100%;
+    max-width: 355px;
+    padding: 26px 0 285px;
+    position: relative;
+    z-index: 4;
   }
 
   .eyebrow {
-    margin-bottom: 16px;
-    font-size: 9px;
-    letter-spacing: 1.7px;
+    gap: 9px;
+    margin-bottom: 15px;
+    font-size: 8px;
+    letter-spacing: 1.55px;
+    white-space: nowrap;
   }
+  .eyebrow span { width: 28px; }
 
   .heroCopy h1 {
-    font-size: clamp(46px, 12.2vw, 60px);
+    max-width: 340px;
+    margin: 0;
+    font-size: clamp(40px, 10.8vw, 52px);
     line-height: .94;
-    letter-spacing: -2.5px;
-    max-width: 440px;
+    letter-spacing: -2px;
   }
 
   .heroCopy > p {
-    max-width: 330px;
-    margin: 20px 0 18px;
-    font-size: 16px;
+    max-width: 305px;
+    margin: 18px 0 17px;
+    font-size: 15px;
     line-height: 1.45;
+    color: rgba(255,255,255,.92);
   }
 
   .primaryCta {
-    padding: 15px 20px;
-    font-size: 15px;
-    gap: 18px;
+    padding: 14px 19px;
+    gap: 16px;
+    font-size: 14px;
+    box-shadow: 0 12px 28px rgba(12,199,234,.2);
   }
 
   .microTrust {
-    gap: 10px 14px;
-    margin-top: 18px;
-    font-size: 10px;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 11px;
+    margin-top: 16px;
+    font-size: 8.5px;
+    white-space: nowrap;
   }
+  .microTrust span { gap: 4px; }
+  .microTrust svg { width: 12px; height: 12px; }
 
   .heroVisual {
-    inset: 76px 0 0;
+    position: absolute;
+    z-index: 2;
+    inset: 64px -64px 165px 0;
+    pointer-events: none;
   }
 
   .chefPlaceholder {
-    background-position: 68% center !important;
+    background-size: cover !important;
+    background-position: 72% center !important;
   }
 
   .benefitStack {
-    gap: 10px;
-    padding: 22px 0 54px;
+    position: relative;
+    z-index: 5;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    gap: 8px;
+    width: 100%;
+    padding: 0;
+    margin: -140px 0 0;
   }
 
   .benefitCard {
-    min-height: 76px;
-    padding: 12px 11px;
+    min-height: 72px;
+    grid-template-columns: 32px 1fr;
+    gap: 8px;
+    padding: 11px 10px;
     border-radius: 15px;
-    background: rgba(5,42,73,.84);
+    background: rgba(5,42,73,.9);
+    border: 1px solid rgba(33,216,246,.2);
+    box-shadow: 0 10px 24px rgba(0,0,0,.16);
+    backdrop-filter: blur(12px);
   }
-
-  .benefitCard h3 {
-    font-size: 11px;
-  }
-
-  .benefitCard p {
-    font-size: 10px;
-    line-height: 1.3;
-  }
+  .benefitCard svg { width: 23px; height: 23px; }
+  .benefitCard h3 { margin-bottom: 3px; font-size: 10px; }
+  .benefitCard p { font-size: 8.5px; line-height: 1.28; color: #dcebf1; }
 
   .platformWrap {
-    margin-top: -28px;
+    width: calc(100% - 24px);
+    margin-top: 14px;
+    position: relative;
+    z-index: 10;
   }
+
+  .platformImageBar {
+    height: 78px;
+    padding: 9px 10px;
+    border-radius: 18px;
+    box-shadow: 0 14px 30px rgba(16,47,67,.12);
+  }
+
+  .platformStripImage {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+  }
+
+  .stats {
+    width: calc(100% - 28px);
+    grid-template-columns: repeat(2, 1fr);
+    padding: 22px 0 34px;
+  }
+
+  .stat {
+    min-height: 64px;
+    gap: 9px;
+    padding: 10px 9px;
+    border-right: 1px solid #d8e1e7;
+    border-bottom: 1px solid #d8e1e7;
+  }
+  .stat:nth-child(2n) { border-right: 0; }
+  .stat:nth-child(5) { border-bottom: 0; }
+  .stat svg { width: 25px; height: 25px; }
+  .stat h3 { margin-bottom: 3px; font-size: 10px; }
+  .stat p { font-size: 9px; }
+}
+
+@media (max-width: 390px) {
+  .heroCopy h1 { font-size: 39px; }
+  .heroCopy { padding-bottom: 270px; }
+  .microTrust { gap: 7px; font-size: 7.8px; }
+  .benefitCard { min-height: 68px; }
 }
