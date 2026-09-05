@@ -74,6 +74,75 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .setupPlatforms i { color:#2d7890; font-style:normal; }
 .setupResult { display:flex; align-items:center; gap:9px; color:#d9f7fb; font-size:13px; white-space:nowrap; }
 .setupResult svg { color:#35d4ef; }
+
+.orderJourney { position:relative; overflow:hidden; padding:105px 0 92px; background:#061d2b; color:#fff; }
+.orderJourney:before { content:''; position:absolute; inset:0; background:linear-gradient(120deg,rgba(7,38,53,.95),rgba(3,20,30,.98)); }
+.orderGlow { position:absolute; border-radius:50%; filter:blur(4px); pointer-events:none; }
+.orderGlowOne { width:520px; height:520px; right:-180px; top:-180px; background:radial-gradient(circle,rgba(17,197,231,.15),transparent 68%); }
+.orderGlowTwo { width:440px; height:440px; left:-180px; bottom:-180px; background:radial-gradient(circle,rgba(17,197,231,.09),transparent 68%); }
+.orderIntro, .phoneFlow, .orderResultBar { position:relative; z-index:2; }
+.orderIntro { display:grid; grid-template-columns:1fr .72fr; align-items:end; gap:90px; margin-bottom:58px; }
+.orderKicker { display:flex; align-items:center; gap:13px; color:#51d7ef; font-size:12px; font-weight:800; letter-spacing:2.7px; margin-bottom:16px; }
+.orderKicker:before { content:''; width:42px; height:2px; background:#1cd2f2; }
+.orderIntro h2 { margin:0; font-size:clamp(43px,4.2vw,62px); line-height:.98; letter-spacing:-2.5px; }
+.orderIntro h2 span { color:#16c8e8; }
+.orderIntroText { display:flex; gap:18px; align-items:flex-start; color:#c8d9e1; max-width:480px; padding-bottom:4px; }
+.orderIntroText svg { color:#21d8f6; flex:0 0 auto; }
+.orderIntroText p { margin:0; font-size:16px; line-height:1.65; }
+.phoneFlow { display:grid; grid-template-columns:1fr 1.08fr 1fr; gap:82px; align-items:end; padding:8px 62px 0; }
+.phoneStep { position:relative; display:flex; flex-direction:column; align-items:center; }
+.phoneStep2 { transform:translateY(-18px); }
+.phoneStepHead { width:278px; display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
+.flowNo { font-size:13px; font-weight:800; letter-spacing:1.8px; color:#6f91a0; }
+.flowIcon { width:40px; height:40px; display:grid; place-items:center; border-radius:12px; background:#0a3144; color:#22d5f4; border:1px solid rgba(34,213,244,.22); }
+.phoneFrame { position:relative; width:278px; height:535px; padding:10px; border-radius:40px; background:linear-gradient(145deg,#31434c,#07131a 45%,#263b45); box-shadow:0 30px 60px rgba(0,0,0,.38), inset 0 0 0 1px rgba(255,255,255,.16); }
+.phoneStep2 .phoneFrame { width:302px; height:575px; }
+.phoneSpeaker { position:absolute; z-index:4; width:82px; height:21px; top:15px; left:50%; transform:translateX(-50%); border-radius:0 0 14px 14px; background:#071016; }
+.phoneScreen { height:100%; overflow:hidden; border-radius:31px; background:#fff; color:#102b39; position:relative; }
+.phoneStatus { height:35px; padding:11px 15px 0; display:flex; justify-content:space-between; font-size:8px; font-weight:800; color:#273a43; }
+.igTop { height:38px; padding:0 15px; display:flex; align-items:center; gap:7px; border-bottom:1px solid #edf0f2; }
+.igTop strong { font-size:12px; }
+.igProfile { display:flex; gap:8px; align-items:center; padding:12px 14px; }
+.avatar { width:31px; height:31px; border-radius:50%; display:grid; place-items:center; color:white; font-weight:800; background:linear-gradient(145deg,#12c6e8,#082f45); }
+.igProfile strong, .igProfile small { display:block; font-size:9px; }
+.igProfile small { color:#8b9aa1; margin-top:2px; }
+.igCreative { margin:0 12px; height:285px; border-radius:16px; padding:28px 17px; display:flex; flex-direction:column; justify-content:flex-end; color:white; background:linear-gradient(180deg,rgba(2,23,34,.2),rgba(2,23,34,.95)),radial-gradient(circle at 70% 30%,#1e6571,#071e2b 55%,#03131d); }
+.igCreative span { font-size:20px; font-weight:900; }
+.igCreative strong { font-size:30px; line-height:.95; }
+.igCreative em { color:#1ed5f2; font-size:23px; font-weight:900; line-height:1; font-style:normal; margin-top:5px; }
+.igAction { margin:12px; height:38px; border-radius:10px; display:flex; align-items:center; justify-content:center; gap:8px; background:#13c9e9; color:#052231; font-size:10px; font-weight:800; }
+.chooserScreen { padding:0 16px; background:linear-gradient(180deg,#f8fcfd,#eef5f7); }
+.chooserScreen .phoneStatus { margin:0 -5px; }
+.miniBrand { margin-top:22px; color:#0c9fbd; font-size:26px; font-weight:900; letter-spacing:-2px; }
+.chooserScreen h4 { margin:32px 0 7px; font-size:21px; line-height:1.05; color:#082838; }
+.chooserScreen > p { margin:0 0 23px; color:#758891; font-size:10px; }
+.platformChoice { height:57px; border-radius:14px; margin-bottom:11px; padding:0 14px; display:flex; align-items:center; justify-content:space-between; background:white; box-shadow:0 8px 22px rgba(14,45,59,.07); font-size:13px; font-weight:800; }
+.platformChoice.pink { color:#ef1456; }
+.platformChoice.orange { color:#e7351b; }
+.platformChoice.purple { color:#563b9d; }
+.platformChoice.migros { color:#f16400; }
+.orderScreen { background:#f6f7f8; }
+.orderHeader { padding:13px 15px; font-size:15px; font-weight:900; color:#ee1456; background:white; }
+.restaurantCover { height:138px; display:flex; align-items:flex-end; padding:16px; color:white; font-size:20px; font-weight:900; background:linear-gradient(180deg,rgba(4,28,39,.08),rgba(4,28,39,.82)),radial-gradient(circle at 60% 30%,#b67c3b,#143d43 62%,#08232e); }
+.ratingRow { display:flex; justify-content:space-between; padding:11px 14px; background:white; font-size:9px; }
+.ratingRow strong { color:#e89300; }
+.menuItem { margin:10px 10px 0; padding:9px; display:grid; grid-template-columns:45px 1fr auto; align-items:center; gap:8px; border-radius:12px; background:white; }
+.foodThumb { width:45px; height:45px; border-radius:9px; background:radial-gradient(circle at 45% 45%,#df9a43 0 22%,#4b792f 23% 40%,#202f27 41%); }
+.foodThumb.second { background:radial-gradient(circle at 50% 45%,#e0b45e 0 25%,#8b4d31 26% 40%,#24342c 41%); }
+.menuItem strong, .menuItem small { display:block; }
+.menuItem strong { font-size:9px; }
+.menuItem small { font-size:7px; color:#87959b; margin-top:3px; }
+.menuItem b { font-size:9px; }
+.basketButton { position:absolute; left:11px; right:11px; bottom:13px; height:39px; border-radius:11px; display:flex; align-items:center; justify-content:center; gap:7px; color:white; background:#ee1456; font-size:10px; font-weight:800; }
+.phoneCaption { width:278px; margin-top:18px; text-align:center; }
+.phoneCaption h3 { margin:0 0 7px; font-size:15px; letter-spacing:.3px; }
+.phoneCaption p { margin:0; color:#91a8b3; font-size:12px; line-height:1.5; }
+.flowArrow { position:absolute; top:300px; right:-53px; width:42px; height:42px; display:grid; place-items:center; border-radius:50%; color:#24d6f5; border:1px solid rgba(36,214,245,.3); background:#082b3d; }
+.orderResultBar { margin-top:55px; min-height:70px; padding:16px 22px; display:flex; align-items:center; gap:14px; border-radius:18px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.09); color:#91afbb; font-size:11px; font-weight:800; letter-spacing:1px; }
+.orderResultBar i { color:#24d6f5; font-style:normal; }
+.orderResultBar strong { color:#28d8f5; }
+.orderResultBar div { margin-left:auto; color:#d6e5ea; font-size:12px; font-weight:500; letter-spacing:0; }
+
 @media (max-width: 1100px) {
   .desktopNav { display:none; }
   .nav { grid-template-columns:1fr auto auto; }
@@ -88,6 +157,9 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .setupFlow { grid-template-columns:repeat(3,1fr); gap:18px; }
   .setupFlow:before, .setupConnector { display:none; }
   .setupCard { min-height:240px; }
+  .orderIntro { grid-template-columns:1fr; gap:25px; }
+  .phoneFlow { gap:30px; padding-inline:0; }
+  .flowArrow { display:none; }
 }
 @media (max-width: 760px) {
   .shell { width:min(100% - 28px, 1320px); }
@@ -132,4 +204,14 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .setupCard p { grid-column:2; }
   .setupFoot { align-items:flex-start; flex-direction:column; }
   .setupResult { white-space:normal; }
+  .orderJourney { padding:68px 0 60px; }
+  .orderIntro { margin-bottom:38px; }
+  .orderIntro h2 { font-size:39px; }
+  .orderIntroText p { font-size:14px; }
+  .phoneFlow { display:flex; flex-direction:column; gap:45px; align-items:center; }
+  .phoneStep2 { transform:none; }
+  .phoneFrame, .phoneStep2 .phoneFrame { width:286px; height:550px; }
+  .phoneStepHead, .phoneCaption { width:286px; }
+  .orderResultBar { flex-wrap:wrap; justify-content:center; text-align:center; }
+  .orderResultBar div { width:100%; margin:5px 0 0; }
 }
