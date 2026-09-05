@@ -1,5 +1,12 @@
 import Image from 'next/image';
-import { ArrowRight, BadgePercent, BarChart3, Camera, CircleCheckBig, ClipboardCheck, Headphones, ListChecks, Store, Target, TrendingUp, Users } from 'lucide-react';
+import { ArrowRight, BadgePercent, BarChart3, Camera, CircleCheckBig, ClipboardCheck, Clock3, Eye, Headphones, ListChecks, Menu, ShieldCheck, ShoppingCart, Store, Target, TrendingUp, Users } from 'lucide-react';
+
+const benefits = [
+  { icon: Eye, title: 'GÖRÜNÜRLÜK', text: 'Daha çok müşteriye ulaşın.' },
+  { icon: Target, title: 'DÖNÜŞÜM', text: 'Görüntülenmeyi siparişe çevirin.' },
+  { icon: ShoppingCart, title: 'SEPET', text: 'Sepet tutarını artırın.' },
+  { icon: BarChart3, title: 'KÂRLILIK', text: 'Sipariş başı kazancı artırın.' },
+];
 
 const stats = [
   { icon: Target, title: '4 PLATFORM', text: 'Tek büyüme stratejisi' },
@@ -14,37 +21,76 @@ const setupSteps = [
   { no: '02', icon: ListChecks, title: 'MENÜ', text: 'Ürünlerinizi satışa uygun, anlaşılır bir menü yapısına dönüştürüyoruz.' },
   { no: '03', icon: BadgePercent, title: 'FİYAT & KAMPANYA', text: 'Fiyat ve kampanya yapısını kârlılığı gözeterek planlıyoruz.' },
   { no: '04', icon: Camera, title: 'GÖRSELLER', text: 'Ürünlerinizi iştah açıcı ve platforma uygun görsellerle hazırlıyoruz.' },
-  { no: '05', icon: Store, title: 'PLATFORM BAŞVURULARI', text: 'Başvuru ve mağaza kurulum süreçlerini 3 ana kanal için hazırlıyoruz.' },
+  { no: '05', icon: Store, title: 'PLATFORM BAŞVURULARI', text: 'Başvuru ve mağaza kurulum süreçlerini platformlara göre hazırlıyoruz.' },
   { no: '06', icon: CircleCheckBig, title: 'SATIŞA HAZIR', text: 'Menünüz, fiyatınız ve platform yapınız sipariş almaya hazır hale geliyor.' },
 ];
+
+function Logo() {
+  return (
+    <a className="brand" href="#" aria-label="Naribo ana sayfa">
+      <Image src="/naribo-logo.png" alt="Naribo Restaurant Growth Partner" width={265} height={110} priority className="brandImage" />
+    </a>
+  );
+}
 
 export default function Home() {
   return (
     <main>
-      <style>{`
-        .heroPosterSection{position:relative;width:100%;background:#03141e;overflow:hidden}
-        .heroPosterImage{display:block;width:100%;height:auto}
-        .heroPosterAnalysisLink,.heroPosterContactLink{position:absolute;display:block;z-index:2;border-radius:999px}
-        .heroPosterAnalysisLink{left:6.3%;top:62.7%;width:23%;height:7.8%}
-        .heroPosterContactLink{right:8.6%;top:2.8%;width:12.3%;height:5.8%}
-        @media(max-width:760px){
-          .heroPosterSection{overflow-x:auto}
-          .heroPosterImage{width:920px;max-width:none;height:auto}
-          .heroPosterAnalysisLink,.heroPosterContactLink{display:none}
-        }
-      `}</style>
+      <section className="hero">
+        <div className="heroGlow" />
 
-      <section className="heroPosterSection" aria-label="Naribo ana sunum">
-        <Image
-          src="/hero-final.png"
-          alt="Naribo - Daha fazla sipariş, daha kârlı büyüme"
-          width={1672}
-          height={941}
-          priority
-          className="heroPosterImage"
-        />
-        <a className="heroPosterAnalysisLink" href="#analiz" aria-label="Ücretsiz Restoran Analizi" />
-        <a className="heroPosterContactLink" href="#iletisim" aria-label="İletişime Geç" />
+        <header className="nav shell">
+          <Logo />
+          <nav className="desktopNav" aria-label="Ana menü">
+            <a href="#">Ana Sayfa</a>
+            <a href="#hizmetler">Hizmetler</a>
+            <a href="#nasil">Nasıl Çalışıyoruz?</a>
+            <a href="#basari">Başarı Hikayeleri</a>
+            <a href="#hakkimizda">Hakkımızda</a>
+          </nav>
+          <a className="contactButton" href="#iletisim">İletişime Geç <ArrowRight size={18} /></a>
+          <button className="mobileMenu" aria-label="Menüyü aç"><Menu /></button>
+        </header>
+
+        <div className="heroGrid shell">
+          <div className="heroCopy">
+            <div className="eyebrow"><span /> RESTORANLARIN DİJİTAL BÜYÜME ORTAĞI</div>
+            <h1><span>DAHA FAZLA</span><br /><strong>SİPARİŞ.</strong><br /><em>DAHA KÂRLI<br />BÜYÜME.</em></h1>
+            <p>Yemek platformlarındaki satışınızı ve kârlılığınızı birlikte büyütüyoruz.</p>
+            <a className="primaryCta" href="#analiz">Ücretsiz Restoran Analizi <ArrowRight size={20} /></a>
+            <div className="microTrust">
+              <span><TrendingUp size={16} /> Hızlı analiz</span>
+              <span><Clock3 size={16} /> Size özel strateji</span>
+              <span><ShieldCheck size={16} /> Ücretsiz danışmanlık</span>
+            </div>
+          </div>
+
+          <div className="heroVisual" aria-label="Naribo şef görseli">
+            <div
+              className="chefPlaceholder"
+              style={{
+                backgroundImage: "linear-gradient(180deg, rgba(2,12,18,.02), rgba(2,12,18,.18)), url('/chef-naribo.png')",
+                backgroundPosition: 'center',
+                backgroundSize: 'cover',
+              }}
+            />
+          </div>
+
+          <div className="benefitStack">
+            {benefits.map(({ icon: Icon, title, text }) => (
+              <article className="benefitCard" key={title}>
+                <Icon size={32} strokeWidth={1.7} />
+                <div><h3>{title}</h3><p>{text}</p></div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="platformWrap shell" aria-label="Sipariş platformları">
+        <div className="platformImageBar">
+          <Image src="/platforms/platform-strip.png" alt="Yemeksepeti, Trendyol Yemek, GetirYemek ve Migros Yemek" width={1320} height={104} priority className="platformStripImage" />
+        </div>
       </section>
 
       <section className="stats shell">
@@ -82,7 +128,7 @@ export default function Home() {
         <div className="shell setupFoot">
           <div className="setupPlatforms">
             <span>PLATFORM BAŞVURULARI</span>
-            <strong>Yemeksepeti</strong><i>•</i><strong>Trendyol Yemek</strong><i>•</i><strong>Migros Yemek</strong>
+            <strong>Yemeksepeti</strong><i>•</i><strong>Trendyol Yemek</strong><i>•</i><strong>GetirYemek</strong><i>•</i><strong>Migros Yemek</strong>
           </div>
           <div className="setupResult"><CircleCheckBig size={22} /> Başvurudan yayına kadar tek ekip.</div>
         </div>
