@@ -27,7 +27,7 @@ const setupSteps = [
 ];
 
 function Logo() {
-  return <a className="brand" href="#" aria-label="Naribo ana sayfa"><Image src="/naribo-logo.png" alt="Naribo Restaurant Growth Partner" width={265} height={110} priority className="brandImage" /></a>;
+  return <a className="brand" href="#" aria-label="Naribo ana sayfa"><Image src="/naribo-logo.png" alt="Naribo" width={265} height={110} priority className="brandImage" /></a>;
 }
 
 export default function Home() {
@@ -41,6 +41,7 @@ export default function Home() {
           <a className="contactButton" href="#iletisim">İletişime Geç <ArrowRight size={18} /></a>
           <button className="mobileMenu" aria-label="Menüyü aç"><Menu /></button>
         </header>
+        <div className="growthBand"><span />RESTORANLARIN BÜYÜME ORTAĞI<span /></div>
         <div className="heroGrid shell">
           <div className="heroCopy">
             <div className="eyebrow"><span /> RESTORANLARIN DİJİTAL BÜYÜME ORTAĞI</div>
