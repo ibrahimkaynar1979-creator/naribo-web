@@ -44,18 +44,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .benefitCard h3 { margin:0 0 5px; font-size:15px; }
 .benefitCard p { margin:0; font-size:13px; line-height:1.35; color:#e1edf3; }
 .platformWrap { margin-top:-50px; position:relative; z-index:10; }
-.platformStrip { background:#fff; min-height:104px; border-radius:26px; display:grid; grid-template-columns:1fr 1px 1.35fr 1px 1.2fr 1px 1fr; align-items:center; padding:0 34px; box-shadow:0 18px 35px rgba(16,47,67,.12); }
-.wordmark { min-height:68px; display:flex; align-items:center; justify-content:center; white-space:nowrap; line-height:1; }
-.wordmarkDivider { width:1px; height:54px; background:#d5dce0; justify-self:center; }
-.wordmarkYemeksepeti { color:#ff0051; font-size:30px; font-weight:900; font-style:italic; letter-spacing:-1.8px; }
-.wordmarkTrendyol { gap:0; font-size:30px; font-weight:500; letter-spacing:-1.5px; color:#151515; }
-.wordmarkTrendyol b { color:#f01812; font-weight:650; }
-.wordmarkGetir { gap:0; font-size:31px; font-weight:800; letter-spacing:-1.8px; }
-.wordmarkGetir span { color:#ffd000; }
-.wordmarkGetir b { color:#54369a; }
-.wordmarkMigros { flex-direction:column; gap:1px; color:#f36a00; font-weight:900; }
-.wordmarkMigros small { font-size:13px; letter-spacing:.2px; }
-.wordmarkMigros b { font-size:34px; letter-spacing:-2px; }
+.platformImageBar { width:100%; height:104px; background:#fff; border-radius:26px; overflow:hidden; box-shadow:0 18px 35px rgba(16,47,67,.12); display:flex; align-items:center; justify-content:center; }
+.platformStripImage { display:block; width:100%; height:100%; object-fit:cover; object-position:center; }
 .stats { display:grid; grid-template-columns:repeat(5,1fr); gap:0; padding:42px 0 64px; }
 .stat { display:flex; gap:15px; align-items:center; padding: 10px 20px; border-right:1px solid #d8e1e7; }
 .stat:last-child { border-right:0; }
@@ -95,9 +85,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .hero { min-height:auto; }
   .stats { grid-template-columns: repeat(2,1fr); }
   .stat { border-bottom:1px solid #d8e1e7; }
-  .platformStrip { padding:0 20px; }
-  .wordmarkYemeksepeti, .wordmarkTrendyol, .wordmarkGetir { font-size:23px; }
-  .wordmarkMigros b { font-size:27px; }
+  .platformImageBar { height:94px; border-radius:22px; }
   .setupIntro { grid-template-columns:1fr; gap:24px; }
   .setupFlow { grid-template-columns:repeat(3,1fr); gap:18px; }
   .setupFlow:before, .setupConnector { display:none; }
@@ -125,14 +113,9 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .benefitCard svg { width:28px; }
   .benefitCard h3 { font-size:12px; }
   .benefitCard p { font-size:11px; }
-  .platformWrap { margin-top:-46px; }
-  .platformStrip { grid-template-columns:1fr 1fr; gap:0; padding:10px 12px; border-radius:20px; }
-  .wordmarkDivider { display:none; }
-  .wordmark { min-height:62px; border-bottom:1px solid #e5e9ec; }
-  .wordmark:nth-of-type(3), .wordmark:nth-of-type(4) { border-bottom:0; }
-  .wordmarkYemeksepeti, .wordmarkTrendyol, .wordmarkGetir { font-size:20px; letter-spacing:-1px; }
-  .wordmarkMigros small { font-size:9px; }
-  .wordmarkMigros b { font-size:24px; }
+  .platformWrap { margin-top:-38px; }
+  .platformImageBar { height:72px; border-radius:18px; }
+  .platformStripImage { object-fit:cover; }
   .stats { grid-template-columns:1fr 1fr; padding:28px 0 42px; }
   .stat { padding:14px 10px; gap:10px; }
   .stat svg { width:28px; }
