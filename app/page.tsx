@@ -21,6 +21,19 @@ const setupSteps = [
 export default function Home() {
   return (
     <main>
+      <style>{`
+        .heroPosterSection{position:relative;width:100%;background:#03141e;overflow:hidden}
+        .heroPosterImage{display:block;width:100%;height:auto}
+        .heroPosterAnalysisLink,.heroPosterContactLink{position:absolute;display:block;z-index:2;border-radius:999px}
+        .heroPosterAnalysisLink{left:6.3%;top:62.7%;width:23%;height:7.8%}
+        .heroPosterContactLink{right:8.6%;top:2.8%;width:12.3%;height:5.8%}
+        @media(max-width:760px){
+          .heroPosterSection{overflow-x:auto}
+          .heroPosterImage{width:920px;max-width:none;height:auto}
+          .heroPosterAnalysisLink,.heroPosterContactLink{display:none}
+        }
+      `}</style>
+
       <section className="heroPosterSection" aria-label="Naribo ana sunum">
         <Image
           src="/hero-final.png"
