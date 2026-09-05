@@ -136,17 +136,33 @@ export default function Home() {
       <section className="approvedJourney" id="hizmetler">
         <style>{`
           .approvedJourney{background:#031722;padding:34px 0;overflow:hidden}
-          .approvedJourneyInner{width:min(1320px,calc(100% - 64px));margin:0 auto;overflow:hidden;border-radius:30px}
-          .approvedJourneyImage{display:block;width:100%;height:auto}
+          .approvedJourneyDesktop{width:min(1320px,calc(100% - 64px));margin:0 auto;overflow:hidden;border-radius:30px}
+          .approvedJourneyDesktop img{display:block;width:100%;height:auto}
+          .approvedJourneyMobile{display:none}
 
           @media(max-width:760px){
-            .approvedJourney{padding:18px 0}
-            .approvedJourneyInner{width:calc(100% - 20px);border-radius:18px;overflow:hidden}
-            .approvedJourneyImage{width:100%;height:auto;max-width:100%}
+            .approvedJourney{padding:0;background:#031722}
+            .approvedJourneyDesktop{display:none}
+            .approvedJourneyMobile{display:block;position:relative}
+            .journeySwipe{display:flex;width:100%;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+            .journeySwipe::-webkit-scrollbar{display:none}
+            .journeySlide{position:relative;flex:0 0 100vw;height:78vh;min-height:560px;max-height:760px;scroll-snap-align:start;scroll-snap-stop:always;overflow:hidden;background:#031722}
+            .journeyCrop{position:absolute;inset:0;background-image:url('/reklamdan-siparise.png');background-repeat:no-repeat;background-size:auto 100%;background-position-y:center}
+            .journeySlide.slide1 .journeyCrop{background-position-x:left}
+            .journeySlide.slide2 .journeyCrop{background-position-x:center}
+            .journeySlide.slide3 .journeyCrop{background-position-x:right}
+            .journeySlide:after{content:'';position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,transparent,rgba(3,23,34,.88));pointer-events:none}
+            .journeySlideLabel{position:absolute;z-index:2;left:18px;right:18px;bottom:22px;display:flex;align-items:flex-end;justify-content:space-between;gap:16px;color:white}
+            .journeySlideLabel strong{font-size:34px;line-height:.9;color:#21d8f6}
+            .journeySlideLabel span{display:block;margin-top:4px;font-size:16px;font-weight:800;letter-spacing:.2px}
+            .journeySwipeHint{position:absolute;z-index:5;right:14px;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:#21d8f6;background:rgba(3,23,34,.78);border:1px solid rgba(33,216,246,.5);box-shadow:0 0 22px rgba(33,216,246,.15);pointer-events:none}
+            .journeyDots{display:flex;justify-content:center;gap:7px;padding:12px 0 14px;background:#031722}
+            .journeyDots i{display:block;width:7px;height:7px;border-radius:50%;background:#285165}
+            .journeyDots i:first-child{background:#21d8f6}
           }
         `}</style>
 
-        <div className="approvedJourneyInner">
+        <div className="approvedJourneyDesktop">
           <Image
             src="/reklamdan-siparise.png"
             alt="Naribo reklamdan siparişe üç adım tasarımı"
@@ -154,6 +170,25 @@ export default function Home() {
             height={941}
             className="approvedJourneyImage"
           />
+        </div>
+
+        <div className="approvedJourneyMobile" aria-label="Reklamdan siparişe mobil kaydırmalı akış">
+          <div className="journeySwipe">
+            <article className="journeySlide slide1">
+              <div className="journeyCrop" />
+              <div className="journeySlideLabel"><div><strong>01</strong><span>REKLAMI GÖRÜR</span></div></div>
+            </article>
+            <article className="journeySlide slide2">
+              <div className="journeyCrop" />
+              <div className="journeySlideLabel"><div><strong>02</strong><span>PLATFORMUNU SEÇER</span></div></div>
+            </article>
+            <article className="journeySlide slide3">
+              <div className="journeyCrop" />
+              <div className="journeySlideLabel"><div><strong>03</strong><span>SİPARİŞİNİ VERİR</span></div></div>
+            </article>
+          </div>
+          <div className="journeySwipeHint"><ArrowRight size={22} /></div>
+          <div className="journeyDots"><i/><i/><i/></div>
         </div>
       </section>
     </main>
