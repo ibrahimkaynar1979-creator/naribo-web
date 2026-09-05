@@ -84,7 +84,7 @@ export default function Home() {
 
       <section className="platformWrap shell" aria-label="Sipariş platformları">
         <div className="platformImageBar">
-          <Image src="/platform-strip.png" alt="Yemeksepeti, Trendyol Yemek, GetirYemek ve Migros Yemek" width={1320} height={104} priority className="platformStripImage" />
+          <Image src="/platforms/platform-strip.png" alt="Yemeksepeti, Trendyol Yemek, GetirYemek ve Migros Yemek" width={1320} height={104} priority className="platformStripImage" />
         </div>
       </section>
 
