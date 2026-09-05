@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import './mobile-overrides.css';
 
 export const metadata: Metadata = {
   title: 'Naribo | Restaurant Growth Partner',
