@@ -33,20 +33,6 @@ function Logo() {
   );
 }
 
-function PlatformStrip() {
-  return (
-    <div className="platformStrip" aria-label="Sipariş platformları">
-      <div className="wordmark wordmarkYemeksepeti">Yemeksepeti</div>
-      <div className="wordmarkDivider" />
-      <div className="wordmark wordmarkTrendyol"><span>trendyol</span><b>yemek</b></div>
-      <div className="wordmarkDivider" />
-      <div className="wordmark wordmarkGetir"><span>getir</span><b>yemek</b></div>
-      <div className="wordmarkDivider" />
-      <div className="wordmark wordmarkMigros"><small>MİGROS</small><b>yemek</b></div>
-    </div>
-  );
-}
-
 export default function Home() {
   return (
     <main>
@@ -96,8 +82,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="platformWrap shell">
-        <PlatformStrip />
+      <section className="platformWrap shell" aria-label="Sipariş platformları">
+        <div className="platformImageBar">
+          <Image src="/platform-strip.png" alt="Yemeksepeti, Trendyol Yemek, GetirYemek ve Migros Yemek" width={1320} height={104} priority className="platformStripImage" />
+        </div>
       </section>
 
       <section className="stats shell">
