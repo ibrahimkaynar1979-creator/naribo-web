@@ -73,13 +73,12 @@ export default function Home() {
             .journeyCarouselKicker{display:flex;align-items:center;justify-content:center;gap:10px;color:#8feaf8;font-size:10px;font-weight:800;letter-spacing:4px;margin-bottom:10px;white-space:nowrap}
             .journeyCarouselKicker span{width:38px;height:1px;background:#20cbe9}
             .journeyCarouselFixedHead h2{margin:0;font-size:29px;line-height:.98;letter-spacing:-1.2px;font-weight:900}.journeyCarouselFixedHead h2 em{font-style:normal;color:#21d8f6}.journeyCarouselFixedHead p{margin:10px auto 0;max-width:410px;color:#c4d7df;font-size:12px;line-height:1.4}
-            .journeyCarouselViewport{position:relative;width:100%;height:58vh;min-height:470px;max-height:610px;overflow:hidden;touch-action:pan-y;background:#031722}
-            .journeyCarouselSlide{position:absolute;inset:0;opacity:0;transform:scale(.99);transition:opacity .24s ease,transform .24s ease;pointer-events:none;overflow:hidden}.journeyCarouselSlide.isActive{opacity:1;transform:scale(1);pointer-events:auto}
-            .journeyCarouselArtwork{position:absolute;inset:0;background-image:url('/reklamdan-siparise.png');background-repeat:no-repeat;background-size:300% auto;background-position-y:63%!important}
+            .journeyCarouselViewport{position:relative;width:100%;height:auto;aspect-ratio:560/630;overflow:hidden;touch-action:pan-y;background:#031722}
+            .journeyCarouselSlide{position:absolute;inset:0;opacity:0;transform:translateX(18px);transition:opacity .22s ease,transform .22s ease;pointer-events:none;overflow:hidden}.journeyCarouselSlide.isActive{opacity:1;transform:translateX(0);pointer-events:auto}
+            .journeyCarouselArtwork{position:absolute;inset:0;background-image:url('/reklamdan-siparise.png');background-repeat:no-repeat;background-size:298.57% 149.37%;background-position-y:62.7%!important}
             .journeyCarouselSlide:nth-child(1) .journeyCarouselArtwork{background-position-x:0%!important}.journeyCarouselSlide:nth-child(2) .journeyCarouselArtwork{background-position-x:50%!important}.journeyCarouselSlide:nth-child(3) .journeyCarouselArtwork{background-position-x:100%!important}
-            .journeyCarouselShade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(3,23,34,.04) 66%,rgba(3,23,34,.82) 100%)}
-            .journeyCarouselLabel{display:none}
-            .journeyCarouselNav{position:absolute;z-index:6;top:52%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(33,216,246,.58);background:rgba(3,23,34,.84);color:#21d8f6}.journeyCarouselNav.prev{left:10px}.journeyCarouselNav.next{right:10px}
+            .journeyCarouselShade{display:none}.journeyCarouselLabel{display:none}
+            .journeyCarouselNav{position:absolute;z-index:6;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(33,216,246,.58);background:rgba(3,23,34,.84);color:#21d8f6}.journeyCarouselNav.prev{left:10px}.journeyCarouselNav.next{right:10px}
             .journeyCarouselDots{height:34px;display:flex;align-items:center;justify-content:center;gap:8px}.journeyCarouselDots button{border:0;padding:0;width:7px;height:7px;border-radius:99px;background:#31566a}.journeyCarouselDots button.active{width:24px;background:#21d8f6}
           }
         `}</style>
