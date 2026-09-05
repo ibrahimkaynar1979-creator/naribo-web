@@ -43,8 +43,8 @@
 
   .heroGlow {
     background:
-      linear-gradient(90deg, rgba(1,14,22,.9) 0%, rgba(1,14,22,.62) 43%, rgba(1,14,22,.14) 80%, rgba(1,14,22,.22) 100%),
-      linear-gradient(180deg, rgba(1,14,22,.04) 0%, rgba(1,14,22,.1) 52%, rgba(1,14,22,.74) 82%, #031722 100%);
+      linear-gradient(90deg, rgba(1,14,22,.94) 0%, rgba(1,14,22,.72) 38%, rgba(1,14,22,.22) 68%, rgba(1,14,22,.08) 100%),
+      linear-gradient(180deg, rgba(1,14,22,.03) 0%, rgba(1,14,22,.08) 54%, rgba(1,14,22,.72) 83%, #031722 100%);
   }
 
   .heroGrid {
@@ -56,67 +56,84 @@
 
   .heroCopy {
     width: 100%;
-    max-width: 350px;
-    padding: 24px 0 255px;
+    max-width: 315px;
+    padding: 20px 0 246px;
     position: relative;
     z-index: 4;
   }
 
+  .heroCopy::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    left: -18px;
+    top: 2px;
+    width: 330px;
+    height: 360px;
+    background: linear-gradient(90deg, rgba(3,23,34,.56), rgba(3,23,34,.2) 68%, transparent 100%);
+    filter: blur(.2px);
+    pointer-events: none;
+  }
+
   .eyebrow {
     gap: 8px;
-    margin-bottom: 14px;
-    font-size: 7.8px;
-    letter-spacing: 1.45px;
+    margin: 0 0 12px;
+    font-size: 7.4px;
+    letter-spacing: 1.35px;
     white-space: nowrap;
+    color: rgba(229,246,250,.9);
   }
-  .eyebrow span { width: 26px; }
+  .eyebrow span { width: 24px; }
 
   .heroCopy h1 {
-    max-width: 328px;
+    max-width: 305px;
     margin: 0;
-    font-size: clamp(37px, 9.9vw, 48px);
-    line-height: .95;
-    letter-spacing: -1.8px;
+    font-size: clamp(35px, 9.2vw, 45px);
+    line-height: .96;
+    letter-spacing: -1.6px;
+    text-shadow: 0 3px 18px rgba(0,0,0,.28);
   }
 
   .heroCopy > p {
-    max-width: 292px;
-    margin: 17px 0 15px;
-    font-size: 14px;
+    max-width: 270px;
+    margin: 15px 0 14px;
+    font-size: 13.5px;
     line-height: 1.46;
-    color: rgba(255,255,255,.92);
+    color: rgba(255,255,255,.94);
+    text-shadow: 0 2px 12px rgba(0,0,0,.35);
   }
 
   .primaryCta {
-    padding: 13px 18px;
-    gap: 14px;
-    font-size: 13.5px;
-    box-shadow: 0 10px 24px rgba(12,199,234,.19);
+    padding: 12px 17px;
+    gap: 13px;
+    font-size: 13px;
+    box-shadow: 0 10px 24px rgba(12,199,234,.2);
   }
 
   .microTrust {
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
-    gap: 12px;
-    margin-top: 14px;
-    font-size: 8.8px;
+    gap: 10px;
+    margin-top: 13px;
+    font-size: 8.2px;
     white-space: nowrap;
-    color: rgba(236,247,250,.88);
+    color: rgba(236,247,250,.9);
+    text-shadow: 0 1px 8px rgba(0,0,0,.35);
   }
   .microTrust span { gap: 4px; }
-  .microTrust svg { width: 12px; height: 12px; }
+  .microTrust svg { width: 11px; height: 11px; }
 
   .heroVisual {
     position: absolute;
     z-index: 2;
-    inset: 62px -76px 145px 0;
+    inset: 62px -86px 142px 0;
     pointer-events: none;
   }
 
   .chefPlaceholder {
     background-size: cover !important;
-    background-position: 76% center !important;
+    background-position: 80% center !important;
   }
 
   .benefitStack {
@@ -127,23 +144,23 @@
     gap: 7px;
     width: 100%;
     padding: 0;
-    margin: -122px 0 0;
+    margin: -116px 0 0;
   }
 
   .benefitCard {
-    min-height: 64px;
-    grid-template-columns: 29px 1fr;
+    min-height: 62px;
+    grid-template-columns: 28px 1fr;
     gap: 7px;
-    padding: 9px 9px;
+    padding: 9px;
     border-radius: 14px;
-    background: linear-gradient(180deg, rgba(7,48,80,.88), rgba(5,39,65,.9));
+    background: linear-gradient(180deg, rgba(7,48,80,.9), rgba(5,39,65,.92));
     border: 1px solid rgba(33,216,246,.16);
     box-shadow: 0 8px 20px rgba(0,0,0,.14);
     backdrop-filter: blur(12px);
   }
-  .benefitCard svg { width: 21px; height: 21px; }
-  .benefitCard h3 { margin-bottom: 2px; font-size: 9.5px; }
-  .benefitCard p { font-size: 8px; line-height: 1.25; color: #dcebf1; }
+  .benefitCard svg { width: 20px; height: 20px; }
+  .benefitCard h3 { margin-bottom: 2px; font-size: 9.2px; }
+  .benefitCard p { font-size: 7.8px; line-height: 1.24; color: #dcebf1; }
 
   .platformWrap {
     width: calc(100% - 24px);
@@ -188,8 +205,9 @@
 }
 
 @media (max-width: 390px) {
-  .heroCopy h1 { font-size: 36px; }
-  .heroCopy { padding-bottom: 245px; }
-  .microTrust { gap: 8px; font-size: 7.8px; }
-  .benefitCard { min-height: 61px; }
+  .heroCopy h1 { font-size: 34px; }
+  .heroCopy { max-width: 300px; padding-bottom: 236px; }
+  .heroCopy::before { width: 310px; }
+  .microTrust { gap: 7px; font-size: 7.5px; }
+  .benefitCard { min-height: 60px; }
 }
