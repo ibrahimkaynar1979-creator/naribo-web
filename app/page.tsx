@@ -67,14 +67,20 @@ export default function Home() {
         <style>{`
           .approvedJourney{background:#031722;padding:34px 0;overflow:hidden}.approvedJourneyDesktop{width:min(1320px,calc(100% - 64px));margin:0 auto;overflow:hidden;border-radius:30px}.approvedJourneyDesktop img{display:block;width:100%;height:auto}.approvedJourneyMobile{display:none}
           @media(max-width:760px){
-            .approvedJourney{padding:0}.approvedJourneyDesktop{display:none}.approvedJourneyMobile{display:block}
-            .journeyCarousel{background:#031722;width:100%;overflow:hidden}.journeyCarouselViewport{position:relative;width:100%;height:72vh;min-height:570px;max-height:720px;overflow:hidden;touch-action:pan-y}
-            .journeyCarouselSlide{position:absolute;inset:0;opacity:0;transform:scale(.985);transition:opacity .28s ease,transform .28s ease;pointer-events:none;overflow:hidden}.journeyCarouselSlide.isActive{opacity:1;transform:scale(1);pointer-events:auto}
-            .journeyCarouselArtwork{position:absolute;inset:0;background-image:url('/reklamdan-siparise.png');background-repeat:no-repeat;background-size:auto 100%;}
-            .journeyCarouselShade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(3,23,34,.02) 58%,rgba(3,23,34,.94) 100%)}
-            .journeyCarouselLabel{position:absolute;z-index:3;left:20px;bottom:24px;color:#fff}.journeyCarouselLabel strong{display:block;color:#21d8f6;font-size:36px;line-height:.9}.journeyCarouselLabel span{display:block;margin-top:7px;font-size:17px;font-weight:900}
-            .journeyCarouselNav{position:absolute;z-index:6;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(33,216,246,.58);background:rgba(3,23,34,.82);color:#21d8f6}.journeyCarouselNav.prev{left:12px}.journeyCarouselNav.next{right:12px}
-            .journeyCarouselDots{height:40px;display:flex;align-items:center;justify-content:center;gap:8px}.journeyCarouselDots button{border:0;padding:0;width:7px;height:7px;border-radius:99px;background:#31566a}.journeyCarouselDots button.active{width:24px;background:#21d8f6}
+            .approvedJourney{padding:0;background:#031722}.approvedJourneyDesktop{display:none}.approvedJourneyMobile{display:block}
+            .journeyCarousel{background:#031722;width:100%;overflow:hidden;padding:24px 0 12px}
+            .journeyCarouselFixedHead{padding:0 18px 18px;text-align:center;color:#fff}
+            .journeyCarouselKicker{display:flex;align-items:center;justify-content:center;gap:10px;color:#8feaf8;font-size:10px;font-weight:800;letter-spacing:4px;margin-bottom:10px;white-space:nowrap}
+            .journeyCarouselKicker span{width:38px;height:1px;background:#20cbe9}
+            .journeyCarouselFixedHead h2{margin:0;font-size:29px;line-height:.98;letter-spacing:-1.2px;font-weight:900}.journeyCarouselFixedHead h2 em{font-style:normal;color:#21d8f6}.journeyCarouselFixedHead p{margin:10px auto 0;max-width:410px;color:#c4d7df;font-size:12px;line-height:1.4}
+            .journeyCarouselViewport{position:relative;width:100%;height:58vh;min-height:470px;max-height:610px;overflow:hidden;touch-action:pan-y;background:#031722}
+            .journeyCarouselSlide{position:absolute;inset:0;opacity:0;transform:scale(.99);transition:opacity .24s ease,transform .24s ease;pointer-events:none;overflow:hidden}.journeyCarouselSlide.isActive{opacity:1;transform:scale(1);pointer-events:auto}
+            .journeyCarouselArtwork{position:absolute;inset:0;background-image:url('/reklamdan-siparise.png');background-repeat:no-repeat;background-size:300% auto;background-position-y:63%!important}
+            .journeyCarouselSlide:nth-child(1) .journeyCarouselArtwork{background-position-x:0%!important}.journeyCarouselSlide:nth-child(2) .journeyCarouselArtwork{background-position-x:50%!important}.journeyCarouselSlide:nth-child(3) .journeyCarouselArtwork{background-position-x:100%!important}
+            .journeyCarouselShade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(3,23,34,.04) 66%,rgba(3,23,34,.82) 100%)}
+            .journeyCarouselLabel{display:none}
+            .journeyCarouselNav{position:absolute;z-index:6;top:52%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(33,216,246,.58);background:rgba(3,23,34,.84);color:#21d8f6}.journeyCarouselNav.prev{left:10px}.journeyCarouselNav.next{right:10px}
+            .journeyCarouselDots{height:34px;display:flex;align-items:center;justify-content:center;gap:8px}.journeyCarouselDots button{border:0;padding:0;width:7px;height:7px;border-radius:99px;background:#31566a}.journeyCarouselDots button.active{width:24px;background:#21d8f6}
           }
         `}</style>
         <div className="approvedJourneyDesktop"><Image src="/reklamdan-siparise.png" alt="Naribo reklamdan siparişe üç adım tasarımı" width={1672} height={941} className="approvedJourneyImage" /></div>
