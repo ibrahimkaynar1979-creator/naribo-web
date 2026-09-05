@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { ArrowRight, BadgePercent, BarChart3, Camera, CircleCheckBig, ClipboardCheck, Clock3, Eye, Headphones, ListChecks, Menu, ShieldCheck, ShoppingCart, Store, Target, TrendingUp, Users } from 'lucide-react';
+import { ArrowRight, BadgePercent, BarChart3, Camera, CircleCheckBig, ClipboardCheck, Clock3, Eye, Headphones, Instagram, ListChecks, Menu, MousePointerClick, ShieldCheck, ShoppingCart, Smartphone, Store, Target, TrendingUp, Users } from 'lucide-react';
 
 const benefits = [
   { icon: Eye, title: 'GÖRÜNÜRLÜK', text: 'Daha çok müşteriye ulaşın.' },
@@ -25,11 +25,62 @@ const setupSteps = [
   { no: '06', icon: CircleCheckBig, title: 'SATIŞA HAZIR', text: 'Menünüz, fiyatınız ve platform yapınız sipariş almaya hazır hale geliyor.' },
 ];
 
+const orderFlow = [
+  { no: '01', icon: Instagram, title: 'REKLAMI GÖRÜR', text: 'Müşteri Instagram’da restoranınızın sponsorlu içeriğiyle karşılaşır.', screen: 'instagram' },
+  { no: '02', icon: MousePointerClick, title: 'PLATFORMUNU SEÇER', text: 'Tek bağlantı üzerinden tercih ettiği sipariş kanalına yönlenir.', screen: 'chooser' },
+  { no: '03', icon: ShoppingCart, title: 'SİPARİŞİNİ VERİR', text: 'Seçtiği platformda menünüzü görür ve siparişini tamamlar.', screen: 'order' },
+];
+
 function Logo() {
   return (
     <a className="brand" href="#" aria-label="Naribo ana sayfa">
       <Image src="/naribo-logo.png" alt="Naribo Restaurant Growth Partner" width={265} height={110} priority className="brandImage" />
     </a>
+  );
+}
+
+function PhoneScreen({ type }: { type: string }) {
+  if (type === 'instagram') {
+    return (
+      <div className="phoneScreen instagramScreen">
+        <div className="phoneStatus"><span>9:41</span><span>● ● ●</span></div>
+        <div className="igTop"><Instagram size={18} /><strong>Instagram</strong></div>
+        <div className="igProfile"><div className="avatar">N</div><div><strong>naribo</strong><small>Sponsored</small></div></div>
+        <div className="igCreative">
+          <span>DAHA FAZLA</span>
+          <strong>SİPARİŞ.</strong>
+          <em>DAHA KÂRLI BÜYÜME.</em>
+        </div>
+        <div className="igAction">Şimdi Sipariş Ver <ArrowRight size={14} /></div>
+      </div>
+    );
+  }
+
+  if (type === 'chooser') {
+    return (
+      <div className="phoneScreen chooserScreen">
+        <div className="phoneStatus"><span>9:41</span><span>● ● ●</span></div>
+        <div className="miniBrand">naribo</div>
+        <h4>Sipariş platformunu seç</h4>
+        <p>Tek bağlantı, dört sipariş kanalı.</p>
+        <div className="platformChoice pink">Yemeksepeti <ArrowRight size={14} /></div>
+        <div className="platformChoice orange">trendyol yemek <ArrowRight size={14} /></div>
+        <div className="platformChoice purple">getir yemek <ArrowRight size={14} /></div>
+        <div className="platformChoice migros">MİGROS yemek <ArrowRight size={14} /></div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="phoneScreen orderScreen">
+      <div className="phoneStatus"><span>9:41</span><span>● ● ●</span></div>
+      <div className="orderHeader">Yemeksepeti</div>
+      <div className="restaurantCover"><span>Restoranınız</span></div>
+      <div className="ratingRow"><strong>4.8 ★</strong><span>20–30 dk</span></div>
+      <div className="menuItem"><div className="foodThumb" /><div><strong>Chef Special</strong><small>Özel sos, taze garnitür</small></div><b>₺349</b></div>
+      <div className="menuItem"><div className="foodThumb second" /><div><strong>Signature Bowl</strong><small>Günün seçimi</small></div><b>₺289</b></div>
+      <div className="basketButton">Sepete Git <ShoppingCart size={15} /></div>
+    </div>
   );
 }
 
@@ -131,6 +182,46 @@ export default function Home() {
             <strong>Yemeksepeti</strong><i>•</i><strong>Trendyol Yemek</strong><i>•</i><strong>GetirYemek</strong><i>•</i><strong>Migros Yemek</strong>
           </div>
           <div className="setupResult"><CircleCheckBig size={22} /> Başvurudan yayına kadar tek ekip.</div>
+        </div>
+      </section>
+
+      <section className="orderJourney" id="hizmetler">
+        <div className="orderGlow orderGlowOne" />
+        <div className="orderGlow orderGlowTwo" />
+        <div className="shell orderIntro">
+          <div>
+            <div className="orderKicker">INSTAGRAM'DAN SİPARİŞE</div>
+            <h2>BİR REKLAM.<br /><span>DÖRT PLATFORM.</span><br />TEK SATIŞ AKIŞI.</h2>
+          </div>
+          <div className="orderIntroText">
+            <Smartphone size={28} />
+            <p>Müşterinin reklamı gördüğü andan siparişini tamamladığı ana kadar tüm akışı tek sistemde kurguluyoruz.</p>
+          </div>
+        </div>
+
+        <div className="shell phoneFlow">
+          {orderFlow.map(({ no, icon: Icon, title, text, screen }, index) => (
+            <article className={`phoneStep phoneStep${index + 1}`} key={no}>
+              <div className="phoneStepHead">
+                <span className="flowNo">{no}</span>
+                <div className="flowIcon"><Icon size={21} /></div>
+              </div>
+              <div className="phoneFrame">
+                <div className="phoneSpeaker" />
+                <PhoneScreen type={screen} />
+              </div>
+              <div className="phoneCaption">
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </div>
+              {index < orderFlow.length - 1 && <div className="flowArrow"><ArrowRight size={22} /></div>}
+            </article>
+          ))}
+        </div>
+
+        <div className="shell orderResultBar">
+          <span>REKLAM</span><i>→</i><span>TEK LİNK</span><i>→</i><span>PLATFORM SEÇİMİ</span><i>→</i><strong>SİPARİŞ</strong>
+          <div>Her adım ölçülebilir. Her temas satışa hizmet eder.</div>
         </div>
       </section>
     </main>
