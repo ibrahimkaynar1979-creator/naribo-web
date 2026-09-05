@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { ArrowRight, BarChart3, Clock3, Eye, Headphones, Menu, ShieldCheck, ShoppingCart, Target, TrendingUp, Users } from 'lucide-react';
+import { ArrowRight, BadgePercent, BarChart3, Camera, CircleCheckBig, ClipboardCheck, Clock3, Eye, Headphones, ListChecks, Menu, ShieldCheck, ShoppingCart, Store, Target, TrendingUp, Users } from 'lucide-react';
 
 const benefits = [
   { icon: Eye, title: 'GÖRÜNÜRLÜK', text: 'Daha çok müşteriye ulaşın.' },
@@ -14,6 +14,15 @@ const stats = [
   { icon: BarChart3, title: 'KÂR ODAKLI', text: 'Ciro değil, kazanç' },
   { icon: Users, title: 'RESTORANA ÖZEL', text: 'Size özel strateji' },
   { icon: Headphones, title: 'SÜREKLİ DESTEK', text: 'Yayın sonrası da yanınızda' },
+];
+
+const setupSteps = [
+  { no: '01', icon: ClipboardCheck, title: 'BAŞVURU', text: 'Restoranınızı tanıyor, ihtiyaç ve hedeflerinizi netleştiriyoruz.' },
+  { no: '02', icon: ListChecks, title: 'MENÜ', text: 'Ürünlerinizi satışa uygun, anlaşılır bir menü yapısına dönüştürüyoruz.' },
+  { no: '03', icon: BadgePercent, title: 'FİYAT & KAMPANYA', text: 'Fiyat ve kampanya yapısını kârlılığı gözeterek planlıyoruz.' },
+  { no: '04', icon: Camera, title: 'GÖRSELLER', text: 'Ürünlerinizi iştah açıcı ve platforma uygun görsellerle hazırlıyoruz.' },
+  { no: '05', icon: Store, title: 'PLATFORM BAŞVURULARI', text: 'Başvuru ve mağaza kurulum süreçlerini 3 ana kanal için hazırlıyoruz.' },
+  { no: '06', icon: CircleCheckBig, title: 'SATIŞA HAZIR', text: 'Menünüz, fiyatınız ve platform yapınız sipariş almaya hazır hale geliyor.' },
 ];
 
 function Logo() {
@@ -89,6 +98,38 @@ export default function Home() {
             <div><h3>{title}</h3><p>{text}</p></div>
           </article>
         ))}
+      </section>
+
+      <section className="setupSection" id="nasil">
+        <div className="shell setupIntro">
+          <div>
+            <div className="sectionKicker">SIFIRDAN SATIŞA</div>
+            <h2>RESTORANINIZI <span>DİJİTAL SATIŞA</span><br />6 ADIMDA HAZIRLIYORUZ.</h2>
+          </div>
+          <p>Menü, fiyat, kampanya, görseller ve platform başvurularını tek akışta yönetiyor; restoranınızı sipariş almaya hazır hale getiriyoruz.</p>
+        </div>
+
+        <div className="shell setupFlow">
+          {setupSteps.map(({ no, icon: Icon, title, text }, index) => (
+            <article className="setupCard" key={no}>
+              <div className="setupTop">
+                <div className="setupIcon"><Icon size={28} strokeWidth={1.65} /></div>
+                <div className="setupNo">{no}</div>
+              </div>
+              <h3>{title}</h3>
+              <p>{text}</p>
+              {index < setupSteps.length - 1 && <div className="setupConnector" aria-hidden="true"><ArrowRight size={18} /></div>}
+            </article>
+          ))}
+        </div>
+
+        <div className="shell setupFoot">
+          <div className="setupPlatforms">
+            <span>PLATFORM BAŞVURULARI</span>
+            <strong>Yemeksepeti</strong><i>•</i><strong>Trendyol Yemek</strong><i>•</i><strong>Migros Yemek</strong>
+          </div>
+          <div className="setupResult"><CircleCheckBig size={22} /> Başvurudan yayına kadar tek ekip.</div>
+        </div>
       </section>
     </main>
   );
