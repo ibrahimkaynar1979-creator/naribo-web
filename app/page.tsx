@@ -37,35 +37,90 @@ export default function Home() {
   return (
     <main>
       <style>{`
-        .codedHero{
+        .targetHero{
           position:relative;
-          min-height:760px;
+          width:calc(100% - 16px);
+          min-height:892px;
+          margin:8px auto 0;
           overflow:hidden;
           color:#fff;
-          background-image:
-            linear-gradient(90deg, rgba(3,20,30,.97) 0%, rgba(3,20,30,.92) 28%, rgba(3,20,30,.20) 46%, rgba(3,20,30,.08) 62%, rgba(3,20,30,.84) 76%, rgba(3,20,30,.96) 100%),
-            url('/hero-final.png');
-          background-size:cover;
-          background-position:center 42%;
-          border-radius:0 0 38px 38px;
+          border:1px solid rgba(255,255,255,.28);
+          border-radius:30px;
+          background:#03141e;
         }
-        .codedHero .nav{padding-top:18px}
-        .codedHero .heroGrid{min-height:640px;padding-top:34px}
-        .codedHero .heroVisual{min-height:540px}
-        .codedHero .chefPlaceholder{display:none}
-        .codedHero .heroCopy h1{font-size:clamp(54px,4.7vw,76px)}
-        .codedHero .benefitCard{background:rgba(4,42,70,.86);backdrop-filter:blur(10px)}
+        .targetHero::before{
+          content:'';
+          position:absolute;
+          inset:0;
+          background-image:url('/hero-final.png');
+          background-size:118% auto;
+          background-position:52% 48%;
+          background-repeat:no-repeat;
+          transform:scale(1.015);
+        }
+        .targetHero::after{
+          content:'';
+          position:absolute;
+          inset:0;
+          background:
+            linear-gradient(180deg, rgba(3,20,30,.84) 0%, rgba(3,20,30,.20) 16%, rgba(3,20,30,.03) 38%, rgba(3,20,30,.18) 100%),
+            linear-gradient(90deg, rgba(3,20,30,.99) 0%, rgba(3,20,30,.96) 27%, rgba(3,20,30,.36) 37%, rgba(3,20,30,.02) 47%, rgba(3,20,30,.04) 70%, rgba(3,20,30,.78) 78%, rgba(3,20,30,.97) 100%);
+          pointer-events:none;
+        }
+        .targetHero .nav,
+        .targetHero .heroGrid{position:relative;z-index:2}
+        .targetHero .nav{padding-top:18px}
+        .targetHero .heroGrid{
+          grid-template-columns:36% 42% 22%;
+          min-height:710px;
+          padding-top:44px;
+        }
+        .targetHero .heroCopy{padding:20px 34px 82px 0;align-self:center}
+        .targetHero .eyebrow{margin-bottom:26px;color:#e7f3f6}
+        .targetHero .heroCopy h1{font-size:clamp(60px,4.65vw,78px);line-height:.90;letter-spacing:-3.5px}
+        .targetHero .heroCopy > p{font-size:20px;line-height:1.48;max-width:470px;margin:26px 0 28px}
+        .targetHero .primaryCta{padding:17px 26px;font-size:17px}
+        .targetHero .microTrust{margin-top:27px;gap:23px}
+        .targetHero .heroVisual{min-height:590px}
+        .targetHero .benefitStack{padding:58px 0 74px 10px;gap:14px}
+        .targetHero .benefitCard{
+          min-height:104px;
+          padding:19px 18px;
+          border-radius:20px;
+          background:rgba(4,38,65,.90);
+          border-color:rgba(16,197,234,.34);
+          box-shadow:0 14px 28px rgba(0,0,0,.18);
+          backdrop-filter:blur(12px);
+        }
+        .targetHero .benefitCard h3{font-size:15px}
+        .targetHero .benefitCard p{font-size:13px}
+        .platformWrap.targetPlatform{margin-top:-84px;z-index:5}
+        .targetPlatform .platformImageBar{height:128px;border-radius:28px;box-shadow:0 18px 38px rgba(10,36,51,.16)}
+        .targetPlatform .platformStripImage{object-fit:cover;object-position:center}
+        @media(max-width:1100px){
+          .targetHero{min-height:auto}
+          .targetHero::before{background-size:cover;background-position:58% center}
+          .targetHero::after{background:linear-gradient(180deg,rgba(3,20,30,.92),rgba(3,20,30,.40))}
+          .targetHero .heroGrid{grid-template-columns:1fr 1fr}
+          .targetHero .benefitStack{grid-column:1/-1;padding:12px 0 92px}
+          .platformWrap.targetPlatform{margin-top:-62px}
+          .targetPlatform .platformImageBar{height:100px}
+        }
         @media(max-width:760px){
-          .codedHero{
-            min-height:auto;
-            background-image:linear-gradient(180deg,rgba(3,20,30,.94) 0%,rgba(3,20,30,.84) 44%,rgba(3,20,30,.58) 100%),url('/hero-final.png');
-            background-position:58% center;
-          }
-          .codedHero .heroVisual{min-height:330px}
+          .targetHero{width:100%;margin:0;border:0;border-radius:0 0 26px 26px}
+          .targetHero::before{background-size:auto 100%;background-position:58% center}
+          .targetHero::after{background:linear-gradient(180deg,rgba(3,20,30,.97) 0%,rgba(3,20,30,.84) 48%,rgba(3,20,30,.48) 100%)}
+          .targetHero .heroGrid{display:flex;flex-direction:column;padding-top:18px}
+          .targetHero .heroCopy{padding:8px 0 18px}
+          .targetHero .heroVisual{min-height:320px;order:2}
+          .targetHero .benefitStack{order:3;padding:16px 0 82px}
+          .targetHero .heroCopy h1{font-size:clamp(48px,14vw,66px)}
+          .platformWrap.targetPlatform{margin-top:-42px}
+          .targetPlatform .platformImageBar{height:76px;border-radius:18px}
         }
       `}</style>
 
-      <section className="hero codedHero">
+      <section className="hero targetHero">
         <header className="nav shell">
           <Logo />
           <nav className="desktopNav" aria-label="Ana menü">
@@ -105,7 +160,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="platformWrap shell" aria-label="Sipariş platformları">
+      <section className="platformWrap targetPlatform shell" aria-label="Sipariş platformları">
         <div className="platformImageBar">
           <Image src="/platforms/platform-strip.png" alt="Yemeksepeti, Trendyol Yemek, GetirYemek ve Migros Yemek" width={1320} height={104} priority className="platformStripImage" />
         </div>
