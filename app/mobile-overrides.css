@@ -43,8 +43,8 @@
 
   .heroGlow {
     background:
-      linear-gradient(90deg, rgba(1,14,22,.94) 0%, rgba(1,14,22,.72) 38%, rgba(1,14,22,.22) 68%, rgba(1,14,22,.08) 100%),
-      linear-gradient(180deg, rgba(1,14,22,.03) 0%, rgba(1,14,22,.08) 54%, rgba(1,14,22,.72) 83%, #031722 100%);
+      linear-gradient(90deg, rgba(1,14,22,.94) 0%, rgba(1,14,22,.7) 34%, rgba(1,14,22,.25) 58%, rgba(1,14,22,.04) 82%),
+      linear-gradient(180deg, rgba(1,14,22,.02) 0%, rgba(1,14,22,.04) 56%, rgba(1,14,22,.58) 82%, #031722 100%);
   }
 
   .heroGrid {
@@ -56,8 +56,8 @@
 
   .heroCopy {
     width: 100%;
-    max-width: 315px;
-    padding: 20px 0 246px;
+    max-width: 294px;
+    padding: 28px 0 282px;
     position: relative;
     z-index: 4;
   }
@@ -67,58 +67,60 @@
     position: absolute;
     z-index: -1;
     left: -18px;
-    top: 2px;
-    width: 330px;
-    height: 360px;
-    background: linear-gradient(90deg, rgba(3,23,34,.56), rgba(3,23,34,.2) 68%, transparent 100%);
-    filter: blur(.2px);
+    top: 8px;
+    width: 310px;
+    height: 390px;
+    background: linear-gradient(90deg, rgba(3,23,34,.52), rgba(3,23,34,.18) 66%, transparent 100%);
     pointer-events: none;
   }
 
   .eyebrow {
-    gap: 8px;
-    margin: 0 0 12px;
+    gap: 9px;
+    margin: 0 0 20px;
     font-size: 7.4px;
     letter-spacing: 1.35px;
     white-space: nowrap;
-    color: rgba(229,246,250,.9);
+    color: rgba(229,246,250,.92);
   }
-  .eyebrow span { width: 24px; }
+  .eyebrow span { width: 27px; }
 
   .heroCopy h1 {
-    max-width: 305px;
+    max-width: 286px;
     margin: 0;
-    font-size: clamp(35px, 9.2vw, 45px);
-    line-height: .96;
-    letter-spacing: -1.6px;
+    font-size: clamp(32px, 8.55vw, 42px);
+    line-height: .98;
+    letter-spacing: -1.35px;
     text-shadow: 0 3px 18px rgba(0,0,0,.28);
   }
 
   .heroCopy > p {
-    max-width: 270px;
-    margin: 15px 0 14px;
-    font-size: 13.5px;
-    line-height: 1.46;
-    color: rgba(255,255,255,.94);
+    max-width: 252px;
+    margin: 22px 0 0;
+    font-size: 13px;
+    line-height: 1.5;
+    color: rgba(255,255,255,.95);
     text-shadow: 0 2px 12px rgba(0,0,0,.35);
   }
 
   .primaryCta {
+    width: fit-content;
+    max-width: 76%;
+    margin-top: 16px;
     padding: 12px 17px;
-    gap: 13px;
-    font-size: 13px;
+    gap: 14px;
+    font-size: 12.8px;
     box-shadow: 0 10px 24px rgba(12,199,234,.2);
   }
 
   .microTrust {
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 10px;
-    margin-top: 13px;
-    font-size: 8.2px;
-    white-space: nowrap;
-    color: rgba(236,247,250,.9);
+    gap: 7px 12px;
+    width: 275px;
+    margin-top: 16px;
+    font-size: 8.4px;
+    color: rgba(236,247,250,.92);
     text-shadow: 0 1px 8px rgba(0,0,0,.35);
   }
   .microTrust span { gap: 4px; }
@@ -127,13 +129,13 @@
   .heroVisual {
     position: absolute;
     z-index: 2;
-    inset: 62px -86px 142px 0;
+    inset: 62px -118px 142px 0;
     pointer-events: none;
   }
 
   .chefPlaceholder {
     background-size: cover !important;
-    background-position: 80% center !important;
+    background-position: 88% center !important;
   }
 
   .benefitStack {
@@ -205,9 +207,12 @@
 }
 
 @media (max-width: 390px) {
-  .heroCopy h1 { font-size: 34px; }
-  .heroCopy { max-width: 300px; padding-bottom: 236px; }
-  .heroCopy::before { width: 310px; }
-  .microTrust { gap: 7px; font-size: 7.5px; }
+  .heroGrid { padding-left: 15px; padding-right: 15px; }
+  .heroCopy { max-width: 272px; padding-top: 24px; padding-bottom: 272px; }
+  .heroCopy h1 { max-width: 265px; font-size: 31px; }
+  .heroCopy > p { max-width: 235px; font-size: 12.4px; }
+  .primaryCta { max-width: 82%; font-size: 12.2px; }
+  .microTrust { width: 250px; gap: 7px 9px; font-size: 7.8px; }
+  .heroVisual { inset-right: -126px; }
   .benefitCard { min-height: 60px; }
 }
