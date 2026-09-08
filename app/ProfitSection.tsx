@@ -27,7 +27,7 @@ export default function ProfitSection(){
       <div className="profitShell">
         <div className="profitHead">
           <div className="profitKicker">SİPARİŞTEN KÂRA</div>
-          <h2><span className="profitTitleLine">SATIŞ ARTTIYSA İŞ BİTMEDİ.</span><span className="profitTitleLine">KÂR DA ARTMALI.</span></h2>
+          <h2><span className="profitTitleLine">DAHA FAZLA DEĞİL,</span><span className="profitTitleLine">DAHA KÂRLI SİPARİŞ.</span></h2>
           <p>Bir siparişin kasaya girmesi yetmez. İndirim, komisyon ve ürün maliyeti çıktıktan sonra restoranınıza gerçekten ne kaldığını birlikte yönetiyoruz.</p>
         </div>
 
