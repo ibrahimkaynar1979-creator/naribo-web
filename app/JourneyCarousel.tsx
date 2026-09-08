@@ -58,14 +58,14 @@ export default function JourneyCarousel(){
         .jcApproved .journeyMiniStep b{font-size:12px;line-height:1;font-weight:900}
         .jcApproved .journeyMiniStep span{font-size:12px;line-height:1.12;font-weight:850;white-space:normal;max-width:104px;text-align:center}
         .jcApproved .journeyMiniArrow{margin:0 2px;width:18px;height:18px;color:#5f8391}
-        .jcApproved .journeyCarouselViewport{height:510px;margin-top:-2px}
+        .jcApproved .journeyCarouselViewport{height:500px;margin-top:-2px}
         .jcApproved .journeyCarouselSlide{padding-top:0;justify-content:flex-start;align-items:center}
-        .jcApproved .journeyPhoneAsset{width:min(112vw,500px);height:510px;transform:translate(0,-8px);align-items:flex-start;justify-content:center}
+        .jcApproved .journeyPhoneAsset{width:min(112vw,500px);height:510px;transform:translate(-4.5vw,-8px);align-items:flex-start;justify-content:center}
         .jcApproved .journeyPhoneAsset img{object-position:center top;filter:drop-shadow(0 18px 28px rgba(0,0,0,.25))}
         .jcApproved .journeyCarouselLabel{display:none}
         .jcApproved .journeyCarouselNav{top:52%;width:40px;height:40px}
         .jcApproved .journeyCarouselNav.prev{left:8px}.jcApproved .journeyCarouselNav.next{right:8px}
-        .jcApproved .journeyCarouselDots{height:18px;margin-top:-12px;padding-bottom:2px}
+        .jcApproved .journeyCarouselDots{display:none}
       }
 
       @media(max-width:390px){
@@ -76,9 +76,8 @@ export default function JourneyCarousel(){
         .jcApproved .journeyMiniStep b{font-size:11px}
         .jcApproved .journeyMiniStep span{font-size:10.8px;max-width:92px}
         .jcApproved .journeyMiniArrow{width:16px;height:16px}
-        .jcApproved .journeyCarouselViewport{height:492px}
-        .jcApproved .journeyPhoneAsset{width:116vw;height:492px;transform:translate(0,-8px)}
-        .jcApproved .journeyCarouselDots{margin-top:-10px}
+        .jcApproved .journeyCarouselViewport{height:482px}
+        .jcApproved .journeyPhoneAsset{width:116vw;height:492px;transform:translate(-6vw,-8px)}
       }
     `}</style>
 
