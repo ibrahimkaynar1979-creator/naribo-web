@@ -43,11 +43,11 @@ export default function ProfitSection(){
             <h3>Bu ₺176'yı nasıl büyütürüz?</h3>
             <p>Rakamları sadece raporlamıyoruz. Sipariş başına kazancı artıracak noktaları bulup aksiyona dönüştürüyoruz.</p>
             <div className="actionFlow">{actions.map((item,i)=><div className="actionItem" key={item}><span className="actionNo">0{i+1}</span><span>{item}</span><ArrowRight size={16}/></div>)}</div>
-            <div className="profitPromise"><strong>Hedef:</strong> Daha çok sipariş kadar, her siparişten daha sağlıklı ve sürdürülebilir kazanç.</div>
+            <div className="profitPromise"><strong>Hedef:</strong> Daha çok sipariş ve her siparişten daha sağlıklı, sürdürülebilir kazanç.</div>
           </article>
         </div>
 
-        <div className="profitFoot"><CircleDollarSign size={17}/> Naribo, sipariş sayısını değil restoranınıza kalan gerçek kazancı büyütmeye odaklanır.</div>
+        <div className="profitFoot"><CircleDollarSign size={17}/> Naribo, hem sipariş sayısını hem de restoranınıza kalan gerçek kazancı büyütmeye odaklanır.</div>
       </div>
     </section>
   );
