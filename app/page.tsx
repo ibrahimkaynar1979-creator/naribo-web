@@ -44,6 +44,7 @@ export default function Home() {
           .mobilePlatformBand{order:4;display:flex!important;width:calc(100% + 56px);height:92px;margin:0 -28px;background:#fff;align-items:center;justify-content:center;overflow:hidden;border-radius:0 0 26px 26px}
           .mobilePlatformBand img{display:block;width:100%;height:100%;object-fit:contain;padding:8px 18px}
           .platformWrap,.stats{display:none!important}
+          .setupFoot{display:none!important}
         }
       `}</style>
       <section className="hero">
