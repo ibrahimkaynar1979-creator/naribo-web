@@ -24,12 +24,12 @@ export default function JourneyCarousel(){
       .jcApproved .journeyCarouselFixedHead h2{margin:0;font-size:30px;line-height:.98;letter-spacing:-1.2px;font-weight:900}
       .jcApproved .journeyCarouselFixedHead h2 em{font-style:normal;color:#21d8f6}
       .jcApproved .journeyCarouselFixedHead p{margin:11px auto 0;max-width:390px;color:#b7c9d1;font-size:13px;line-height:1.45}
-      .jcApproved .journeyMiniFlow{display:flex;align-items:center;justify-content:center;margin:14px auto 8px;padding:0 14px;max-width:520px}
-      .jcApproved .journeyMiniStep{border:0;background:transparent;color:#66818e;padding:0;font:inherit;display:flex;align-items:center;justify-content:center;gap:5px;white-space:nowrap;transition:color .2s ease,opacity .2s ease;opacity:.72}
-      .jcApproved .journeyMiniStep b{font-size:9px;letter-spacing:.5px;color:inherit}
-      .jcApproved .journeyMiniStep span{font-size:10px;font-weight:700;color:inherit}
+      .jcApproved .journeyMiniFlow{display:flex;align-items:center;justify-content:center;margin:14px auto 8px;padding:0 14px;max-width:620px}
+      .jcApproved .journeyMiniStep{border:0;background:transparent;color:#78939f;padding:0;font:inherit;display:flex;align-items:center;justify-content:center;gap:6px;white-space:nowrap;transition:color .2s ease,opacity .2s ease;opacity:.82}
+      .jcApproved .journeyMiniStep b{font-size:11px;letter-spacing:.4px;color:inherit;font-weight:900}
+      .jcApproved .journeyMiniStep span{font-size:13px;font-weight:800;color:inherit}
       .jcApproved .journeyMiniStep.active{color:#21d8f6;opacity:1}
-      .jcApproved .journeyMiniArrow{color:#426574;margin:0 7px;flex:0 0 auto}
+      .jcApproved .journeyMiniArrow{color:#5a7b89;margin:0 10px;flex:0 0 auto}
       .jcApproved .journeyCarouselViewport{position:relative;height:610px;overflow:hidden;touch-action:pan-y}
       .jcApproved .journeyCarouselSlide{position:absolute;inset:0;opacity:0;transform:translateX(34px);transition:opacity .28s ease,transform .28s ease;pointer-events:none;display:flex;flex-direction:column;align-items:center;padding-top:4px}
       .jcApproved .journeyCarouselSlide.isActive{opacity:1;transform:translateX(0);pointer-events:auto}
@@ -52,14 +52,14 @@ export default function JourneyCarousel(){
         .jcApproved .journeyCarouselKicker span{width:28px}
         .jcApproved .journeyCarouselFixedHead h2{font-size:clamp(21px,5.8vw,28px);line-height:1.02;letter-spacing:-.8px;white-space:nowrap}
         .jcApproved .journeyCarouselFixedHead p{margin-top:9px;max-width:360px;font-size:12px;line-height:1.4}
-        .jcApproved .journeyMiniFlow{margin:12px auto 3px;padding:0 8px;width:100%}
-        .jcApproved .journeyMiniStep{gap:3px;min-width:0}
-        .jcApproved .journeyMiniStep b{font-size:8px}
-        .jcApproved .journeyMiniStep span{font-size:9px;letter-spacing:-.15px}
-        .jcApproved .journeyMiniArrow{margin:0 5px;width:12px;height:12px}
-        .jcApproved .journeyCarouselViewport{height:520px;margin-top:-4px}
-        .jcApproved .journeyCarouselSlide{padding-top:0;justify-content:flex-start}
-        .jcApproved .journeyPhoneAsset{width:min(108vw,480px);height:520px;transform:translate(-7.5vw,-12px);align-items:flex-start}
+        .jcApproved .journeyMiniFlow{margin:15px auto 8px;padding:0 12px;width:100%;max-width:430px;justify-content:space-between}
+        .jcApproved .journeyMiniStep{gap:4px;min-width:0;flex-direction:column;line-height:1.05}
+        .jcApproved .journeyMiniStep b{font-size:12px;line-height:1;font-weight:900}
+        .jcApproved .journeyMiniStep span{font-size:12px;line-height:1.12;font-weight:850;white-space:normal;max-width:104px;text-align:center}
+        .jcApproved .journeyMiniArrow{margin:0 2px;width:18px;height:18px;color:#5f8391}
+        .jcApproved .journeyCarouselViewport{height:540px;margin-top:-2px}
+        .jcApproved .journeyCarouselSlide{padding-top:0;justify-content:flex-start;align-items:center}
+        .jcApproved .journeyPhoneAsset{width:min(112vw,500px);height:540px;transform:translate(0,-8px);align-items:flex-start;justify-content:center}
         .jcApproved .journeyPhoneAsset img{object-position:center top;filter:drop-shadow(0 18px 28px rgba(0,0,0,.25))}
         .jcApproved .journeyCarouselLabel{display:none}
         .jcApproved .journeyCarouselNav{top:52%;width:40px;height:40px}
@@ -70,10 +70,12 @@ export default function JourneyCarousel(){
       @media(max-width:390px){
         .jcApproved .journeyCarouselFixedHead h2{font-size:20px;letter-spacing:-.65px}
         .jcApproved .journeyCarouselFixedHead p{font-size:11.5px}
-        .jcApproved .journeyMiniStep span{font-size:8.2px}
-        .jcApproved .journeyMiniArrow{margin:0 3px}
-        .jcApproved .journeyCarouselViewport{height:500px}
-        .jcApproved .journeyPhoneAsset{width:112vw;height:500px;transform:translate(-9vw,-12px)}
+        .jcApproved .journeyMiniFlow{padding:0 8px}
+        .jcApproved .journeyMiniStep b{font-size:11px}
+        .jcApproved .journeyMiniStep span{font-size:10.8px;max-width:92px}
+        .jcApproved .journeyMiniArrow{width:16px;height:16px}
+        .jcApproved .journeyCarouselViewport{height:520px}
+        .jcApproved .journeyPhoneAsset{width:116vw;height:520px;transform:translate(0,-8px)}
       }
     `}</style>
 
@@ -86,7 +88,7 @@ export default function JourneyCarousel(){
     <div className="journeyMiniFlow" aria-label="Reklamdan siparişe üç adım">
       {slides.map((s,i)=><div key={s.no} style={{display:'contents'}}>
         <button className={`journeyMiniStep ${i===active?'active':''}`} onClick={()=>setActive(i)} aria-label={`${s.no} ${s.short}`}><b>{s.no}</b><span>{s.short}</span></button>
-        {i<slides.length-1&&<ArrowRight className="journeyMiniArrow" size={14} strokeWidth={2}/>} 
+        {i<slides.length-1&&<ArrowRight className="journeyMiniArrow" size={18} strokeWidth={2.2}/>} 
       </div>)}
     </div>
 
