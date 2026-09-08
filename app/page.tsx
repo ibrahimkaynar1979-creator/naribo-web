@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import JourneyCarousel from './JourneyCarousel';
+import ProfitSection from './ProfitSection';
 import { ArrowRight, BadgePercent, BarChart3, Camera, CircleCheckBig, ClipboardCheck, Clock3, Eye, Headphones, ListChecks, Menu, ShieldCheck, ShoppingCart, Store, Target, TrendingUp, Users } from 'lucide-react';
 
 const benefits = [
@@ -86,6 +87,8 @@ export default function Home() {
         <div className="approvedJourneyDesktop"><Image src="/reklamdan-siparise.png" alt="Naribo reklamdan siparişe üç adım tasarımı" width={1672} height={941} className="approvedJourneyImage" /></div>
         <div className="approvedJourneyMobile"><JourneyCarousel /></div>
       </section>
+
+      <ProfitSection />
     </main>
   );
 }
