@@ -44,7 +44,6 @@ export default function Home() {
           .mobilePlatformBand{order:4;display:flex!important;width:calc(100% + 56px);height:92px;margin:0 -28px;background:#fff;align-items:center;justify-content:center;overflow:hidden;border-radius:0 0 26px 26px}
           .mobilePlatformBand img{display:block;width:100%;height:100%;object-fit:contain;padding:8px 18px}
           .platformWrap,.stats{display:none!important}
-          .setupFoot{display:none!important}
         }
       `}</style>
       <section className="hero">
@@ -76,7 +75,7 @@ export default function Home() {
       <section className="setupSection" id="nasil">
         <div className="shell setupIntro"><div><div className="sectionKicker">SIFIRDAN SATIŞA</div><h2>RESTORANINIZI <span>DİJİTAL SATIŞA</span><br />6 ADIMDA HAZIRLIYORUZ.</h2></div><p>Menü, fiyat, kampanya, görseller ve platform başvurularını tek akışta yönetiyor; restoranınızı sipariş almaya hazır hale getiriyoruz.</p></div>
         <div className="shell setupFlow">{setupSteps.map(({no,icon:Icon,title,text},index)=><article className="setupCard" key={no}><div className="setupTop"><div className="setupIcon"><Icon size={28} strokeWidth={1.65}/></div><div className="setupNo">{no}</div></div><h3>{title}</h3><p>{text}</p>{index<setupSteps.length-1&&<div className="setupConnector" aria-hidden="true"><ArrowRight size={18}/></div>}</article>)}</div>
-        <div className="shell setupFoot"><div className="setupPlatforms"><span>PLATFORM BAŞVURULARI</span><strong>Yemeksepeti</strong><i>•</i><strong>Trendyol Yemek</strong><i>•</i><strong>GetirYemek</strong><i>•</i><strong>Migros Yemek</strong></div><div className="setupResult"><CircleCheckBig size={22}/> Başvurudan yayına kadar tek ekip.</div></div>
+        <div className="shell setupFoot"><div className="setupPlatforms"><span>PLATFORM BAŞVURULARI</span><strong>Yemeksepeti</strong><i>•</i><strong>Trendyol Yemek</strong><i>•</i><strong>Migros Yemek</strong></div><div className="setupResult"><CircleCheckBig size={22}/> Başvurudan yayına kadar tek ekip.</div></div>
       </section>
 
       <section className="approvedJourney" id="hizmetler">
