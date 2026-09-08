@@ -1,36 +1,24 @@
-import { ArrowUpRight, BadgePercent, CircleDollarSign, Percent, ReceiptText, ShoppingBasket, TrendingUp } from 'lucide-react';
+import { ArrowRight, BadgePercent, CircleDollarSign, ReceiptText, ShoppingBasket, TrendingUp, UtensilsCrossed } from 'lucide-react';
 
-const metrics = [
-  { icon: ShoppingBasket, label: 'SEPET TUTARI', value: '₺428', note: 'Sipariş başı ortalama' },
-  { icon: BadgePercent, label: 'KAMPANYA', value: '%14', note: 'Kontrollü indirim oranı' },
-  { icon: Percent, label: 'KOMİSYON', value: '%18', note: 'Platform maliyeti takibi' },
-  { icon: CircleDollarSign, label: 'NET KAZANÇ', value: '₺214', note: 'Sipariş başı net katkı' },
-];
+const orderRows = [
+  { icon: ShoppingBasket, label: 'Müşterinin ödediği', value: '₺428', kind: 'plus' },
+  { icon: BadgePercent, label: 'Kampanya / indirim', value: '− ₺60', kind: 'minus' },
+  { icon: ReceiptText, label: 'Platform komisyonu', value: '− ₺77', kind: 'minus' },
+  { icon: UtensilsCrossed, label: 'Ürün maliyeti', value: '− ₺115', kind: 'minus' },
+] as const;
+
+const actions = ['Fiyatı optimize eder','Kampanyayı kontrol eder','Sepet tutarını büyütür','Sipariş başına kazancı artırır'];
 
 export default function ProfitSection(){
   return (
     <section className="profitSection" id="basari">
       <style>{`
-        .profitSection{background:#f2f5f6;padding:86px 0 88px;overflow:hidden}
-        .profitShell{width:min(1180px,calc(100% - 64px));margin:0 auto}
-        .profitHead{text-align:center;max-width:850px;margin:0 auto 38px}
-        .profitKicker{display:flex;align-items:center;justify-content:center;gap:11px;color:#1185a5;font-size:11px;font-weight:800;letter-spacing:2.7px;margin-bottom:13px}
-        .profitKicker:before,.profitKicker:after{content:'';width:38px;height:1px;background:#19cbe9}
-        .profitHead h2{margin:0;color:#092838;font-size:clamp(38px,4.4vw,58px);line-height:1;letter-spacing:-2px;font-weight:900}
-        .profitHead h2 span{color:#0c9fc2}
-        .profitHead p{max-width:650px;margin:16px auto 0;color:#607680;font-size:16px;line-height:1.55}
-        .profitPanel{display:grid;grid-template-columns:1.05fr .95fr;gap:18px;padding:18px;border-radius:30px;background:#072535;box-shadow:0 22px 48px rgba(7,37,53,.13)}
-        .profitOverview{border-radius:22px;padding:28px;background:linear-gradient(145deg,#0a3850,#082d42);color:#fff;display:flex;flex-direction:column;justify-content:space-between;min-height:360px}
-        .profitOverviewTop{display:flex;align-items:flex-start;justify-content:space-between;gap:18px}.profitOverviewTop span{color:#8eeafb;font-size:10px;font-weight:800;letter-spacing:2px}.profitOverviewTop svg{color:#26d4f2}
-        .profitBig{margin-top:24px}.profitBig small{display:block;color:#acc3ce;font-size:12px;margin-bottom:6px}.profitBig strong{font-size:54px;line-height:.9;letter-spacing:-2px}.profitBig em{display:inline-flex;align-items:center;gap:5px;margin-left:12px;color:#42e3b4;font-size:12px;font-style:normal;font-weight:800}
-        .profitBars{display:grid;gap:10px;margin-top:28px}.profitBar{display:grid;grid-template-columns:88px 1fr 44px;align-items:center;gap:10px;font-size:10px;color:#c8dce4}.profitTrack{height:7px;border-radius:99px;background:#123f52;overflow:hidden}.profitFill{height:100%;border-radius:99px;background:#1bcbe8}.profitBar:nth-child(2) .profitFill{width:74%}.profitBar:nth-child(3) .profitFill{width:58%}.profitBar:nth-child(4) .profitFill{width:82%}.profitBar:first-child .profitFill{width:91%}.profitBar b{text-align:right;color:#fff;font-size:10px}
-        .profitInsight{margin-top:22px;display:flex;align-items:flex-start;gap:11px;padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.055);border:1px solid rgba(95,223,244,.13)}.profitInsight svg{color:#25d5f2;flex:0 0 auto}.profitInsight strong{display:block;font-size:11px;margin-bottom:3px}.profitInsight p{margin:0;color:#a9c1cb;font-size:10px;line-height:1.4}
-        .profitMetrics{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-        .profitMetric{min-height:174px;padding:20px;border-radius:20px;background:#fff;border:1px solid #dce6ea;box-shadow:0 10px 24px rgba(9,40,56,.05);display:flex;flex-direction:column;justify-content:space-between}.profitMetricTop{display:flex;align-items:center;justify-content:space-between}.profitMetricIcon{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:#edfafd;color:#0aa7c9}.profitMetricTop span{font-size:9px;color:#78909a;font-weight:800;letter-spacing:1px}.profitMetric strong{display:block;color:#0b3446;font-size:30px;letter-spacing:-1px}.profitMetric p{margin:4px 0 0;color:#738791;font-size:10px;line-height:1.35}
-        .profitFoot{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:22px;color:#5b737e;font-size:12px}.profitFoot svg{color:#0aa7c9}
-
+        .profitSection{background:#f2f5f6;padding:86px 0 88px;overflow:hidden}.profitShell{width:min(1120px,calc(100% - 64px));margin:0 auto}.profitHead{text-align:center;max-width:850px;margin:0 auto 38px}.profitKicker{display:flex;align-items:center;justify-content:center;gap:11px;color:#1185a5;font-size:11px;font-weight:800;letter-spacing:2.7px;margin-bottom:13px}.profitKicker:before,.profitKicker:after{content:'';width:38px;height:1px;background:#19cbe9}.profitHead h2{margin:0;color:#092838;font-size:clamp(38px,4.4vw,58px);line-height:1;letter-spacing:-2px;font-weight:900}.profitHead h2 span{color:#0c9fc2}.profitHead p{max-width:690px;margin:16px auto 0;color:#607680;font-size:16px;line-height:1.55}
+        .profitStory{display:grid;grid-template-columns:1.02fr .98fr;gap:18px;padding:18px;border-radius:30px;background:#072535;box-shadow:0 22px 48px rgba(7,37,53,.13)}
+        .orderCard{padding:28px;border-radius:22px;background:linear-gradient(145deg,#0a3850,#082d42);color:#fff}.orderEyebrow{display:flex;align-items:center;justify-content:space-between;color:#8eeafb;font-size:10px;font-weight:800;letter-spacing:2px}.orderEyebrow svg{color:#26d4f2}.orderTitle{margin:20px 0 7px;font-size:25px;line-height:1.05;font-weight:900}.orderHint{margin:0 0 20px;color:#a9c1cb;font-size:12px;line-height:1.45}.orderRows{display:grid;gap:8px}.orderRow{display:grid;grid-template-columns:38px 1fr auto;align-items:center;gap:11px;padding:11px 12px;border-radius:13px;background:rgba(255,255,255,.055);border:1px solid rgba(95,223,244,.1)}.orderIcon{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:rgba(33,216,246,.1);color:#2ad8f4}.orderRow span{font-size:12px;color:#d4e3e9}.orderRow strong{font-size:15px}.orderRow.minus strong{color:#f3c5b8}.netResult{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:13px;padding:17px 18px;border-radius:15px;background:#0b5268;border:1px solid rgba(52,224,247,.34)}.netResult small{display:block;color:#9cecf8;font-size:9px;font-weight:800;letter-spacing:1.5px;margin-bottom:3px}.netResult b{font-size:17px}.netResult strong{font-size:34px;letter-spacing:-1px;color:#fff}
+        .nariboAction{padding:28px;border-radius:22px;background:#fff}.nariboActionKicker{display:flex;align-items:center;gap:8px;color:#0aa7c9;font-size:10px;font-weight:900;letter-spacing:1.8px}.nariboAction h3{margin:16px 0 8px;color:#092838;font-size:27px;line-height:1.05;letter-spacing:-.8px}.nariboAction>p{margin:0;color:#6c818b;font-size:12px;line-height:1.5}.actionFlow{display:grid;gap:8px;margin-top:20px}.actionItem{display:grid;grid-template-columns:28px 1fr 18px;align-items:center;gap:9px;padding:11px 12px;border-radius:13px;background:#f1f8fa;color:#153d4d;font-size:12px;font-weight:800}.actionNo{color:#0aa7c9;font-size:9px;letter-spacing:1px}.actionItem svg{color:#0aa7c9}.profitPromise{margin-top:18px;padding:15px 16px;border-radius:14px;background:#e8fafd;color:#103847;font-size:12px;line-height:1.45}.profitPromise strong{color:#078ead}.profitFoot{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:22px;color:#5b737e;font-size:12px}.profitFoot svg{color:#0aa7c9}
         @media(max-width:760px){
-          .profitSection{padding:28px 0 30px}.profitShell{width:calc(100% - 28px)}.profitHead{margin-bottom:18px}.profitKicker{font-size:8.5px;letter-spacing:2.2px;margin-bottom:9px;gap:8px}.profitKicker:before,.profitKicker:after{width:28px}.profitHead h2{font-size:27px;line-height:1.02;letter-spacing:-1px}.profitHead p{margin-top:10px;font-size:11.5px;line-height:1.42;max-width:360px}.profitPanel{display:block;padding:10px;border-radius:22px}.profitOverview{min-height:255px;padding:18px;border-radius:16px}.profitOverviewTop span{font-size:8px}.profitBig{margin-top:16px}.profitBig small{font-size:9px}.profitBig strong{font-size:42px}.profitBig em{font-size:9px;margin-left:8px}.profitBars{gap:7px;margin-top:18px}.profitBar{grid-template-columns:72px 1fr 36px;gap:7px;font-size:8px}.profitTrack{height:5px}.profitBar b{font-size:8px}.profitInsight{margin-top:15px;padding:9px 10px}.profitInsight svg{width:18px;height:18px}.profitInsight strong{font-size:9px}.profitInsight p{font-size:8px}.profitMetrics{grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}.profitMetric{min-height:115px;padding:11px;border-radius:14px}.profitMetricIcon{width:32px;height:32px;border-radius:10px}.profitMetricIcon svg{width:17px;height:17px}.profitMetricTop span{font-size:7px}.profitMetric strong{font-size:22px}.profitMetric p{font-size:8px;margin-top:2px}.profitFoot{margin-top:12px;font-size:9px;gap:5px}.profitFoot svg{width:14px;height:14px}
+          .profitSection{padding:30px 0 34px}.profitShell{width:calc(100% - 28px)}.profitHead{margin-bottom:20px}.profitKicker{font-size:9px;letter-spacing:2.4px;margin-bottom:10px;gap:8px}.profitKicker:before,.profitKicker:after{width:30px}.profitHead h2{font-size:28px;line-height:1.02;letter-spacing:-1px}.profitHead p{margin-top:11px;font-size:13px;line-height:1.45;max-width:390px}.profitStory{display:block;padding:10px;border-radius:22px}.orderCard{padding:18px;border-radius:16px}.orderEyebrow{font-size:8.5px;letter-spacing:1.7px}.orderTitle{margin-top:16px;font-size:21px}.orderHint{font-size:11px;margin-bottom:15px}.orderRows{gap:7px}.orderRow{grid-template-columns:36px 1fr auto;gap:9px;padding:9px 10px}.orderIcon{width:32px;height:32px}.orderIcon svg{width:17px;height:17px}.orderRow span{font-size:11px}.orderRow strong{font-size:13px}.netResult{margin-top:10px;padding:13px 14px}.netResult small{font-size:8px}.netResult b{font-size:14px}.netResult strong{font-size:29px}.nariboAction{margin-top:9px;padding:18px;border-radius:16px}.nariboActionKicker{font-size:8.5px}.nariboAction h3{margin-top:12px;font-size:22px}.nariboAction>p{font-size:11px}.actionFlow{gap:7px;margin-top:15px}.actionItem{padding:10px 11px;font-size:11px}.profitPromise{margin-top:14px;padding:12px 13px;font-size:11px}.profitFoot{margin-top:14px;font-size:10px;line-height:1.35;text-align:center}.profitFoot svg{width:15px;height:15px;flex:0 0 auto}
         }
       `}</style>
 
@@ -38,30 +26,28 @@ export default function ProfitSection(){
         <div className="profitHead">
           <div className="profitKicker">SİPARİŞTEN KÂRA</div>
           <h2>SATIŞ ARTTIYSA İŞ BİTMEDİ.<br/><span>KÂR DA ARTMALI.</span></h2>
-          <p>Sepet tutarı, kampanya maliyeti, platform komisyonu ve net kazancı birlikte izleyerek büyümeyi sadece ciroyla değil gerçek kârlılıkla yönetiyoruz.</p>
+          <p>Bir siparişin kasaya girmesi yetmez. İndirim, komisyon ve ürün maliyeti çıktıktan sonra restoranınıza gerçekten ne kaldığını birlikte yönetiyoruz.</p>
         </div>
 
-        <div className="profitPanel">
-          <article className="profitOverview">
-            <div>
-              <div className="profitOverviewTop"><span>NARİBO KÂRLILIK GÖRÜNÜMÜ</span><TrendingUp size={25}/></div>
-              <div className="profitBig"><small>Net kârlılık</small><strong>%24,8</strong><em><ArrowUpRight size={13}/> +%6,4</em></div>
-              <div className="profitBars">
-                <div className="profitBar"><span>Sepet</span><div className="profitTrack"><div className="profitFill"/></div><b>91</b></div>
-                <div className="profitBar"><span>Kampanya</span><div className="profitTrack"><div className="profitFill"/></div><b>74</b></div>
-                <div className="profitBar"><span>Komisyon</span><div className="profitTrack"><div className="profitFill"/></div><b>58</b></div>
-                <div className="profitBar"><span>Net kazanç</span><div className="profitTrack"><div className="profitFill"/></div><b>82</b></div>
-              </div>
-            </div>
-            <div className="profitInsight"><ReceiptText size={22}/><div><strong>Karar ciroya göre değil, net kazanca göre.</strong><p>Hangi kampanyanın gerçekten kazandırdığını görün; zarar ettiren promosyonu büyütmeyin.</p></div></div>
+        <div className="profitStory">
+          <article className="orderCard">
+            <div className="orderEyebrow"><span>1 SİPARİŞİN GERÇEK HESABI</span><ReceiptText size={23}/></div>
+            <h3 className="orderTitle">₺428'lik siparişten<br/>size ne kalıyor?</h3>
+            <p className="orderHint">Sipariş tutarından gerçek maliyetleri tek tek düşelim.</p>
+            <div className="orderRows">{orderRows.map(({icon:Icon,label,value,kind})=><div className={`orderRow ${kind}`} key={label}><div className="orderIcon"><Icon size={18}/></div><span>{label}</span><strong>{value}</strong></div>)}</div>
+            <div className="netResult"><div><small>GERÇEK SONUÇ</small><b>Restoranınıza kalan</b></div><strong>₺176</strong></div>
           </article>
 
-          <div className="profitMetrics">
-            {metrics.map(({icon:Icon,label,value,note})=><article className="profitMetric" key={label}><div className="profitMetricTop"><div className="profitMetricIcon"><Icon size={21}/></div><span>{label}</span></div><div><strong>{value}</strong><p>{note}</p></div></article>)}
-          </div>
+          <article className="nariboAction">
+            <div className="nariboActionKicker"><TrendingUp size={18}/> NARİBO NE YAPIYOR?</div>
+            <h3>Bu ₺176'yı nasıl büyütürüz?</h3>
+            <p>Rakamları sadece raporlamıyoruz. Sipariş başına kazancı artıracak noktaları bulup aksiyona dönüştürüyoruz.</p>
+            <div className="actionFlow">{actions.map((item,i)=><div className="actionItem" key={item}><span className="actionNo">0{i+1}</span><span>{item}</span><ArrowRight size={16}/></div>)}</div>
+            <div className="profitPromise"><strong>Hedef:</strong> Daha çok sipariş kadar, her siparişten daha sağlıklı ve sürdürülebilir kazanç.</div>
+          </article>
         </div>
 
-        <div className="profitFoot"><TrendingUp size={16}/> Naribo, sipariş sayısını değil sürdürülebilir kârlılığı büyütmeye odaklanır.</div>
+        <div className="profitFoot"><CircleDollarSign size={17}/> Naribo, sipariş sayısını değil restoranınıza kalan gerçek kazancı büyütmeye odaklanır.</div>
       </div>
     </section>
   );
