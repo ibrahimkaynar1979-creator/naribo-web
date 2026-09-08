@@ -4,6 +4,7 @@ import ProfitSection from './ProfitSection';
 import GrowthSystemSection from './GrowthSystemSection';
 import NariboModelSection from './NariboModelSection';
 import GrowthPartnerSection from './GrowthPartnerSection';
+import FinalCtaSection from './FinalCtaSection';
 import { ArrowRight, BadgePercent, BarChart3, Camera, CircleCheckBig, ClipboardCheck, Clock3, Eye, Headphones, ListChecks, Menu, ShieldCheck, ShoppingCart, Store, Target, TrendingUp, Users } from 'lucide-react';
 
 const benefits = [
@@ -95,6 +96,7 @@ export default function Home() {
       <GrowthSystemSection />
       <NariboModelSection />
       <GrowthPartnerSection />
+      <FinalCtaSection />
     </main>
   );
 }
