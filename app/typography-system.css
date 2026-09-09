@@ -24,11 +24,12 @@ main section[class] .fcK {
 }
 
 @media (max-width: 760px) {
-  /* Referans: 3. bölümdeki “REKLAMI GÖSTERMEK YETMEZ...” başlığı. */
+  /* REFERANS: 3. bölüm — “REKLAMI GÖSTERMEK YETMEZ...” */
   main section[class] h2 {
     font-size: var(--naribo-section-title-mobile) !important;
     line-height: 1.02 !important;
     letter-spacing: -.8px !important;
+    font-weight: 900 !important;
   }
 
   main section[class] .sectionKicker,
@@ -38,5 +39,18 @@ main section[class] .fcK {
     font-size: var(--naribo-section-kicker-mobile) !important;
     line-height: 1.1 !important;
     letter-spacing: 2.3px !important;
+  }
+}
+
+/* 3. bölümün kendi 390px altı referans ölçüsü: 20px. Bütün bölümler aynısını kullanır. */
+@media (max-width: 390px) {
+  :root {
+    --naribo-section-title-mobile: 20px;
+  }
+
+  main section[class] h2 {
+    font-size: 20px !important;
+    line-height: 1.02 !important;
+    letter-spacing: -.65px !important;
   }
 }
