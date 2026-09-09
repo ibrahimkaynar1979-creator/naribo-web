@@ -1,11 +1,11 @@
 :root {
   --naribo-section-title-desktop: 54px;
-  --naribo-section-title-mobile: 30px;
+  --naribo-section-title-mobile: clamp(21px, 5.8vw, 28px);
   --naribo-section-kicker-desktop: 12px;
   --naribo-section-kicker-mobile: 10px;
 }
 
-/* Naribo genel tipografi standardı: hero hariç bütün bölüm başlıkları aynı ölçüde. */
+/* Hero hariç bütün ana bölüm başlıkları aynı tipografik ölçüyü kullanır. */
 main section[class] h2 {
   font-size: var(--naribo-section-title-desktop) !important;
   line-height: .98 !important;
@@ -13,7 +13,6 @@ main section[class] h2 {
   font-weight: 900 !important;
 }
 
-/* Bölüm üst etiketleri / kicker metinleri aynı punto ve ritimde. */
 main section[class] .sectionKicker,
 main section[class] [class*="Kicker"],
 main section[class] .gpK,
@@ -25,10 +24,11 @@ main section[class] .fcK {
 }
 
 @media (max-width: 760px) {
+  /* Referans: 3. bölümdeki “REKLAMI GÖSTERMEK YETMEZ...” başlığı. */
   main section[class] h2 {
     font-size: var(--naribo-section-title-mobile) !important;
-    line-height: 1 !important;
-    letter-spacing: -1.2px !important;
+    line-height: 1.02 !important;
+    letter-spacing: -.8px !important;
   }
 
   main section[class] .sectionKicker,
