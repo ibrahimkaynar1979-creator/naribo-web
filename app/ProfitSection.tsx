@@ -1,10 +1,11 @@
-import { ArrowRight, BadgePercent, CircleDollarSign, ReceiptText, ShoppingBasket, TrendingUp, UtensilsCrossed } from 'lucide-react';
+import { ArrowRight, BadgePercent, CircleDollarSign, ReceiptText, ShoppingBasket, TrendingUp, UtensilsCrossed, WalletCards } from 'lucide-react';
 
 const orderRows = [
-  { icon: ShoppingBasket, label: 'Müşterinin ödediği', value: '₺428', kind: 'plus' },
-  { icon: BadgePercent, label: 'Kampanya / indirim', value: '− ₺60', kind: 'minus' },
-  { icon: ReceiptText, label: 'Platform komisyonu', value: '− ₺77', kind: 'minus' },
-  { icon: UtensilsCrossed, label: 'Ürün maliyeti', value: '− ₺115', kind: 'minus' },
+  { icon: ShoppingBasket, label: 'Liste fiyatı', value: '₺678', kind: 'plus' },
+  { icon: BadgePercent, label: 'Müşteri indirimi', value: '− ₺200', kind: 'minus' },
+  { icon: WalletCards, label: 'Müşterinin ödediği', value: '₺478', kind: 'plus' },
+  { icon: ReceiptText, label: 'Platform + taşıma komisyonları', value: '− ₺195,02', kind: 'minus' },
+  { icon: UtensilsCrossed, label: 'Ürün maliyeti', value: '− ₺128', kind: 'minus' },
 ] as const;
 
 const actions = ['Fiyatı optimize eder','Kampanyayı kontrol eder','Sepet tutarını büyütür','Sipariş başına kazancı artırır'];
@@ -34,15 +35,15 @@ export default function ProfitSection(){
         <div className="profitStory">
           <article className="orderCard">
             <div className="orderEyebrow"><span>1 SİPARİŞİN GERÇEK HESABI</span><ReceiptText size={23}/></div>
-            <h3 className="orderTitle">₺428'lik siparişten<br/>size ne kalıyor?</h3>
-            <p className="orderHint">Sipariş tutarından gerçek maliyetleri tek tek düşelim.</p>
+            <h3 className="orderTitle">₺678 liste fiyatından<br/>size ne kalıyor?</h3>
+            <p className="orderHint">Liste fiyatından gerçek kesintileri tek tek düşelim.</p>
             <div className="orderRows">{orderRows.map(({icon:Icon,label,value,kind})=><div className={`orderRow ${kind}`} key={label}><div className="orderIcon"><Icon size={18}/></div><span>{label}</span><strong>{value}</strong></div>)}</div>
-            <div className="netResult"><div><small>GERÇEK SONUÇ</small><b>Restoranınıza kalan</b></div><strong>₺176</strong></div>
+            <div className="netResult"><div><small>GERÇEK SONUÇ</small><b>Restoranınıza kalan</b></div><strong>₺154,98</strong></div>
           </article>
 
           <article className="nariboAction">
             <div className="nariboActionKicker"><TrendingUp size={18}/> NARİBO NE YAPIYOR?</div>
-            <h3>Bu ₺176'yı nasıl büyütürüz?</h3>
+            <h3>Bu ₺154,98'i nasıl büyütürüz?</h3>
             <p>Rakamları sadece raporlamıyoruz. Sipariş başına kazancı artıracak noktaları bulup aksiyona dönüştürüyoruz.</p>
             <div className="actionFlow">{actions.map((item,i)=><div className="actionItem" key={item}><span className="actionNo">0{i+1}</span><span>{item}</span><ArrowRight size={16}/></div>)}</div>
             <div className="profitPromise"><strong>Hedef:</strong> Daha çok sipariş ve her siparişten daha sağlıklı, sürdürülebilir kazanç.</div>
