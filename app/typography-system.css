@@ -1,8 +1,10 @@
 :root {
   --naribo-section-title-desktop: 54px;
-  --naribo-section-title-mobile: clamp(21px, 5.8vw, 28px);
+  --naribo-section-title-mobile: 29px;
   --naribo-section-kicker-desktop: 12px;
   --naribo-section-kicker-mobile: 10px;
+  --naribo-accent: #21d8f6;
+  --naribo-dark: #031722;
 }
 
 /* Hero hariç bütün ana bölüm başlıkları aynı tipografik ölçüyü kullanır. */
@@ -16,7 +18,8 @@ main section[class] h2 {
 main section[class] .sectionKicker,
 main section[class] [class*="Kicker"],
 main section[class] .gpK,
-main section[class] .fcK {
+main section[class] .fcK,
+main section[class] .qrK {
   font-size: var(--naribo-section-kicker-desktop) !important;
   line-height: 1.1 !important;
   font-weight: 800 !important;
@@ -24,33 +27,36 @@ main section[class] .fcK {
 }
 
 @media (max-width: 760px) {
-  /* REFERANS: 3. bölüm — “REKLAMI GÖSTERMEK YETMEZ...” */
+  /* KİLİTLİ REFERANS: Reklamdan Siparişe */
   main section[class] h2 {
     font-size: var(--naribo-section-title-mobile) !important;
-    line-height: 1.02 !important;
-    letter-spacing: -.8px !important;
+    line-height: .98 !important;
+    letter-spacing: -1px !important;
     font-weight: 900 !important;
   }
 
   main section[class] .sectionKicker,
   main section[class] [class*="Kicker"],
   main section[class] .gpK,
-  main section[class] .fcK {
+  main section[class] .fcK,
+  main section[class] .qrK {
     font-size: var(--naribo-section-kicker-mobile) !important;
     line-height: 1.1 !important;
-    letter-spacing: 2.3px !important;
-  }
-}
-
-/* 3. bölümün kendi 390px altı referans ölçüsü: 20px. Bütün bölümler aynısını kullanır. */
-@media (max-width: 390px) {
-  :root {
-    --naribo-section-title-mobile: 20px;
+    letter-spacing: 4px !important;
+    font-weight: 800 !important;
   }
 
-  main section[class] h2 {
-    font-size: 20px !important;
-    line-height: 1.02 !important;
-    letter-spacing: -.65px !important;
+  /* Ana bölüm açıklamalarında ortak ritim. */
+  .profitHead p,
+  .growthSystemHead p,
+  .qrCopy > p,
+  .nm2Lead,
+  .gpLead,
+  .fc p,
+  .setupIntro > p,
+  .journeyCarouselFixedHead p {
+    font-size: 12px !important;
+    line-height: 1.5 !important;
+    margin-top: 10px !important;
   }
 }
