@@ -1,15 +1,23 @@
 import Image from 'next/image';
-import { BarChart3, Layers3, Target } from 'lucide-react';
-
-const pillars = [
-  { icon:Target, title:'Restoranınıza özel strateji', text:'Menü, fiyat, müşteri ve platform verilerinize göre.' },
-  { icon:Layers3, title:'Tek ekipten yönetim', text:'Menüden reklama kadar tek büyüme planı.' },
-  { icon:BarChart3, title:'Sürekli ölçüm & gelişim', text:'Sipariş ve gerçek kazanç birlikte büyür.' },
-] as const;
 
 export default function NariboModelSection(){
-  return <section className="nm" id="naribo-modeli"><style>{`
-    .nm{background:#f3f6f7;padding:82px 0;color:#082b3a}.nmS{width:min(1180px,calc(100% - 64px));margin:auto}.nmK{text-align:center;color:#0c9fc2;font:900 11px/1 sans-serif;letter-spacing:2.8px}.nmH{text-align:center;margin:12px 0 12px;font-size:clamp(44px,5vw,66px);line-height:.96;letter-spacing:-2.4px}.nmH span{display:block;color:#0c9fc2}.nmP{text-align:center;max-width:720px;margin:0 auto 34px;color:#58717c;font-size:16px;line-height:1.5}.nmPanel{display:grid;grid-template-columns:1.18fr .82fr;min-height:610px;border-radius:32px;overflow:hidden;background:#041d2a;box-shadow:0 24px 62px rgba(8,43,58,.14)}.nmVisual{position:relative;min-height:610px}.nmVisual img{object-fit:cover;object-position:center}.nmShade{position:absolute;inset:0;background:linear-gradient(180deg,transparent 52%,rgba(3,23,34,.88) 100%)}.nmVisualText{position:absolute;left:32px;right:32px;bottom:30px;color:#fff}.nmVisualText small{color:#7fe8f8;font-weight:900;letter-spacing:2px}.nmVisualText h3{max-width:520px;font-size:30px;line-height:1.03;margin:8px 0 0}.nmRight{padding:40px 34px;display:flex;flex-direction:column;justify-content:center}.nmRightTitle{color:#fff;font-size:25px;line-height:1.1;margin:0 0 20px}.nmCards{display:grid;gap:12px}.nmCard{display:grid;grid-template-columns:52px 1fr;gap:14px;padding:18px;border:1px solid rgba(33,216,246,.18);border-radius:18px;background:#073149;color:#fff}.nmIcon{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:rgba(33,216,246,.11);color:#21d8f6}.nmCard b{font-size:15px}.nmCard p{margin:5px 0 0;color:#c4d7de;font-size:13.5px;line-height:1.45}.nmQuote{margin-top:18px;padding:17px;border-radius:16px;background:#fff;color:#173d4c;font-size:14px;font-weight:850}
-    @media(max-width:760px){.nm{padding:40px 0}.nmS{width:calc(100% - 24px)}.nmH{font-size:35px}.nmP{font-size:14px;margin-bottom:22px}.nmPanel{grid-template-columns:1fr;min-height:0;border-radius:22px}.nmVisual{min-height:390px}.nmVisualText{left:19px;right:19px;bottom:19px}.nmVisualText h3{font-size:24px}.nmRight{padding:18px 15px 16px}.nmRightTitle{font-size:20px;margin:2px 0 13px}.nmCard{padding:13px;grid-template-columns:46px 1fr}.nmIcon{width:44px;height:44px}.nmCard b{font-size:13.5px}.nmCard p{font-size:12.5px}.nmQuote{font-size:12.8px;padding:14px}}
-  `}</style><div className="nmS"><div className="nmK">NARİBO MODELİ</div><h2 className="nmH">AJANSINIZ DEĞİL.<span>BÜYÜME ORTAĞINIZ.</span></h2><p className="nmP">Restoranınızın dijital satışını tek tek hizmetler olarak değil, bütün bir büyüme sistemi olarak yönetiyoruz.</p><div className="nmPanel"><div className="nmVisual"><Image src="/naribo-modeli.png" alt="Naribo restoran dashboard analizi" fill sizes="(max-width:760px) 100vw, 60vw"/><div className="nmShade"/><div className="nmVisualText"><small>AYNI HEDEF</small><h3>Restoranınızın ekibine dışarıdan değil, büyümenin içinden bakıyoruz.</h3></div></div><div className="nmRight"><h3 className="nmRightTitle">Naribo'nun farkı 3 noktada.</h3><div className="nmCards">{pillars.map(({icon:Icon,title,text})=><div className="nmCard" key={title}><div className="nmIcon"><Icon size={24}/></div><div><b>{title}</b><p>{text}</p></div></div>)}</div><div className="nmQuote">Aynı masanın iki tarafı değil, aynı tarafındayız.</div></div></div></div></section>
+  return (
+    <section className="nmPremium" id="naribo-modeli">
+      <style>{`
+        .nmPremium{background:#031722;padding:0;overflow:hidden}.nmPremiumInner{width:100%;margin:0 auto}.nmPremiumImage{display:block;width:100%;height:auto}
+        @media(max-width:760px){.nmPremium{background:#031722}.nmPremiumInner{width:100%;overflow:hidden}.nmPremiumImage{width:100%;height:auto}}
+      `}</style>
+      <div className="nmPremiumInner">
+        <Image
+          src="/naribo-modeli-premium.png"
+          alt="Naribo Modeli - restoran buyume haritasi, veri analizi, strateji ve surdurulebilir artis"
+          width={1872}
+          height={768}
+          className="nmPremiumImage"
+          priority={false}
+          sizes="100vw"
+        />
+      </div>
+    </section>
+  );
 }
