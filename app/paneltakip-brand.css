@@ -1,65 +1,188 @@
-/* PanelTakip ana marka logosu — header override */
+/* PanelTakip header — sade, ortalı ve premium */
 .nav {
-  grid-template-columns: 390px 1fr auto;
-  gap: 24px;
-  padding-top: 14px;
+  position: relative;
+  z-index: 100;
+  width: min(1320px, calc(100% - 48px));
+  min-height: 142px;
+  margin-inline: auto;
+  padding: 10px 0 8px;
+  display: grid;
+  grid-template-columns: 1fr 560px 1fr;
+  align-items: center;
+  gap: 20px;
 }
 
+/* Header'da sadece kelime logosu görünür; koyu zemindeki açıklama HTML/CSS ile ayrıca yazılır. */
 .brand {
-  width: 390px;
-  min-height: 104px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  grid-column: 2;
+  position: relative;
+  justify-self: center;
+  width: 560px;
+  height: 122px;
+  min-height: 122px;
+  display: block;
+  overflow: hidden;
   background-image: url('/paneltakip-logo-header.png');
   background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
+  background-position: center -2px;
+  background-size: 560px auto;
+}
+
+.brand::after {
+  content: 'RESTORAN BÜYÜME & YÖNETİM HİZMETİ';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 3px;
+  z-index: 3;
+  text-align: center;
+  color: #dce8ed;
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 650;
+  letter-spacing: 3.8px;
+  white-space: nowrap;
+  text-shadow: 0 1px 8px rgba(0,0,0,.35);
 }
 
 .brandImage {
   display: none !important;
 }
 
+.desktopNav,
+.contactButton {
+  display: none !important;
+}
+
+.mobileMenu {
+  display: grid !important;
+  grid-column: 3;
+  justify-self: end;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border-radius: 18px;
+  color: #fff;
+  background: rgba(255,255,255,.045);
+  border: 1px solid rgba(255,255,255,.13);
+}
+
+.mobileMenu svg {
+  width: 28px;
+  height: 28px;
+}
+
+.growthBand {
+  position: relative;
+  z-index: 99;
+  height: 48px;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  background: #062332;
+  border-top: 1px solid rgba(33,216,246,.08);
+  border-bottom: 1px solid rgba(33,216,246,.18);
+  color: #c6f1f7;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 4.8px;
+  white-space: nowrap;
+}
+
+.growthBand span {
+  width: 56px;
+  height: 1px;
+  background: #20cbe9;
+  opacity: .95;
+}
+
 @media (max-width: 1080px) and (min-width: 761px) {
   .nav {
-    grid-template-columns: 320px 1fr auto;
-    gap: 18px;
+    grid-template-columns: 1fr 470px 1fr;
+    min-height: 126px;
   }
 
   .brand {
-    width: 320px;
-    min-height: 92px;
+    width: 470px;
+    height: 106px;
+    min-height: 106px;
+    background-size: 470px auto;
   }
 
-  .desktopNav {
-    gap: 20px;
-    font-size: 12px;
+  .brand::after {
+    font-size: 9px;
+    letter-spacing: 3px;
   }
 }
 
 @media (max-width: 760px) {
   .nav {
-    min-height: 82px;
-    padding: 6px 12px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    width: 100%;
+    min-height: 78px;
+    height: 78px;
+    margin: 0;
+    padding: 6px 14px;
     grid-template-columns: 1fr auto;
-    align-items: center;
+    gap: 10px;
+    background: rgba(3,23,34,.97);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
   }
 
   .brand {
-    width: min(270px, calc(100vw - 76px));
-    height: 68px;
-    min-height: 68px;
-    margin: 0 auto 0 0;
-    overflow: visible;
-    align-items: center;
-    justify-content: center;
-    background-position: left center;
-    background-size: contain;
+    grid-column: 1;
+    justify-self: start;
+    width: min(250px, calc(100vw - 84px));
+    height: 64px;
+    min-height: 64px;
+    margin: 0;
+    background-size: 250px auto;
+    background-position: left -1px;
+  }
+
+  .brand::after {
+    bottom: 2px;
+    text-align: left;
+    padding-left: 6px;
+    font-size: 6.5px;
+    letter-spacing: 1.35px;
+  }
+
+  .mobileMenu {
+    grid-column: 2;
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+  }
+
+  .mobileMenu svg {
+    width: 24px;
+    height: 24px;
   }
 
   .growthBand {
-    top: 82px;
+    position: fixed;
+    top: 78px;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    height: 32px;
+    min-height: 32px;
+    gap: 10px;
+    font-size: 8px;
+    letter-spacing: 2.2px;
+  }
+
+  .growthBand span {
+    width: 30px;
   }
 
   .heroVisual {
@@ -69,8 +192,12 @@
 
 @media (max-width: 390px) {
   .brand {
-    width: min(244px, calc(100vw - 72px));
-    height: 64px;
-    min-height: 64px;
+    width: min(230px, calc(100vw - 78px));
+    background-size: 230px auto;
+  }
+
+  .brand::after {
+    font-size: 6px;
+    letter-spacing: 1.15px;
   }
 }
