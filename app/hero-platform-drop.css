@@ -33,7 +33,7 @@
   opacity: 0;
   transform: translateY(-560px);
   transform-origin: center bottom;
-  animation: platformDropBounce 1.34s cubic-bezier(.18,.72,.22,1) var(--drop-delay) forwards;
+  animation: platformDropBounce 1.95s cubic-bezier(.18,.72,.22,1) var(--drop-delay) forwards;
   filter: drop-shadow(0 7px 9px rgba(0,0,0,.28));
   will-change: transform, opacity;
 }
@@ -88,7 +88,7 @@
     width: 64px;
     max-width: 64px;
     height: 54px;
-    animation-duration: 1.34s;
+    animation-duration: 1.95s;
   }
 
   .heroPlatformDropItem img {
