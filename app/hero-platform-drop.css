@@ -10,7 +10,7 @@
   width: min(470px, 100%);
   height: 54px;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: flex-start;
   gap: 12px;
   pointer-events: none;
@@ -21,9 +21,11 @@
   position: absolute;
   left: 0;
   right: 0;
-  bottom: -5px;
-  height: 1px;
-  background: linear-gradient(90deg, rgba(33,216,246,.65), rgba(33,216,246,.06));
+  bottom: 0;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(33,216,246,.08), rgba(33,216,246,.95) 15%, rgba(33,216,246,.95) 85%, rgba(33,216,246,.08));
+  box-shadow: 0 0 10px rgba(33,216,246,.22);
   z-index: -1;
 }
 
@@ -33,9 +35,11 @@
   display: grid;
   place-items: center;
   opacity: 0;
-  transform: translateY(-90px);
-  animation: platformDropBounce 820ms cubic-bezier(.2,.82,.24,1) var(--drop-delay) forwards;
-  filter: drop-shadow(0 5px 7px rgba(0,0,0,.22));
+  transform: translateY(-520px);
+  transform-origin: center bottom;
+  animation: platformDropBounce 1.28s cubic-bezier(.18,.72,.22,1) var(--drop-delay) forwards;
+  filter: drop-shadow(0 7px 9px rgba(0,0,0,.28));
+  will-change: transform, opacity;
 }
 
 .heroPlatformDropItem img {
@@ -46,11 +50,15 @@
 }
 
 @keyframes platformDropBounce {
-  0% { opacity: 0; transform: translateY(-90px) scale(.94); }
-  58% { opacity: 1; transform: translateY(8px) scale(1); }
-  76% { transform: translateY(-4px); }
-  90% { transform: translateY(2px); }
-  100% { opacity: 1; transform: translateY(0); }
+  0%   { opacity: 0; transform: translateY(-520px) scale(.94); }
+  8%   { opacity: 1; }
+  58%  { opacity: 1; transform: translateY(0) scale(1); }
+  69%  { transform: translateY(-18px) scale(1.015); }
+  78%  { transform: translateY(0) scale(1); }
+  86%  { transform: translateY(-8px) scale(1.006); }
+  92%  { transform: translateY(0) scale(1); }
+  96%  { transform: translateY(-3px); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 @media (max-width: 760px) {
@@ -68,21 +76,20 @@
     right: 0;
     bottom: calc(100% + 12px);
     width: 100%;
-    height: 42px;
+    height: 58px;
+    padding: 0 4px 2px;
     justify-content: space-between;
+    align-items: flex-end;
     gap: 8px;
-  }
-
-  .heroPlatformDrop::after {
-    bottom: -4px;
+    overflow: visible;
   }
 
   .heroPlatformDropItem {
-    flex: 1 1 0;
-    width: auto;
+    flex: 0 1 64px;
+    width: 64px;
     max-width: 64px;
-    height: 38px;
-    animation-duration: 760ms;
+    height: 48px;
+    animation-duration: 1.28s;
   }
 
   .heroPlatformDropItem img {
@@ -99,13 +106,15 @@
   }
 
   .heroPlatformDrop {
-    height: 38px;
+    height: 54px;
     gap: 6px;
   }
 
   .heroPlatformDropItem {
+    flex-basis: 58px;
+    width: 58px;
     max-width: 58px;
-    height: 35px;
+    height: 44px;
   }
 }
 
