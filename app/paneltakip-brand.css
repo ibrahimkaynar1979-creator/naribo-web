@@ -45,17 +45,18 @@
 }
 .mobileMenu svg { width: 24px; height: 24px; }
 
-/* Slogan bandi: ilk kisim beyaz, ikinci kisim orijinal turkuaz */
+/* Slogan bandi: tek kompozisyon, solda beyaz / sagda turkuaz */
 .growthBand {
   position: relative;
   z-index: 99;
-  height: 60px;
-  min-height: 60px;
+  height: 66px;
+  min-height: 66px;
   display: block;
   overflow: hidden;
-  background: #062332;
+  background: linear-gradient(180deg,#062735 0%,#05212f 100%);
   border-top: 1px solid rgba(33,216,246,.08);
-  border-bottom: 1px solid rgba(33,216,246,.18);
+  border-bottom: 1px solid rgba(33,216,246,.32);
+  box-shadow: inset 0 -10px 24px rgba(0,0,0,.08);
   color: transparent !important;
   font-size: 0 !important;
   line-height: 0 !important;
@@ -70,19 +71,17 @@
   background-image: url('/paneltakip-slogan.png');
   background-repeat: no-repeat;
   background-position: center;
-  background-size: auto 46px;
+  background-size: auto 52px;
 }
 
-/* Daha Fazla Sipariş — beyaza çevrilmiş aynı el yazısı */
 .growthBand::before {
-  clip-path: inset(0 49% 0 0);
-  filter: brightness(0) invert(1) drop-shadow(0 1px 2px rgba(255,255,255,.16));
+  clip-path: inset(0 50% 0 0);
+  filter: brightness(0) invert(1) drop-shadow(0 1px 2px rgba(255,255,255,.13));
 }
 
-/* Daha Kârlı Büyüme — orijinal turkuaz */
 .growthBand::after {
-  clip-path: inset(0 0 0 46%);
-  filter: drop-shadow(0 1px 3px rgba(0,197,234,.18));
+  clip-path: inset(0 0 0 48%);
+  filter: saturate(1.08) brightness(1.05) drop-shadow(0 2px 4px rgba(0,197,234,.22));
 }
 
 .growthBand span { display: none !important; }
@@ -90,8 +89,8 @@
 @media (max-width:1080px) and (min-width:761px) {
   .nav { grid-template-columns: 280px 1fr auto; min-height: 86px; }
   .brand { width: 280px; height: 64px; min-height: 64px; }
-  .growthBand { height: 56px; min-height: 56px; }
-  .growthBand::before,.growthBand::after { background-size: auto 42px; }
+  .growthBand { height: 62px; min-height: 62px; }
+  .growthBand::before,.growthBand::after { background-size: auto 48px; }
 }
 
 @media (max-width:760px) {
@@ -125,19 +124,21 @@
     top: 68px;
     left: 0; right: 0;
     z-index: 99;
-    height: 48px;
-    min-height: 48px;
+    height: 54px;
+    min-height: 54px;
   }
   .growthBand::before,.growthBand::after {
-    background-size: min(90vw, 365px) auto;
+    background-size: min(94vw, 390px) auto;
     background-position: center;
   }
-  .heroVisual { top: 116px; }
+  .growthBand::before { clip-path: inset(0 50% 0 0); }
+  .growthBand::after { clip-path: inset(0 0 0 48%); }
+  .heroVisual { top: 122px; }
 }
 
 @media (max-width:390px) {
   .brand { width: 190px; height: 48px; min-height: 48px; }
-  .growthBand { height: 46px; min-height: 46px; }
-  .growthBand::before,.growthBand::after { background-size: 90vw auto; }
-  .heroVisual { top: 114px; }
+  .growthBand { height: 52px; min-height: 52px; }
+  .growthBand::before,.growthBand::after { background-size: 94vw auto; }
+  .heroVisual { top: 120px; }
 }
