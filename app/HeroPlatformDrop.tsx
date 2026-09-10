@@ -25,7 +25,7 @@ export default function HeroPlatformDrop() {
       {platforms.map((platform, index) => (
         <div
           className="heroPlatformDropItem"
-          style={{ '--drop-delay': `${index * 160}ms` } as React.CSSProperties}
+          style={{ '--drop-delay': `${index * 200}ms` } as React.CSSProperties}
           key={platform.alt}
         >
           <img src={platform.src} alt={platform.alt} />
