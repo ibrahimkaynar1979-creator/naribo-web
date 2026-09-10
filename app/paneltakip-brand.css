@@ -45,31 +45,53 @@
 }
 .mobileMenu svg { width: 24px; height: 24px; }
 
-/* Eski “Restoranların Büyüme Ortağı” yazısı yerine görsel slogan */
+/* Slogan bandi: ilk kisim beyaz, ikinci kisim orijinal turkuaz */
 .growthBand {
   position: relative;
   z-index: 99;
-  height: 58px;
-  min-height: 58px;
+  height: 60px;
+  min-height: 60px;
   display: block;
   overflow: hidden;
-  background-color: #062332;
-  background-image: url('/paneltakip-slogan.png');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: auto 46px;
+  background: #062332;
   border-top: 1px solid rgba(33,216,246,.08);
   border-bottom: 1px solid rgba(33,216,246,.18);
   color: transparent !important;
   font-size: 0 !important;
   line-height: 0 !important;
 }
+
+.growthBand::before,
+.growthBand::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url('/paneltakip-slogan.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: auto 46px;
+}
+
+/* Daha Fazla Sipariş — beyaza çevrilmiş aynı el yazısı */
+.growthBand::before {
+  clip-path: inset(0 49% 0 0);
+  filter: brightness(0) invert(1) drop-shadow(0 1px 2px rgba(255,255,255,.16));
+}
+
+/* Daha Kârlı Büyüme — orijinal turkuaz */
+.growthBand::after {
+  clip-path: inset(0 0 0 46%);
+  filter: drop-shadow(0 1px 3px rgba(0,197,234,.18));
+}
+
 .growthBand span { display: none !important; }
 
 @media (max-width:1080px) and (min-width:761px) {
   .nav { grid-template-columns: 280px 1fr auto; min-height: 86px; }
   .brand { width: 280px; height: 64px; min-height: 64px; }
-  .growthBand { height: 54px; min-height: 54px; background-size: auto 42px; }
+  .growthBand { height: 56px; min-height: 56px; }
+  .growthBand::before,.growthBand::after { background-size: auto 42px; }
 }
 
 @media (max-width:760px) {
@@ -103,16 +125,19 @@
     top: 68px;
     left: 0; right: 0;
     z-index: 99;
-    height: 42px;
-    min-height: 42px;
-    background-size: min(94vw, 390px) auto;
+    height: 48px;
+    min-height: 48px;
+  }
+  .growthBand::before,.growthBand::after {
+    background-size: min(90vw, 365px) auto;
     background-position: center;
   }
-  .heroVisual { top: 110px; }
+  .heroVisual { top: 116px; }
 }
 
 @media (max-width:390px) {
   .brand { width: 190px; height: 48px; min-height: 48px; }
-  .growthBand { height: 40px; min-height: 40px; background-size: 94vw auto; }
-  .heroVisual { top: 108px; }
+  .growthBand { height: 46px; min-height: 46px; }
+  .growthBand::before,.growthBand::after { background-size: 90vw auto; }
+  .heroVisual { top: 114px; }
 }
