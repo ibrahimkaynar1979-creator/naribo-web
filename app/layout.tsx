@@ -1,10 +1,12 @@
 import type { Metadata } from 'next';
 import MobileNav from './MobileNav';
+import HeroPlatformDrop from './HeroPlatformDrop';
 import './globals.css';
 import './mobile-overrides.css';
 import './hero-mobile.css';
 import './typography-system.css';
 import './paneltakip-brand.css';
+import './hero-platform-drop.css';
 
 export const metadata: Metadata = {
   title: 'PanelTakip | Restoran Büyüme & Yönetim Hizmeti',
@@ -21,7 +23,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="tr">
-      <body>{children}<MobileNav/></body>
+      <body>{children}<HeroPlatformDrop/><MobileNav/></body>
     </html>
   );
 }
