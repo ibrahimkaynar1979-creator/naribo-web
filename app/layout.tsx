@@ -6,11 +6,11 @@ import './hero-mobile.css';
 import './typography-system.css';
 
 export const metadata: Metadata = {
-  title: 'Naribo | Restoran Büyüme Ortağı',
-  description: 'Naribo; restoranların yemek platformlarındaki satışını, sipariş sayısını ve gerçek kârlılığını büyütmeye odaklanan restoran büyüme ortağıdır.',
+  title: 'PanelTakip | Restoran Büyüme & Yönetim Hizmeti',
+  description: 'PanelTakip; restoranların yemek platformlarındaki satışını, panel yönetimini, sipariş sayısını ve gerçek kârlılığını büyütmeye odaklanan restoran büyüme ve yönetim hizmetidir.',
   openGraph: {
-    title: 'Naribo | Restoran Büyüme Ortağı',
-    description: 'Daha fazla sipariş, daha kârlı büyüme. Restoranınızın dijital satışını Naribo ile büyütün.',
+    title: 'PanelTakip | Restoran Büyüme & Yönetim Hizmeti',
+    description: 'Daha fazla sipariş, daha kârlı büyüme. Yemek platformlarındaki satışınızı ve panellerinizi PanelTakip ile yönetin.',
     type: 'website',
     locale: 'tr_TR'
   },
