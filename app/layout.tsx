@@ -4,6 +4,7 @@ import './globals.css';
 import './mobile-overrides.css';
 import './hero-mobile.css';
 import './typography-system.css';
+import './paneltakip-brand.css';
 
 export const metadata: Metadata = {
   title: 'PanelTakip | Restoran Büyüme & Yönetim Hizmeti',
