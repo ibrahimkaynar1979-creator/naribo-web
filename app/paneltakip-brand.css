@@ -7,7 +7,7 @@
   margin-inline: auto;
   padding: 10px 0;
   display: grid;
-  grid-template-columns: 320px 1fr auto;
+  grid-template-columns: 340px 1fr auto;
   align-items: center;
   gap: 20px;
 }
@@ -15,9 +15,9 @@
 .brand {
   grid-column: 1;
   justify-self: start;
-  width: 320px;
-  height: 72px;
-  min-height: 72px;
+  width: 340px;
+  height: 76px;
+  min-height: 76px;
   display: block;
   overflow: visible;
   background-image: url('/paneltakip-logo-transparent.png');
@@ -45,52 +45,44 @@
 }
 .mobileMenu svg { width: 24px; height: 24px; }
 
-/* Slogan bandi: tek kompozisyon, solda beyaz / sagda turkuaz */
+/* Header altındaki ince büyüme ortağı bandı */
 .growthBand {
   position: relative;
   z-index: 99;
-  height: 66px;
-  min-height: 66px;
-  display: block;
+  width: 100%;
+  height: 30px;
+  min-height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
   overflow: hidden;
-  background: linear-gradient(180deg,#062735 0%,#05212f 100%);
+  color: #8feaf8;
+  background: rgba(3,23,34,.97);
   border-top: 1px solid rgba(33,216,246,.08);
-  border-bottom: 1px solid rgba(33,216,246,.32);
-  box-shadow: inset 0 -10px 24px rgba(0,0,0,.08);
-  color: transparent !important;
-  font-size: 0 !important;
-  line-height: 0 !important;
+  border-bottom: 1px solid rgba(33,216,246,.18);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  line-height: 1;
+}
+.growthBand::before,.growthBand::after { content: none; }
+.growthBand span {
+  display: block;
+  width: 38px;
+  height: 1px;
+  background: rgba(33,216,246,.72);
 }
 
-.growthBand::before,
-.growthBand::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background-image: url('/paneltakip-slogan.png');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: auto 52px;
+@media (min-width:761px) {
+  .heroCopy { transform: translateY(-20px); }
 }
-
-.growthBand::before {
-  clip-path: inset(0 50% 0 0);
-  filter: brightness(0) invert(1) drop-shadow(0 1px 2px rgba(255,255,255,.13));
-}
-
-.growthBand::after {
-  clip-path: inset(0 0 0 48%);
-  filter: saturate(1.08) brightness(1.05) drop-shadow(0 2px 4px rgba(0,197,234,.22));
-}
-
-.growthBand span { display: none !important; }
 
 @media (max-width:1080px) and (min-width:761px) {
   .nav { grid-template-columns: 280px 1fr auto; min-height: 86px; }
   .brand { width: 280px; height: 64px; min-height: 64px; }
-  .growthBand { height: 62px; min-height: 62px; }
-  .growthBand::before,.growthBand::after { background-size: auto 48px; }
+  .growthBand { height: 30px; min-height: 30px; }
+  .heroCopy { transform: translateY(-14px); }
 }
 
 @media (max-width:760px) {
@@ -99,20 +91,21 @@
     top: 0; left: 0; right: 0;
     z-index: 100;
     width: 100%;
-    height: 68px;
-    min-height: 68px;
+    height: 72px;
+    min-height: 72px;
     margin: 0;
-    padding: 6px 12px;
+    padding: 7px 12px;
     grid-template-columns: 1fr auto;
     gap: 8px;
     background: #031722;
+    border-bottom: 1px solid rgba(33,216,246,.10);
   }
   .brand {
     grid-column: 1;
     justify-self: start;
-    width: 210px;
-    height: 52px;
-    min-height: 52px;
+    width: 220px;
+    height: 54px;
+    min-height: 54px;
     margin: 0;
     background-position: left center;
     background-size: contain;
@@ -121,24 +114,27 @@
   .mobileMenu svg { width: 22px; height: 22px; }
   .growthBand {
     position: fixed;
-    top: 68px;
+    top: 72px;
     left: 0; right: 0;
     z-index: 99;
-    height: 54px;
-    min-height: 54px;
+    height: 28px;
+    min-height: 28px;
+    gap: 10px;
+    font-size: 8px;
+    letter-spacing: 2.2px;
   }
-  .growthBand::before,.growthBand::after {
-    background-size: min(94vw, 390px) auto;
-    background-position: center;
+  .growthBand span { width: 26px; }
+  .heroVisual { top: 100px !important; }
+  .heroGrid {
+    padding-top: 100px !important;
+    min-height: 900px !important;
   }
-  .growthBand::before { clip-path: inset(0 50% 0 0); }
-  .growthBand::after { clip-path: inset(0 0 0 48%); }
-  .heroVisual { top: 122px; }
+  .heroCopy { padding-bottom: 54px !important; }
+  .heroActionDock { position: relative; z-index: 5; }
+  .microTrust { padding-bottom: 12px; }
+  .hero { min-height: 900px !important; }
 }
 
 @media (max-width:390px) {
-  .brand { width: 190px; height: 48px; min-height: 48px; }
-  .growthBand { height: 52px; min-height: 52px; }
-  .growthBand::before,.growthBand::after { background-size: 94vw auto; }
-  .heroVisual { top: 120px; }
+  .brand { width: 205px; height: 50px; min-height: 50px; }
 }
