@@ -4,10 +4,10 @@ import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 const platforms = [
-  { src: '/ymksptpng.png', alt: 'Yemeksepeti' },
-  { src: '/gtrpng.png', alt: 'Getir Yemek' },
-  { src: '/ubrpng.png', alt: 'Uber Eats' },
-  { src: '/mgrspng.png', alt: 'Migros Yemek' },
+  { src: '/platforms/yemek-sepeti-logo-png_seeklogo-155131.png', alt: 'Yemeksepeti' },
+  { src: '/platforms/getiryemek-logo-png_seeklogo-397395.png', alt: 'Getir Yemek' },
+  { src: '/platforms/uber-eats-trendyolgo-logo-png_seeklogo-677055.png', alt: 'Uber Eats' },
+  { src: '/platforms/migros-yemek-logo-png_seeklogo-454008.png', alt: 'Migros Yemek' },
 ];
 
 export default function HeroPlatformDrop() {
