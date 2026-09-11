@@ -1,258 +1,38 @@
 /* PanelTakip header — standart web sitesi logo ölçüsü */
-.nav {
-  position: relative;
-  z-index: 100;
-  width: min(1320px, calc(100% - 48px));
-  min-height: 92px;
-  margin-inline: auto;
-  padding: 10px 0;
-  display: grid;
-  grid-template-columns: 340px 1fr auto;
-  align-items: center;
-  gap: 20px;
+.nav { position:relative; z-index:100; width:min(1320px,calc(100% - 48px)); min-height:92px; margin-inline:auto; padding:10px 0; display:grid; grid-template-columns:340px 1fr auto; align-items:center; gap:20px; }
+.brand { grid-column:1; justify-self:start; width:340px; height:76px; min-height:76px; display:block; overflow:visible; background-image:url('/paneltakip-logo-transparent.png'); background-repeat:no-repeat; background-position:left center; background-size:contain; }
+.brand::after{content:none!important}.brandImage{display:none!important}.desktopNav,.contactButton{display:none!important}
+.mobileMenu{display:grid!important;grid-column:3;justify-self:end;place-items:center;width:46px;height:46px;padding:0;border-radius:14px;color:#fff;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.13)}
+.mobileMenu svg{width:24px;height:24px}
+.growthBand{position:relative;z-index:99;width:100%;height:30px;min-height:30px;display:flex;align-items:center;justify-content:center;gap:14px;overflow:hidden;color:#8feaf8;background:rgba(3,23,34,.97);border-top:1px solid rgba(33,216,246,.08);border-bottom:1px solid rgba(33,216,246,.18);font-size:10px;font-weight:800;letter-spacing:3px;line-height:1}
+.growthBand::before,.growthBand::after{content:none}.growthBand span{display:block;width:38px;height:1px;background:rgba(33,216,246,.72)}
+.eyebrow{display:none!important}
+
+@keyframes desktopPlatformLand {
+  0%{opacity:0;transform:translateY(-180px) rotate(-5deg) scale(.92)}
+  12%{opacity:1}
+  55%{transform:translateY(0) rotate(0deg) scale(1)}
+  66%{transform:translateY(-16px) rotate(4deg) scale(1.02)}
+  75%{transform:translateY(0) rotate(-3deg) scale(1)}
+  83%{transform:translateY(-7px) rotate(2deg)}
+  90%{transform:translateY(0) rotate(-1deg)}
+  95%{transform:translateY(-2px) rotate(.5deg)}
+  100%{opacity:1;transform:translateY(0) rotate(0deg) scale(1)}
 }
 
-.brand {
-  grid-column: 1;
-  justify-self: start;
-  width: 340px;
-  height: 76px;
-  min-height: 76px;
-  display: block;
-  overflow: visible;
-  background-image: url('/paneltakip-logo-transparent.png');
-  background-repeat: no-repeat;
-  background-position: left center;
-  background-size: contain;
-}
-
-.brand::after { content: none !important; }
-.brandImage { display: none !important; }
-.desktopNav,.contactButton { display: none !important; }
-
-.mobileMenu {
-  display: grid !important;
-  grid-column: 3;
-  justify-self: end;
-  place-items: center;
-  width: 46px;
-  height: 46px;
-  padding: 0;
-  border-radius: 14px;
-  color: #fff;
-  background: rgba(255,255,255,.045);
-  border: 1px solid rgba(255,255,255,.13);
-}
-.mobileMenu svg { width: 24px; height: 24px; }
-
-/* Header altındaki ince büyüme ortağı bandı */
-.growthBand {
-  position: relative;
-  z-index: 99;
-  width: 100%;
-  height: 30px;
-  min-height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  overflow: hidden;
-  color: #8feaf8;
-  background: rgba(3,23,34,.97);
-  border-top: 1px solid rgba(33,216,246,.08);
-  border-bottom: 1px solid rgba(33,216,246,.18);
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 3px;
-  line-height: 1;
-}
-.growthBand::before,.growthBand::after { content: none; }
-.growthBand span {
-  display: block;
-  width: 38px;
-  height: 1px;
-  background: rgba(33,216,246,.72);
-}
-
-/* Büyüme ortağı mesajı yalnızca ince bantta görünür. */
-.eyebrow { display: none !important; }
-
-/* Masaüstü: hero'yu daha dengeli, tek kompozisyon halinde tut. */
 @media (min-width:1081px) {
-  .hero {
-    min-height: 670px !important;
-    height: 670px;
-  }
-  .nav {
-    min-height: 82px;
-    height: 82px;
-    padding: 6px 0;
-  }
-  .brand {
-    width: 300px;
-    height: 66px;
-    min-height: 66px;
-  }
-  .mobileMenu {
-    width: 46px;
-    height: 46px;
-  }
-  .growthBand {
-    height: 30px;
-    min-height: 30px;
-  }
-  .heroGrid {
-    min-height: 558px !important;
-    height: 558px;
-    padding-top: 0 !important;
-    grid-template-columns: 40% 39% 21%;
-  }
-  .heroCopy {
-    align-self: center;
-    transform: translateY(-4px);
-    padding: 0 38px 0 0;
-  }
-  .heroCopy h1 {
-    font-size: clamp(56px, 4.25vw, 70px);
-    line-height: .91;
-    letter-spacing: -3px;
-  }
-  .heroCopy > p {
-    margin: 22px 0 22px;
-    font-size: clamp(17px, 1.15vw, 20px);
-    max-width: 470px;
-  }
-  .heroActionDock {
-    position: relative;
-  }
-  .primaryCta {
-    min-height: 54px;
-    padding: 14px 24px;
-  }
-  .microTrust {
-    margin-top: 18px;
-    gap: 17px;
-    font-size: 11px;
-  }
-  .heroVisual {
-    inset: 0 -80px 0 -100px !important;
-  }
-  .chefPlaceholder {
-    background-position: 52% center !important;
-  }
-  .benefitStack {
-    gap: 10px;
-    padding: 0 0 0 22px;
-  }
-  .benefitCard {
-    min-height: 82px;
-    padding: 14px 15px;
-    border-radius: 17px;
-    grid-template-columns: 42px 1fr;
-  }
-  .benefitCard svg {
-    width: 28px;
-    height: 28px;
-  }
-  .benefitCard h3 {
-    font-size: 13px;
-  }
-  .benefitCard p {
-    font-size: 12px;
-  }
-  .platformWrap {
-    margin-top: -38px !important;
-  }
-  .platformImageBar {
-    height: 90px !important;
-    border-radius: 22px !important;
-  }
-  .platformLogoRow {
-    gap: 52px !important;
-  }
-  .platformLogoRow img {
-    height: 66px !important;
-  }
-  .stats {
-    padding-top: 34px !important;
-    padding-bottom: 52px !important;
-  }
+  .hero{min-height:670px!important;height:670px}.nav{min-height:82px;height:82px;padding:6px 0}.brand{width:300px;height:66px;min-height:66px}.mobileMenu{width:46px;height:46px}.growthBand{height:30px;min-height:30px}
+  .heroGrid{min-height:558px!important;height:558px;padding-top:0!important;grid-template-columns:40% 39% 21%}.heroCopy{align-self:center;transform:translateY(-4px);padding:0 38px 0 0}.heroCopy h1{font-size:clamp(56px,4.25vw,70px);line-height:.91;letter-spacing:-3px}.heroCopy>p{margin:22px 0 22px;font-size:clamp(17px,1.15vw,20px);max-width:470px}.heroActionDock{position:relative}.primaryCta{min-height:54px;padding:14px 24px}.microTrust{margin-top:18px;gap:17px;font-size:11px}.heroVisual{inset:0 -80px 0 -100px!important}.chefPlaceholder{background-position:52% center!important}.benefitStack{gap:10px;padding:0 0 0 22px}.benefitCard{min-height:82px;padding:14px 15px;border-radius:17px;grid-template-columns:42px 1fr}.benefitCard svg{width:28px;height:28px}.benefitCard h3{font-size:13px}.benefitCard p{font-size:12px}
+  /* Masaüstünde CTA üzerindeki kopya logolar kapalı. Animasyon yalnızca alttaki beyaz bantta. */
+  .heroPlatformDrop{display:none!important}
+  .platformWrap{margin-top:-38px!important}.platformImageBar{height:90px!important;border-radius:22px!important;overflow:visible!important}.platformLogoRow{gap:52px!important}.platformLogoRow img{height:66px!important;opacity:0;transform-origin:center bottom;animation:desktopPlatformLand 3.35s cubic-bezier(.18,.72,.22,1) forwards;will-change:transform,opacity;filter:drop-shadow(0 7px 8px rgba(0,0,0,.16))}.platformLogoRow img:nth-child(1){animation-delay:.10s}.platformLogoRow img:nth-child(2){animation-delay:.30s}.platformLogoRow img:nth-child(3){animation-delay:.50s}.platformLogoRow img:nth-child(4){animation-delay:.70s}.stats{padding-top:34px!important;padding-bottom:52px!important}
 }
 
-@media (max-width:1080px) and (min-width:761px) {
-  .nav { grid-template-columns: 280px 1fr auto; min-height: 86px; }
-  .brand { width: 280px; height: 64px; min-height: 64px; }
-  .growthBand { height: 30px; min-height: 30px; }
-  .heroCopy { transform: translateY(-14px); }
+@media (max-width:1080px) and (min-width:761px){.nav{grid-template-columns:280px 1fr auto;min-height:86px}.brand{width:280px;height:64px;min-height:64px}.growthBand{height:30px;min-height:30px}.heroCopy{transform:translateY(-14px)}}
+
+@media (max-width:760px){
+  .nav{position:fixed;top:0;left:0;right:0;z-index:100;width:100%;height:72px;min-height:72px;margin:0;padding:7px 12px;grid-template-columns:1fr auto;gap:8px;background:#031722;border-bottom:1px solid rgba(33,216,246,.10)}.brand{grid-column:1;justify-self:start;width:220px;height:54px;min-height:54px;margin:0;background-position:left center;background-size:contain}.mobileMenu{grid-column:2;width:42px;height:42px;border-radius:13px}.mobileMenu svg{width:22px;height:22px}.growthBand{position:fixed;top:72px;left:0;right:0;z-index:99;height:28px;min-height:28px;gap:10px;font-size:8px;letter-spacing:2.2px}.growthBand span{width:26px}
+  .hero{height:100svh!important;min-height:100svh!important}.heroVisual{top:100px!important;height:calc(100% - 100px)!important}.heroGrid{height:100svh!important;min-height:100svh!important;padding-top:100px!important}.heroCopy{height:calc(100svh - 100px)!important;min-height:0!important;padding-bottom:0!important}.heroActionDock{z-index:5}.microTrust{padding-bottom:0}
 }
-
-@media (max-width:760px) {
-  .nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    width: 100%;
-    height: 72px;
-    min-height: 72px;
-    margin: 0;
-    padding: 7px 12px;
-    grid-template-columns: 1fr auto;
-    gap: 8px;
-    background: #031722;
-    border-bottom: 1px solid rgba(33,216,246,.10);
-  }
-  .brand {
-    grid-column: 1;
-    justify-self: start;
-    width: 220px;
-    height: 54px;
-    min-height: 54px;
-    margin: 0;
-    background-position: left center;
-    background-size: contain;
-  }
-  .mobileMenu { grid-column: 2; width: 42px; height: 42px; border-radius: 13px; }
-  .mobileMenu svg { width: 22px; height: 22px; }
-  .growthBand {
-    position: fixed;
-    top: 72px;
-    left: 0; right: 0;
-    z-index: 99;
-    height: 28px;
-    min-height: 28px;
-    gap: 10px;
-    font-size: 8px;
-    letter-spacing: 2.2px;
-  }
-  .growthBand span { width: 26px; }
-
-  /* Mobil ilk açılış: tarayıcı çubuğu açıkken de CTA ve 3 fayda aynı ekranda görünür. */
-  .hero {
-    height: 100svh !important;
-    min-height: 100svh !important;
-  }
-  .heroVisual {
-    top: 100px !important;
-    height: calc(100% - 100px) !important;
-  }
-  .heroGrid {
-    height: 100svh !important;
-    min-height: 100svh !important;
-    padding-top: 100px !important;
-  }
-  .heroCopy {
-    height: calc(100svh - 100px) !important;
-    min-height: 0 !important;
-    padding-bottom: 0 !important;
-  }
-  .heroActionDock { z-index: 5; }
-  .microTrust { padding-bottom: 0; }
-}
-
-@media (max-width:390px) {
-  .brand { width: 205px; height: 50px; min-height: 50px; }
-
-  .heroCopy {
-    height: calc(100svh - 100px) !important;
-  }
-}
+@media(max-width:390px){.brand{width:205px;height:50px;min-height:50px}.heroCopy{height:calc(100svh - 100px)!important}}
+@media(prefers-reduced-motion:reduce){.platformLogoRow img{opacity:1!important;transform:none!important;animation:none!important}}
