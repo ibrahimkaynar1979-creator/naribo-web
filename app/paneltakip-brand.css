@@ -160,10 +160,6 @@
   .benefitCard p {
     font-size: 12px;
   }
-  /* Masaüstünde CTA üstünde ikinci kez platform logosu göstermiyoruz. */
-  .heroPlatformDrop {
-    display: none !important;
-  }
   .platformWrap {
     margin-top: -38px !important;
   }
