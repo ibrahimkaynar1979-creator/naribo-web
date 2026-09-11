@@ -9,7 +9,7 @@ const links = [
   ['Hizmetler', '#hizmetler'],
   ['QR Menü', '#qr-menu'],
   ['Kârlılık', '#basari'],
-  ['Naribo Modeli', '#naribo-modeli'],
+  ['PanelTakip Modeli', '#naribo-modeli'],
   ['İletişim', '#iletisim'],
 ] as const;
 
