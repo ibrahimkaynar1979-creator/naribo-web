@@ -23,12 +23,24 @@
 @media (min-width:1081px) {
   .hero{min-height:670px!important;height:670px}.nav{min-height:82px;height:82px;padding:6px 0}.brand{width:300px;height:66px;min-height:66px}.mobileMenu{width:46px;height:46px}.growthBand{height:30px;min-height:30px}
   .heroGrid{min-height:558px!important;height:558px;padding-top:0!important;grid-template-columns:40% 39% 21%}.heroCopy{align-self:center;transform:translateY(-4px);padding:0 38px 0 0}.heroCopy h1{font-size:clamp(56px,4.25vw,70px);line-height:.91;letter-spacing:-3px}.heroCopy>p{margin:22px 0 22px;font-size:clamp(17px,1.15vw,20px);max-width:470px}.heroActionDock{position:relative}.primaryCta{min-height:54px;padding:14px 24px}.microTrust{margin-top:18px;gap:17px;font-size:11px}.heroVisual{inset:0 -80px 0 -100px!important}.chefPlaceholder{background-position:52% center!important}.benefitStack{gap:10px;padding:0 0 0 22px}.benefitCard{min-height:82px;padding:14px 15px;border-radius:17px;grid-template-columns:42px 1fr}.benefitCard svg{width:28px;height:28px}.benefitCard h3{font-size:13px}.benefitCard p{font-size:12px}
-  /* Masaüstünde CTA üzerindeki kopya logolar kapalı. Animasyon yalnızca alttaki beyaz bantta. */
   .heroPlatformDrop{display:none!important}
   .platformWrap{margin-top:-38px!important}.platformImageBar{height:90px!important;border-radius:22px!important;overflow:visible!important}.platformLogoRow{gap:52px!important}.platformLogoRow img{height:66px!important;opacity:0;transform-origin:center bottom;animation:desktopPlatformLand 3.35s cubic-bezier(.18,.72,.22,1) forwards;will-change:transform,opacity;filter:drop-shadow(0 7px 8px rgba(0,0,0,.16))}.platformLogoRow img:nth-child(1){animation-delay:.10s}.platformLogoRow img:nth-child(2){animation-delay:.30s}.platformLogoRow img:nth-child(3){animation-delay:.50s}.platformLogoRow img:nth-child(4){animation-delay:.70s}.stats{padding-top:34px!important;padding-bottom:52px!important}
+
+  /* Kayıp 3. bölüm: bozuk tek görsel yerine mevcut çalışan reklamdan-siparişe carousel gösterilir. */
+  .approvedJourney{padding:0!important;background:#031722!important;min-height:0!important}
+  .approvedJourneyDesktop{display:none!important}
+  .approvedJourneyMobile{display:block!important}
+  .approvedJourney .jcApproved{padding:46px 0 26px!important}
+  .approvedJourney .jcApproved .journeyCarouselFixedHead{padding-bottom:16px!important}
+  .approvedJourney .jcApproved .journeyCarouselFixedHead h2{font-size:46px!important;line-height:.98!important}
+  .approvedJourney .jcApproved .journeyCarouselFixedHead p{font-size:15px!important;max-width:560px!important}
+  .approvedJourney .jcApproved .journeyMiniFlow{max-width:720px!important;margin-top:20px!important;margin-bottom:10px!important}
+  .approvedJourney .jcApproved .journeyCarouselViewport{height:560px!important;max-width:1100px;margin:0 auto!important}
+  .approvedJourney .jcApproved .journeyPhoneAsset{width:380px!important;height:455px!important}
+  .approvedJourney .jcApproved .journeyCarouselLabel{margin-top:-10px!important}
 }
 
-@media (max-width:1080px) and (min-width:761px){.nav{grid-template-columns:280px 1fr auto;min-height:86px}.brand{width:280px;height:64px;min-height:64px}.growthBand{height:30px;min-height:30px}.heroCopy{transform:translateY(-14px)}}
+@media (max-width:1080px) and (min-width:761px){.nav{grid-template-columns:280px 1fr auto;min-height:86px}.brand{width:280px;height:64px;min-height:64px}.growthBand{height:30px;min-height:30px}.heroCopy{transform:translateY(-14px)}.approvedJourneyDesktop{display:none!important}.approvedJourneyMobile{display:block!important}}
 
 @media (max-width:760px){
   .nav{position:fixed;top:0;left:0;right:0;z-index:100;width:100%;height:72px;min-height:72px;margin:0;padding:7px 12px;grid-template-columns:1fr auto;gap:8px;background:#031722;border-bottom:1px solid rgba(33,216,246,.10)}.brand{grid-column:1;justify-self:start;width:220px;height:54px;min-height:54px;margin:0;background-position:left center;background-size:contain}.mobileMenu{grid-column:2;width:42px;height:42px;border-radius:13px}.mobileMenu svg{width:22px;height:22px}.growthBand{position:fixed;top:72px;left:0;right:0;z-index:99;height:28px;min-height:28px;gap:10px;font-size:8px;letter-spacing:2.2px}.growthBand span{width:26px}
