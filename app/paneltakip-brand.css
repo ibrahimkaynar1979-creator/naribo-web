@@ -74,6 +74,9 @@
   background: rgba(33,216,246,.72);
 }
 
+/* Büyüme ortağı mesajı yalnızca ince bantta görünür. */
+.eyebrow { display: none !important; }
+
 @media (min-width:761px) {
   .heroCopy { transform: translateY(-20px); }
 }
