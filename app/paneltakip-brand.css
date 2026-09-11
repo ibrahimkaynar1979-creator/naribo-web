@@ -127,17 +127,34 @@
     letter-spacing: 2.2px;
   }
   .growthBand span { width: 26px; }
-  .heroVisual { top: 100px !important; }
-  .heroGrid {
-    padding-top: 100px !important;
-    min-height: 900px !important;
+
+  /* Mobil ilk açılış: tarayıcı çubuğu açıkken de CTA ve 3 fayda aynı ekranda görünür. */
+  .hero {
+    height: 100svh !important;
+    min-height: 100svh !important;
   }
-  .heroCopy { padding-bottom: 54px !important; }
-  .heroActionDock { position: relative; z-index: 5; }
-  .microTrust { padding-bottom: 12px; }
-  .hero { min-height: 900px !important; }
+  .heroVisual {
+    top: 100px !important;
+    height: calc(100% - 100px) !important;
+  }
+  .heroGrid {
+    height: 100svh !important;
+    min-height: 100svh !important;
+    padding-top: 100px !important;
+  }
+  .heroCopy {
+    height: calc(100svh - 100px) !important;
+    min-height: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  .heroActionDock { z-index: 5; }
+  .microTrust { padding-bottom: 0; }
 }
 
 @media (max-width:390px) {
   .brand { width: 205px; height: 50px; min-height: 50px; }
+
+  .heroCopy {
+    height: calc(100svh - 100px) !important;
+  }
 }
