@@ -45,8 +45,30 @@
 }
 .mobileMenu svg { width: 24px; height: 24px; }
 
-/* Eski ayrı slogan/büyüme bandı kaldırıldı. Hero doğrudan header altından başlar. */
-.growthBand { display: none !important; }
+/* Header altındaki ince marka bandı */
+.growthBand {
+  position: relative;
+  z-index: 90;
+  width: 100%;
+  min-height: 30px;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  color: #8feaf8;
+  background: rgba(3, 23, 34, .96);
+  border-top: 1px solid rgba(33, 216, 246, .08);
+  border-bottom: 1px solid rgba(33, 216, 246, .16);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  line-height: 1;
+}
+.growthBand span {
+  width: 38px;
+  height: 1px;
+  background: rgba(33, 216, 246, .72);
+}
 
 /* Masaüstünde başlık kompozisyonunu görsel merkezine biraz yaklaştır. */
 @media (min-width:761px) {
@@ -87,9 +109,28 @@
   .mobileMenu { grid-column: 2; width: 42px; height: 42px; border-radius: 13px; }
   .mobileMenu svg { width: 22px; height: 22px; }
 
-  /* Band kalktığı için hero görseli yalnızca header yüksekliğinden sonra başlar. */
-  .heroVisual { top: 72px !important; }
-  .heroGrid { padding-top: 72px !important; }
+  .growthBand {
+    position: fixed;
+    top: 72px;
+    left: 0;
+    right: 0;
+    min-height: 28px;
+    gap: 10px;
+    font-size: 8px;
+    letter-spacing: 2.2px;
+  }
+  .growthBand span { width: 26px; }
+
+  /* Header + ince bant yüksekliği */
+  .heroVisual { top: 100px !important; }
+  .heroGrid {
+    padding-top: 100px !important;
+    min-height: 900px !important;
+  }
+  .heroCopy { padding-bottom: 54px !important; }
+  .heroActionDock { position: relative; z-index: 5; }
+  .microTrust { padding-bottom: 12px; }
+  .hero { min-height: 900px !important; }
 }
 
 @media (max-width:390px) {
