@@ -77,8 +77,110 @@
 /* Büyüme ortağı mesajı yalnızca ince bantta görünür. */
 .eyebrow { display: none !important; }
 
-@media (min-width:761px) {
-  .heroCopy { transform: translateY(-20px); }
+/* Masaüstü: hero'yu daha dengeli, tek kompozisyon halinde tut. */
+@media (min-width:1081px) {
+  .hero {
+    min-height: 670px !important;
+    height: 670px;
+  }
+  .nav {
+    min-height: 82px;
+    height: 82px;
+    padding: 6px 0;
+  }
+  .brand {
+    width: 300px;
+    height: 66px;
+    min-height: 66px;
+  }
+  .mobileMenu {
+    width: 46px;
+    height: 46px;
+  }
+  .growthBand {
+    height: 30px;
+    min-height: 30px;
+  }
+  .heroGrid {
+    min-height: 558px !important;
+    height: 558px;
+    padding-top: 0 !important;
+    grid-template-columns: 40% 39% 21%;
+  }
+  .heroCopy {
+    align-self: center;
+    transform: translateY(-4px);
+    padding: 0 38px 0 0;
+  }
+  .heroCopy h1 {
+    font-size: clamp(56px, 4.25vw, 70px);
+    line-height: .91;
+    letter-spacing: -3px;
+  }
+  .heroCopy > p {
+    margin: 22px 0 22px;
+    font-size: clamp(17px, 1.15vw, 20px);
+    max-width: 470px;
+  }
+  .heroActionDock {
+    position: relative;
+  }
+  .primaryCta {
+    min-height: 54px;
+    padding: 14px 24px;
+  }
+  .microTrust {
+    margin-top: 18px;
+    gap: 17px;
+    font-size: 11px;
+  }
+  .heroVisual {
+    inset: 0 -80px 0 -100px !important;
+  }
+  .chefPlaceholder {
+    background-position: 52% center !important;
+  }
+  .benefitStack {
+    gap: 10px;
+    padding: 0 0 0 22px;
+  }
+  .benefitCard {
+    min-height: 82px;
+    padding: 14px 15px;
+    border-radius: 17px;
+    grid-template-columns: 42px 1fr;
+  }
+  .benefitCard svg {
+    width: 28px;
+    height: 28px;
+  }
+  .benefitCard h3 {
+    font-size: 13px;
+  }
+  .benefitCard p {
+    font-size: 12px;
+  }
+  /* Masaüstünde CTA üstünde ikinci kez platform logosu göstermiyoruz. */
+  .heroPlatformDrop {
+    display: none !important;
+  }
+  .platformWrap {
+    margin-top: -38px !important;
+  }
+  .platformImageBar {
+    height: 90px !important;
+    border-radius: 22px !important;
+  }
+  .platformLogoRow {
+    gap: 52px !important;
+  }
+  .platformLogoRow img {
+    height: 66px !important;
+  }
+  .stats {
+    padding-top: 34px !important;
+    padding-bottom: 52px !important;
+  }
 }
 
 @media (max-width:1080px) and (min-width:761px) {
