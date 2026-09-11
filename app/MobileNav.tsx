@@ -5,11 +5,10 @@ import { Menu, X } from 'lucide-react';
 
 const links = [
   ['Ana Sayfa', '#'],
-  ['Nasıl Çalışıyoruz?', '#nasil'],
   ['Hizmetler', '#hizmetler'],
+  ['Nasıl Çalışıyoruz?', '#nasil'],
   ['QR Menü', '#qr-menu'],
   ['Kârlılık', '#basari'],
-  ['PanelTakip Modeli', '#naribo-modeli'],
   ['İletişim', '#iletisim'],
 ] as const;
 
@@ -23,20 +22,12 @@ export default function MobileNav(){
     </div>}
     <style>{`
       .mobileMenuLive,.mobileNavPanel{display:none}
-      .setupPlatforms strong,.setupPlatforms i{display:none!important}
-      .setupPlatforms:after{content:'Yemeksepeti  •  Trendyol Yemek  •  GetirYemek  •  Migros Yemek';font-weight:800;color:inherit}
-      @media(min-width:761px){
-        .desktopNav a[href="#basari"]{font-size:0}
-        .desktopNav a[href="#basari"]:after{content:'Kârlılık';font-size:14px}
-        .desktopNav a[href="#hakkimizda"]{display:none!important}
-      }
       @media(max-width:760px){
         .nav .mobileMenu{display:none!important}
         .mobileMenuLive{position:fixed;z-index:102;top:12px;right:16px;display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.1);color:#fff}
         .mobileNavPanel{position:fixed;z-index:101;top:92px;left:12px;right:12px;display:block;padding:14px;border-radius:18px;background:rgba(3,23,34,.985);border:1px solid rgba(33,216,246,.18);box-shadow:0 20px 45px rgba(0,0,0,.34);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
         .mobileNavPanel nav{display:grid;gap:5px}.mobileNavPanel nav a{display:block;padding:12px 14px;border-radius:12px;color:#e9f7fa;font-size:13px;font-weight:750;background:rgba(255,255,255,.035);text-decoration:none}
         .mobileNavCta{display:flex;align-items:center;justify-content:center;margin-top:10px;padding:13px 14px;border-radius:12px;background:#21d8f6;color:#03202d;font-size:12.5px;font-weight:900;text-decoration:none}
-        .setupPlatforms:after{display:block;width:100%;margin-top:5px;font-size:10.5px;line-height:1.45}
       }
     `}</style>
   </>;
