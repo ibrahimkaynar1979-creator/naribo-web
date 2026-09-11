@@ -31,9 +31,9 @@
   align-items: flex-end;
   justify-content: center;
   opacity: 0;
-  transform: translateY(-560px);
+  transform: translateY(-620px) rotate(-8deg) scale(.94);
   transform-origin: center bottom;
-  animation: platformDropBounce 1.95s cubic-bezier(.18,.72,.22,1) var(--drop-delay) forwards;
+  animation: platformDropBounce 3.35s cubic-bezier(.20,.72,.16,1) var(--drop-delay) forwards;
   filter: drop-shadow(0 7px 9px rgba(0,0,0,.28));
   will-change: transform, opacity;
 }
@@ -47,16 +47,47 @@
   object-position: center bottom;
 }
 
+/* Yavasca yukaridan duser, zemine degince birkac kez ziplayip sallanir ve sakinlesir. */
 @keyframes platformDropBounce {
-  0%   { opacity: 0; transform: translateY(-560px) scale(.94); }
-  8%   { opacity: 1; }
-  58%  { opacity: 1; transform: translateY(0) scale(1); }
-  69%  { transform: translateY(-18px) scale(1.015); }
-  78%  { transform: translateY(0) scale(1); }
-  86%  { transform: translateY(-8px) scale(1.006); }
-  92%  { transform: translateY(0) scale(1); }
-  96%  { transform: translateY(-3px); }
-  100% { opacity: 1; transform: translateY(0) scale(1); }
+  0% {
+    opacity: 0;
+    transform: translateY(-620px) rotate(-8deg) scale(.94);
+  }
+  7% {
+    opacity: 1;
+  }
+  56% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+  63% {
+    transform: translateY(-24px) rotate(5deg) scale(1.02);
+  }
+  69% {
+    transform: translateY(0) rotate(-4deg) scale(.995);
+  }
+  75% {
+    transform: translateY(-13px) rotate(3deg) scale(1.01);
+  }
+  81% {
+    transform: translateY(0) rotate(-2.2deg) scale(1);
+  }
+  86% {
+    transform: translateY(-6px) rotate(1.6deg);
+  }
+  90% {
+    transform: translateY(0) rotate(-1deg);
+  }
+  94% {
+    transform: translateY(-2px) rotate(.6deg);
+  }
+  97% {
+    transform: translateY(0) rotate(-.3deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
 }
 
 @media (max-width: 760px) {
@@ -88,7 +119,7 @@
     width: 64px;
     max-width: 64px;
     height: 54px;
-    animation-duration: 1.95s;
+    animation-duration: 3.35s;
   }
 
   .heroPlatformDropItem img {
