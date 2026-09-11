@@ -41,7 +41,7 @@ const platformLogos = [
 
 function PlatformLogoRow({ mobile = false }: { mobile?: boolean }) {
   return <div className={mobile ? 'platformLogoRow platformLogoRowMobile' : 'platformLogoRow'}>
-    {platformLogos.map((platform) => <Image key={platform.src} src={platform.src} alt={platform.alt} width={180} height={92} priority />)}
+    {platformLogos.map((platform) => <img key={platform.src} src={platform.src} alt={platform.alt} />)}
   </div>;
 }
 
