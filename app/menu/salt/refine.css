@@ -4,98 +4,103 @@
 }
 
 .app .hero {
-  height: 270px !important;
+  height: 238px !important;
 }
 
 .app .heroContent {
-  padding: 18px 14px !important;
+  padding: 15px 13px !important;
 }
 
 .app .saltLogo {
-  width: 58px !important;
-  height: 58px !important;
-  font-size: 13px !important;
-  margin-bottom: 9px !important;
+  width: 52px !important;
+  height: 52px !important;
+  font-size: 12px !important;
+  margin-bottom: 7px !important;
 }
 
 .app .hero h1 {
-  font-size: 22px !important;
-  line-height: 1.04 !important;
-  margin-bottom: 6px !important;
+  font-size: 20px !important;
+  line-height: 1.02 !important;
+  margin-bottom: 4px !important;
 }
 
 .app .hero p {
-  font-size: 11px !important;
-  line-height: 1.35 !important;
+  font-size: 10px !important;
+  line-height: 1.3 !important;
 }
 
 .app .cats {
   grid-template-columns: repeat(4, 1fr) !important;
-  gap: 8px !important;
-  padding: 10px 12px 5px !important;
+  gap: 7px !important;
+  padding: 8px 11px 4px !important;
 }
 
 .app .catThumb {
-  height: 58px !important;
-  border-radius: 11px !important;
-  margin-bottom: 4px !important;
+  height: 51px !important;
+  border-radius: 10px !important;
+  margin-bottom: 3px !important;
 }
 
 .app .catBtn {
-  font-size: 10px !important;
+  font-size: 9.5px !important;
 }
 
 .app .section {
-  padding: 8px 14px 14px !important;
+  padding: 6px 12px 10px !important;
 }
 
 .app .secHead {
-  margin-bottom: 8px !important;
+  margin-bottom: 6px !important;
 }
 
 .app .secHead h2 {
-  font-size: 19px !important;
-  line-height: 1.15 !important;
-  letter-spacing: -0.35px !important;
+  font-size: 17px !important;
+  line-height: 1.1 !important;
+  letter-spacing: -0.25px !important;
 }
 
 .app .secHead button {
-  font-size: 10px !important;
+  font-size: 9.5px !important;
 }
 
 .app .featureGrid {
-  gap: 8px !important;
+  gap: 7px !important;
 }
 
 .app .featureCard {
-  border-radius: 13px !important;
+  border-radius: 12px !important;
 }
 
 .app .featureCard img {
-  height: 112px !important;
+  height: 94px !important;
 }
 
 .app .featureText {
-  padding: 8px 9px !important;
+  padding: 7px 8px !important;
 }
 
 .app .featureText b {
-  font-size: 12px !important;
-  line-height: 1.25 !important;
+  font-size: 11px !important;
+  line-height: 1.2 !important;
 }
 
 .app .featureText span {
-  font-size: 12px !important;
+  font-size: 11px !important;
 }
 
 .app .powered {
-  padding: 5px 0 8px !important;
+  padding: 4px 0 6px !important;
 }
 
 .app .bottom {
-  height: 60px !important;
+  height: 56px !important;
+}
+
+.app .bottom button {
+  font-size: 8.8px !important;
+  gap: 3px !important;
 }
 
 .app .phone {
-  padding-bottom: 66px !important;
+  padding-bottom: 60px !important;
 }
