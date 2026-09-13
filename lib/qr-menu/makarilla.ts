@@ -1,39 +1,23 @@
 import type { QrMenuRestaurant } from './types';
 
+const bolognese = 'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?auto=format&fit=crop&w=1200&q=90';
+
 export const makarillaRestaurant: QrMenuRestaurant = {
-  id: 'makarilla',
-  slug: 'makarilla',
-  name: 'Makarilla',
-  shortName: 'makarilla',
-  tagline: 'Evde İtalyan Makarnası',
-  logo: '/makarilla-logo.png',
-  coverImage: '/makarilla-hero.jpg',
-  theme: {
-    accent: '#ED171C',
-    background: '#FBF7F2',
-    surface: '#FFFFFF',
-    text: '#171717',
-    muted: '#807A73',
-    radius: 18,
-  },
-  branch: {
-    id: 'makarilla-karsiyaka',
-    name: 'Karşıyaka',
-    address: 'Karşıyaka',
-    city: 'İzmir',
-    openingHours: 'Her gün 11:00 – 23:30',
-  },
-  reviewSummary: { rating: 4.8, count: 312 },
+  id: 'makarilla', slug: 'makarilla', name: 'Makarilla', shortName: 'makarilla', tagline: 'Evde İtalyan Makarnası',
+  logo: '/makarilla-logo.svg', coverImage: bolognese,
+  theme: { accent:'#ED171C', background:'#FBF7F2', surface:'#FFFFFF', text:'#171717', muted:'#807A73', radius:18 },
+  branch: { id:'makarilla-karsiyaka', name:'Karşıyaka', address:'Karşıyaka', city:'İzmir', openingHours:'Her gün 11:00 – 23:30' },
+  reviewSummary: { rating:4.8, count:312 },
   categories: [
-    { id: 'pastas', name: 'Makarnalar', sortOrder: 1, isActive: true },
-    { id: 'chicken-pastas', name: 'Tavuklu Makarnalar', sortOrder: 2, isActive: true },
-    { id: 'salads', name: 'Salatalar', sortOrder: 3, isActive: true },
-    { id: 'wraps', name: 'Wraplar', sortOrder: 4, isActive: true },
-    { id: 'desserts', name: 'Tatlılar', sortOrder: 5, isActive: true },
-    { id: 'drinks', name: 'İçecekler', sortOrder: 6, isActive: true },
+    { id:'pastas', name:'Makarnalar', sortOrder:1, isActive:true },
+    { id:'chicken-pastas', name:'Tavuklu Makarnalar', sortOrder:2, isActive:true },
+    { id:'salads', name:'Salatalar', sortOrder:3, isActive:true },
+    { id:'wraps', name:'Wraplar', sortOrder:4, isActive:true },
+    { id:'desserts', name:'Tatlılar', sortOrder:5, isActive:true },
+    { id:'drinks', name:'İçecekler', sortOrder:6, isActive:true },
   ],
   products: [
-    { id:'casarecce-bolognese', categoryId:'pastas', name:'Bolonez Makarna', description:'Özel sosu ve taptaze malzemeleriyle İtalyan lezzeti şimdi daha yakın.', price:299, image:'/makarilla-hero.jpg', allergens:['Gluten','Süt'], isFeatured:true, isActive:true, sortOrder:1 },
+    { id:'casarecce-bolognese', categoryId:'pastas', name:'Bolonez Makarna', description:'Özel sosu ve taptaze malzemeleriyle İtalyan lezzeti şimdi daha yakın.', price:299, image:bolognese, allergens:['Gluten','Süt'], isFeatured:true, isActive:true, sortOrder:1 },
     { id:'casarecce-kremali-mantar', categoryId:'pastas', name:'Alfredo Makarna', description:'Kremalı, parmesanlı özel tarif.', price:289, image:'https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=1000&q=88', allergens:['Gluten','Süt'], isFeatured:true, isActive:true, sortOrder:2 },
     { id:'penne-pesto-tavuk', categoryId:'chicken-pastas', name:'Tavuklu Pesto Penne', description:'Izgara tavuk parçaları, pesto sos ve parmesan ile penne.', price:319, image:'https://images.unsplash.com/photo-1563379926898-05f4575a45d8?auto=format&fit=crop&w=1000&q=88', allergens:['Gluten','Süt'], isFeatured:true, isActive:true, sortOrder:3 },
     { id:'penne-alfredo-tavuk', categoryId:'chicken-pastas', name:'Tavuklu Alfredo Penne', description:'Kremalı Alfredo sos, mantar, tavuk ve parmesan.', price:319, image:'https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=1000&q=88', allergens:['Gluten','Süt'], isFeatured:true, isActive:true, sortOrder:4 },
