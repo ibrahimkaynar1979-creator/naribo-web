@@ -1,19 +1,123 @@
 'use client';
+
 import './premium-v2.css';
-import {useMemo,useState} from 'react';
-import Link from 'next/link';
-import {LayoutDashboard,Utensils,Tags,QrCode,Store,MessageSquare,BellRing,Settings,ExternalLink,Plus,Search,Eye,MoreHorizontal,TrendingUp,ChevronDown,Star,Clock3,CheckCircle2,GripVertical} from 'lucide-react';
-type Tab='overview'|'products'|'categories'|'restaurant'|'waiter'|'feedback'|'qr'|'settings';
-const products=[{name:'Bolonez Makarna',cat:'Makarnalar',price:299,desc:'Dana bolonez sos, parmesan',img:'🍝'},{name:'Alfredo Makarna',cat:'Makarnalar',price:289,desc:'Krema, parmesan, özel sos',img:'🍜'},{name:'Tavuklu Pesto Penne',cat:'Tavuklu Makarnalar',price:319,desc:'Tavuk, pesto, parmesan',img:'🥘'},{name:'Tavuklu Alfredo Penne',cat:'Tavuklu Makarnalar',price:329,desc:'Tavuk, krema, parmesan',img:'🍲'}];
-const nav=[['overview','Genel Bakış',LayoutDashboard],['products','Ürünler',Utensils],['categories','Kategoriler',Tags],['restaurant','Restoran Bilgileri',Store],['waiter','Garson Çağrıları',BellRing],['feedback','Geri Bildirimler',MessageSquare],['qr','QR Kod',QrCode],['settings','Ayarlar',Settings]] as const;
-export default function Admin(){const[tab,setTab]=useState<Tab>('overview');const[q,setQ]=useState('');const filtered=useMemo(()=>products.filter(p=>p.name.toLowerCase().includes(q.toLowerCase())),[q]);const title=nav.find(n=>n[0]===tab)?.[1]||'Genel Bakış';return <main className="ptAdminPremium"><header className="ptTop"><div className="ptLogo">panel<span>takip</span><small>QR MENÜ</small></div><div className="ptTopRight"><button className="ptBranch"><span className="ptBranchMark">M</span><span><b>Makarilla</b><small>Karşıyaka · İzmir</small></span><ChevronDown size={15}/></button><button className="ptBell"><BellRing size={17}/><i>2</i></button><Link href="/menu/makarilla" target="_blank" className="ptView"><Eye size={16}/>Menüyü Gör<ExternalLink size={13}/></Link><div className="ptAvatar">MK</div></div></header><div className="ptShell"><aside className="ptSide"><div className="ptSideTitle">ÇALIŞMA ALANI</div>{nav.map(([id,label,Icon])=><button key={id} onClick={()=>setTab(id)} className={tab===id?'ptNav isActive':'ptNav'}><Icon size={18}/><span>{label}</span>{id==='waiter'&&<em>2</em>}</button>)}<div className="ptSideFoot"><div className="ptPlan"><small>PANELTAKİP PRO</small><b>QR Menü aktif</b><span><i/> Sistem çalışıyor</span></div></div></aside><section className="ptContent"><div className="ptPageHead"><div><p>MAKARILLA <span>/</span> QR MENÜ</p><h1>{title}</h1></div>{tab==='products'&&<button className="ptPrimary"><Plus size={16}/>Yeni Ürün</button>}{tab==='categories'&&<button className="ptPrimary"><Plus size={16}/>Yeni Kategori</button>}</div>{tab==='overview'?<Overview setTab={setTab}/>:tab==='products'?<Products q={q} setQ={setQ} items={filtered}/>:tab==='feedback'?<Feedback/>:tab==='categories'?<Categories/>:<Empty tab={tab}/>}</section></div></main>}
-function Overview({setTab}:{setTab:(t:Tab)=>void}){return <><div className="ptStats"><Stat k="Bugünkü Görüntülenme" v="184" s="+18%" note="düne göre"/><Stat k="Menü Ürünleri" v="24" s="22 aktif" note="2 pasif"/><Stat k="Müşteri Puanı" v="4.8" s="96 yorum" note="son 30 gün"/><Stat k="Bekleyen Çağrı" v="2" s="Masa 5 · Masa 8" note="işlem bekliyor" warn/></div><div className="ptDashboardGrid"><div className="ptPanel ptPerformance"><div className="ptPanelHead row"><div><h2>Menü performansı</h2><p>Son 7 gündeki QR menü görüntülenmeleri</p></div><button>Son 7 gün <ChevronDown size={14}/></button></div><div className="ptChart"><div className="ptChartValue"><strong>1.248</strong><span><TrendingUp size={13}/> %14,2 artış</span></div><div className="ptBars">{[42,58,47,72,63,88,76].map((h,i)=><div key={i}><i style={{height:h+'%'}}/><span>{['Pzt','Sal','Çar','Per','Cum','Cmt','Paz'][i]}</span></div>)}</div></div></div><div className="ptPanel ptCalls"><div className="ptPanelHead row"><div><h2>Canlı çağrılar</h2><p>Şu anda işlem bekleyenler</p></div><span className="ptLive"><i/> CANLI</span></div><Call table="Masa 5" time="2 dk"/><Call table="Masa 8" time="5 dk"/><button className="ptTextBtn" onClick={()=>setTab('waiter')}>Tüm çağrıları görüntüle →</button></div><div className="ptPanel ptQuickPanel"><div className="ptPanelHead"><h2>Hızlı yönetim</h2><p>Sık kullandığınız işlemlere doğrudan ulaşın.</p></div><div className="ptQuick"><Quick icon={<Utensils/>} t="Ürünleri Yönet" s="Fiyat, görsel ve durum" onClick={()=>setTab('products')}/><Quick icon={<Tags/>} t="Kategoriler" s="Sıralama ve görünürlük" onClick={()=>setTab('categories')}/><Quick icon={<QrCode/>} t="QR Kod" s="Kalıcı menü QR kodu" onClick={()=>setTab('qr')}/><Quick icon={<Store/>} t="Restoran Bilgileri" s="Saat, telefon ve adres" onClick={()=>setTab('restaurant')}/></div></div><div className="ptPanel ptReviewsMini"><div className="ptPanelHead row"><div><h2>Son geri bildirimler</h2><p>Müşterileriniz ne söylüyor?</p></div><button onClick={()=>setTab('feedback')}>Tümü</button></div><ReviewMini stars={5} text="Makarnalar çok güzeldi, servis de hızlıydı." time="12 dk önce"/><ReviewMini stars={4} text="Menü çok kullanışlı, ürün görselleri başarılı." time="1 sa önce"/></div></div></>}
-function Stat({k,v,s,note,warn}:{k:string,v:string,s:string,note:string,warn?:boolean}){return <div className={'ptStat '+(warn?'warn':'')}><div className="ptStatTop"><span>{k}</span><i className="ptStatDot"/></div><strong>{v}</strong><div className="ptStatFoot"><b>{s}</b><span>{note}</span></div></div>}
-function Call({table,time}:{table:string,time:string}){return <div className="ptCall"><div className="ptCallIcon"><BellRing size={17}/></div><div><b>{table}</b><span>Garson çağrısı · {time} önce</span></div><button>Yanıtla</button></div>}
-function Quick({icon,t,s,onClick}:{icon:React.ReactNode,t:string,s:string,onClick:()=>void}){return <button onClick={onClick}><i>{icon}</i><div><b>{t}</b><span>{s}</span></div><strong>→</strong></button>}
-function ReviewMini({stars,text,time}:{stars:number,text:string,time:string}){return <div className="ptReviewMini"><div><span>{Array.from({length:stars}).map((_,i)=><Star key={i} size={12} fill="currentColor"/>)}</span><small>{time}</small></div><p>{text}</p></div>}
-function Products({q,setQ,items}:{q:string,setQ:(v:string)=>void,items:typeof products}){return <><div className="ptToolbar"><label><Search size={17}/><input value={q} onChange={e=>setQ(e.target.value)} placeholder="Ürün adı veya kategori ara..."/></label><div><button>Tüm kategoriler <ChevronDown size={14}/></button><button>Durum <ChevronDown size={14}/></button></div></div><div className="ptPanel ptTable"><div className="ptTableTop"><div><h2>Tüm ürünler</h2><p>24 ürün · 22 aktif</p></div><button>Sıralamayı düzenle</button></div><div className="ptThead"><span>ÜRÜN</span><span>KATEGORİ</span><span>FİYAT</span><span>DURUM</span><span/></div>{items.map((p,i)=><div className="ptTr" key={p.name}><div className="ptProd"><div className={'ptThumb t'+i}>{p.img}</div><div><b>{p.name}</b><small>{p.desc}</small></div></div><span>{p.cat}</span><b>₺{p.price}</b><span className="ptBadge"><i/>Aktif</span><button className="ptMore"><MoreHorizontal size={18}/></button></div>)}</div></>}
-function Feedback(){return <div className="ptFeedbackGrid"><div className="ptPanel ptRating"><small>GENEL PUAN</small><div><strong>4.8</strong><span>{[1,2,3,4,5].map(i=><Star key={i} size={19} fill="currentColor"/>)}</span><p>96 doğrulanmış geri bildirim</p></div></div><div className="ptPanel ptDistribution"><div className="ptPanelHead"><h2>Puan dağılımı</h2><p>Son 30 gün</p></div>{[[5,78],[4,14],[3,5],[2,2],[1,1]].map(([s,p])=><div className="ptRate" key={s}><span>{s} <Star size={11} fill="currentColor"/></span><i><b style={{width:p+'%'}}/></i><em>%{p}</em></div>)}</div><div className="ptPanel ptFeedbackList"><div className="ptPanelHead row"><div><h2>Müşteri yorumları</h2><p>En yeni geri bildirimler</p></div><button>Filtrele</button></div><FullReview name="Misafir · Masa 12" stars={5} text="Makarnalar gerçekten çok başarılıydı. QR menü hızlı açıldı ve ürünleri bulmak çok kolaydı." time="Bugün, 19:42"/><FullReview name="Misafir · Masa 4" stars={5} text="Servis hızlı, menü çok şık. Tekrar geleceğiz." time="Bugün, 18:16"/><FullReview name="Misafir · Masa 7" stars={4} text="Her şey güzeldi. Tatlı seçenekleri biraz daha fazla olabilir." time="Dün, 21:08"/></div></div>}
-function FullReview({name,stars,text,time}:{name:string,stars:number,text:string,time:string}){return <div className="ptFullReview"><div className="ptReviewer">{name.slice(-2)}</div><div><div className="ptReviewHead"><b>{name}</b><span>{Array.from({length:stars}).map((_,i)=><Star key={i} size={12} fill="currentColor"/>)}</span><small>{time}</small></div><p>{text}</p></div></div>}
-function Categories(){const cats=[['Makarnalar',8,'Yayında'],['Tavuklu Makarnalar',6,'Yayında'],['Salatalar',4,'Yayında'],['Wraplar',3,'Yayında'],['Tatlılar',2,'Yayında'],['İçecekler',1,'Yayında']];return <div className="ptPanel ptCategoryPanel"><div className="ptTableTop"><div><h2>Menü kategorileri</h2><p>Sürükleyerek menü sırasını değiştirebilirsiniz.</p></div></div>{cats.map(([n,c,s])=><div className="ptCategoryRow" key={String(n)}><GripVertical size={18}/><div className="ptCatIcon"><Tags size={18}/></div><div><b>{n}</b><span>{c} ürün</span></div><span className="ptBadge"><i/>{s}</span><button className="ptMore"><MoreHorizontal size={18}/></button></div>)}</div>}
-function Empty({tab}:{tab:Tab}){const tx:Record<string,string>={restaurant:'Logo, restoran adı, çalışma saatleri, telefon ve adres.',waiter:'Masa bazlı garson çağrılarını anlık yönetin.',qr:'Restoranın kalıcı QR kodunu görüntüleyin ve indirin.',settings:'QR menü ve restoran çalışma alanı ayarları.'};return <div className="ptPanel ptEmpty"><div><CheckCircle2/></div><h2>{nav.find(n=>n[0]===tab)?.[1]}</h2><p>{tx[tab]}</p><span>Bu modül sonraki aşamada detaylandırılacak.</span></div>}
+import { useMemo, useState } from 'react';
+import {
+  BarChart3, Bell, ChevronLeft, Edit3, GripVertical, Home, MoreVertical,
+  Plus, QrCode, Search, Settings, Star, Store, Tags, Trash2, Upload,
+  Utensils, X
+} from 'lucide-react';
+import { makarillaRestaurant } from '../../../lib/qr-menu/makarilla';
+
+type Tab = 'overview'|'menu'|'categories'|'qr'|'restaurant'|'feedback'|'stats';
+
+type Product = typeof makarillaRestaurant.products[number];
+
+const categories = makarillaRestaurant.categories;
+const products = makarillaRestaurant.products;
+
+export default function AdminPage(){
+  const [tab,setTab]=useState<Tab>('overview');
+  const [query,setQuery]=useState('');
+  const [category,setCategory]=useState('all');
+  const [editing,setEditing]=useState<Product|null>(null);
+
+  const filtered=useMemo(()=>products.filter(p=>{
+    const q=query.toLocaleLowerCase('tr-TR');
+    return (category==='all'||p.categoryId===category) && (!q||`${p.name} ${p.description}`.toLocaleLowerCase('tr-TR').includes(q));
+  }),[query,category]);
+
+  return <main className="qrAdminPremium">
+    <header className="qaTop">
+      <button className="qaBrand" onClick={()=>setTab('overview')}><span>panel</span>takip<small>QR MENÜ</small></button>
+      <div className="qaTopRestaurant"><div className="qaRestaurantThumb">M</div><div><b>Makarilla</b><small>Karşıyaka · İzmir</small></div></div>
+      <div className="qaTopActions"><button className="qaBell"><Bell size={18}/><i>2</i></button><div className="qaAvatar">MK</div></div>
+    </header>
+
+    <aside className="qaSide">
+      <DesktopNav tab={tab} setTab={setTab}/>
+    </aside>
+
+    <section className="qaMain">
+      {tab==='overview'&&<Overview setTab={setTab}/>} 
+      {tab==='menu'&&<MenuScreen query={query} setQuery={setQuery} category={category} setCategory={setCategory} items={filtered} setEditing={setEditing}/>} 
+      {tab==='categories'&&<Categories/>}
+      {tab==='qr'&&<QrScreen/>}
+      {tab==='restaurant'&&<RestaurantScreen/>}
+      {tab==='feedback'&&<Feedback/>}
+      {tab==='stats'&&<Stats/>}
+    </section>
+
+    <MobileNav tab={tab} setTab={setTab}/>
+    {editing&&<ProductEditor product={editing} onClose={()=>setEditing(null)}/>} 
+  </main>
+}
+
+function DesktopNav({tab,setTab}:{tab:Tab;setTab:(t:Tab)=>void}){
+  const items:[Tab,string,React.ComponentType<{size?:number}>][]=[
+    ['overview','Genel Bakış',Home],['menu','Menüm',Utensils],['categories','Kategoriler',Tags],['qr','QR Kod',QrCode],['restaurant','Restoran Bilgileri',Store],['feedback','Geri Bildirimler',Star],['stats','İstatistikler',BarChart3],
+  ];
+  return <>{items.map(([id,label,Icon])=><button key={id} className={tab===id?'active':''} onClick={()=>setTab(id)}><Icon size={17}/><span>{label}</span></button>)}<button><Settings size={17}/><span>Ayarlar</span></button></>
+}
+
+function MobileNav({tab,setTab}:{tab:Tab;setTab:(t:Tab)=>void}){
+  const moreActive=['categories','restaurant','feedback','stats'].includes(tab);
+  return <nav className="qaMobileNav">
+    <button className={tab==='overview'?'active':''} onClick={()=>setTab('overview')}><Home/><span>Ana Sayfa</span></button>
+    <button className={tab==='menu'?'active':''} onClick={()=>setTab('menu')}><Utensils/><span>Menüm</span></button>
+    <button className={tab==='qr'?'active':''} onClick={()=>setTab('qr')}><QrCode/><span>QR Kod</span></button>
+    <button className={moreActive?'active':''} onClick={()=>setTab('categories')}><MoreVertical/><span>Diğer</span></button>
+  </nav>
+}
+
+function Overview({setTab}:{setTab:(t:Tab)=>void}){
+  return <div className="qaPage qaOverview">
+    <div className="qaWelcomeCard"><div className="qaRestaurantThumb large">M</div><div><b>Makarilla</b><small>Karşıyaka · İzmir</small></div><span>›</span></div>
+    <div className="qaGreeting"><h1>Günaydın <span>👋</span></h1><p>Menünüz yayında. Her şey yolunda.</p></div>
+    <div className="qaMetricGrid">
+      <Metric icon="eye" value="1.248" label="Görüntülenme" trend="↗ %14"/>
+      <Metric icon="fork" value="24" label="Toplam Ürün" trend="↗ %8"/>
+      <Metric icon="star" value="4.8" label="Müşteri Puanı"/>
+      <Metric icon="bell" value="2" label="Bekleyen Çağrı"/>
+    </div>
+    <div className="qaPromo"><div><b>Lezzet dijitalde daha yakın.</b><span>QR menünüz her zaman açık, her zaman sizinle.</span></div><button onClick={()=>setTab('menu')}>Menümü Yönet</button></div>
+    <section className="qaCard qaChartCard"><div className="qaCardHead"><h2>Son 7 Günlük Görüntülenme</h2><span>310</span></div><Bars/></section>
+  </div>
+}
+
+function Metric({value,label,trend,icon}:{value:string;label:string;trend?:string;icon:string}){return <div className="qaMetric"><i>{icon==='eye'?'◉':icon==='fork'?'🍴':icon==='star'?'★':'♢'}</i><strong>{value}</strong><span>{label}</span>{trend&&<small>{trend}</small>}</div>}
+
+function Bars(){return <div className="qaBars">{[36,52,43,60,67,86,64].map((h,i)=><div key={i}><i style={{height:`${h}%`}}/><span>{['Pzt','Sal','Çar','Per','Cum','Cmt','Paz'][i]}</span></div>)}</div>}
+
+function MenuScreen({query,setQuery,category,setCategory,items,setEditing}:{query:string;setQuery:(v:string)=>void;category:string;setCategory:(v:string)=>void;items:Product[];setEditing:(p:Product)=>void}){
+  return <div className="qaPage">
+    <div className="qaTitleRow"><div><h1>Menüm</h1><p>QR menünüzdeki ürünleri yönetin.</p></div><button className="qaAdd"><Plus/> Ürün Ekle</button></div>
+    <label className="qaSearch"><Search/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Ürün ara..."/></label>
+    <div className="qaCategoryChips"><button className={category==='all'?'active':''} onClick={()=>setCategory('all')}>Tümü <b>{products.length}</b></button>{categories.map(c=><button key={c.id} className={category===c.id?'active':''} onClick={()=>setCategory(c.id)}>{c.name} <b>{products.filter(p=>p.categoryId===c.id).length}</b></button>)}</div>
+    <div className="qaProductList">{items.map(p=><button key={p.id} className="qaProductRow" onClick={()=>setEditing(p)}><img src={p.image} alt={p.name}/><div><b>{p.name}</b><small>{categories.find(c=>c.id===p.categoryId)?.name}</small><strong>₺{p.price}</strong></div><span className={p.isActive?'qaToggle on':'qaToggle'}><i/></span><MoreVertical size={18}/></button>)}</div>
+    <button className="qaFloatingAdd"><Plus/> Ürün Ekle</button>
+  </div>
+}
+
+function ProductEditor({product,onClose}:{product:Product;onClose:()=>void}){
+  const [active,setActive]=useState(product.isActive);
+  return <div className="qaEditorBackdrop"><section className="qaEditor">
+    <header><button onClick={onClose}><ChevronLeft/></button><h2>Ürün Düzenle</h2><button><Trash2/></button></header>
+    <div className="qaEditorPhoto"><img src={product.image} alt={product.name}/><button><Upload/> Görseli Değiştir</button></div>
+    <label>Ürün Adı <b>*</b><input defaultValue={product.name}/></label>
+    <label>Açıklama<textarea defaultValue={product.description}/><small>{product.description.length}/200</small></label>
+    <div className="qaFormGrid"><label>Kategori <b>*</b><select defaultValue={product.categoryId}>{categories.map(c=><option key={c.id} value={c.id}>{c.name}</option>)}</select></label><label>Fiyat <b>*</b><div className="qaPrice"><span>₺</span><input defaultValue={product.price}/></div></label></div>
+    <div className="qaVisibility"><span>Menüde Göster</span><button className={active?'qaToggle on':'qaToggle'} onClick={()=>setActive(!active)}><i/></button><b>{active?'Açık (Yayında)':'Pasif'}</b></div>
+    <button className="qaSave" onClick={onClose}>Değişiklikleri Kaydet</button>
+  </section></div>
+}
+
+function Categories(){return <div className="qaPage"><div className="qaTitleRow"><div><h1>Kategoriler</h1><p>Menü kategorilerinizi yönetin.</p></div><button className="qaAdd"><Plus/> Kategori Ekle</button></div><div className="qaCategoryList">{categories.map((c,i)=><div key={c.id}><GripVertical/><img src={products.find(p=>p.categoryId===c.id)?.image||products[0].image}/><div><b>{c.name}</b><small>{products.filter(p=>p.categoryId===c.id).length} ürün</small></div><button><Edit3/></button><button className="danger"><Trash2/></button></div>)}</div></div>}
+
+function QrScreen(){return <div className="qaPage"><h1>QR Kod</h1><p>Restoranınıza özel QR kodu indirin ve dilediğiniz yerde kullanın.</p><section className="qaQrCard"><div className="qaFakeQr">▦</div><h2>Makarilla</h2><code>paneltakip.com/makarilla</code></section><div className="qaActionStack"><button>QR Kodu İndir</button><button>QR Kod Tasarla</button><button>Masaüstü Etiketi</button><button>Masa PDF’i İndir</button></div></div>}
+
+function RestaurantScreen(){return <div className="qaPage"><h1>Restoran Bilgileri</h1><p>Restoranınıza ait temel bilgileri güncelleyin.</p><div className="qaRestaurantCover"><div className="qaRestaurantHero">M</div><button><Upload/> Logoyu Değiştir</button></div><div className="qaFormStack"><label>Restoran Adı<input defaultValue="Makarilla"/></label><label>Mutfak Türü<select defaultValue="italyan"><option value="italyan">İtalyan Mutfağı</option></select></label><label>Telefon<input defaultValue="0 532 123 45 67"/></label><label>Adres<input defaultValue="Karşıyaka, İzmir"/></label><label>Çalışma Saatleri<input defaultValue="11:00 - 23:00"/></label></div><button className="qaSave">Kaydet</button></div>}
+
+function Feedback(){const rows=[['A','Ayşe K.','Makarnalar çok güzeldi, servis de hızlıydı.'],['M','Mehmet T.','Lezzet harika, porsiyon biraz daha büyük olabilir.'],['E','Elif S.','Kesinlikle tekrar geleceğiz. Teşekkürler!'],['C','Can D.','Menü sade ve anlaşılır.']];return <div className="qaPage"><h1>Geri Bildirimler</h1><p>Misafirlerinizin görüşlerini takip edin.</p><div className="qaFeedbackTabs"><button className="active">Tümü <b>12</b></button><button>Olumlu <b>10</b></button><button>Olumsuz <b>2</b></button></div><div className="qaFeedbackList">{rows.map(([a,n,t])=><article key={n}><div>{a}</div><section><b>{n}</b><span>★★★★★</span><p>{t}</p></section><MoreVertical/></article>)}</div></div>}
+
+function Stats(){return <div className="qaPage"><div className="qaTitleRow"><div><h1>İstatistikler</h1><p>QR menünüzün performansını inceleyin.</p></div><button className="qaPeriod">Son 7 gün</button></div><div className="qaMetricGrid"><Metric icon="eye" value="1.248" label="Görüntülenme" trend="↗ %14"/><Metric icon="fork" value="462" label="Ürün Tıklaması" trend="↗ %13"/><Metric icon="qr" value="318" label="QR Tarama" trend="↗ %18"/><Metric icon="bell" value="24" label="Garson Çağrısı" trend="↗ %33"/></div><section className="qaCard qaChartCard"><h2>Görüntülenme</h2><Bars/></section><section className="qaCard qaPopular"><div><h2>En Çok Görüntülenen Ürünler</h2><button>Tümü</button></div><article><img src={products[0].image}/><b>Bolonez Makarna</b><span>428</span></article></section></div>}
