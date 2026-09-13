@@ -1,0 +1,39 @@
+/* PanelTakip QR Admin — premium v2 overrides */
+html body .ptAdminPremium{--bg:#f2ede3;--surface:#fbf7ef;--ink:#102f32;--muted:#716f68;--teal:#006d70;background:radial-gradient(circle at 62% -12%,rgba(255,255,255,.92),transparent 38%),linear-gradient(135deg,#f5f0e7 0%,#efe8dc 100%);font-size:15px!important}
+html body .ptAdminPremium .ptTop{height:78px!important;padding:0 34px!important;background:rgba(251,247,239,.9)!important;border-bottom:1px solid rgba(25,55,54,.09)!important;box-shadow:0 8px 30px rgba(75,61,42,.06)!important}
+html body .ptAdminPremium .ptLogo{font-size:25px!important;font-weight:950!important;letter-spacing:-1.2px!important}
+html body .ptAdminPremium .ptLogo small{font-size:9px!important;font-weight:850!important;color:#77736b!important}
+html body .ptAdminPremium .ptRest b{font-size:13px!important;font-weight:850!important;color:#163638!important}
+html body .ptAdminPremium .ptRest span{font-size:10px!important;font-weight:600!important;color:#77736b!important}
+html body .ptAdminPremium .ptView{height:42px!important;padding:0 16px!important;font-size:11px!important;font-weight:850!important;border-radius:13px!important;background:#fbf7ef!important;border:1px solid rgba(20,62,61,.11)!important;box-shadow:0 7px 18px rgba(75,61,42,.08),inset 0 1px rgba(255,255,255,.9)!important}
+html body .ptAdminPremium .ptShell{grid-template-columns:232px minmax(0,1fr)!important;min-height:calc(100vh - 78px)!important}
+html body .ptAdminPremium .ptSide{top:78px!important;height:calc(100vh - 78px)!important;padding:26px 15px!important;background:rgba(246,240,230,.74)!important}
+html body .ptAdminPremium .ptSideTitle{font-size:9px!important;font-weight:900!important;letter-spacing:1.7px!important;color:#77736b!important}
+html body .ptAdminPremium .ptNav{height:46px!important;font-size:12px!important;font-weight:720!important;color:#4e5551!important;border-radius:13px!important;margin:4px 0!important}
+html body .ptAdminPremium .ptNav svg{stroke-width:2.2!important}
+html body .ptAdminPremium .ptNav.isActive{color:#005f62!important;font-weight:850!important;background:linear-gradient(145deg,#faf6ed,#eee7da)!important;box-shadow:5px 6px 14px rgba(102,84,57,.10),-4px -4px 12px rgba(255,255,255,.76),inset 0 1px rgba(255,255,255,.7)!important}
+html body .ptAdminPremium .ptContent{padding:34px 38px!important;max-width:1380px!important}
+html body .ptAdminPremium .ptPageHead{margin-bottom:25px!important}
+html body .ptAdminPremium .ptPageHead p{font-size:9px!important;font-weight:900!important;letter-spacing:1.65px!important;color:#77736b!important}
+html body .ptAdminPremium .ptPageHead h1{font-size:29px!important;line-height:1.05!important;font-weight:900!important;letter-spacing:-.85px!important;color:#102f32!important}
+html body .ptAdminPremium .ptStats{gap:16px!important;margin-bottom:20px!important}
+html body .ptAdminPremium .ptStat{min-height:118px!important;padding:19px!important;border-radius:17px!important;background:linear-gradient(145deg,rgba(252,248,240,.96),rgba(244,238,227,.92))!important;border:1px solid rgba(24,62,60,.08)!important;box-shadow:0 12px 26px rgba(89,72,48,.085),inset 0 1px rgba(255,255,255,.9)!important}
+html body .ptAdminPremium .ptStat>span{font-size:10px!important;font-weight:750!important;color:#656861!important}
+html body .ptAdminPremium .ptStat strong{font-size:31px!important;font-weight:900!important;color:#102f32!important;letter-spacing:-1px!important}
+html body .ptAdminPremium .ptStat small{font-size:9px!important;font-weight:850!important}
+html body .ptAdminPremium .ptGrid{gap:18px!important}
+html body .ptAdminPremium .ptPanel{border-radius:18px!important;background:linear-gradient(145deg,rgba(252,248,240,.94),rgba(244,238,227,.90))!important;border:1px solid rgba(24,62,60,.08)!important;box-shadow:0 14px 30px rgba(89,72,48,.085),inset 0 1px rgba(255,255,255,.86)!important}
+html body .ptAdminPremium .ptPanelHead{padding:20px 21px!important}
+html body .ptAdminPremium .ptPanelHead h2{font-size:18px!important;line-height:22px!important;font-weight:900!important;letter-spacing:-.35px!important;color:#143638!important}
+html body .ptAdminPremium .ptPanelHead p{font-size:10px!important;line-height:15px!important;font-weight:560!important;color:#74736d!important}
+html body .ptAdminPremium .ptQuick{gap:13px!important;padding:16px!important}
+html body .ptAdminPremium .ptQuick button{min-height:100px!important;padding:15px!important;border-radius:15px!important;background:linear-gradient(145deg,#fbf7ef,#f1eadf)!important;border:1px solid rgba(25,61,59,.07)!important;box-shadow:0 8px 18px rgba(92,73,48,.07),inset 0 1px rgba(255,255,255,.88)!important}
+html body .ptAdminPremium .ptQuick i{width:38px!important;height:38px!important;border-radius:11px!important;background:linear-gradient(145deg,#f7f1e7,#e9e1d4)!important;box-shadow:inset 1px 1px 3px rgba(96,77,51,.09),inset -2px -2px 5px rgba(255,255,255,.78)!important}
+html body .ptAdminPremium .ptQuick b{font-size:11px!important;line-height:15px!important;font-weight:850!important;color:#183638!important}
+html body .ptAdminPremium .ptQuick span{font-size:9px!important;line-height:14px!important;font-weight:560!important;color:#77736b!important}
+html body .ptAdminPremium .ptEvent{padding:16px 19px!important}
+html body .ptAdminPremium .ptEvent b{font-size:10px!important;line-height:14px!important;font-weight:820!important;color:#173638!important}
+html body .ptAdminPremium .ptEvent span{font-size:9px!important;font-weight:550!important;color:#77736b!important}
+html body .ptAdminPremium .ptEmpty h2{font-size:27px!important;font-weight:900!important;color:#123537!important}
+html body .ptAdminPremium .ptEmpty p{font-size:11px!important;font-weight:580!important;color:#6f7069!important}
+@media(max-width:760px){html body .ptAdminPremium .ptTop{height:64px!important;padding:0 14px!important}html body .ptAdminPremium .ptLogo{font-size:21px!important}html body .ptAdminPremium .ptShell{grid-template-columns:64px minmax(0,1fr)!important}html body .ptAdminPremium .ptSide{top:64px!important;height:calc(100vh - 64px)!important;padding:16px 7px!important}html body .ptAdminPremium .ptContent{padding:18px 12px 28px!important}html body .ptAdminPremium .ptPageHead h1{font-size:23px!important}html body .ptAdminPremium .ptStats{gap:10px!important}html body .ptAdminPremium .ptStat{min-height:105px!important;padding:14px!important}html body .ptAdminPremium .ptStat strong{font-size:27px!important}html body .ptAdminPremium .ptPanelHead h2{font-size:17px!important}html body .ptAdminPremium .ptQuick b{font-size:10px!important}}
