@@ -1,22 +1,79 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { Building2, ChevronLeft, Home, Info, Mail, MapPin, MessageCircle, Phone, Search, Send, Star, X } from 'lucide-react';
+import { BellRing, Building2, ChevronLeft, Home, Info, Mail, MapPin, MessageCircle, Phone, Search, Send, Star, Utensils, X } from 'lucide-react';
 import type { QrMenuProduct, QrMenuRestaurant } from '../../lib/qr-menu/types';
 import { QrChip, QrInput, QrSheet } from './ui';
 import './qr-menu.css';
 import './qr-menu-turquoise.css';
 
 type Tab = 'home' | 'menu' | 'branch' | 'reviews' | 'contact';
+type WelcomeModal = null | 'waiter' | 'waiter-success' | 'feedback' | 'feedback-success';
+
 export function QrMenuApp({ restaurant }: { restaurant: QrMenuRestaurant }) {
-  const [tab,setTab]=useState<Tab>('home'); const [categoryId,setCategoryId]=useState('all'); const [query,setQuery]=useState(''); const [selected,setSelected]=useState<QrMenuProduct|null>(null);
+  const [tab,setTab]=useState<Tab>('home');
+  const [categoryId,setCategoryId]=useState('all');
+  const [query,setQuery]=useState('');
+  const [selected,setSelected]=useState<QrMenuProduct|null>(null);
+  const [welcomeOpen,setWelcomeOpen]=useState(true);
+  const [welcomeModal,setWelcomeModal]=useState<WelcomeModal>(null);
+  const [tableNo,setTableNo]=useState('');
+  const [feedbackScore,setFeedbackScore]=useState(0);
+  const [feedbackText,setFeedbackText]=useState('');
+
   const categories=restaurant.categories.filter(c=>c.isActive).sort((a,b)=>a.sortOrder-b.sortOrder);
   const products=useMemo(()=>{const q=query.trim().toLocaleLowerCase('tr-TR');return restaurant.products.filter(p=>p.isActive).filter(p=>categoryId==='all'||p.categoryId===categoryId).filter(p=>!q||`${p.name} ${p.description}`.toLocaleLowerCase('tr-TR').includes(q)).sort((a,b)=>a.sortOrder-b.sortOrder)},[restaurant.products,categoryId,query]);
   const featured=restaurant.products.filter(p=>p.isActive&&p.isFeatured).slice(0,4);
   const go=(next:Tab,cat='all')=>{setTab(next);setQuery('');setCategoryId(next==='menu'?cat:'all')};
   const vars={'--qr-accent':restaurant.theme.accent,'--qr-bg':restaurant.theme.background,'--qr-surface':restaurant.theme.surface,'--qr-text':restaurant.theme.text,'--qr-muted':restaurant.theme.muted} as React.CSSProperties;
-  return <main className="qr-stage" style={vars}><section className="qr-app-shell">{tab==='home'&&<HomeScreen restaurant={restaurant} categories={categories} featured={featured} onMenu={(cat='all')=>go('menu',cat)} onProduct={setSelected}/>} {tab==='menu'&&<MenuScreen restaurant={restaurant} categories={categories} products={products} categoryId={categoryId} query={query} onCategory={setCategoryId} onQuery={setQuery} onProduct={setSelected}/>} {tab==='branch'&&<BranchScreen restaurant={restaurant}/>} {tab==='reviews'&&<ReviewsScreen restaurant={restaurant}/>} {tab==='contact'&&<ContactScreen restaurant={restaurant}/>}<div className="qr-powered">Powered by <b>paneltakip</b></div><BottomNav tab={tab} onChange={t=>go(t)}/></section><ProductSheet product={selected} onClose={()=>setSelected(null)} onBackToMenu={()=>{setSelected(null);go('menu')}}/></main>
+
+  return <main className="qr-stage" style={vars}>
+    <section className="qr-app-shell">
+      {tab==='home'&&<HomeScreen restaurant={restaurant} categories={categories} featured={featured} onMenu={(cat='all')=>go('menu',cat)} onProduct={setSelected}/>} 
+      {tab==='menu'&&<MenuScreen restaurant={restaurant} categories={categories} products={products} categoryId={categoryId} query={query} onCategory={setCategoryId} onQuery={setQuery} onProduct={setSelected}/>} 
+      {tab==='branch'&&<BranchScreen restaurant={restaurant}/>} 
+      {tab==='reviews'&&<ReviewsScreen restaurant={restaurant}/>} 
+      {tab==='contact'&&<ContactScreen restaurant={restaurant}/>} 
+      <div className="qr-powered">Powered by <b>paneltakip</b></div>
+      <BottomNav tab={tab} onChange={t=>go(t)}/>
+    </section>
+    <ProductSheet product={selected} onClose={()=>setSelected(null)} onBackToMenu={()=>{setSelected(null);go('menu')}}/>
+    {welcomeOpen&&<WelcomeGate restaurant={restaurant} onMenu={()=>{setWelcomeOpen(false);go('menu')}} onWaiter={()=>setWelcomeModal('waiter')} onFeedback={()=>setWelcomeModal('feedback')}/>} 
+    <WelcomeModalView type={welcomeModal} tableNo={tableNo} setTableNo={setTableNo} feedbackScore={feedbackScore} setFeedbackScore={setFeedbackScore} feedbackText={feedbackText} setFeedbackText={setFeedbackText} onClose={()=>setWelcomeModal(null)} onWaiterSend={()=>setWelcomeModal('waiter-success')} onFeedbackSend={()=>setWelcomeModal('feedback-success')}/>
+  </main>
 }
+
+function WelcomeGate({restaurant,onMenu,onWaiter,onFeedback}:{restaurant:QrMenuRestaurant;onMenu:()=>void;onWaiter:()=>void;onFeedback:()=>void}){
+  const hero=restaurant.products.find(p=>p.isFeatured&&p.isActive)?.image ?? restaurant.products.find(p=>p.isActive)?.image;
+  return <div className="qr-entry-screen">
+    {hero&&<img className="qr-entry-bg" src={hero} alt=""/>}
+    <div className="qr-entry-overlay"/>
+    <div className="qr-entry-top"><span>TR</span></div>
+    <div className="qr-entry-content">
+      <div className="qr-entry-mark">{restaurant.shortName.slice(0,1)}</div>
+      <h1>{restaurant.name}</h1>
+      <p>Hoş geldiniz</p>
+      <div className="qr-entry-actions">
+        <button className="is-primary" onClick={onMenu}><Utensils size={20}/>Menüye Git</button>
+        <button onClick={onWaiter}><BellRing size={20}/>Garson Çağır</button>
+        <button onClick={onFeedback}><MessageCircle size={20}/>Geri Bildirim</button>
+      </div>
+    </div>
+    <div className="qr-entry-powered">Powered by <b>paneltakip</b></div>
+  </div>
+}
+
+function WelcomeModalView({type,tableNo,setTableNo,feedbackScore,setFeedbackScore,feedbackText,setFeedbackText,onClose,onWaiterSend,onFeedbackSend}:{type:WelcomeModal;tableNo:string;setTableNo:(v:string)=>void;feedbackScore:number;setFeedbackScore:(v:number)=>void;feedbackText:string;setFeedbackText:(v:string)=>void;onClose:()=>void;onWaiterSend:()=>void;onFeedbackSend:()=>void}){
+  if(!type) return null;
+  return <div className="qr-service-backdrop"><div className="qr-service-modal">
+    <button className="qr-service-close" onClick={onClose}><X size={24}/></button>
+    {type==='waiter'&&<><div className="qr-service-icon"><BellRing size={34}/></div><h2>Garson Çağır</h2><p>Masa numaranızı girin.</p><input inputMode="numeric" value={tableNo} onChange={e=>setTableNo(e.target.value.replace(/\D/g,'').slice(0,3))} placeholder="000"/><button className="qr-service-primary" disabled={!tableNo} onClick={onWaiterSend}>Garson Çağır</button></>}
+    {type==='waiter-success'&&<><div className="qr-service-icon success">✓</div><h2>Talebiniz iletildi</h2><p>Garson birazdan sizinle ilgilenecek. Beklediğiniz için teşekkürler.</p><button className="qr-service-primary" onClick={onClose}>Tamam</button></>}
+    {type==='feedback'&&<><div className="qr-service-icon"><MessageCircle size={34}/></div><h2>Geri Bildirim</h2><p>Deneyiminizi değerlendirir misiniz?</p><div className="qr-feedback-stars">{[1,2,3,4,5].map(n=><button key={n} className={feedbackScore>=n?'is-active':''} onClick={()=>setFeedbackScore(n)}>★</button>)}</div><textarea value={feedbackText} onChange={e=>setFeedbackText(e.target.value)} placeholder="İsterseniz kısa bir not yazın..."/><button className="qr-service-primary" disabled={!feedbackScore} onClick={onFeedbackSend}>Gönder</button></>}
+    {type==='feedback-success'&&<><div className="qr-service-icon success">✓</div><h2>Teşekkür ederiz</h2><p>Geri bildiriminiz alındı.</p><button className="qr-service-primary" onClick={onClose}>Tamam</button></>}
+  </div></div>
+}
+
 function AppHeader({restaurant,title}:{restaurant:QrMenuRestaurant;title?:string}){return <header className="qr-title-row"><div><small>{restaurant.shortName}</small><h1>{title||restaurant.branch.name}</h1></div></header>}
 function HomeScreen({restaurant,categories,featured,onMenu,onProduct}:{restaurant:QrMenuRestaurant;categories:QrMenuRestaurant['categories'];featured:QrMenuProduct[];onMenu:(cat?:string)=>void;onProduct:(p:QrMenuProduct)=>void}){const cover=featured[0]??restaurant.products.find(p=>p.isActive);const icons=['🍔','🍗','🍟','🥤','🥗'];return <div className="qr-page qr-home"><section className="qr-welcome"><div className="qr-cover">{cover&&<img src={cover.image} alt={restaurant.name}/>}<div className="qr-cover-shade"/></div><div className="qr-welcome-copy"><h1>{restaurant.name}</h1><p><MapPin size={15}/>{restaurant.branch.name}, {restaurant.branch.city} <span>•</span> ★ {restaurant.reviewSummary?.rating??'—'}</p><button onClick={()=>onMenu('all')}>Menüyü Gör</button></div></section><div className="qr-section-head"><h2>Kategoriler</h2><button onClick={()=>onMenu('all')}>Tümünü gör</button></div><div className="qr-category-grid">{categories.slice(0,5).map((c,i)=><button key={c.id} onClick={()=>onMenu(c.id)}><span>{icons[i]||'🍽️'}</span><small>{c.name}</small></button>)}</div><div className="qr-section-head"><h2>Öne Çıkanlar</h2><button onClick={()=>onMenu('all')}>Menüye git</button></div><div className="qr-product-grid">{featured.slice(0,4).map(p=><ProductCard key={p.id} product={p} onClick={()=>onProduct(p)}/>)}</div><div className="qr-quick-info"><span><b>★ {restaurant.reviewSummary?.rating??'—'}</b><small>{restaurant.reviewSummary?.count??0} yorum</small></span><span><b>Açık</b><small>{restaurant.branch.openingHours}</small></span><span><b>{restaurant.branch.name}</b><small>{restaurant.branch.city}</small></span></div></div>}
 function MenuScreen({restaurant,categories,products,categoryId,query,onCategory,onQuery,onProduct}:{restaurant:QrMenuRestaurant;categories:QrMenuRestaurant['categories'];products:QrMenuProduct[];categoryId:string;query:string;onCategory:(s:string)=>void;onQuery:(s:string)=>void;onProduct:(p:QrMenuProduct)=>void}){return <div className="qr-page"><AppHeader restaurant={restaurant} title="Menü"/><label className="qr-search"><Search size={19}/><QrInput value={query} onChange={e=>onQuery(e.target.value)} placeholder="Menüde ara..."/></label><div className="qr-chip-row"><QrChip active={categoryId==='all'} onClick={()=>onCategory('all')}>Tümü</QrChip>{categories.map(c=><QrChip key={c.id} active={categoryId===c.id} onClick={()=>onCategory(c.id)}>{c.name}</QrChip>)}</div><div className="qr-section-head"><h2>Menümüz</h2><span>{products.length} ürün</span></div><div className="qr-product-grid">{products.map(p=><ProductCard key={p.id} product={p} onClick={()=>onProduct(p)}/>)}</div></div>}
