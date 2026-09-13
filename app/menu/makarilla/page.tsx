@@ -1,6 +1,6 @@
-import { QrMenuPremiumApp } from '../../../components/qr-menu/QrMenuPremiumApp';
+import { MakarillaReferenceHome } from '../../../components/qr-menu/MakarillaReferenceHome';
 import { makarillaRestaurant } from '../../../lib/qr-menu/makarilla';
 
 export default function MakarillaMenuPage() {
-  return <QrMenuPremiumApp restaurant={makarillaRestaurant} />;
+  return <MakarillaReferenceHome restaurant={makarillaRestaurant} />;
 }
