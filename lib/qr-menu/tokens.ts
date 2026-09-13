@@ -1,0 +1,40 @@
+export const qrMenuTokens = {
+  colors: {
+    brand: '#0A84E8',
+    text: '#0F172A',
+    muted: '#64748B',
+    background: '#F7F8FA',
+    surface: '#FFFFFF',
+    border: '#E5E7EB',
+    success: '#22C55E',
+    warning: '#F59E0B',
+    danger: '#EF4444',
+  },
+  typography: {
+    fontFamily: 'Manrope, Arial, sans-serif',
+    h1: '22px',
+    h2: '18px',
+    h3: '16px',
+    body: '14px',
+    small: '12px',
+    caption: '11px',
+  },
+  spacing: {
+    page: 16,
+    card: 16,
+    section: 24,
+    gap: 12,
+  },
+  radius: {
+    card: 14,
+    control: 12,
+    pill: 999,
+    sheet: 24,
+  },
+  control: {
+    buttonHeight: 50,
+    inputHeight: 48,
+    productImage: 72,
+    categoryIcon: 24,
+  },
+} as const;
