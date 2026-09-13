@@ -1,0 +1,11 @@
+:root{--qr-turquoise:#12A6A6;--qr-turquoise-dark:#0B8587;--qr-turquoise-soft:#EAF8F7;--qr-ink:#12343B}
+.qr-stage{background:#eaf7f6;color:var(--qr-ink)}
+.qr-app-shell{background:linear-gradient(180deg,#eaf8f7 0,#f7fcfb 34%,#fff 100%)}
+.qr-welcome-logo,.qr-welcome-copy button,.qr-chip.is-active,.qr-logo-badge,.qr-primary{background:var(--qr-turquoise)!important}
+.qr-welcome-copy h1,.qr-title-row h1,.qr-product-body strong,.qr-product-body b,.qr-category-grid button,.qr-branch-hero h2,.qr-contact h1{color:var(--qr-ink)!important}
+.qr-section-head h2,.qr-product-body span,.qr-heart,.qr-rating,.qr-info-row>span,.qr-review-summary>strong,.qr-contact-icon,.qr-detail-price,.qr-powered b,.qr-bottom-nav button.is-active,.qr-quick-info b{color:var(--qr-turquoise)!important}
+.qr-chip.is-active{border-color:var(--qr-turquoise)!important}
+.qr-category-grid button span,.qr-search,.qr-list-card,.qr-review-summary,.qr-branch-hero{border-color:#d8eeee!important}
+.qr-allergens span{background:var(--qr-turquoise-soft)!important;color:var(--qr-turquoise-dark)!important}
+.qr-detail-media{background:linear-gradient(180deg,#e7f7f6,#fff)!important}
+.qr-bottom-nav{border-top-color:#dceeed!important}
