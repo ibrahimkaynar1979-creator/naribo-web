@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import {
+  Bell,
   Building2,
   ChevronLeft,
   ChevronRight,
@@ -14,6 +15,7 @@ import {
   Phone,
   Search,
   Send,
+  Settings,
   Star,
   X,
 } from 'lucide-react';
@@ -29,9 +31,7 @@ export function QrMenuApp({ restaurant }: { restaurant: QrMenuRestaurant }) {
   const [query, setQuery] = useState('');
   const [selected, setSelected] = useState<QrMenuProduct | null>(null);
 
-  const categories = restaurant.categories
-    .filter((c) => c.isActive)
-    .sort((a, b) => a.sortOrder - b.sortOrder);
+  const categories = restaurant.categories.filter((c) => c.isActive).sort((a, b) => a.sortOrder - b.sortOrder);
 
   const products = useMemo(() => {
     const q = query.trim().toLocaleLowerCase('tr-TR');
@@ -62,23 +62,10 @@ export function QrMenuApp({ restaurant }: { restaurant: QrMenuRestaurant }) {
   return (
     <main className="qr-stage" style={themeVars}>
       <section className="qr-app-shell">
-        {tab === 'home' && (
-          <HomeScreen restaurant={restaurant} featured={featured} onOpenMenu={() => go('menu')} onProduct={setSelected} />
-        )}
-
+        {tab === 'home' && <HomeScreen restaurant={restaurant} featured={featured} onOpenMenu={() => go('menu')} onProduct={setSelected} />}
         {tab === 'menu' && (
-          <MenuScreen
-            restaurant={restaurant}
-            categories={categories}
-            products={products}
-            categoryId={categoryId}
-            query={query}
-            onCategory={setCategoryId}
-            onQuery={setQuery}
-            onProduct={setSelected}
-          />
+          <MenuScreen restaurant={restaurant} categories={categories} products={products} categoryId={categoryId} query={query} onCategory={setCategoryId} onQuery={setQuery} onProduct={setSelected} />
         )}
-
         {tab === 'branch' && <BranchScreen restaurant={restaurant} />}
         {tab === 'reviews' && <ReviewsScreen restaurant={restaurant} />}
         {tab === 'contact' && <ContactScreen restaurant={restaurant} onBackHome={() => go('home')} />}
@@ -86,7 +73,6 @@ export function QrMenuApp({ restaurant }: { restaurant: QrMenuRestaurant }) {
         <div className="qr-powered">Powered by <b>paneltakip</b></div>
         <BottomNav tab={tab} onChange={go} />
       </section>
-
       <ProductSheet product={selected} onClose={() => setSelected(null)} />
     </main>
   );
@@ -99,36 +85,49 @@ function HomeScreen({ restaurant, featured, onOpenMenu, onProduct }: {
   onProduct: (product: QrMenuProduct) => void;
 }) {
   const rating = restaurant.reviewSummary;
+  const promo = featured[0] ?? restaurant.products.find((p) => p.isActive);
+
   return (
     <div className="qr-page qr-home">
-      <header className="qr-brand-row">
-        <div className="qr-logo-badge">{restaurant.shortName}</div>
-        <div className="qr-brand-copy">
-          <strong>{restaurant.name}</strong>
-          <span>{restaurant.tagline}</span>
+      <header className="qr-home-head">
+        <div>
+          <small>Hoş geldiniz</small>
+          <h1>{restaurant.shortName}</h1>
         </div>
-        <button className="qr-icon-button" onClick={onOpenMenu} aria-label="Menüde ara"><Search size={18} /></button>
+        <div className="qr-head-actions">
+          <button className="qr-icon-button" aria-label="Bildirimler"><Bell size={17} /></button>
+          <button className="qr-icon-button" aria-label="Ayarlar"><Settings size={17} /></button>
+        </div>
       </header>
 
       <div className="qr-info-grid">
-        <div className="qr-info-card"><span>Bugün</span><strong>Açık</strong><small>{restaurant.branch.openingHours}</small></div>
+        <div className="qr-info-card accent"><span>Şube</span><strong>Açık</strong><small>{restaurant.branch.openingHours}</small></div>
         <div className="qr-info-card"><span>Google</span><strong>{rating?.rating?.toFixed(1) ?? '—'} ★</strong><small>{rating?.count ?? 0} değerlendirme</small></div>
       </div>
 
-      {restaurant.coverImage && (
-        <button className="qr-feature-banner" onClick={() => featured[0] && onProduct(featured[0])}>
-          <img src={restaurant.coverImage} alt="" />
-          <div className="qr-feature-overlay">
-            <small>Öne çıkan</small>
-            <strong>{featured[0]?.name ?? restaurant.tagline}</strong>
-            <span>Detayları gör <ChevronRight size={14} /></span>
+      <div className="qr-section-head tight"><h2>Öne Çıkan Lezzet</h2></div>
+      {promo && (
+        <article className="qr-promo-card">
+          <img src={promo.image} alt={promo.name} />
+          <div className="qr-promo-copy">
+            <div>
+              <strong>{promo.name}</strong>
+              <small>{promo.description}</small>
+            </div>
+            <b>₺{promo.price}</b>
           </div>
-        </button>
+          <button onClick={() => onProduct(promo)}>Detayları Gör</button>
+        </article>
       )}
 
-      <div className="qr-section-head"><h2>Öne Çıkan Lezzetler</h2><button onClick={onOpenMenu}>Tüm menü</button></div>
+      <div className="qr-mini-grid">
+        <button onClick={onOpenMenu}><span>Menümüz</span><b>{restaurant.products.filter((p) => p.isActive).length} ürün</b><ChevronRight size={16} /></button>
+        <button><span>Şubemiz</span><b>{restaurant.branch.name}</b><ChevronRight size={16} /></button>
+      </div>
+
+      <div className="qr-section-head"><h2>Popüler</h2><button onClick={onOpenMenu}>Tümünü gör</button></div>
       <div className="qr-home-list">
-        {featured.map((product) => <ProductCard key={product.id} product={product} onClick={() => onProduct(product)} compact />)}
+        {featured.slice(0, 2).map((product) => <ProductCard key={product.id} product={product} onClick={() => onProduct(product)} compact />)}
       </div>
     </div>
   );
@@ -145,17 +144,15 @@ function MenuScreen({ restaurant, categories, products, categoryId, query, onCat
   onProduct: (product: QrMenuProduct) => void;
 }) {
   return (
-    <div className="qr-page">
-      <header className="qr-title-row"><div><small>{restaurant.shortName}</small><h1>Menü</h1></div><Search size={20} /></header>
+    <div className="qr-page qr-menu-page">
+      <header className="qr-title-row"><div><small>{restaurant.shortName}</small><h1>Menü</h1></div><button className="qr-icon-button"><Search size={18} /></button></header>
       <label className="qr-search"><Search size={17} /><QrInput value={query} onChange={(e) => onQuery(e.target.value)} placeholder="Menüde ara..." /></label>
       <div className="qr-chip-row">
         <QrChip active={categoryId === 'all'} onClick={() => onCategory('all')}>Tümü</QrChip>
         {categories.map((category) => <QrChip key={category.id} active={categoryId === category.id} onClick={() => onCategory(category.id)}>{category.name}</QrChip>)}
       </div>
       <div className="qr-section-head"><h2>Ürünler</h2><span>{products.length} ürün</span></div>
-      <div className="qr-product-grid">
-        {products.map((product) => <ProductCard key={product.id} product={product} onClick={() => onProduct(product)} />)}
-      </div>
+      <div className="qr-product-grid">{products.map((product) => <ProductCard key={product.id} product={product} onClick={() => onProduct(product)} />)}</div>
     </div>
   );
 }
@@ -163,7 +160,7 @@ function MenuScreen({ restaurant, categories, products, categoryId, query, onCat
 function ProductCard({ product, onClick, compact = false }: { product: QrMenuProduct; onClick: () => void; compact?: boolean }) {
   return (
     <button className={`qr-product-card ${compact ? 'is-compact' : ''}`} onClick={onClick}>
-      <div className="qr-product-image"><img src={product.image} alt={product.name} /><span className="qr-heart"><Heart size={15} /></span></div>
+      <div className="qr-product-image"><img src={product.image} alt={product.name} /><span className="qr-heart"><Heart size={14} /></span></div>
       <div className="qr-product-body"><strong>{product.name}</strong><p>{product.description}</p><div><b>₺{product.price}</b><span>İncele</span></div></div>
     </button>
   );
@@ -175,12 +172,7 @@ function BranchScreen({ restaurant }: { restaurant: QrMenuRestaurant }) {
     <div className="qr-page">
       <header className="qr-title-row"><div><small>{restaurant.shortName}</small><h1>Şube Bilgileri</h1></div><Building2 size={20} /></header>
       <div className="qr-branch-hero"><div className="qr-logo-badge large">{restaurant.shortName}</div><h2>{restaurant.name}</h2><div className="qr-rating"><Star size={16} fill="currentColor" /> {restaurant.reviewSummary?.rating ?? '—'} <span>({restaurant.reviewSummary?.count ?? 0})</span></div></div>
-      <div className="qr-list-card">
-        <InfoRow icon={<MapPin size={18} />} label="Adres" value={`${branch.address}, ${branch.city}`} />
-        <InfoRow icon={<Phone size={18} />} label="Telefon" value={branch.phone ?? '—'} />
-        <InfoRow icon={<Info size={18} />} label="Çalışma Saatleri" value={branch.openingHours ?? '—'} />
-        <InfoRow icon={<Mail size={18} />} label="E-posta" value={branch.email ?? '—'} />
-      </div>
+      <div className="qr-list-card"><InfoRow icon={<MapPin size={18} />} label="Adres" value={`${branch.address}, ${branch.city}`} /><InfoRow icon={<Phone size={18} />} label="Telefon" value={branch.phone ?? '—'} /><InfoRow icon={<Info size={18} />} label="Çalışma Saatleri" value={branch.openingHours ?? '—'} /><InfoRow icon={<Mail size={18} />} label="E-posta" value={branch.email ?? '—'} /></div>
     </div>
   );
 }
@@ -191,10 +183,7 @@ function ReviewsScreen({ restaurant }: { restaurant: QrMenuRestaurant }) {
     <div className="qr-page">
       <header className="qr-title-row"><div><small>{restaurant.shortName}</small><h1>Yorumlar</h1></div><MessageCircle size={20} /></header>
       <div className="qr-review-summary"><strong>{rating?.rating?.toFixed(1) ?? '—'}</strong><div><div className="qr-stars">★★★★★</div><span>{rating?.count ?? 0} değerlendirme</span></div></div>
-      <div className="qr-list-card">
-        <div className="qr-review"><b>Ahmet Y. · 5 ★</b><p>Lezzetli, temiz ve hızlı. Tekrar geleceğim.</p><small>2 gün önce</small></div>
-        <div className="qr-review"><b>Zeynep K. · 5 ★</b><p>Çıtır tavuk ve soslar çok başarılı.</p><small>5 gün önce</small></div>
-      </div>
+      <div className="qr-list-card"><div className="qr-review"><b>Ahmet Y. · 5 ★</b><p>Lezzetli, temiz ve hızlı. Tekrar geleceğim.</p><small>2 gün önce</small></div><div className="qr-review"><b>Zeynep K. · 5 ★</b><p>Çıtır tavuk ve soslar çok başarılı.</p><small>5 gün önce</small></div></div>
     </div>
   );
 }
@@ -202,9 +191,7 @@ function ReviewsScreen({ restaurant }: { restaurant: QrMenuRestaurant }) {
 function ContactScreen({ restaurant, onBackHome }: { restaurant: QrMenuRestaurant; onBackHome: () => void }) {
   return (
     <div className="qr-page qr-contact">
-      <div className="qr-contact-icon"><Send size={28} /></div>
-      <h1>Bize Ulaşın</h1>
-      <p>{restaurant.name} ile iletişim kurmak için aşağıdaki bilgileri kullanabilirsiniz.</p>
+      <div className="qr-contact-icon"><Send size={28} /></div><h1>Bize Ulaşın</h1><p>{restaurant.name} ile iletişim kurmak için aşağıdaki bilgileri kullanabilirsiniz.</p>
       <div className="qr-list-card full"><InfoRow icon={<Phone size={18} />} label="Telefon" value={restaurant.branch.phone ?? '—'} /><InfoRow icon={<Mail size={18} />} label="E-posta" value={restaurant.branch.email ?? '—'} /></div>
       <button className="qr-primary" onClick={onBackHome}>Ana Sayfaya Dön</button>
     </div>
