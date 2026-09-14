@@ -37,6 +37,7 @@ export function MakarillaMenuView() {
   const products = makarillaRestaurant.products.filter(p => p.isActive && p.categoryId === active);
   const activeCategory = categories.find(c => c.id === active);
   const heroImage = categoryHeroImages[active] || '/makarilla_tabak_v2.png';
+  const activeLabel = categoryLabels[active] || activeCategory?.name;
 
   return <main className="mk-menu-shell">
     <div className="mk-menu-page">
@@ -59,15 +60,14 @@ export function MakarillaMenuView() {
         <div className="mk-hero-copy">
           <div className="mk-hero-eyebrow">GERÇEK İTALYAN LEZZETİ</div>
           <div className="mk-hero-red-line" />
-          <h1>{categoryLabels[active] || activeCategory?.name}</h1>
+          <h1>{activeLabel}</h1>
           <p>Taze malzemeler,<br/>özel tarifler.</p>
         </div>
-        <div className="mk-hero-script">Good<br/>Food<br/>Good<br/>People</div>
-        <img className="mk-hero-plate" src={heroImage} alt={categoryLabels[active] || 'Makarilla'} />
+        <img className="mk-hero-plate" src={heroImage} alt={activeLabel || 'Makarilla'} />
       </section>
 
       <section className="mk-products">
-        <div className="mk-products-heading"><h2>{activeCategory?.name}</h2><span>{products.length} ürün</span></div>
+        <div className="mk-products-heading"><h2>{activeLabel}</h2><span>{products.length} ürün</span></div>
         {products.length ? products.map(product => <article className="mk-product" key={product.id}>
           <img src={product.image} alt={product.name}/>
           <div><h3>{product.name}</h3><p>{product.description}</p><strong>₺{product.price}</strong></div>
