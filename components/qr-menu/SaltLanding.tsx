@@ -44,6 +44,7 @@ export function SaltLanding({ restaurant }: { restaurant: QrMenuRestaurant }) {
   const [rating, setRating] = useState(0);
   const [scale, setScale] = useState(1);
   const hero = restaurant.coverImage || restaurant.products.find(p => p.isFeatured && p.isActive)?.image || restaurant.products.find(p => p.isActive)?.image;
+  const isMakarilla = restaurant.slug === 'makarilla';
 
   useEffect(() => {
     const fit = () => setScale(Math.min(window.innerWidth / DESIGN_W, 1));
@@ -68,12 +69,12 @@ export function SaltLanding({ restaurant }: { restaurant: QrMenuRestaurant }) {
       <section className="salt-landing" style={{ transform: `scale(${scale})` }}>
         <header className="salt-topbar">
           <div className="salt-wordmark salt-wordmark-logo" aria-label={`${restaurant.name} ${restaurant.tagline}`}>
-            <img src={restaurant.logo || '/makarilla-logo.svg'} alt={restaurant.name} />
+            <img src={restaurant.logo || '/makarilla-logo.png'} alt={restaurant.name} />
           </div>
           <button className="salt-language" aria-label="Dil seçimi">TR <ChevronDown size={18}/></button>
         </header>
 
-        <section className="salt-hero">
+        <section className={`salt-hero${isMakarilla ? ' makarilla-hero' : ''}`}>
           <div className="salt-shape salt-shape-peach"/><div className="salt-shape salt-shape-sage"/>
           <div className="salt-copy">
             <div className="salt-eyebrow">GERÇEK İTALYAN<br/>LEZZETİ</div><div className="salt-red-line"/>
