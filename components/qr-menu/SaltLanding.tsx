@@ -29,6 +29,8 @@ type SaltThemeVars = React.CSSProperties & {
 
 const DESIGN_W = 430;
 const DESIGN_H = 790;
+const FOOTER_H = 78;
+const FOOTER_GAP = 48;
 
 const SALT_REFERENCE_THEME: SaltThemeVars = {
   '--salt-bg': '#FCF8F3', '--salt-bg-soft': '#F8F0E9', '--salt-ink': '#151A1E', '--salt-accent': '#EB3038',
@@ -94,13 +96,6 @@ export function SaltLanding({ restaurant }: { restaurant: QrMenuRestaurant }) {
           <div className="salt-powered">Powered by <b>paneltakip</b></div>
         </section>
 
-        <nav className="salt-bottom-nav" aria-label="Hızlı işlemler">
-          <button onClick={() => setModal('wifi')}><Wifi/><span>Wi-Fi</span></button>
-          <button onClick={() => setModal('iban')}><CreditCard/><span>IBAN</span></button>
-          <button onClick={openMap}><MapPin/><span>Yol Tarifi</span></button>
-          <button onClick={() => setModal('more')}><MoreHorizontal/><span>Daha Fazla</span></button>
-        </nav>
-
         {modal && <div className="salt-modal-backdrop"><div className="salt-modal">
           <button className="salt-modal-close" onClick={() => setModal(null)}><X/></button>
           {modal === 'waiter' && <><BellRing className="salt-modal-main-icon"/><h2>Garson Çağır</h2><p>Masa numaranızı girin.</p><input value={table} onChange={e => setTable(e.target.value.replace(/\D/g,'').slice(0,3))} inputMode="numeric" placeholder="000"/><button className="salt-modal-submit" disabled={!table} onClick={() => setModal('success')}>Garson Çağır</button></>}
@@ -111,6 +106,16 @@ export function SaltLanding({ restaurant }: { restaurant: QrMenuRestaurant }) {
           {modal === 'success' && <><div className="salt-success">✓</div><h2>Teşekkür ederiz</h2><p>Talebiniz alındı.</p><button className="salt-modal-submit" onClick={() => setModal(null)}>Tamam</button></>}
         </div></div>}
       </section>
+    </div>
+
+    <div className="salt-footer-gap" style={{ height: FOOTER_GAP * scale }} />
+    <div className="salt-footer-frame" style={{ width: DESIGN_W * scale, height: FOOTER_H * scale }}>
+      <nav className="salt-bottom-nav" style={{ transform: `scale(${scale})` }} aria-label="Hızlı işlemler">
+        <button onClick={() => setModal('wifi')}><Wifi/><span>Wi-Fi</span></button>
+        <button onClick={() => setModal('iban')}><CreditCard/><span>IBAN</span></button>
+        <button onClick={openMap}><MapPin/><span>Yol Tarifi</span></button>
+        <button onClick={() => setModal('more')}><MoreHorizontal/><span>Daha Fazla</span></button>
+      </nav>
     </div>
   </main>;
 }
