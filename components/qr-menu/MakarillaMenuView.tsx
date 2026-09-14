@@ -47,10 +47,17 @@ export function MakarillaMenuView() {
         </button>)}
       </nav>
 
-      <section className="mk-category-hero">
-        <img src={categoryImages[active]} alt={activeCategory?.name || 'Makarilla'} />
-        <div className="mk-category-shade"/>
-        <div className="mk-category-title"><small>GERÇEK İTALYAN LEZZETİ</small><h1>{activeCategory?.name}</h1><p>Taze malzemeler, özel tarifler, keyifli anlar.</p></div>
+      <section className="mk-category-hero mk-landing-hero">
+        <div className="mk-hero-shape mk-hero-shape-peach" />
+        <div className="mk-hero-shape mk-hero-shape-sage" />
+        <div className="mk-hero-copy">
+          <div className="mk-hero-eyebrow">MAKARILLA MENÜ</div>
+          <div className="mk-hero-red-line" />
+          <h1>{categoryLabels[active] || activeCategory?.name}</h1>
+          <p>Taze malzemeler,<br/>özel tarifler.</p>
+        </div>
+        <div className="mk-hero-script">Good<br/>Food<br/>Good<br/>People</div>
+        <img className="mk-hero-plate" src="/makarilla_tabak_v2.png" alt="Makarilla makarna" />
       </section>
 
       <section className="mk-products">
