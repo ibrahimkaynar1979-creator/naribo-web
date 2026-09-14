@@ -64,13 +64,6 @@ export function SaltLanding({ restaurant }: { restaurant: QrMenuRestaurant }) {
     window.open(`https://www.google.com/maps/search/?api=1&query=${q}`, '_blank', 'noopener,noreferrer');
   };
 
-  const quickNav = <nav className="salt-bottom-nav" aria-label="Hızlı işlemler">
-    <button onClick={() => setModal('wifi')}><Wifi/><span>Wi-Fi</span></button>
-    <button onClick={() => setModal('iban')}><CreditCard/><span>IBAN</span></button>
-    <button onClick={openMap}><MapPin/><span>Yol Tarifi</span></button>
-    <button onClick={() => setModal('more')}><MoreHorizontal/><span>Daha Fazla</span></button>
-  </nav>;
-
   return <main className="salt-landing-stage" style={SALT_REFERENCE_THEME}>
     <div className="salt-landing-frame" style={{ width: DESIGN_W * scale, height: DESIGN_H * scale }}>
       <section className="salt-landing" style={{ transform: `scale(${scale})` }}>
@@ -99,6 +92,13 @@ export function SaltLanding({ restaurant }: { restaurant: QrMenuRestaurant }) {
           <div className="salt-powered">Powered by <b>paneltakip</b></div>
         </section>
 
+        <nav className="salt-bottom-nav" aria-label="Hızlı işlemler">
+          <button onClick={() => setModal('wifi')}><Wifi/><span>Wi-Fi</span></button>
+          <button onClick={() => setModal('iban')}><CreditCard/><span>IBAN</span></button>
+          <button onClick={openMap}><MapPin/><span>Yol Tarifi</span></button>
+          <button onClick={() => setModal('more')}><MoreHorizontal/><span>Daha Fazla</span></button>
+        </nav>
+
         {modal && <div className="salt-modal-backdrop"><div className="salt-modal">
           <button className="salt-modal-close" onClick={() => setModal(null)}><X/></button>
           {modal === 'waiter' && <><BellRing className="salt-modal-main-icon"/><h2>Garson Çağır</h2><p>Masa numaranızı girin.</p><input value={table} onChange={e => setTable(e.target.value.replace(/\D/g,'').slice(0,3))} inputMode="numeric" placeholder="000"/><button className="salt-modal-submit" disabled={!table} onClick={() => setModal('success')}>Garson Çağır</button></>}
@@ -110,6 +110,5 @@ export function SaltLanding({ restaurant }: { restaurant: QrMenuRestaurant }) {
         </div></div>}
       </section>
     </div>
-    {quickNav}
   </main>;
 }
