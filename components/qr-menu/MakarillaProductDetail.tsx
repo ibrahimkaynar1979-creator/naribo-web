@@ -22,8 +22,8 @@ export function MakarillaProductDetail({ productId }: { productId: string }) {
 
   const categoryLabel = categoryLabels[product.categoryId] || 'Menü';
 
-  return <main className="mk-menu-shell">
-    <div className="mk-menu-page">
+  return <main className="mk-menu-shell mk-detail-shell">
+    <div className="mk-menu-page mk-detail-page-wrap">
       <header className="mk-menu-header">
         <button className="mk-back" onClick={() => window.location.href='/menu/makarilla?view=menu'} aria-label="Menüye dön"><ArrowLeft/></button>
         <img src="/makarilla-menu-logo.png" alt="Makarilla" />
@@ -38,7 +38,11 @@ export function MakarillaProductDetail({ productId }: { productId: string }) {
         </div>
 
         <div className="mk-detail-body">
-          <span className="mk-detail-category">{categoryLabel}</span>
+          <div className="mk-detail-topline">
+            <span className="mk-detail-category">{categoryLabel}</span>
+            <div className="mk-detail-price">₺{product.price}</div>
+          </div>
+
           <h1>{product.name}</h1>
           <div className="mk-detail-accent" />
           <p className="mk-detail-copy">{product.description}</p>
@@ -48,11 +52,11 @@ export function MakarillaProductDetail({ productId }: { productId: string }) {
             <div className="mk-detail-chips">{product.allergens.map(item => <b key={item}>{item}</b>)}</div>
           </div> : null}
 
-          <div className="mk-detail-price">₺{product.price}</div>
-          <div className="mk-detail-disclaimer">Bu menü bilgilendirme amaçlıdır. Sipariş alınmamaktadır.</div>
+          <div className="mk-detail-footnote">
+            <span>Menü bilgilendirme amaçlıdır · Sipariş alınmamaktadır.</span>
+            <span>Powered By <b>paneltakip.com</b></span>
+          </div>
         </div>
-
-        <div className="mk-powered">Powered By <b>paneltakip.com</b></div>
       </section>
     </div>
 
