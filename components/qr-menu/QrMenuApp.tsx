@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { BellRing, Building2, ChevronLeft, Home, Info, Mail, MapPin, MessageCircle, Phone, Search, Send, Star, UserRound, Utensils, X } from 'lucide-react';
+import { BellRing, Building2, ChevronLeft, Clock3, Home, Info, Mail, MapPin, MessageCircle, Phone, Search, Send, Star, UserRound, Utensils, X } from 'lucide-react';
 import type { QrMenuProduct, QrMenuRestaurant } from '../../lib/qr-menu/types';
 import { QrChip, QrInput, QrSheet } from './ui';
 import './qr-menu.css';
@@ -19,24 +19,41 @@ export function QrMenuApp({ restaurant }: { restaurant: QrMenuRestaurant }) {
 function WelcomeGate({restaurant,onMenu,onWaiter,onFeedback}:{restaurant:QrMenuRestaurant;onMenu:()=>void;onWaiter:()=>void;onFeedback:()=>void}){
   const hero = restaurant.coverImage ?? restaurant.products.find(p=>p.isFeatured&&p.isActive)?.image ?? restaurant.products.find(p=>p.isActive)?.image;
   return <div className="qr-entry-screen">
-    <section className="qr-entry-hero">
-      {hero&&<img src={hero} alt={restaurant.name}/>}<div className="qr-entry-hero-shade"/>
-      <button className="qr-entry-lang">TR <span>⌄</span></button>
-      <div className="qr-entry-brand-card">
+    <header className="qr-entry-header">
+      <div className="qr-entry-header-brand">
         {restaurant.logo?<img src={restaurant.logo} alt={`${restaurant.name} logo`}/>:<><strong>{restaurant.shortName}</strong><small>{restaurant.tagline ?? 'RESTAURANT'}</small></>}
       </div>
+      <button className="qr-entry-lang"><span>🌐</span> TR <b>⌄</b></button>
+    </header>
+
+    <section className="qr-entry-hero">
+      {hero&&<img src={hero} alt={restaurant.name}/>}<div className="qr-entry-hero-shade"/>
+      <div className="qr-entry-hero-copy">
+        <small>GERÇEK LEZZET</small>
+        <h1>{restaurant.tagline || 'İyi Tavuk, İyi İnsanlar.'}</h1>
+        <span>Good Food<br/>Good People</span>
+      </div>
     </section>
+
     <section className="qr-entry-panel">
-      <div className="qr-entry-copy"><small>HOŞ GELDİNİZ</small><h1>{restaurant.name}</h1><p>Menümüzü keşfedin, masanıza destek isteyin veya deneyiminizi paylaşın.</p></div>
+      <div className="qr-entry-copy"><small>HOŞ GELDİNİZ</small><h2>{restaurant.name}</h2><p>Menümüzü keşfedin, masanıza destek isteyin veya deneyiminizi paylaşın.</p></div>
       <div className="qr-entry-actions">
-        <button className="is-primary" onClick={onMenu}><span className="qr-entry-action-icon"><Utensils size={20}/></span><span className="qr-entry-action-copy"><b>Menüyü Gör</b><small>Tüm lezzetleri keşfedin</small></span><span className="qr-entry-arrow">→</span></button>
-        <button className="is-secondary" onClick={onWaiter}><span className="qr-entry-action-icon waiter"><UserRound size={21}/><BellRing size={12}/></span><span className="qr-entry-action-copy"><b>Garson Çağır</b><small>Masanıza servis desteği isteyin</small></span><span className="qr-entry-arrow">→</span></button>
-        <button className="is-secondary" onClick={onFeedback}><span className="qr-entry-action-icon"><MessageCircle size={21}/></span><span className="qr-entry-action-copy"><b>Geri Bildirim</b><small>Deneyiminizi bizimle paylaşın</small></span><span className="qr-entry-arrow">→</span></button>
+        <button className="is-primary" onClick={onMenu}><span className="qr-entry-action-icon"><Utensils size={22}/></span><span className="qr-entry-action-copy"><b>Menüyü Gör</b><small>Tüm lezzetleri keşfedin</small></span><span className="qr-entry-arrow">→</span></button>
+        <button className="is-secondary" onClick={onWaiter}><span className="qr-entry-action-icon waiter"><UserRound size={23}/></span><span className="qr-entry-action-copy"><b>Garson Çağır</b><small>Masanıza servis desteği isteyin</small></span><span className="qr-entry-arrow">→</span></button>
+        <button className="is-secondary" onClick={onFeedback}><span className="qr-entry-action-icon"><MessageCircle size={23}/></span><span className="qr-entry-action-copy"><b>Geri Bildirim</b><small>Deneyiminizi bizimle paylaşın</small></span><span className="qr-entry-arrow">→</span></button>
       </div>
       <div className="qr-entry-powered">Powered by <b>paneltakip</b></div>
     </section>
+
+    <nav className="qr-entry-bottom-nav">
+      <button className="is-active"><Home size={21}/><span>Ana Sayfa</span></button>
+      <button><Info size={21}/><span>Bilgi</span></button>
+      <button onClick={onFeedback}><MessageCircle size={21}/><span>Yorum Yap</span></button>
+      <button><Clock3 size={21}/><span>Saatler</span></button>
+    </nav>
   </div>
 }
+
 function WelcomeModalView({type,tableNo,setTableNo,feedbackScore,setFeedbackScore,feedbackText,setFeedbackText,onClose,onWaiterSend,onFeedbackSend}:{type:WelcomeModal;tableNo:string;setTableNo:(v:string)=>void;feedbackScore:number;setFeedbackScore:(v:number)=>void;feedbackText:string;setFeedbackText:(v:string)=>void;onClose:()=>void;onWaiterSend:()=>void;onFeedbackSend:()=>void}){if(!type)return null;return <div className="qr-service-backdrop"><div className="qr-service-modal"><button className="qr-service-close" onClick={onClose}><X size={24}/></button>{type==='waiter'&&<><div className="qr-service-icon"><UserRound size={26}/></div><h2>Garson Çağır</h2><p>Masa numaranızı girin.</p><input inputMode="numeric" value={tableNo} onChange={e=>setTableNo(e.target.value.replace(/\D/g,'').slice(0,3))} placeholder="000"/><button className="qr-service-primary" disabled={!tableNo} onClick={onWaiterSend}>Garson Çağır</button></>}{type==='waiter-success'&&<><div className="qr-service-icon success">✓</div><h2>Talebiniz iletildi</h2><p>Garson birazdan sizinle ilgilenecek. Beklediğiniz için teşekkürler.</p><button className="qr-service-primary" onClick={onClose}>Tamam</button></>}{type==='feedback'&&<><div className="qr-service-icon"><MessageCircle size={34}/></div><h2>Geri Bildirim</h2><p>Deneyiminizi değerlendirir misiniz?</p><div className="qr-feedback-stars">{[1,2,3,4,5].map(n=><button key={n} className={feedbackScore>=n?'is-active':''} onClick={()=>setFeedbackScore(n)}>★</button>)}</div><textarea value={feedbackText} onChange={e=>setFeedbackText(e.target.value)} placeholder="İsterseniz kısa bir not yazın..."/><button className="qr-service-primary" disabled={!feedbackScore} onClick={onFeedbackSend}>Gönder</button></>}{type==='feedback-success'&&<><div className="qr-service-icon success">✓</div><h2>Teşekkür ederiz</h2><p>Geri bildiriminiz alındı.</p><button className="qr-service-primary" onClick={onClose}>Tamam</button></>}</div></div>}
 function AppHeader({restaurant,title}:{restaurant:QrMenuRestaurant;title?:string}){return <header className="qr-title-row"><div><small>{restaurant.shortName}</small><h1>{title||restaurant.branch.name}</h1></div></header>}
 function HomeScreen({restaurant,categories,featured,onMenu,onProduct}:{restaurant:QrMenuRestaurant;categories:QrMenuRestaurant['categories'];featured:QrMenuProduct[];onMenu:(cat?:string)=>void;onProduct:(p:QrMenuProduct)=>void}){const cover=featured[0]??restaurant.products.find(p=>p.isActive);const icons=['🍔','🍗','🍟','🥤','🥗'];return <div className="qr-page qr-home"><section className="qr-welcome"><div className="qr-cover">{cover&&<img src={cover.image} alt={restaurant.name}/>}<div className="qr-cover-shade"/></div><div className="qr-welcome-copy"><h1>{restaurant.name}</h1><p><MapPin size={15}/>{restaurant.branch.name}, {restaurant.branch.city} <span>•</span> ★ {restaurant.reviewSummary?.rating??'—'}</p><button onClick={()=>onMenu('all')}>Menüyü Gör</button></div></section><div className="qr-section-head"><h2>Kategoriler</h2><button onClick={()=>onMenu('all')}>Tümünü gör</button></div><div className="qr-category-grid">{categories.slice(0,5).map((c,i)=><button key={c.id} onClick={()=>onMenu(c.id)}><span>{icons[i]||'🍽️'}</span><small>{c.name}</small></button>)}</div><div className="qr-section-head"><h2>Öne Çıkanlar</h2><button onClick={()=>onMenu('all')}>Menüye git</button></div><div className="qr-product-grid">{featured.slice(0,4).map(p=><ProductCard key={p.id} product={p} onClick={()=>onProduct(p)}/>)}</div></div>}
