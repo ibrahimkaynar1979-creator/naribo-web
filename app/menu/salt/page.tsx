@@ -1,7 +1,6 @@
-import { QrMenuApp } from '../../../components/qr-menu/QrMenuApp';
+import { SaltLanding } from '../../../components/qr-menu/SaltLanding';
 import { saltRestaurant } from '../../../lib/qr-menu/salt';
-import './salt-reference.css';
 
 export default function SaltMenuPage() {
-  return <QrMenuApp restaurant={saltRestaurant} />;
+  return <SaltLanding restaurant={saltRestaurant} />;
 }
