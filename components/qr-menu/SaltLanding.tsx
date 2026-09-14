@@ -81,9 +81,11 @@ export function SaltLanding({ restaurant }: { restaurant: QrMenuRestaurant }) {
             <h1>Lezzet<br/>her zaman<br/>daha iyisini<br/>bir araya getirir.</h1><p>Taze malzemeler,<br/>keyifli anlar.</p>
           </div>
           <div className="salt-script">Good<br/>Food<br/>Good<br/>People</div>
-          {hero && <img className="salt-burger salt-pasta" src={hero} alt={`${restaurant.name} makarna`} />}
+          {!isMakarilla && hero && <img className="salt-burger salt-pasta" src={hero} alt={`${restaurant.name} yemek`} />}
           <div className="salt-dots"><b/><span/><span/></div>
         </section>
+
+        {isMakarilla && hero && <img className="makarilla-pasta-overlay" src={hero} alt={`${restaurant.name} makarna`} />}
 
         <section className="salt-actions">
           <button className="salt-action salt-action-primary" onClick={openMenu}><span className="salt-action-icon"><Utensils/></span><span className="salt-action-copy"><b>Menüyü Gör</b><small>Tüm lezzetleri keşfedin</small></span><span className="salt-action-arrow">→</span></button>
