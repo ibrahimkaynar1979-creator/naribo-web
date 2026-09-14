@@ -57,7 +57,7 @@ export function SaltLanding({ restaurant }: { restaurant: QrMenuRestaurant }) {
     };
   }, []);
 
-  const openMenu = () => { window.location.href = '/menu/salt?view=menu'; };
+  const openMenu = () => { window.location.href = `/menu/${restaurant.slug}?view=menu`; };
   const openMap = () => {
     const q = encodeURIComponent(`${restaurant.branch.address} ${restaurant.branch.city}`);
     window.open(`https://www.google.com/maps/search/?api=1&query=${q}`, '_blank', 'noopener,noreferrer');
@@ -67,18 +67,20 @@ export function SaltLanding({ restaurant }: { restaurant: QrMenuRestaurant }) {
     <div className="salt-landing-frame" style={{ width: DESIGN_W * scale, height: DESIGN_H * scale }}>
       <section className="salt-landing" style={{ transform: `scale(${scale})` }}>
         <header className="salt-topbar">
-          <div className="salt-wordmark" aria-label="SALT Fried Chicken"><strong>SALT</strong><small>FRIED CHICKEN</small></div>
+          <div className="salt-wordmark salt-wordmark-logo" aria-label={`${restaurant.name} ${restaurant.tagline}`}>
+            <img src={restaurant.logo || '/makarilla-logo.svg'} alt={restaurant.name} />
+          </div>
           <button className="salt-language" aria-label="Dil seçimi">TR <ChevronDown size={18}/></button>
         </header>
 
         <section className="salt-hero">
           <div className="salt-shape salt-shape-peach"/><div className="salt-shape salt-shape-sage"/>
           <div className="salt-copy">
-            <div className="salt-eyebrow">İYİ TAVUK<br/>İYİ İNSANLAR</div><div className="salt-red-line"/>
+            <div className="salt-eyebrow">GERÇEK İTALYAN<br/>LEZZETİ</div><div className="salt-red-line"/>
             <h1>Lezzet<br/>her zaman<br/>daha iyisini<br/>bir araya getirir.</h1><p>Taze malzemeler,<br/>keyifli anlar.</p>
           </div>
           <div className="salt-script">Good<br/>Food<br/>Good<br/>People</div>
-          {hero && <img className="salt-burger" src={hero} alt="SALT burger"/>}
+          {hero && <img className="salt-burger salt-pasta" src={hero} alt={`${restaurant.name} makarna`} />}
           <div className="salt-dots"><b/><span/><span/></div>
         </section>
 
