@@ -1,8 +1,9 @@
 'use client';
 
-import { ArrowLeft, ChevronDown, CreditCard, MapPin, MoreHorizontal, Wifi } from 'lucide-react';
+import { ArrowLeft, ChevronDown } from 'lucide-react';
 import { useState } from 'react';
 import { makarillaRestaurant } from '../../lib/qr-menu/makarilla';
+import { MakarillaBottomNav } from './MakarillaBottomNav';
 import './makarilla-menu.css';
 
 const categoryImages: Record<string, string> = {
@@ -78,8 +79,6 @@ export function MakarillaMenuView() {
       <div className="mk-powered">Powered By <b>paneltakip.com</b></div>
     </div>
 
-    <nav className="mk-bottom-nav">
-      <button><Wifi/><span>Wi-Fi</span></button><button><CreditCard/><span>IBAN</span></button><button onClick={()=>window.open('https://www.google.com/maps/search/?api=1&query=Karşıyaka%20İzmir','_blank')}><MapPin/><span>Yol Tarifi</span></button><button><MoreHorizontal/><span>Daha Fazla</span></button>
-    </nav>
+    <MakarillaBottomNav />
   </main>;
 }
