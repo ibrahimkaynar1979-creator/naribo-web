@@ -3,6 +3,7 @@
 import { ArrowLeft, ChevronDown, CreditCard, MapPin, MoreHorizontal, Wifi } from 'lucide-react';
 import { makarillaRestaurant } from '../../lib/qr-menu/makarilla';
 import './makarilla-menu.css';
+import './makarilla-product-detail.css';
 
 const categoryLabels: Record<string, string> = {
   pastas: 'Makarnalar',
