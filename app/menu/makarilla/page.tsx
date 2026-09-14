@@ -1,6 +1,6 @@
-import { MakarillaCustomerPremium } from '../../../components/qr-menu/MakarillaCustomerPremium';
+import { SaltLanding } from '../../../components/qr-menu/SaltLanding';
 import { makarillaRestaurant } from '../../../lib/qr-menu/makarilla';
 
 export default function MakarillaMenuPage() {
-  return <MakarillaCustomerPremium restaurant={makarillaRestaurant} />;
+  return <SaltLanding restaurant={makarillaRestaurant} />;
 }
