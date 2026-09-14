@@ -53,12 +53,20 @@ export function SaltLanding({ restaurant }: { restaurant: QrMenuRestaurant }) {
     const html = document.documentElement;
     const body = document.body;
     const prevHtmlOverflowX = html.style.overflowX;
+    const prevHtmlOverflowY = html.style.overflowY;
+    const prevHtmlOverscrollY = html.style.overscrollBehaviorY;
     const prevBodyOverflowX = body.style.overflowX;
+    const prevBodyOverflowY = body.style.overflowY;
     const prevBodyOverscrollX = body.style.overscrollBehaviorX;
+    const prevBodyOverscrollY = body.style.overscrollBehaviorY;
 
     html.style.overflowX = 'hidden';
+    html.style.overflowY = 'hidden';
+    html.style.overscrollBehaviorY = 'none';
     body.style.overflowX = 'hidden';
+    body.style.overflowY = 'hidden';
     body.style.overscrollBehaviorX = 'none';
+    body.style.overscrollBehaviorY = 'none';
 
     const fit = () => {
       const layoutWidth = document.documentElement.clientWidth || window.innerWidth;
@@ -76,8 +84,12 @@ export function SaltLanding({ restaurant }: { restaurant: QrMenuRestaurant }) {
       window.removeEventListener('resize', fit);
       window.visualViewport?.removeEventListener('resize', fit);
       html.style.overflowX = prevHtmlOverflowX;
+      html.style.overflowY = prevHtmlOverflowY;
+      html.style.overscrollBehaviorY = prevHtmlOverscrollY;
       body.style.overflowX = prevBodyOverflowX;
+      body.style.overflowY = prevBodyOverflowY;
       body.style.overscrollBehaviorX = prevBodyOverscrollX;
+      body.style.overscrollBehaviorY = prevBodyOverscrollY;
     };
   }, []);
 
@@ -87,7 +99,7 @@ export function SaltLanding({ restaurant }: { restaurant: QrMenuRestaurant }) {
     window.open(`https://www.google.com/maps/search/?api=1&query=${q}`, '_blank', 'noopener,noreferrer');
   };
 
-  return <main className="salt-landing-stage" style={{ ...SALT_REFERENCE_THEME, width: '100vw', maxWidth: '100vw', overflowX: 'hidden', touchAction: 'pan-y', overscrollBehaviorX: 'none' }}>
+  return <main className="salt-landing-stage" style={{ ...SALT_REFERENCE_THEME, width: '100vw', maxWidth: '100vw', height: '100dvh', overflow: 'hidden', touchAction: 'manipulation', overscrollBehavior: 'none' }}>
     <div className="salt-landing-frame" style={{ width: DESIGN_W * scale, height: DESIGN_H * scale }}>
       <section className="salt-landing" style={{ transform: `scale(${scale})` }}>
         <header className="salt-topbar">
