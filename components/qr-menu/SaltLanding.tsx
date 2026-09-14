@@ -50,14 +50,34 @@ export function SaltLanding({ restaurant }: { restaurant: QrMenuRestaurant }) {
   const makarillaPlate = '/makarilla_tabak_v2.png';
 
   useEffect(() => {
-    const fit = () => setScale(Math.min(window.innerWidth / DESIGN_W, 1));
+    const html = document.documentElement;
+    const body = document.body;
+    const prevHtmlOverflowX = html.style.overflowX;
+    const prevBodyOverflowX = body.style.overflowX;
+    const prevBodyOverscrollX = body.style.overscrollBehaviorX;
+
+    html.style.overflowX = 'hidden';
+    body.style.overflowX = 'hidden';
+    body.style.overscrollBehaviorX = 'none';
+
+    const fit = () => {
+      const layoutWidth = document.documentElement.clientWidth || window.innerWidth;
+      const visualWidth = window.visualViewport?.width || layoutWidth;
+      const viewportWidth = Math.min(layoutWidth, visualWidth, window.innerWidth);
+      setScale(Math.min(viewportWidth / DESIGN_W, 1));
+    };
+
     window.scrollTo(0, 0);
     fit();
     window.addEventListener('resize', fit);
     window.visualViewport?.addEventListener('resize', fit);
+
     return () => {
       window.removeEventListener('resize', fit);
       window.visualViewport?.removeEventListener('resize', fit);
+      html.style.overflowX = prevHtmlOverflowX;
+      body.style.overflowX = prevBodyOverflowX;
+      body.style.overscrollBehaviorX = prevBodyOverscrollX;
     };
   }, []);
 
@@ -67,7 +87,7 @@ export function SaltLanding({ restaurant }: { restaurant: QrMenuRestaurant }) {
     window.open(`https://www.google.com/maps/search/?api=1&query=${q}`, '_blank', 'noopener,noreferrer');
   };
 
-  return <main className="salt-landing-stage" style={SALT_REFERENCE_THEME}>
+  return <main className="salt-landing-stage" style={{ ...SALT_REFERENCE_THEME, width: '100vw', maxWidth: '100vw', overflowX: 'hidden', touchAction: 'pan-y', overscrollBehaviorX: 'none' }}>
     <div className="salt-landing-frame" style={{ width: DESIGN_W * scale, height: DESIGN_H * scale }}>
       <section className="salt-landing" style={{ transform: `scale(${scale})` }}>
         <header className="salt-topbar">
