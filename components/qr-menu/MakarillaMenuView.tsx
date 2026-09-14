@@ -1,7 +1,7 @@
 'use client';
 
-import { ArrowLeft, ChevronDown, CreditCard, MapPin, MoreHorizontal, Search, Wifi } from 'lucide-react';
-import { useMemo, useState } from 'react';
+import { ArrowLeft, ChevronDown, CreditCard, MapPin, MoreHorizontal, Wifi } from 'lucide-react';
+import { useState } from 'react';
 import { makarillaRestaurant } from '../../lib/qr-menu/makarilla';
 import './makarilla-menu.css';
 
@@ -26,11 +26,10 @@ const categoryLabels: Record<string, string> = {
 
 export function MakarillaMenuView() {
   const [active, setActive] = useState('pastas');
-  const [query, setQuery] = useState('');
   const categories = makarillaRestaurant.categories
     .filter(c => c.isActive)
     .sort((a, b) => categoryOrder.indexOf(a.id) - categoryOrder.indexOf(b.id));
-  const products = useMemo(() => makarillaRestaurant.products.filter(p => p.isActive && (!query ? p.categoryId === active : `${p.name} ${p.description}`.toLocaleLowerCase('tr').includes(query.toLocaleLowerCase('tr')))), [active, query]);
+  const products = makarillaRestaurant.products.filter(p => p.isActive && p.categoryId === active);
   const activeCategory = categories.find(c => c.id === active);
 
   return <main className="mk-menu-shell">
@@ -41,10 +40,8 @@ export function MakarillaMenuView() {
         <button className="mk-lang">TR <ChevronDown/></button>
       </header>
 
-      <div className="mk-search"><Search/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Ürünler içinde arama yapın" /></div>
-
       <nav className="mk-category-strip" aria-label="Menü kategorileri">
-        {categories.map(category => <button key={category.id} className={active===category.id ? 'active' : ''} onClick={()=>{setActive(category.id);setQuery('')}}>
+        {categories.map(category => <button key={category.id} className={active===category.id ? 'active' : ''} onClick={()=>setActive(category.id)}>
           <span className="mk-category-image"><img src={categoryImages[category.id]} alt="" /></span>
           <span>{categoryLabels[category.id] || category.name}</span>
         </button>)}
@@ -53,15 +50,15 @@ export function MakarillaMenuView() {
       <section className="mk-category-hero">
         <img src={categoryImages[active]} alt={activeCategory?.name || 'Makarilla'} />
         <div className="mk-category-shade"/>
-        <div className="mk-category-title"><small>GERÇEK İTALYAN LEZZETİ</small><h1>{query ? 'Arama Sonuçları' : activeCategory?.name}</h1><p>{query ? `“${query}” için bulunan lezzetler` : 'Taze malzemeler, özel tarifler, keyifli anlar.'}</p></div>
+        <div className="mk-category-title"><small>GERÇEK İTALYAN LEZZETİ</small><h1>{activeCategory?.name}</h1><p>Taze malzemeler, özel tarifler, keyifli anlar.</p></div>
       </section>
 
       <section className="mk-products">
-        <div className="mk-products-heading"><h2>{query ? 'Bulunan Ürünler' : activeCategory?.name}</h2><span>{products.length} ürün</span></div>
+        <div className="mk-products-heading"><h2>{activeCategory?.name}</h2><span>{products.length} ürün</span></div>
         {products.length ? products.map(product => <article className="mk-product" key={product.id}>
           <img src={product.image} alt={product.name}/>
           <div><h3>{product.name}</h3><p>{product.description}</p><strong>₺{product.price}</strong></div>
-        </article>) : <div className="mk-empty">Aramanızla eşleşen ürün bulunamadı.</div>}
+        </article>) : <div className="mk-empty">Bu kategoride henüz ürün bulunmuyor.</div>}
       </section>
 
       <div className="mk-powered">Powered By <b>paneltakip.com</b></div>
