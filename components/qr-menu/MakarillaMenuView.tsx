@@ -17,6 +17,7 @@ const categoryImages: Record<string, string> = {
 const categoryHeroImages: Record<string, string> = {
   pastas: '/makarilla_tabak_v2.png',
   'chicken-pastas': '/tavuklar_banner.png',
+  wraps: '/wrap_banner.png',
 };
 
 const categoryOrder = ['pastas', 'chicken-pastas', 'wraps', 'salads', 'desserts', 'drinks'];
