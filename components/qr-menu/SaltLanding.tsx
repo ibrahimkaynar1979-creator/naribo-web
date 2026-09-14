@@ -28,26 +28,26 @@ type SaltThemeVars = React.CSSProperties & {
 };
 
 const DESIGN_W = 430;
-const DESIGN_H = 932;
+const DESIGN_H = 860;
 
 const SALT_REFERENCE_THEME: SaltThemeVars = {
-  '--salt-bg': '#FCF7F1',
-  '--salt-bg-soft': '#F8F1EB',
-  '--salt-ink': '#141A1F',
-  '--salt-accent': '#EA3038',
-  '--salt-peach-a': '#FFD1B5',
-  '--salt-peach-b': '#FCE6D7',
-  '--salt-sage-a': '#E6ECE7',
-  '--salt-sage-b': '#EFE9DE',
-  '--salt-primary-a': '#FA7B73',
-  '--salt-primary-b': '#E95A5B',
-  '--salt-primary-c': '#D68163',
-  '--salt-warm-a': '#FFFDFC',
-  '--salt-warm-b': '#F7EBE6',
-  '--salt-warm-c': '#F5E2D4',
-  '--salt-cool-a': '#FDFEFE',
-  '--salt-cool-b': '#DDE5E7',
-  '--salt-cool-c': '#BCD6DF',
+  '--salt-bg': '#FCF8F3',
+  '--salt-bg-soft': '#F8F0E9',
+  '--salt-ink': '#151A1E',
+  '--salt-accent': '#EB3038',
+  '--salt-peach-a': '#F8CBAE',
+  '--salt-peach-b': '#F7E4D4',
+  '--salt-sage-a': '#E4EAE5',
+  '--salt-sage-b': '#EEE8DE',
+  '--salt-primary-a': '#F98077',
+  '--salt-primary-b': '#E95A5C',
+  '--salt-primary-c': '#D88465',
+  '--salt-warm-a': '#FFFDFB',
+  '--salt-warm-b': '#F8ECE7',
+  '--salt-warm-c': '#F4E3D5',
+  '--salt-cool-a': '#FBFDFD',
+  '--salt-cool-b': '#E0E8EA',
+  '--salt-cool-c': '#BED8E1',
 };
 
 export function SaltLanding({ restaurant }: { restaurant: QrMenuRestaurant }) {
@@ -60,7 +60,7 @@ export function SaltLanding({ restaurant }: { restaurant: QrMenuRestaurant }) {
   useEffect(() => {
     const fit = () => {
       const vw = window.innerWidth;
-      const vh = window.innerHeight;
+      const vh = window.visualViewport?.height || window.innerHeight;
       setScale(Math.min(vw / DESIGN_W, vh / DESIGN_H, 1));
     };
     fit();
