@@ -28,7 +28,7 @@ type SaltThemeVars = React.CSSProperties & {
 };
 
 const DESIGN_W = 430;
-const DESIGN_H = 860;
+const DESIGN_H = 790;
 
 const SALT_REFERENCE_THEME: SaltThemeVars = {
   '--salt-bg': '#FCF8F3', '--salt-bg-soft': '#F8F0E9', '--salt-ink': '#151A1E', '--salt-accent': '#EB3038',
