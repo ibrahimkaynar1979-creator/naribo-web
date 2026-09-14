@@ -1,10 +1,10 @@
 import type { QrMenuRestaurant } from './types';
 
-const bolognese = 'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?auto=format&fit=crop&w=1200&q=90';
+const bolognese = '/makarilla_tabak.png';
 
 export const makarillaRestaurant: QrMenuRestaurant = {
   id: 'makarilla', slug: 'makarilla', name: 'Makarilla', shortName: 'makarilla', tagline: 'Evde İtalyan Makarnası',
-  logo: '/makarilla-logo.svg', coverImage: bolognese,
+  logo: '/makarilla-logo.png', coverImage: bolognese,
   theme: { accent:'#ED171C', background:'#FBF7F2', surface:'#FFFFFF', text:'#171717', muted:'#807A73', radius:18 },
   branch: { id:'makarilla-karsiyaka', name:'Karşıyaka', address:'Karşıyaka', city:'İzmir', openingHours:'Her gün 11:00 – 23:30' },
   reviewSummary: { rating:4.8, count:312 },
