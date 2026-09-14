@@ -14,6 +14,11 @@ const categoryImages: Record<string, string> = {
   drinks: 'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=500&q=88',
 };
 
+const categoryHeroImages: Record<string, string> = {
+  pastas: '/makarilla_tabak_v2.png',
+  'chicken-pastas': '/tavuklar_banner.png',
+};
+
 const categoryOrder = ['pastas', 'chicken-pastas', 'wraps', 'salads', 'desserts', 'drinks'];
 const categoryLabels: Record<string, string> = {
   pastas: 'Makarnalar',
@@ -31,6 +36,7 @@ export function MakarillaMenuView() {
     .sort((a, b) => categoryOrder.indexOf(a.id) - categoryOrder.indexOf(b.id));
   const products = makarillaRestaurant.products.filter(p => p.isActive && p.categoryId === active);
   const activeCategory = categories.find(c => c.id === active);
+  const heroImage = categoryHeroImages[active] || '/makarilla_tabak_v2.png';
 
   return <main className="mk-menu-shell">
     <div className="mk-menu-page">
@@ -57,7 +63,7 @@ export function MakarillaMenuView() {
           <p>Taze malzemeler,<br/>özel tarifler.</p>
         </div>
         <div className="mk-hero-script">Good<br/>Food<br/>Good<br/>People</div>
-        <img className="mk-hero-plate" src="/makarilla_tabak_v2.png" alt="Makarilla makarna" />
+        <img className="mk-hero-plate" src={heroImage} alt={categoryLabels[active] || 'Makarilla'} />
       </section>
 
       <section className="mk-products">
