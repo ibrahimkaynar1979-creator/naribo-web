@@ -60,9 +60,9 @@ export function SaltLanding({ restaurant }: { restaurant: QrMenuRestaurant }) {
   useEffect(() => {
     const fit = () => {
       const vw = window.innerWidth;
-      const vh = window.visualViewport?.height || window.innerHeight;
-      setScale(Math.min(vw / DESIGN_W, vh / DESIGN_H, 1));
+      setScale(Math.min(vw / DESIGN_W, 1));
     };
+    window.scrollTo(0, 0);
     fit();
     window.addEventListener('resize', fit);
     window.visualViewport?.addEventListener('resize', fit);
