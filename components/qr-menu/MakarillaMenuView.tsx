@@ -25,7 +25,7 @@ export function MakarillaMenuView() {
     <div className="mk-menu-page">
       <header className="mk-menu-header">
         <button className="mk-back" onClick={() => window.location.href='/menu/makarilla'} aria-label="Geri"><ArrowLeft/></button>
-        <img src="/makarilla-logo.png" alt="Makarilla" />
+        <img src="/makarilla-menu-logo.png" alt="Makarilla" />
         <button className="mk-lang">TR <ChevronDown/></button>
       </header>
 
