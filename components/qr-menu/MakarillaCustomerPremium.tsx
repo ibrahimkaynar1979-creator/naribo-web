@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { ChevronRight, Globe2, Menu, Search, BellRing, Wifi, CreditCard, MapPin, Instagram, Star, X } from 'lucide-react';
+import { ChevronRight, Globe2, Menu, Search, BellRing, Wifi, CreditCard, MapPin, Instagram, Star, X, MoreHorizontal } from 'lucide-react';
 import type { QrMenuProduct, QrMenuRestaurant } from '../../lib/qr-menu/types';
 import './makarilla-customer-premium.css';
 
@@ -18,7 +18,6 @@ export function MakarillaCustomerPremium({ restaurant }: { restaurant: QrMenuRes
   const featured = activeProducts.filter(p=>p.isFeatured).slice(0,4);
   const activeCategories = restaurant.categories.filter(c=>c.isActive);
   const vars = {'--menu-accent':restaurant.theme.accent,'--menu-bg':'#071113','--menu-surface':'#0d181b','--menu-text':'#f7f4ee','--menu-muted':'#a7b0ad'} as React.CSSProperties;
-
   const ProductRow=({p,index}:{p:QrMenuProduct,index:number})=><button className="mkc-product" onClick={()=>setSelected(p)}><img src={p.image} alt={p.name}/><div><div className="mkc-name-line"><strong>{p.name}</strong>{index===0&&<em>★ Şefin Özeli</em>}{index===2&&<em className="new">Yeni</em>}</div><p>{p.description}</p></div><b>₺{p.price}</b></button>;
 
   return <main className="mkc-stage" style={vars}><section className="mkc-app">
@@ -31,7 +30,7 @@ export function MakarillaCustomerPremium({ restaurant }: { restaurant: QrMenuRes
       {query||cat!=='all'?<><div className="mkc-section-head"><h2>{query?'Arama Sonuçları':activeCategories.find(c=>c.id===cat)?.name}</h2>{cat!=='all'&&<button onClick={()=>setCat('all')}>Tümü <ChevronRight size={16}/></button>}</div><div className="mkc-product-list">{products.map((p,i)=><ProductRow key={p.id} p={p} index={i}/>)}</div></>:
       <div className="mkc-category-sections">{activeCategories.map(category=>{const list=activeProducts.filter(p=>p.categoryId===category.id).slice(0,4);if(!list.length)return null;return <section className="mkc-category-block" key={category.id}><div className="mkc-section-head"><h2>{category.name}</h2><button onClick={()=>setCat(category.id)}>Tümünü Gör <ChevronRight size={16}/></button></div><div className="mkc-product-list">{list.map((p,i)=><ProductRow key={p.id} p={p} index={i}/>)}</div></section>})}</div>}
     </section>
-    <nav className="mkc-quickbar"><button className="primary"><BellRing/><span>Garson</span></button><button><Wifi/><span>Wi‑Fi</span></button><button><CreditCard/><span>IBAN</span></button><button><MapPin/><span>Yol</span></button><button><Instagram/><span>Instagram</span></button><button><Star/><span>Yorum</span></button></nav>
+    <nav className="mkc-quickbar"><button className="primary"><BellRing/><span>Garson</span></button><button><Wifi/><span>Wi‑Fi</span></button><button><MapPin/><span>Yol Tarifi</span></button><button onClick={()=>setDrawer(true)}><MoreHorizontal/><span>Daha Fazla</span></button></nav>
   </section>
   {selected&&<div className="mkc-modal-backdrop" onClick={()=>setSelected(null)}><article className="mkc-modal" onClick={e=>e.stopPropagation()}><button className="mkc-close" onClick={()=>setSelected(null)}><X/></button><img src={selected.image} alt={selected.name}/><div><small>MAKARILLA</small><h2>{selected.name}</h2><b>₺{selected.price}</b><p>{selected.description}</p>{selected.allergens?.length?<div className="mkc-tags">{selected.allergens.map(a=><span key={a}>{a}</span>)}</div>:null}</div></article></div>}
   {drawer&&<div className="mkc-drawer-backdrop" onClick={()=>setDrawer(false)}><aside className="mkc-drawer" onClick={e=>e.stopPropagation()}><button className="mkc-close" onClick={()=>setDrawer(false)}><X/></button><img src={restaurant.logo} alt={restaurant.name}/><button><BellRing/> Garson Çağır</button><button><Wifi/> Wi‑Fi Bilgileri</button><button><CreditCard/> IBAN</button><button><MapPin/> Yol Tarifi</button><button><Instagram/> Sosyal Medya</button><button><Star/> Yorum Yap</button></aside></div>}
