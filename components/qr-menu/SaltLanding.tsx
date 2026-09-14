@@ -29,7 +29,7 @@ type SaltThemeVars = React.CSSProperties & {
 
 const DESIGN_W = 430;
 const DESIGN_H = 790;
-const FOOTER_H = 58;
+const FOOTER_H = 78;
 const FOOTER_GAP = 0;
 
 const SALT_REFERENCE_THEME: SaltThemeVars = {
