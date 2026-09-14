@@ -51,7 +51,7 @@ export function MakarillaMenuView() {
         <div className="mk-hero-shape mk-hero-shape-peach" />
         <div className="mk-hero-shape mk-hero-shape-sage" />
         <div className="mk-hero-copy">
-          <div className="mk-hero-eyebrow">MAKARILLA MENÜ</div>
+          <div className="mk-hero-eyebrow">GERÇEK İTALYAN LEZZETİ</div>
           <div className="mk-hero-red-line" />
           <h1>{categoryLabels[active] || activeCategory?.name}</h1>
           <p>Taze malzemeler,<br/>özel tarifler.</p>
