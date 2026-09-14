@@ -14,10 +14,22 @@ const categoryImages: Record<string, string> = {
   drinks: 'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=500&q=88',
 };
 
+const categoryOrder = ['pastas', 'chicken-pastas', 'wraps', 'salads', 'desserts', 'drinks'];
+const categoryLabels: Record<string, string> = {
+  pastas: 'Makarnalar',
+  'chicken-pastas': 'Tavuklar',
+  wraps: 'Wraplar',
+  salads: 'Salatalar',
+  desserts: 'Tatlılar',
+  drinks: 'İçecekler',
+};
+
 export function MakarillaMenuView() {
   const [active, setActive] = useState('pastas');
   const [query, setQuery] = useState('');
-  const categories = makarillaRestaurant.categories.filter(c => c.isActive);
+  const categories = makarillaRestaurant.categories
+    .filter(c => c.isActive)
+    .sort((a, b) => categoryOrder.indexOf(a.id) - categoryOrder.indexOf(b.id));
   const products = useMemo(() => makarillaRestaurant.products.filter(p => p.isActive && (!query ? p.categoryId === active : `${p.name} ${p.description}`.toLocaleLowerCase('tr').includes(query.toLocaleLowerCase('tr')))), [active, query]);
   const activeCategory = categories.find(c => c.id === active);
 
@@ -34,7 +46,7 @@ export function MakarillaMenuView() {
       <nav className="mk-category-strip" aria-label="Menü kategorileri">
         {categories.map(category => <button key={category.id} className={active===category.id ? 'active' : ''} onClick={()=>{setActive(category.id);setQuery('')}}>
           <span className="mk-category-image"><img src={categoryImages[category.id]} alt="" /></span>
-          <span>{category.name}</span>
+          <span>{categoryLabels[category.id] || category.name}</span>
         </button>)}
       </nav>
 
