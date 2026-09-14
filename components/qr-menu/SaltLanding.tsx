@@ -125,7 +125,7 @@ export function SaltLanding({ restaurant }: { restaurant: QrMenuRestaurant }) {
           <button className="salt-action salt-action-primary" onClick={openMenu}><span className="salt-action-icon"><Utensils/></span><span className="salt-action-copy"><b>Menüyü Gör</b><small>Tüm lezzetleri keşfedin</small></span><span className="salt-action-arrow">→</span></button>
           <button className="salt-action salt-action-warm" onClick={() => setModal('waiter')}><span className="salt-action-icon"><BellRing/></span><span className="salt-action-copy"><b>Garson Çağır</b><small>Masanıza servis desteği isteyin</small></span><span className="salt-action-arrow">→</span></button>
           <button className="salt-action salt-action-cool" onClick={() => setModal('feedback')}><span className="salt-action-icon"><MessageCircle/></span><span className="salt-action-copy"><b>Geri Bildirim</b><small>Deneyiminizi bizimle paylaşın</small></span><span className="salt-action-arrow">→</span></button>
-          <div className="salt-powered">Powered by <b>paneltakip</b></div>
+          <div className="salt-powered">Powered By <b>paneltakip.com</b></div>
         </section>
 
         {modal && <div className="salt-modal-backdrop"><div className="salt-modal">
