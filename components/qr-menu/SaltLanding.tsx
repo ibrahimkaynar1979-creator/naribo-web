@@ -47,6 +47,7 @@ export function SaltLanding({ restaurant }: { restaurant: QrMenuRestaurant }) {
   const [scale, setScale] = useState(1);
   const hero = restaurant.coverImage || restaurant.products.find(p => p.isFeatured && p.isActive)?.image || restaurant.products.find(p => p.isActive)?.image;
   const isMakarilla = restaurant.slug === 'makarilla';
+  const makarillaPlate = '/makarilla_tabak_v2.png';
 
   useEffect(() => {
     const fit = () => setScale(Math.min(window.innerWidth / DESIGN_W, 1));
@@ -87,7 +88,7 @@ export function SaltLanding({ restaurant }: { restaurant: QrMenuRestaurant }) {
           <div className="salt-dots"><b/><span/><span/></div>
         </section>
 
-        {isMakarilla && hero && <img className="makarilla-pasta-overlay" src={hero} alt={`${restaurant.name} makarna`} />}
+        {isMakarilla && <img className="makarilla-pasta-overlay" src={makarillaPlate} alt={`${restaurant.name} makarna`} />}
 
         <section className="salt-actions">
           <button className="salt-action salt-action-primary" onClick={openMenu}><span className="salt-action-icon"><Utensils/></span><span className="salt-action-copy"><b>Menüyü Gör</b><small>Tüm lezzetleri keşfedin</small></span><span className="salt-action-arrow">→</span></button>
