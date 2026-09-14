@@ -19,37 +19,39 @@ export function QrMenuApp({ restaurant }: { restaurant: QrMenuRestaurant }) {
 function WelcomeGate({restaurant,onMenu,onWaiter,onFeedback}:{restaurant:QrMenuRestaurant;onMenu:()=>void;onWaiter:()=>void;onFeedback:()=>void}){
   const hero = restaurant.coverImage ?? restaurant.products.find(p=>p.isFeatured&&p.isActive)?.image ?? restaurant.products.find(p=>p.isActive)?.image;
   return <div className="qr-entry-screen">
-    <header className="qr-entry-header">
-      <div className="qr-entry-header-brand">
-        {restaurant.logo?<img src={restaurant.logo} alt={`${restaurant.name} logo`}/>:<><strong>{restaurant.shortName}</strong><small>{restaurant.tagline ?? 'RESTAURANT'}</small></>}
-      </div>
-      <button className="qr-entry-lang"><span>🌐</span> TR <b>⌄</b></button>
-    </header>
-
     <section className="qr-entry-hero">
+      <header className="qr-entry-header">
+        <div className="qr-entry-header-brand">
+          {restaurant.logo?<img src={restaurant.logo} alt={`${restaurant.name} logo`}/>:<><strong>{restaurant.shortName}</strong><small>FRIED CHICKEN</small></>}
+        </div>
+        <button className="qr-entry-lang">TR <b>⌄</b></button>
+      </header>
+      <div className="qr-entry-gradient qr-entry-gradient-a"/><div className="qr-entry-gradient qr-entry-gradient-b"/>
       {hero&&<img src={hero} alt={restaurant.name}/>}<div className="qr-entry-hero-shade"/>
       <div className="qr-entry-hero-copy">
-        <small>GERÇEK LEZZET</small>
-        <h1>{restaurant.tagline || 'İyi Tavuk, İyi İnsanlar.'}</h1>
-        <span>Good Food<br/>Good People</span>
+        <small>İYİ TAVUK<br/>İYİ İNSANLAR</small>
+        <i/>
+        <h1>Lezzet<br/>her zaman<br/>daha iyisini<br/>bir araya getirir.</h1>
+        <p>Taze malzemeler,<br/>keyifli anlar.</p>
       </div>
+      <div className="qr-entry-script">Good<br/>Food<br/>Good<br/>People</div>
+      <div className="qr-entry-dots"><b/><span/><span/></div>
     </section>
 
     <section className="qr-entry-panel">
-      <div className="qr-entry-copy"><small>HOŞ GELDİNİZ</small><h2>{restaurant.name}</h2><p>Menümüzü keşfedin, masanıza destek isteyin veya deneyiminizi paylaşın.</p></div>
       <div className="qr-entry-actions">
-        <button className="is-primary" onClick={onMenu}><span className="qr-entry-action-icon"><Utensils size={22}/></span><span className="qr-entry-action-copy"><b>Menüyü Gör</b><small>Tüm lezzetleri keşfedin</small></span><span className="qr-entry-arrow">→</span></button>
-        <button className="is-secondary" onClick={onWaiter}><span className="qr-entry-action-icon waiter"><UserRound size={23}/></span><span className="qr-entry-action-copy"><b>Garson Çağır</b><small>Masanıza servis desteği isteyin</small></span><span className="qr-entry-arrow">→</span></button>
-        <button className="is-secondary" onClick={onFeedback}><span className="qr-entry-action-icon"><MessageCircle size={23}/></span><span className="qr-entry-action-copy"><b>Geri Bildirim</b><small>Deneyiminizi bizimle paylaşın</small></span><span className="qr-entry-arrow">→</span></button>
+        <button className="is-primary" onClick={onMenu}><span className="qr-entry-action-icon"><Utensils size={25}/></span><span className="qr-entry-action-copy"><b>Menüyü Gör</b><small>Tüm lezzetleri keşfedin</small></span><span className="qr-entry-arrow">→</span></button>
+        <button className="is-secondary is-warm" onClick={onWaiter}><span className="qr-entry-action-icon waiter"><BellRing size={24}/></span><span className="qr-entry-action-copy"><b>Garson Çağır</b><small>Masanıza servis desteği isteyin</small></span><span className="qr-entry-arrow">→</span></button>
+        <button className="is-secondary is-cool" onClick={onFeedback}><span className="qr-entry-action-icon"><MessageCircle size={24}/></span><span className="qr-entry-action-copy"><b>Geri Bildirim</b><small>Deneyiminizi bizimle paylaşın</small></span><span className="qr-entry-arrow">→</span></button>
       </div>
       <div className="qr-entry-powered">Powered by <b>paneltakip</b></div>
     </section>
 
     <nav className="qr-entry-bottom-nav">
-      <button className="is-active"><Home size={21}/><span>Ana Sayfa</span></button>
-      <button><Info size={21}/><span>Bilgi</span></button>
-      <button onClick={onFeedback}><MessageCircle size={21}/><span>Yorum Yap</span></button>
-      <button><Clock3 size={21}/><span>Saatler</span></button>
+      <button className="is-active"><Home size={22}/><span>Ana Sayfa</span></button>
+      <button><Info size={22}/><span>Bilgi</span></button>
+      <button onClick={onFeedback}><MessageCircle size={22}/><span>Yorum Yap</span></button>
+      <button><Clock3 size={22}/><span>Saatler</span></button>
     </nav>
   </div>
 }
