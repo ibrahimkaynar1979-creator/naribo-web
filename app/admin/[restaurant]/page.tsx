@@ -1,6 +1,7 @@
 'use client';
 
 import '../../qr-menu/admin/premium-v2.css';
+import './typography.css';
 import { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'next/navigation';
 import {
