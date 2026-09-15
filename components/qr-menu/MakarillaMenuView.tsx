@@ -56,7 +56,7 @@ export function MakarillaMenuView() {
         </button>)}
       </nav>
 
-      <section className="mk-category-hero mk-landing-hero">
+      <section className={`mk-category-hero mk-landing-hero${active === 'wraps' ? ' mk-hero-wraps' : ''}`}>
         <div className="mk-hero-shape mk-hero-shape-peach" />
         <div className="mk-hero-shape mk-hero-shape-sage" />
         <div className="mk-hero-copy">
