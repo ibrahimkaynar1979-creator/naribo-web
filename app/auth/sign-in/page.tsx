@@ -3,21 +3,22 @@
 import { useActionState, useState } from 'react';
 import { signInWithEmail } from './actions';
 import PhoneSignIn from './PhoneSignIn';
+import ForgotPasswordFlow from './ForgotPasswordFlow';
 
 export default function SignIn(){
  const[state,action,pending]=useActionState(signInWithEmail,null);
- const[mode,setMode]=useState<'email'|'phone'>('email');
+ const[mode,setMode]=useState<'email'|'phone'|'forgot'>('email');
  const[showPassword,setShowPassword]=useState(false);
  return <main className="ptAuthPage">
   <section className="ptAuthCard">
    <div className="ptAuthEyebrow">PANELTAKİP · QR MENÜ</div>
-   <h1>Yönetim Paneli</h1>
-   <p className="ptAuthLead">Restoranınızı yönetmek için hesabınızla giriş yapın.</p>
-   <div className="ptAuthTabs">
+   <h1>{mode==='forgot'?'Şifrenizi Oluşturun':'Yönetim Paneli'}</h1>
+   <p className="ptAuthLead">{mode==='forgot'?'İlk girişinizse veya şifrenizi unuttuysanız e-posta adresinizi yazın.':'Restoranınızı yönetmek için hesabınızla giriş yapın.'}</p>
+   {mode!=='forgot'&&<div className="ptAuthTabs">
     <button type="button" className={mode==='email'?'active':''} onClick={()=>setMode('email')}>E-posta</button>
     <button type="button" className={mode==='phone'?'active':''} onClick={()=>setMode('phone')}>Telefon</button>
-   </div>
-   {mode==='email'?<form action={action} className="ptAuthForm">
+   </div>}
+   {mode==='email'&&<form action={action} className="ptAuthForm">
     <label>E-posta<input name="email" type="email" required autoComplete="email" placeholder="ornek@restoran.com"/></label>
     <label>Şifre
      <span className="ptPasswordField">
@@ -27,8 +28,11 @@ export default function SignIn(){
     </label>
     {state?.error&&<p className="ptAuthError">{state.error}</p>}
     <button disabled={pending}>{pending?'Giriş yapılıyor…':'Giriş Yap'}</button>
-   </form>:<PhoneSignIn/>}
-   <p className="ptAuthFoot">Hesaplar PanelTakip tarafından yetkilendirilir.</p>
+    <button type="button" className="ptForgotLink" onClick={()=>setMode('forgot')}>İlk Şifremi Oluştur / Şifremi Unuttum</button>
+   </form>}
+   {mode==='phone'&&<PhoneSignIn/>}
+   {mode==='forgot'&&<ForgotPasswordFlow onBack={()=>setMode('email')}/>}
+   <p className="ptAuthFoot">Kayıt olmanız gerekmez. Hesabınız PanelTakip tarafından oluşturulur.</p>
   </section>
   <style jsx global>{`
    .ptAuthPage{min-height:100vh;display:grid;place-items:center;background:#fbf7f1;padding:24px;font-family:Arial,sans-serif;color:#171717}
@@ -37,7 +41,7 @@ export default function SignIn(){
    .ptAuthTabs{display:grid;grid-template-columns:1fr 1fr;background:#f5eee7;border-radius:12px;padding:4px;margin-bottom:20px}.ptAuthTabs button{height:40px;border:0;border-radius:9px;background:transparent;color:#776c65;font-weight:800;cursor:pointer}.ptAuthTabs button.active{background:#fff;color:#171717;box-shadow:0 2px 8px rgba(80,55,40,.08)}
    .ptAuthForm{display:grid;gap:15px}.ptAuthForm label{display:grid;gap:7px;font-size:13px;font-weight:800}.ptAuthForm input{height:48px;border:1px solid #e7dcd3;border-radius:12px;padding:0 14px;font-size:15px;background:#fff;outline:none}.ptAuthForm input:focus{border-color:#f46861;box-shadow:0 0 0 3px rgba(244,104,97,.1)}
    .ptPasswordField{position:relative;display:block}.ptPasswordField input{width:100%;box-sizing:border-box;padding-right:72px}.ptPasswordToggle{position:absolute;right:8px;top:50%;transform:translateY(-50%);height:32px;padding:0 9px;border:0;border-radius:8px;background:#f5eee7;color:#665d57;font-size:11px;font-weight:900;cursor:pointer}
-   .ptAuthForm>button:not(.ptLinkButton){width:100%;height:49px;border:0;border-radius:12px;background:#f46861;color:#fff;font-size:14px;font-weight:900;cursor:pointer}.ptAuthForm>button:disabled{opacity:.55;cursor:wait}.ptAuthForm small{font-size:11px;color:#8a817b;text-align:center}.ptAuthError{background:#fff0ee;color:#b83d37;padding:11px;border-radius:10px;font-size:13px;font-weight:700;margin:0}.ptSent{background:#f4f8f1;padding:12px;border-radius:11px;font-size:12px;color:#55644e}.ptLinkButton{border:0;background:transparent;color:#d9554e;font-weight:800;cursor:pointer}.ptAuthFoot{font-size:11px;color:#8a817b;text-align:center;margin:18px 0 0}
+   .ptAuthForm>button:not(.ptLinkButton):not(.ptForgotLink){width:100%;height:49px;border:0;border-radius:12px;background:#f46861;color:#fff;font-size:14px;font-weight:900;cursor:pointer}.ptAuthForm>button:disabled{opacity:.55;cursor:wait}.ptAuthError{background:#fff0ee;color:#b83d37;padding:11px;border-radius:10px;font-size:13px;font-weight:700;margin:0}.ptAuthSuccess{background:#eef7ef;color:#35633d;padding:11px;border-radius:10px;font-size:12px;font-weight:700;margin:0;line-height:1.45}.ptForgotLink{border:0;background:transparent;color:#d9554e;font-size:12px;font-weight:900;cursor:pointer;text-align:center;padding:1px 0}.ptSent{background:#f4f8f1;padding:12px;border-radius:11px;font-size:12px;color:#55644e}.ptLinkButton{border:0;background:transparent;color:#d9554e;font-weight:800;cursor:pointer}.ptAuthFoot{font-size:11px;color:#8a817b;text-align:center;margin:18px 0 0;line-height:1.45}
   `}</style>
  </main>
 }
