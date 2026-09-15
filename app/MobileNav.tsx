@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 
 const links = [
@@ -14,6 +15,8 @@ const links = [
 
 export default function MobileNav(){
   const [open,setOpen]=useState(false);
+  const pathname=usePathname();
+  if(pathname?.startsWith('/menu/')) return null;
   return <>
     <button className="mobileMenuLive" aria-label={open ? 'Menüyü kapat' : 'Menüyü aç'} aria-expanded={open} onClick={()=>setOpen(v=>!v)}>{open?<X size={22}/>:<Menu size={22}/>}</button>
     {open&&<div className="mobileNavPanel" role="dialog" aria-label="Mobil menü">

@@ -1,0 +1,106 @@
+/* Approved PanelTakip QR Menu home-screen proportions */
+@media (min-width: 431px) {
+  .app .phone { width: min(100%, 390px) !important; }
+}
+
+.app .hero {
+  height: 238px !important;
+}
+
+.app .heroContent {
+  padding: 15px 13px !important;
+}
+
+.app .saltLogo {
+  width: 52px !important;
+  height: 52px !important;
+  font-size: 12px !important;
+  margin-bottom: 7px !important;
+}
+
+.app .hero h1 {
+  font-size: 20px !important;
+  line-height: 1.02 !important;
+  margin-bottom: 4px !important;
+}
+
+.app .hero p {
+  font-size: 10px !important;
+  line-height: 1.3 !important;
+}
+
+.app .cats {
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 7px !important;
+  padding: 8px 11px 4px !important;
+}
+
+.app .catThumb {
+  height: 51px !important;
+  border-radius: 10px !important;
+  margin-bottom: 3px !important;
+}
+
+.app .catBtn {
+  font-size: 9.5px !important;
+}
+
+.app .section {
+  padding: 6px 12px 10px !important;
+}
+
+.app .secHead {
+  margin-bottom: 6px !important;
+}
+
+.app .secHead h2 {
+  font-size: 17px !important;
+  line-height: 1.1 !important;
+  letter-spacing: -0.25px !important;
+}
+
+.app .secHead button {
+  font-size: 9.5px !important;
+}
+
+.app .featureGrid {
+  gap: 7px !important;
+}
+
+.app .featureCard {
+  border-radius: 12px !important;
+}
+
+.app .featureCard img {
+  height: 94px !important;
+}
+
+.app .featureText {
+  padding: 7px 8px !important;
+}
+
+.app .featureText b {
+  font-size: 11px !important;
+  line-height: 1.2 !important;
+}
+
+.app .featureText span {
+  font-size: 11px !important;
+}
+
+.app .powered {
+  padding: 4px 0 6px !important;
+}
+
+.app .bottom {
+  height: 56px !important;
+}
+
+.app .bottom button {
+  font-size: 8.8px !important;
+  gap: 3px !important;
+}
+
+.app .phone {
+  padding-bottom: 60px !important;
+}
