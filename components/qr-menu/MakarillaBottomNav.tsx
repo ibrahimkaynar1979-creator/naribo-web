@@ -25,7 +25,7 @@ export function MakarillaBottomNav() {
       <button onClick={() => setSheet('wifi')}><Wifi/><span>Wi-Fi</span></button>
       <button onClick={() => setSheet('iban')}><CreditCard/><span>IBAN</span></button>
       <button className="mk-waiter-button" onClick={() => setSheet('waiter')}><span className="mk-waiter-icon"><Bell/></span><span>Garson Çağır</span></button>
-      <button onClick={() => setSheet('directions')}><MapPin/><span>Yol Tarifi</span></button>
+      <button onClick={() => setSheet('feedback')}><MessageCircle/><span>Geri Bildirim</span></button>
       <button onClick={() => setSheet('more')}><MoreHorizontal/><span>Daha Fazla</span></button>
     </nav>
 
@@ -73,7 +73,7 @@ export function MakarillaBottomNav() {
           <div className="mk-sheet-icon"><MoreHorizontal/></div>
           <h3>Daha Fazla</h3>
           <div className="mk-more-grid">
-            <button onClick={() => setSheet('feedback')}><MessageCircle/><span>Geri Bildirim</span></button>
+            <button onClick={() => setSheet('directions')}><MapPin/><span>Yol Tarifi</span></button>
             <button><Instagram/><span>Instagram</span></button>
             <button><Phone/><span>İletişim</span></button>
           </div>
