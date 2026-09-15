@@ -4,7 +4,6 @@ import { ArrowLeft, ChevronDown } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 import { makarillaRestaurant } from '../../lib/qr-menu/makarilla';
 import type { QrMenuProduct } from '../../lib/qr-menu/types';
-import { readMakarillaMenuDraft } from '../../lib/qr-menu/client-store';
 import { MakarillaBottomNav } from './MakarillaBottomNav';
 import './makarilla-menu.css';
 
@@ -18,7 +17,7 @@ export function MakarillaMenuView({initialCategory}:{initialCategory?:string}){
   const safeInitialCategory=initialCategory&&categoryOrder.includes(initialCategory)?initialCategory:'pastas';
   const [active,setActive]=useState(safeInitialCategory);
   const [menuProducts,setMenuProducts]=useState<QrMenuProduct[]>(makarillaRestaurant.products);
-  useEffect(()=>{const load=()=>{const draft=readMakarillaMenuDraft();setMenuProducts(draft?.products||makarillaRestaurant.products)};load();window.addEventListener('makarilla-menu-updated',load);window.addEventListener('storage',load);return()=>{window.removeEventListener('makarilla-menu-updated',load);window.removeEventListener('storage',load)}},[]);
+  useEffect(()=>{let cancelled=false;fetch('/api/qr-menu/makarilla',{cache:'no-store'}).then(r=>r.ok?r.json():Promise.reject()).then(data=>{if(!cancelled&&Array.isArray(data.products))setMenuProducts(data.products)}).catch(()=>{});return()=>{cancelled=true}},[]);
   const categories=useMemo(()=>makarillaRestaurant.categories.filter(c=>c.isActive).sort((a,b)=>categoryOrder.indexOf(a.id)-categoryOrder.indexOf(b.id)),[]);
   const products=menuProducts.filter(p=>p.isActive&&p.categoryId===active).sort((a,b)=>a.sortOrder-b.sortOrder);
   const activeCategory=categories.find(c=>c.id===active);const heroImage=categoryHeroImages[active]||'/makarilla_tabak_v2.png';const activeLabel=categoryLabels[active]||activeCategory?.name;const activeSlogan=categorySlogans[active]||'İyi malzeme. İyi tarif. İyi lezzet.';
