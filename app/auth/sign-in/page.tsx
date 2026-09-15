@@ -1,20 +1,36 @@
 'use client';
 
-import { useActionState } from 'react';
+import { useActionState, useState } from 'react';
 import { signInWithEmail } from './actions';
+import PhoneSignIn from './PhoneSignIn';
 
 export default function SignIn(){
  const[state,action,pending]=useActionState(signInWithEmail,null);
- return <main style={{minHeight:'100vh',display:'grid',placeItems:'center',background:'#fbf7f1',padding:24,fontFamily:'Arial,sans-serif'}}>
-  <form action={action} style={{width:'min(420px,100%)',background:'#fffdf9',border:'1px solid #ece4da',borderRadius:24,padding:34,boxShadow:'0 18px 60px rgba(91,61,44,.08)'}}>
-   <div style={{fontSize:12,fontWeight:800,color:'#e84f4a',letterSpacing:1.2}}>PANELTAKİP · QR MENÜ</div>
-   <h1 style={{fontFamily:'Georgia,serif',fontSize:34,margin:'10px 0 8px',color:'#171717'}}>Yönetim Paneli</h1>
-   <p style={{fontSize:14,fontWeight:600,lineHeight:1.5,color:'#747474',margin:'0 0 26px'}}>Restoranınızı yönetmek için hesabınızla giriş yapın.</p>
-   <label style={{display:'grid',gap:7,fontSize:13,fontWeight:800,marginBottom:16}}>E-posta<input name="email" type="email" required autoComplete="email" style={{height:48,border:'1px solid #e7dcd3',borderRadius:12,padding:'0 14px',fontSize:15}}/></label>
-   <label style={{display:'grid',gap:7,fontSize:13,fontWeight:800,marginBottom:18}}>Şifre<input name="password" type="password" required autoComplete="current-password" style={{height:48,border:'1px solid #e7dcd3',borderRadius:12,padding:'0 14px',fontSize:15}}/></label>
-   {state?.error&&<div style={{background:'#fff0ee',color:'#b83d37',padding:11,borderRadius:10,fontSize:13,fontWeight:700,marginBottom:14}}>{state.error}</div>}
-   <button disabled={pending} style={{width:'100%',height:49,border:0,borderRadius:12,background:'#f46861',color:'#fff',fontSize:14,fontWeight:800,cursor:'pointer'}}>{pending?'Giriş yapılıyor…':'Giriş Yap'}</button>
-   <p style={{fontSize:11,color:'#8a817b',textAlign:'center',margin:'18px 0 0'}}>Hesaplar PanelTakip tarafından yetkilendirilir.</p>
-  </form>
+ const[mode,setMode]=useState<'email'|'phone'>('email');
+ return <main className="ptAuthPage">
+  <section className="ptAuthCard">
+   <div className="ptAuthEyebrow">PANELTAKİP · QR MENÜ</div>
+   <h1>Yönetim Paneli</h1>
+   <p className="ptAuthLead">Restoranınızı yönetmek için hesabınızla giriş yapın.</p>
+   <div className="ptAuthTabs">
+    <button type="button" className={mode==='email'?'active':''} onClick={()=>setMode('email')}>E-posta</button>
+    <button type="button" className={mode==='phone'?'active':''} onClick={()=>setMode('phone')}>Telefon</button>
+   </div>
+   {mode==='email'?<form action={action} className="ptAuthForm">
+    <label>E-posta<input name="email" type="email" required autoComplete="email" placeholder="ornek@restoran.com"/></label>
+    <label>Şifre<input name="password" type="password" required autoComplete="current-password" placeholder="••••••••"/></label>
+    {state?.error&&<p className="ptAuthError">{state.error}</p>}
+    <button disabled={pending}>{pending?'Giriş yapılıyor…':'Giriş Yap'}</button>
+   </form>:<PhoneSignIn/>}
+   <p className="ptAuthFoot">Hesaplar PanelTakip tarafından yetkilendirilir.</p>
+  </section>
+  <style jsx global>{`
+   .ptAuthPage{min-height:100vh;display:grid;place-items:center;background:#fbf7f1;padding:24px;font-family:Arial,sans-serif;color:#171717}
+   .ptAuthCard{width:min(430px,100%);background:#fffdf9;border:1px solid #ece4da;border-radius:24px;padding:34px;box-shadow:0 18px 60px rgba(91,61,44,.08)}
+   .ptAuthEyebrow{font-size:12px;font-weight:900;color:#e84f4a;letter-spacing:1.2px}.ptAuthCard h1{font-family:Georgia,serif;font-size:34px;margin:10px 0 8px}.ptAuthLead{font-size:14px;font-weight:600;line-height:1.5;color:#747474;margin:0 0 22px}
+   .ptAuthTabs{display:grid;grid-template-columns:1fr 1fr;background:#f5eee7;border-radius:12px;padding:4px;margin-bottom:20px}.ptAuthTabs button{height:40px;border:0;border-radius:9px;background:transparent;color:#776c65;font-weight:800;cursor:pointer}.ptAuthTabs button.active{background:#fff;color:#171717;box-shadow:0 2px 8px rgba(80,55,40,.08)}
+   .ptAuthForm{display:grid;gap:15px}.ptAuthForm label{display:grid;gap:7px;font-size:13px;font-weight:800}.ptAuthForm input{height:48px;border:1px solid #e7dcd3;border-radius:12px;padding:0 14px;font-size:15px;background:#fff;outline:none}.ptAuthForm input:focus{border-color:#f46861;box-shadow:0 0 0 3px rgba(244,104,97,.1)}
+   .ptAuthForm>button:not(.ptLinkButton){width:100%;height:49px;border:0;border-radius:12px;background:#f46861;color:#fff;font-size:14px;font-weight:900;cursor:pointer}.ptAuthForm>button:disabled{opacity:.55;cursor:wait}.ptAuthForm small{font-size:11px;color:#8a817b;text-align:center}.ptAuthError{background:#fff0ee;color:#b83d37;padding:11px;border-radius:10px;font-size:13px;font-weight:700;margin:0}.ptSent{background:#f4f8f1;padding:12px;border-radius:11px;font-size:12px;color:#55644e}.ptLinkButton{border:0;background:transparent;color:#d9554e;font-weight:800;cursor:pointer}.ptAuthFoot{font-size:11px;color:#8a817b;text-align:center;margin:18px 0 0}
+  `}</style>
  </main>
 }
