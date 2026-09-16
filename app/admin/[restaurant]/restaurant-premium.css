@@ -1,0 +1,44 @@
+/* Approved Restoran Bilgileri screen */
+.qrAdminPremium:has(.qaFormCards) .qaMain{background:linear-gradient(180deg,#fffdf9 0%,#fff8f2 100%)}
+.qrAdminPremium:has(.qaFormCards) .qaPage{max-width:none!important;position:relative;padding-bottom:116px}
+.qrAdminPremium:has(.qaFormCards) .qaTitleRow{position:relative;padding:6px 0 20px;margin-bottom:8px;overflow:visible;align-items:center}
+.qrAdminPremium:has(.qaFormCards) .qaTitleRow:before{content:'RESTORAN YÖNETİMİ';position:absolute;left:0;top:-10px;font-size:11px;font-weight:900;letter-spacing:1.7px;color:#93a0aa}
+.qrAdminPremium:has(.qaFormCards) .qaTitleRow:after{content:'';position:absolute;right:-28px;top:-58px;width:440px;height:185px;border-radius:0 0 0 240px;background:radial-gradient(circle at 72% 30%,#ffe0cf 0,#ffd8c5 42%,#ffeadf 72%,transparent 73%);opacity:.78;z-index:0;pointer-events:none}
+.qrAdminPremium:has(.qaFormCards) .qaTitleRow>div,.qrAdminPremium:has(.qaFormCards) .qaTitleRow>.qaAdd{position:relative;z-index:1}
+.qrAdminPremium:has(.qaFormCards) .qaTitleRow h1{font-family:Arial,sans-serif!important;font-size:48px!important;line-height:1!important;font-weight:950!important;letter-spacing:-2.4px;color:#111922;margin:12px 0 0}
+.qrAdminPremium:has(.qaFormCards) .qaTitleRow p{font-size:16px!important;line-height:1.35!important;font-weight:750!important;color:#677684;margin:10px 0 0!important}
+.qrAdminPremium:has(.qaFormCards) .qaTitleRow .qaAdd{height:50px;border-radius:14px;padding:0 20px;background:#fffefd;color:#ef4e48;border:1px solid #f0dfd6;box-shadow:0 10px 24px rgba(88,58,42,.06);font-size:13px!important;font-weight:900!important}
+.qrAdminPremium:has(.qaFormCards) .qaTitleRow .qaAdd:before{content:'Önizlemeyi Gör';margin-right:8px}
+.qrAdminPremium:has(.qaFormCards) .qaTitleRow .qaAdd svg{display:none}
+
+.qrAdminPremium:has(.qaFormCards) .qaFormCards{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(310px,.9fr);gap:18px;align-items:start}
+.qrAdminPremium:has(.qaFormCards) .qaManageCard{border:1px solid #eee2d9;border-radius:18px;background:#fffefd;box-shadow:0 12px 32px rgba(91,61,44,.045);padding:22px}
+.qrAdminPremium:has(.qaFormCards) .qaManageCard h2{font-family:Arial,sans-serif;font-size:17px!important;font-weight:900!important;color:#17202a;margin:0 0 18px;padding-left:34px;position:relative}
+.qrAdminPremium:has(.qaFormCards) .qaManageCard h2:before{content:'▣';position:absolute;left:0;top:-2px;width:24px;height:24px;border-radius:8px;background:#fff0ea;color:#ff5f58;display:grid;place-items:center;font-size:13px}
+
+/* Left identity card */
+.qrAdminPremium:has(.qaFormCards) .qaManageCard:first-child{display:grid;grid-template-columns:1fr 1fr;gap:0 16px;position:relative;padding-top:22px}
+.qrAdminPremium:has(.qaFormCards) .qaManageCard:first-child h2{grid-column:1/-1}
+.qrAdminPremium:has(.qaFormCards) .qaManageCard:first-child label{margin-bottom:14px;font-size:11px!important;font-weight:850!important;color:#5d6974;gap:7px}
+.qrAdminPremium:has(.qaFormCards) .qaManageCard:first-child label:nth-of-type(1),.qrAdminPremium:has(.qaFormCards) .qaManageCard:first-child label:nth-of-type(2){grid-column:1/-1}
+.qrAdminPremium:has(.qaFormCards) .qaManageCard:first-child label:nth-of-type(2) input{height:72px}
+.qrAdminPremium:has(.qaFormCards) .qaManageCard:first-child label:nth-of-type(3),.qrAdminPremium:has(.qaFormCards) .qaManageCard:first-child label:nth-of-type(4),.qrAdminPremium:has(.qaFormCards) .qaManageCard:first-child label:nth-of-type(5),.qrAdminPremium:has(.qaFormCards) .qaManageCard:first-child label:nth-of-type(6){grid-column:auto}
+.qrAdminPremium:has(.qaFormCards) .qaManageCard input{height:46px;border:1px solid #e7ddd6;border-radius:11px;background:#fff;padding:0 13px;font-size:13px!important;font-weight:700!important;color:#26323d;box-shadow:inset 0 1px 0 rgba(255,255,255,.6)}
+.qrAdminPremium:has(.qaFormCards) .qaManageCard input:focus{border-color:#ff9b8d;box-shadow:0 0 0 3px rgba(255,99,91,.08)}
+
+/* Right media/settings card */
+.qrAdminPremium:has(.qaFormCards) .qaManageCard:nth-child(2){position:relative;padding-top:22px;overflow:hidden}
+.qrAdminPremium:has(.qaFormCards) .qaManageCard:nth-child(2):before{content:'Restoran Durumu\A\A●  Aktif\A\ARestoranınız yayında ve misafirleriniz tarafından görüntüleniyor.\A\A👁  QR Menünü Görüntüle';white-space:pre-wrap;display:block;margin:-2px 0 18px;padding:18px;border:1px solid #efe0d7;border-radius:15px;background:linear-gradient(180deg,#fffaf7,#fff3ed);color:#4f5d67;font-size:12px;line-height:1.55;font-weight:750}
+.qrAdminPremium:has(.qaFormCards) .qaManageCard:nth-child(2) h2{margin-top:4px}
+.qrAdminPremium:has(.qaFormCards) .qaManageCard:nth-child(2) label{font-size:11px!important;font-weight:850!important;color:#5f6b76;margin-bottom:13px}
+.qrAdminPremium:has(.qaFormCards) .qaManageCard:nth-child(2) label:nth-of-type(4),.qrAdminPremium:has(.qaFormCards) .qaManageCard:nth-child(2) label:nth-of-type(5){position:relative;padding:14px;border:1px solid #eee1d8;border-radius:15px;background:#fffaf7}
+.qrAdminPremium:has(.qaFormCards) .qaManageCard:nth-child(2) label:nth-of-type(4):before{content:'Restoran Logosu';display:block;font-size:15px;font-weight:900;color:#16202a;margin-bottom:10px}
+.qrAdminPremium:has(.qaFormCards) .qaManageCard:nth-child(2) label:nth-of-type(5):before{content:'Restoran Görseli';display:block;font-size:15px;font-weight:900;color:#16202a;margin-bottom:10px}
+.qrAdminPremium:has(.qaFormCards) .qaManageCard:nth-child(2):after{content:'💡  İpuçları\A\A✓ Restoran açıklamanızı kısa ve etkileyici yazın.\A✓ Çalışma saatlerinizi güncel tutun.\A✓ Sosyal medya hesaplarınızı ekleyin.\A✓ Restoran görsellerinizin kaliteli ve güncel olmasına dikkat edin.';white-space:pre-wrap;display:block;margin-top:18px;padding:18px;border:1px solid #efe0d7;border-radius:15px;background:linear-gradient(180deg,#fffdfb,#fff7f1);font-size:12px;line-height:1.75;font-weight:750;color:#596772}
+.qrAdminPremium:has(.qaFormCards) .qaManageCard:nth-child(2) input[type=color]{width:88px;height:46px;padding:5px;border-radius:12px}
+
+.qrAdminPremium:has(.qaFormCards) .qaPage:after{content:'Lezzet dijitalde daha yakın.     QR menünüz her zaman açık, her zaman sizinle.                                          QR Menünü Görüntüle   ↗     ▣';position:absolute;left:0;right:0;bottom:0;min-height:94px;border-radius:18px;background:linear-gradient(100deg,#ff5f59 0%,#ff806b 62%,#efc3aa 100%);display:flex;align-items:center;padding:0 26px;color:#fff;font-size:14px;font-weight:850;white-space:pre-wrap;box-shadow:0 16px 34px rgba(242,71,67,.12)}
+.qrAdminPremium:has(.qaFormCards) .qaSide button.active{background:linear-gradient(90deg,#fff1e8,#fff8f3);color:#f0443e;border:1px solid #ffd8c8}
+
+@media(max-width:1050px){.qrAdminPremium:has(.qaFormCards) .qaFormCards{grid-template-columns:1fr}.qrAdminPremium:has(.qaFormCards) .qaTitleRow h1{font-size:42px!important}.qrAdminPremium:has(.qaFormCards) .qaManageCard:first-child{grid-template-columns:1fr 1fr}}
+@media(max-width:720px){.qrAdminPremium:has(.qaFormCards) .qaTitleRow{align-items:flex-start;gap:14px}.qrAdminPremium:has(.qaFormCards) .qaTitleRow:after{display:none}.qrAdminPremium:has(.qaFormCards) .qaTitleRow h1{font-size:36px!important}.qrAdminPremium:has(.qaFormCards) .qaTitleRow p{font-size:14px!important}.qrAdminPremium:has(.qaFormCards) .qaFormCards{display:block}.qrAdminPremium:has(.qaFormCards) .qaManageCard{margin-bottom:14px;padding:16px}.qrAdminPremium:has(.qaFormCards) .qaManageCard:first-child{display:block}.qrAdminPremium:has(.qaFormCards) .qaPage:after{font-size:12px;min-height:86px;padding:14px;white-space:normal}}
