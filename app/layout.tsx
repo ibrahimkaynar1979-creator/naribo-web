@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import MobileNav from './MobileNav';
 import HeroPlatformDrop from './HeroPlatformDrop';
 import AdminImageUploadEnhancer from './AdminImageUploadEnhancer';
+import AdminFeedbackEnhancer from './AdminFeedbackEnhancer';
 import './globals.css';
 import './mobile-overrides.css';
 import './hero-mobile.css';
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="tr">
-      <body>{children}<AdminImageUploadEnhancer/><HeroPlatformDrop/><MobileNav/></body>
+      <body>{children}<AdminImageUploadEnhancer/><AdminFeedbackEnhancer/><HeroPlatformDrop/><MobileNav/></body>
     </html>
   );
 }
