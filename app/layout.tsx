@@ -5,6 +5,7 @@ import AdminImageUploadEnhancer from './AdminImageUploadEnhancer';
 import AdminFeedbackEnhancer from './AdminFeedbackEnhancer';
 import AdminStatsEnhancer from './AdminStatsEnhancer';
 import AdminSettingsEnhancer from './AdminSettingsEnhancer';
+import AdminLiveCalls from './AdminLiveCalls';
 import './globals.css';
 import './mobile-overrides.css';
 import './hero-mobile.css';
@@ -27,7 +28,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="tr">
-      <body>{children}<AdminImageUploadEnhancer/><AdminFeedbackEnhancer/><AdminStatsEnhancer/><AdminSettingsEnhancer/><HeroPlatformDrop/><MobileNav/></body>
+      <body>{children}<AdminImageUploadEnhancer/><AdminFeedbackEnhancer/><AdminStatsEnhancer/><AdminSettingsEnhancer/><AdminLiveCalls/><HeroPlatformDrop/><MobileNav/></body>
     </html>
   );
 }
