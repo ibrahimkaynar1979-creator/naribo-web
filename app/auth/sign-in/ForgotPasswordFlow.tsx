@@ -13,10 +13,10 @@ export default function ForgotPasswordFlow({onBack}:{onBack:()=>void}){
   const form=new FormData(e.currentTarget);
   const email=String(form.get('email')||'').trim();
   if(!email){setError('E-posta adresinizi yazın.');setBusy(false);return}
-  const redirectTo=`${window.location.origin}/auth/sign-in`;
+  const redirectTo=`${window.location.origin}/auth/reset-password`;
   const {error:authError}=await authClient.requestPasswordReset({email,redirectTo});
   if(authError)setError(authError.message||'Şifre oluşturma bağlantısı gönderilemedi.');
-  else setNotice('E-postanıza şifre oluşturma bağlantısı gönderdik. Bağlantı 15 dakika geçerlidir.');
+  else setNotice('E-postanıza şifre oluşturma bağlantısı gönderdik. Gelen bağlantıdan yeni şifrenizi belirleyebilirsiniz.');
   setBusy(false);
  }
  return <form className="ptAuthForm" onSubmit={submit}>
