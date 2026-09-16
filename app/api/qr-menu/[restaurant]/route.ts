@@ -18,7 +18,27 @@ export async function GET(_r:NextRequest,{params}:Context){
 }
 
 export async function PUT(request:NextRequest,{params}:Context){
- try{const{restaurant}=await params;const slug=slugify(restaurant);const access=await requireAccess(slug);if(!access)return NextResponse.json({error:'Yetkisiz erişim'},{status:403});const body=await request.json() as {products?:ProductInput[]};if(!Array.isArray(body.products))return NextResponse.json({error:'Geçersiz veri'},{status:400});const sql=getQrMenuDb();const r=await getRestaurant(sql,slug);if(!r)return NextResponse.json({error:'Restoran bulunamadı'},{status:404});const rid=r.id;const cr=await sql`SELECT id FROM categories WHERE restaurant_id=${rid}`;const valid=new Set((cr as any[]).map(c=>String(c.id)));const ids=new Set(body.products.map(p=>p.id).filter((id):id is string=>Boolean(id&&/^\d+$/.test(id))));const ex=await sql`SELECT id FROM products WHERE restaurant_id=${rid}`;for(const row of ex as any[])if(!ids.has(String(row.id)))await sql`DELETE FROM products WHERE id=${row.id} AND restaurant_id=${rid}`;for(const p of body.products){if(!valid.has(String(p.categoryId))||!p.name?.trim())continue;const cid=Number(p.categoryId),a=(p.allergens||[]).map(x=>x.trim()).filter(Boolean).join(',');if(p.id&&/^\d+$/.test(p.id))await sql`UPDATE products SET category_id=${cid},name=${p.name.trim()},description=${p.description||''},price=${Number(p.price)||0},image_url=${p.image||''},allergens=CASE WHEN ${a}='' THEN ARRAY[]::text[] ELSE string_to_array(${a}, ',') END,is_active=${p.isActive},sort_order=${p.sortOrder||0},updated_at=now() WHERE id=${Number(p.id)} AND restaurant_id=${rid}`;else await sql`INSERT INTO products (restaurant_id,category_id,name,description,price,image_url,allergens,is_active,is_featured,sort_order) VALUES (${rid},${cid},${p.name.trim()},${p.description||''},${Number(p.price)||0},${p.image||''},CASE WHEN ${a}='' THEN ARRAY[]::text[] ELSE string_to_array(${a}, ',') END,${p.isActive},false,${p.sortOrder||0})`}return NextResponse.json({ok:true})}catch(e){console.error(e);return NextResponse.json({error:'Menü kaydedilemedi'},{status:500})}
+ try{
+  const{restaurant}=await params;const slug=slugify(restaurant);const access=await requireAccess(slug);if(!access)return NextResponse.json({error:'Yetkisiz erişim'},{status:403});
+  const body=await request.json() as {products?:ProductInput[]};if(!Array.isArray(body.products))return NextResponse.json({error:'Geçersiz veri'},{status:400});
+  const sql=getQrMenuDb();const r=await getRestaurant(sql,slug);if(!r)return NextResponse.json({error:'Restoran bulunamadı'},{status:404});const rid=r.id;
+  const cr=await sql`SELECT id FROM categories WHERE restaurant_id=${rid}`;const validCategories=new Set((cr as any[]).map(c=>String(c.id)));
+  const existingRows=await sql`SELECT id FROM products WHERE restaurant_id=${rid}`;const existingIds=new Set((existingRows as any[]).map(x=>String(x.id)));
+  for(const p of body.products){
+   if(!validCategories.has(String(p.categoryId)))return NextResponse.json({error:`${p.name||'Ürün'} için geçerli bir kategori seçin.`},{status:400});
+   if(!p.name?.trim())return NextResponse.json({error:'Ürün adı boş bırakılamaz.'},{status:400});
+   if(!Number.isFinite(Number(p.price))||Number(p.price)<0)return NextResponse.json({error:`${p.name} için fiyat geçersiz.`},{status:400});
+   if(p.id&&/^\d+$/.test(p.id)&&!existingIds.has(p.id))return NextResponse.json({error:'Ürün kaydı bu restorana ait değil.'},{status:403});
+  }
+  const incomingIds=new Set(body.products.map(p=>p.id).filter((id):id is string=>Boolean(id&&/^\d+$/.test(id))));
+  for(const row of existingRows as any[])if(!incomingIds.has(String(row.id)))await sql`DELETE FROM products WHERE id=${row.id} AND restaurant_id=${rid}`;
+  for(let index=0;index<body.products.length;index++){
+   const p=body.products[index];const cid=Number(p.categoryId);const allergens=(p.allergens||[]).map(x=>String(x).trim()).filter(Boolean).slice(0,20).join(',');const sortOrder=Number.isFinite(Number(p.sortOrder))?Number(p.sortOrder):index+1;
+   if(p.id&&/^\d+$/.test(p.id))await sql`UPDATE products SET category_id=${cid},name=${p.name.trim().slice(0,160)},description=${String(p.description||'').slice(0,2000)},price=${Number(p.price)},image_url=${String(p.image||'').slice(0,4000)},allergens=CASE WHEN ${allergens}='' THEN ARRAY[]::text[] ELSE string_to_array(${allergens}, ',') END,is_active=${p.isActive!==false},sort_order=${sortOrder},updated_at=now() WHERE id=${Number(p.id)} AND restaurant_id=${rid}`;
+   else await sql`INSERT INTO products (restaurant_id,category_id,name,description,price,image_url,allergens,is_active,is_featured,sort_order) VALUES (${rid},${cid},${p.name.trim().slice(0,160)},${String(p.description||'').slice(0,2000)},${Number(p.price)},${String(p.image||'').slice(0,4000)},CASE WHEN ${allergens}='' THEN ARRAY[]::text[] ELSE string_to_array(${allergens}, ',') END,${p.isActive!==false},false,${sortOrder})`;
+  }
+  return NextResponse.json({ok:true});
+ }catch(e){console.error(e);return NextResponse.json({error:'Menü kaydedilemedi'},{status:500})}
 }
 
 export async function PATCH(request:NextRequest,{params}:Context){
