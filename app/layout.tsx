@@ -7,12 +7,14 @@ import AdminStatsEnhancer from './AdminStatsEnhancer';
 import AdminSettingsEnhancer from './AdminSettingsEnhancer';
 import AdminLiveCalls from './AdminLiveCalls';
 import AdminLiveFeedback from './AdminLiveFeedback';
+import AdminCategoryOrderEnhancer from './AdminCategoryOrderEnhancer';
 import './globals.css';
 import './mobile-overrides.css';
 import './hero-mobile.css';
 import './typography-system.css';
 import './paneltakip-brand.css';
 import './hero-platform-drop.css';
+import './admin-category-order.css';
 
 export const metadata: Metadata = {
   title: 'PanelTakip | Restoran Büyüme & Yönetim Hizmeti',
@@ -29,7 +31,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="tr">
-      <body>{children}<AdminImageUploadEnhancer/><AdminFeedbackEnhancer/><AdminStatsEnhancer/><AdminSettingsEnhancer/><AdminLiveCalls/><AdminLiveFeedback/><HeroPlatformDrop/><MobileNav/></body>
+      <body>{children}<AdminImageUploadEnhancer/><AdminFeedbackEnhancer/><AdminStatsEnhancer/><AdminSettingsEnhancer/><AdminLiveCalls/><AdminLiveFeedback/><AdminCategoryOrderEnhancer/><HeroPlatformDrop/><MobileNav/></body>
     </html>
   );
 }
