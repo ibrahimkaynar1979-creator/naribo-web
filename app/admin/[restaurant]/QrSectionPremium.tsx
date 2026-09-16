@@ -1,0 +1,62 @@
+'use client';
+
+import { useMemo, useState } from 'react';
+import { Copy, Download, ExternalLink, Eye, Link2, Palette, Printer, QrCode, Share2, Upload, X } from 'lucide-react';
+
+type Restaurant={id:string;slug:string;name:string;logo:string;cover:string;description:string;phone:string;address:string;instagram:string;wifiName:string;wifiPassword:string;iban:string;directionsUrl:string;openingHours:Record<string,string>;themeColor:string};
+type QrStyle='standard'|'minimal'|'rounded'|'colorful'|'mono';
+
+const colors=['111820','8A5A2B','FF625B','1FB56C','2E83D3','7557C8'];
+
+export default function QrSectionPremium({restaurant}:{restaurant:Restaurant}){
+ const [color,setColor]=useState((restaurant.themeColor||'#111820').replace('#','').toUpperCase());
+ const [style,setStyle]=useState<QrStyle>('standard');
+ const [withLogo,setWithLogo]=useState(true);
+ const [copied,setCopied]=useState(false);
+ const menuUrl=`https://www.paneltakip.com/menu/${restaurant.slug}`;
+ const localMenuPath=`/menu/${restaurant.slug}`;
+ const qrColor=style==='mono'?'111820':style==='colorful'?'FF625B':color;
+ const qrBg=style==='minimal'?'FFFDF9':'FFFFFF';
+ const qrSrc=useMemo(()=>`https://api.qrserver.com/v1/create-qr-code/?size=900x900&margin=28&format=png&ecc=H&color=${qrColor}&bgcolor=${qrBg}&data=${encodeURIComponent(menuUrl)}`,[menuUrl,qrColor,qrBg]);
+ const qrSvg=useMemo(()=>`https://api.qrserver.com/v1/create-qr-code/?size=1200x1200&margin=36&format=svg&ecc=H&color=${qrColor}&bgcolor=${qrBg}&data=${encodeURIComponent(menuUrl)}`,[menuUrl,qrColor,qrBg]);
+ const copy=async()=>{await navigator.clipboard.writeText(menuUrl);setCopied(true);setTimeout(()=>setCopied(false),1600)};
+ const share=async()=>{try{if(navigator.share)await navigator.share({title:`${restaurant.name} QR Menü`,text:`${restaurant.name} dijital menü`,url:menuUrl});else await copy()}catch{}};
+ const downloadRaw=async(url:string,name:string)=>{try{const r=await fetch(url);if(!r.ok)throw new Error();const b=await r.blob();const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}catch{window.open(url,'_blank','noopener,noreferrer')}};
+ const downloadPng=async()=>{try{const img=new Image();img.crossOrigin='anonymous';img.src=qrSrc;await img.decode();const canvas=document.createElement('canvas');canvas.width=1200;canvas.height=1200;const ctx=canvas.getContext('2d');if(!ctx)throw new Error();ctx.fillStyle='#fff';ctx.fillRect(0,0,1200,1200);ctx.drawImage(img,0,0,1200,1200);if(withLogo&&restaurant.logo){try{const logo=new Image();logo.crossOrigin='anonymous';logo.src=restaurant.logo;await logo.decode();const box=250,x=(1200-box)/2,y=(1200-box)/2;ctx.fillStyle='#fff';ctx.beginPath();ctx.roundRect(x-20,y-20,box+40,box+40,34);ctx.fill();ctx.drawImage(logo,x,y,box,box)}catch{}}const a=document.createElement('a');a.href=canvas.toDataURL('image/png');a.download=`${restaurant.slug}-qr-menu.png`;a.click()}catch{await downloadRaw(qrSrc,`${restaurant.slug}-qr-menu.png`)}};
+ const printQr=()=>{const w=window.open('','_blank','width=720,height=820');if(!w)return;w.document.write(`<html><head><title>${restaurant.name} QR Menü</title><style>body{font-family:Arial;text-align:center;padding:40px}img{width:520px;max-width:90%}h1{margin:0 0 8px}p{color:#666}</style></head><body><h1>${restaurant.name}</h1><p>Menüyü görüntülemek için QR kodu okutun.</p><img src="${qrSrc}" onload="window.print()"/></body></html>`);w.document.close()};
+ const styles:[QrStyle,string][]=[['standard','Standart'],['minimal','Minimal'],['rounded','Yuvarlak'],['colorful','Renkli'],['mono','Siyah Beyaz']];
+ return <div className="qaPage qaQrGeneratorPage">
+  <div className="qaQrHero"><div><small>QR MENÜ</small><h1>QR Kod</h1><p>Restoranınızın dijital menüsüne kolayca erişim sağlayın.</p></div><em>Aynı lezzet,<br/>daha modern bir deneyim.</em></div>
+  <div className="qaQrLayout">
+   <div className="qaQrLeft">
+    <section className="qaQrBuilderCard">
+     <header><QrCode/><div><h2>QR Kodunuz</h2><p>Bu QR kodu masa, menü standı veya dilediğiniz alanda kullanabilirsiniz.</p></div></header>
+     <div className="qaQrBuilderMain">
+      <div className={`qaQrImageFrame style-${style}`}><img src={qrSrc} alt={`${restaurant.name} QR kod`}/>{withLogo&&restaurant.logo&&<span><img src={restaurant.logo} alt="Restoran logosu"/></span>}</div>
+      <div className="qaQrActions">
+       <button className="primary" onClick={downloadPng}><Download/><span><b>QR Kodu İndir</b><small>PNG · Yüksek kalite</small></span></button>
+       <button onClick={()=>downloadRaw(qrSvg,`${restaurant.slug}-qr-menu.svg`)}><Download/><span><b>SVG İndir</b><small>Matbaa ve büyük baskı</small></span></button>
+       <button onClick={printQr}><Printer/><span><b>Yazdır</b><small>Masa standı için ideal</small></span></button>
+       <button onClick={copy}><Link2/><span><b>{copied?'Kopyalandı':'Linki Kopyala'}</b><small>{menuUrl}</small></span></button>
+       <button onClick={share}><Share2/><span><b>Paylaş</b><small>WhatsApp, Instagram vb.</small></span></button>
+      </div>
+     </div>
+     <div className="qaQrPermanentLink"><Link2/><div><b>Kalıcı Menü Linkiniz</b><span>{menuUrl}</span></div><button onClick={copy}><Copy/>{copied?'Kopyalandı':'Kopyala'}</button></div>
+    </section>
+    <section className="qaQrDesignCard">
+     <header><Palette/><div><h2>QR Kod Tasarım Seçenekleri</h2><p>Markanıza uygun QR kod tasarımını seçin.</p></div></header>
+     <div className="qaQrStyleGrid">{styles.map(([id,label])=><button key={id} className={style===id?'active':''} onClick={()=>setStyle(id)}><span className={`mini ${id}`}><QrCode/></span><b>{label}</b></button>)}</div>
+     <div className="qaQrControls">
+      <div><h3>Logo Seçimi</h3><p>QR kodun ortasında restoran logonuz gösterilsin.</p><div className="qaQrLogoControl">{restaurant.logo?<img src={restaurant.logo} alt="Logo"/>:<span>{restaurant.name.slice(0,1)}</span>}<button onClick={()=>setWithLogo(true)} className={withLogo?'active':''}><Upload/>Logoyu Kullan</button><button onClick={()=>setWithLogo(false)}><X/>Kaldır</button></div></div>
+      <div><h3>QR Kod Rengi</h3><p>Marka renginize uygun renk seçin.</p><div className="qaQrColors">{colors.map(c=><button key={c} className={color===c?'active':''} style={{background:`#${c}`}} onClick={()=>setColor(c)} aria-label={`#${c}`}/>)}</div></div>
+     </div>
+    </section>
+   </div>
+   <aside className="qaQrRight">
+    <section className="qaQrPreviewCard"><header><Eye/><div><h2>QR Menü Önizleme</h2><p>Müşterileriniz bu menüyü görecek.</p></div></header><div className="qaPhoneMock"><div className="qaPhoneNotch"/><iframe src={localMenuPath} title="QR Menü Önizleme"/></div><a href={localMenuPath} target="_blank" rel="noreferrer"><ExternalLink/>Menüyü yeni sekmede aç</a></section>
+    <section className="qaQrTips"><h2>💡 Kullanım Önerileri</h2><p>✓ QR kodu masa üstü standlarda kullanın.</p><p>✓ Restoran girişinde görünür bir alana yerleştirin.</p><p>✓ Sosyal medya hesaplarınızda paylaşın.</p><p>✓ Baskı alırken SVG veya yüksek kaliteli PNG kullanın.</p><p>✓ QR kod çevresinde yeterli boşluk bırakın.</p></section>
+   </aside>
+  </div>
+  <div className="qaQrBottomBanner"><div><b>Lezzet dijitalde daha yakın.</b><span>QR menünüz her zaman açık, her zaman sizinle.</span></div><a href={localMenuPath} target="_blank" rel="noreferrer">Menümü Görüntüle <ExternalLink/></a><div className="miniQr"><img src={qrSrc} alt="QR"/></div></div>
+ </div>
+}
