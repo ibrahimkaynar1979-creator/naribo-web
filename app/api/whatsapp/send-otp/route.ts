@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 
 import { sql } from '../../../../lib/db';
+import { sendWhatsAppOtp } from '../../../../lib/whatsapp/client';
 import {
   generateOtp,
   getOtpExpiry,
@@ -50,15 +51,34 @@ export async function POST(request: Request) {
     const codeHash = hashOtp(phone, code);
     const expiresAt = getOtpExpiry();
 
-    await sql`
+    const inserted = await sql`
       INSERT INTO public.whatsapp_otp_codes (phone, code_hash, expires_at)
       VALUES (${phone}, ${codeHash}, ${expiresAt.toISOString()})
+      RETURNING id
     `;
 
-    // Meta WhatsApp authentication template send will be added after business verification.
-    return NextResponse.json({ ok: true, expiresIn: 300 });
+    const otpId = Number(inserted[0].id);
+    const sendEnabled = process.env.WHATSAPP_OTP_SEND_ENABLED === 'true';
+
+    if (sendEnabled) {
+      try {
+        await sendWhatsAppOtp(phone, code);
+      } catch (error) {
+        await sql`
+          DELETE FROM public.whatsapp_otp_codes
+          WHERE id = ${otpId}
+        `;
+        throw error;
+      }
+    }
+
+    return NextResponse.json({
+      ok: true,
+      expiresIn: 300,
+      delivery: sendEnabled ? 'whatsapp' : 'disabled',
+    });
   } catch (error) {
     console.error('WhatsApp OTP request failed', error);
-    return NextResponse.json({ error: 'Kod oluşturulamadı.' }, { status: 500 });
+    return NextResponse.json({ error: 'Kod oluşturulamadı veya gönderilemedi.' }, { status: 500 });
   }
 }
