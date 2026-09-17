@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { authClient } from '../../../lib/auth/client';
 
 export default function ForgotPasswordFlow({onBack}:{onBack:()=>void}){
  const[busy,setBusy]=useState(false);
@@ -13,10 +12,14 @@ export default function ForgotPasswordFlow({onBack}:{onBack:()=>void}){
   const form=new FormData(e.currentTarget);
   const email=String(form.get('email')||'').trim();
   if(!email){setError('E-posta adresinizi yazın.');setBusy(false);return}
-  const redirectTo=`${window.location.origin}/auth/reset-password`;
-  const {error:authError}=await authClient.requestPasswordReset({email,redirectTo});
-  if(authError)setError(authError.message||'Şifre oluşturma bağlantısı gönderilemedi.');
-  else setNotice('E-postanıza şifre oluşturma bağlantısı gönderdik. Gelen bağlantıdan yeni şifrenizi belirleyebilirsiniz.');
+  try{
+   const response=await fetch('/api/auth/request-password-reset',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})});
+   const result=await response.json();
+   if(!response.ok)setError(result.error||'Şifre oluşturma bağlantısı gönderilemedi.');
+   else setNotice('E-postanıza şifre oluşturma bağlantısı gönderdik. Gelen bağlantıdan yeni şifrenizi belirleyebilirsiniz.');
+  }catch{
+   setError('Şifre oluşturma bağlantısı gönderilemedi.');
+  }
   setBusy(false);
  }
  return <form className="ptAuthForm" onSubmit={submit}>
