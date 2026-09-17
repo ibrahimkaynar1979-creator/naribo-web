@@ -1,0 +1,145 @@
+.qrAdminPremium{
+  --pt-font: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  --pt-page-title:32px;
+  --pt-greeting:40px;
+  --pt-section-title:18px;
+  --pt-subtitle:16px;
+  --pt-nav:14px;
+  --pt-body:14px;
+  --pt-card-copy:13px;
+  --pt-label:13px;
+  --pt-input:14px;
+  --pt-button:14px;
+  --pt-kpi:28px;
+  --pt-kpi-label:13px;
+  --pt-helper:12px;
+  --pt-min:11px;
+  font-family:var(--pt-font)!important;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+.qrAdminPremium,
+.qrAdminPremium button,
+.qrAdminPremium input,
+.qrAdminPremium textarea,
+.qrAdminPremium select,
+.qrAdminPremium label,
+.qrAdminPremium p,
+.qrAdminPremium span,
+.qrAdminPremium small,
+.qrAdminPremium b,
+.qrAdminPremium strong,
+.qrAdminPremium a{
+  font-family:var(--pt-font)!important;
+}
+
+/* Sayfa hiyerarsisi */
+.qrAdminPremium .qaTitleRow h1{font-size:var(--pt-page-title)!important;line-height:1.08!important;font-weight:800!important;letter-spacing:-.8px!important}
+.qrAdminPremium .qaGreeting h1:before{font-size:var(--pt-greeting)!important;line-height:1.02!important;font-weight:800!important;letter-spacing:-1px!important}
+.qrAdminPremium .qaTitleRow p,
+.qrAdminPremium .qaGreeting p:before,
+.qrAdminPremium .qaPage>p{font-size:var(--pt-body)!important;line-height:1.5!important;font-weight:600!important}
+
+/* Sol menu ve ust bar */
+.qrAdminPremium .qaSide button{font-size:var(--pt-nav)!important;font-weight:700!important}
+.qrAdminPremium .qaTopRestaurant b{font-size:14px!important;font-weight:800!important}
+.qrAdminPremium .qaTopRestaurant small{font-size:12px!important;font-weight:600!important}
+.qrAdminPremium .qaBrand{font-size:14px!important;font-weight:800!important}
+.qrAdminPremium .qaBrand small{font-size:11px!important;font-weight:700!important}
+
+/* Kart basliklari */
+.qrAdminPremium .qaDashHead h2,
+.qrAdminPremium .qaManageCard h2,
+.qrAdminPremium .qaInlineEditor h3{font-family:var(--pt-font)!important;font-size:var(--pt-section-title)!important;line-height:1.25!important;font-weight:800!important;letter-spacing:-.25px!important}
+.qrAdminPremium .qaDashHead p{font-size:var(--pt-card-copy)!important;line-height:1.45!important;font-weight:600!important}
+
+/* Formlar */
+.qrAdminPremium label,
+.qrAdminPremium .qaManageCard label,
+.qrAdminPremium .qaEditor label{font-size:var(--pt-label)!important;font-weight:700!important;line-height:1.35!important}
+.qrAdminPremium input,
+.qrAdminPremium textarea,
+.qrAdminPremium select,
+.qrAdminPremium .qaEditor input,
+.qrAdminPremium .qaEditor textarea,
+.qrAdminPremium .qaEditor select{font-size:var(--pt-input)!important;font-weight:500!important;line-height:1.4!important}
+.qrAdminPremium button,
+.qrAdminPremium .qaAdd,
+.qrAdminPremium .qaSave,
+.qrAdminPremium .qaSecondary,
+.qrAdminPremium .qaQrCard a,
+.qrAdminPremium .qaInlineEditor button,
+.qrAdminPremium .qaCallList button,
+.qrAdminPremium .qaCallMini button{font-size:var(--pt-button)!important;font-weight:700!important}
+
+/* KPI ve dashboard */
+.qrAdminPremium .qaDashboardMetric strong{font-size:var(--pt-kpi)!important;line-height:1!important;font-weight:800!important}
+.qrAdminPremium .qaDashboardMetric span,
+.qrAdminPremium .qaMetric span{font-size:var(--pt-kpi-label)!important;line-height:1.3!important;font-weight:700!important}
+.qrAdminPremium .qaDashboardMetric small,
+.qrAdminPremium .qaMetric small{font-size:var(--pt-helper)!important;line-height:1.35!important;font-weight:500!important}
+.qrAdminPremium .qaHealthScore strong{font-size:32px!important;font-weight:800!important}
+.qrAdminPremium .qaHealthScore span{font-size:12px!important;font-weight:600!important}
+.qrAdminPremium .qaHealthList>div{font-size:12px!important;font-weight:600!important}
+
+/* Hizli yonetim */
+.qrAdminPremium .qaQuickGrid b{font-size:13px!important;font-weight:700!important;line-height:1.3!important}
+.qrAdminPremium .qaQuickGrid small{font-size:11px!important;font-weight:500!important;line-height:1.3!important}
+
+/* Urun ve liste alanlari */
+.qrAdminPremium .qaProductRow b,
+.qrAdminPremium .qaProductRow strong,
+.qrAdminPremium .qaPopularList b,
+.qrAdminPremium .qaPopularList strong,
+.qrAdminPremium .qaStatProducts b,
+.qrAdminPremium .qaStatProducts strong{font-size:14px!important;font-weight:700!important;line-height:1.35!important}
+.qrAdminPremium .qaProductRow small,
+.qrAdminPremium .qaPopularList small,
+.qrAdminPremium .qaStatProducts span{font-size:12px!important;font-weight:500!important;line-height:1.35!important}
+.qrAdminPremium .qaPopularList>div>span{font-size:12px!important;font-weight:600!important}
+
+/* Cagri ve geri bildirim */
+.qrAdminPremium .qaCallList b,
+.qrAdminPremium .qaCallMini b,
+.qrAdminPremium .qaFeedbackList b,
+.qrAdminPremium .qaFeedbackMini b{font-size:13px!important;font-weight:700!important}
+.qrAdminPremium .qaCallList span,
+.qrAdminPremium .qaCallList small,
+.qrAdminPremium .qaCallList strong,
+.qrAdminPremium .qaCallMini small,
+.qrAdminPremium .qaFeedbackList p,
+.qrAdminPremium .qaFeedbackList small,
+.qrAdminPremium .qaFeedbackMini span{font-size:12px!important;line-height:1.45!important;font-weight:500!important}
+.qrAdminPremium .qaFeedbackList span{font-size:14px!important}
+
+/* Grafikler ve bos durumlar */
+.qrAdminPremium .qaRealChart b,
+.qrAdminPremium .qaRealChart small{font-size:11px!important;font-weight:600!important}
+.qrAdminPremium .qaEmptyState b,
+.qrAdminPremium .qaEmptyChart b{font-size:13px!important;font-weight:700!important}
+.qrAdminPremium .qaEmptyState span,
+.qrAdminPremium .qaEmptyChart span{font-size:12px!important;font-weight:500!important;line-height:1.4!important}
+
+/* Bilgi, not, chip ve durumlar */
+.qrAdminPremium .qaInfo b{font-size:13px!important;font-weight:700!important}
+.qrAdminPremium .qaInfo span,
+.qrAdminPremium .qaQrCard p,
+.qrAdminPremium .qaNote{font-size:12px!important;line-height:1.5!important;font-weight:500!important}
+.qrAdminPremium .qaCategoryChips button{font-size:13px!important;font-weight:700!important}
+.qrAdminPremium .qaStatusPill{font-size:12px!important;font-weight:700!important}
+
+/* Rozetler 11 px altina dusmez */
+.qrAdminPremium .qaBell>i,
+.qrAdminPremium .qaSide button em{font-size:11px!important;font-weight:700!important}
+
+/* Hesap menusu */
+.ptAdminAvatar{font-size:12px!important;font-weight:800!important}
+.ptAdminAccountHead strong{font-size:14px!important;font-weight:800!important}
+.ptAdminAccountHead span{font-size:12px!important;font-weight:500!important}
+.ptAdminAccountItem{font-size:14px!important;font-weight:700!important}
+
+@media(max-width:900px){
+  .qrAdminPremium{--pt-page-title:28px;--pt-greeting:34px;--pt-section-title:17px;--pt-nav:14px;--pt-body:14px}
+  .qrAdminPremium .qaDashboardMetric strong{font-size:26px!important}
+}
