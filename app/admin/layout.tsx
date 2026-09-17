@@ -1,7 +1,8 @@
 'use client';
 
+import './panel-typography-v1.css';
 import { useEffect, useRef, useState } from 'react';
-import { KeyRound, LogOut, UserRound } from 'lucide-react';
+import { KeyRound, LogOut } from 'lucide-react';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
