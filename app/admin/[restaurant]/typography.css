@@ -57,3 +57,62 @@
   .ptAdminSurface .qaManageCard h2{font-size:16px!important}
   .ptAdminSurface .qaQrCard h2{font-size:22px!important}
 }
+
+
+/* Overview v3 — readable QR dashboard, natural vertical flow */
+@media(min-width:901px){
+ .ptWorkspace{height:100vh;grid-template-rows:64px 68px minmax(0,1fr)!important}
+ .ptTopbar{height:64px!important}
+ .ptUtilityRow{height:68px!important}
+ .ptContent{overflow:auto!important;padding:18px!important}
+ .ptAdminSurface.qaMain{height:auto!important;min-height:100%!important;overflow:visible!important}
+ .qaOverviewRedesign{padding:2px 2px 30px!important}
+ .qaOverviewRedesign .qaGreeting{margin-bottom:18px!important}
+ .qaOverviewRedesign .qaGreeting h1{font-size:26px!important;letter-spacing:-.45px!important}
+ .qaOverviewRedesign .qaGreeting p{font-size:13px!important;margin-top:5px!important}
+ .qaOverviewRedesign .qaOverviewMetrics{gap:12px!important;margin-bottom:14px!important}
+ .qaOverviewRedesign .qaDashboardMetric{min-height:94px!important;padding:15px 16px!important;grid-template-columns:42px 1fr!important;column-gap:12px!important}
+ .qaOverviewRedesign .qaDashboardMetric>i{width:40px!important;height:40px!important}
+ .qaOverviewRedesign .qaDashboardMetric strong{font-size:26px!important}
+ .qaOverviewRedesign .qaDashboardMetric span{font-size:13px!important;font-weight:750!important}
+ .qaOverviewRedesign .qaDashboardMetric small{font-size:11px!important;margin-top:3px!important}
+ .qaOverviewPrimary{display:grid;grid-template-columns:minmax(0,1.8fr) minmax(300px,.8fr);gap:14px;margin-bottom:14px}
+ .qaOverviewRedesign .qaDashCard{padding:18px!important;border-radius:18px!important}
+ .qaOverviewRedesign .qaDashHead{margin-bottom:14px!important;align-items:flex-start!important}
+ .qaOverviewRedesign .qaDashHead h2{font-size:19px!important;letter-spacing:-.2px!important}
+ .qaOverviewRedesign .qaDashHead p{font-size:12px!important;margin-top:4px!important}
+ .qaOverviewRedesign .qaDashHead>button{border:0;background:#eef8fa;color:#078b96;border-radius:9px;padding:7px 10px;font-size:11px;font-weight:750;cursor:pointer}
+ .qaStatusPill{padding:6px 9px;border-radius:999px;background:#eef8fa;color:#168c96;font-size:10px;font-weight:700}
+ .qaPerformanceCard .qaRealChart{height:180px!important;padding:16px 8px 0!important}
+ .qaPerformanceCard .qaRealChart b{font-size:11px!important}.qaPerformanceCard .qaRealChart small{font-size:10px!important}
+ .qaPerformanceCard .qaRealChart>div>span{width:min(34px,60%)!important}
+ .qaHealthHero{display:flex;align-items:baseline;gap:9px;margin:10px 0 18px}
+ .qaHealthHero strong{font-size:40px;line-height:1;font-weight:800;color:#08aeb8}
+ .qaHealthHero span{font-size:12px;color:#70839a;font-weight:650}
+ .qaOverviewRedesign .qaHealthList{gap:11px!important}
+ .qaOverviewRedesign .qaHealthList>div{font-size:12px!important;gap:8px!important}
+ .qaOverviewRedesign .qaHealthList svg{width:17px!important;height:17px!important}
+ .qaOverviewRedesign .qaHealthList b{color:#173158}
+ .qaQuickSection{margin-bottom:14px}
+ .qaQuickGridWide{grid-template-columns:repeat(4,1fr)!important;gap:10px!important}
+ .qaOverviewRedesign .qaQuickGrid button{min-height:82px!important;padding:13px!important}
+ .qaOverviewRedesign .qaQuickGrid button>svg{width:38px!important;height:38px!important;padding:8px!important}
+ .qaOverviewRedesign .qaQuickGrid b{font-size:12px!important}
+ .qaOverviewRedesign .qaQuickGrid small{font-size:10px!important;margin-top:3px!important}
+ .qaOverviewSecondary{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+ .qaPopularTable>div{min-height:62px!important;grid-template-columns:24px 48px 1fr auto!important;gap:10px!important;padding:6px 0!important}
+ .qaPopularTable img{width:48px!important;height:48px!important;border-radius:10px!important}
+ .qaPopularTable .qaRank{font-size:12px!important;color:#7b8ca2}
+ .qaPopularTable b,.qaPopularTable strong{font-size:12px!important}
+ .qaPopularTable small{font-size:10px!important;margin-top:3px!important}
+ .qaOverviewRedesign .qaFeedbackMini>div{padding:12px 0!important}
+ .qaOverviewRedesign .qaFeedbackMini b{font-size:12px!important}
+ .qaOverviewRedesign .qaFeedbackMini span{font-size:11px!important;line-height:1.45!important}
+ .qaCallsStrip{margin-bottom:4px}
+ .qaCallsEmpty{min-height:58px;display:flex;align-items:center;gap:10px;padding:0 12px;background:#f7fbfd;border:1px dashed #cbdde7;border-radius:12px;color:#647b94;font-size:12px}
+ .qaCallsEmpty svg{color:#08aeb8}
+}
+@media(max-width:1200px) and (min-width:901px){
+ .qaQuickGridWide{grid-template-columns:repeat(2,1fr)!important}
+ .qaOverviewPrimary{grid-template-columns:1.45fr .8fr}
+}
