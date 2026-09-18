@@ -116,3 +116,57 @@
  .qaQuickGridWide{grid-template-columns:repeat(2,1fr)!important}
  .qaOverviewPrimary{grid-template-columns:1.45fr .8fr}
 }
+
+
+/* Overview v4 — compact, readable, single desktop viewport */
+@media(min-width:901px){
+ .ptWorkspaceOverview{grid-template-rows:64px minmax(0,1fr)!important}
+ .ptWorkspaceOverview .ptContent{padding:14px 16px!important;overflow:hidden!important}
+ .ptWorkspaceOverview .ptAdminSurface.qaMain{height:100%!important;min-height:0!important;overflow:hidden!important}
+ .qaOverviewCompact{height:100%;display:grid;grid-template-rows:82px minmax(190px,1.05fr) minmax(205px,.95fr);gap:12px;padding:0!important}
+ .qaOverviewTop{display:grid;grid-template-columns:repeat(4,minmax(0,1fr)) minmax(170px,.92fr);gap:10px}
+ .qaOverviewCompact .qaDashboardMetric{min-height:0!important;height:82px!important;padding:11px 13px!important;grid-template-columns:38px 1fr!important;column-gap:10px!important}
+ .qaOverviewCompact .qaDashboardMetric>i{width:36px!important;height:36px!important}
+ .qaOverviewCompact .qaDashboardMetric strong{font-size:24px!important;line-height:1!important}
+ .qaOverviewCompact .qaDashboardMetric span{font-size:12px!important;line-height:1.15!important}
+ .qaOverviewCompact .qaDashboardMetric small{font-size:10px!important;line-height:1.1!important}
+ .qaPrimaryAction{border:0;border-radius:14px;background:linear-gradient(135deg,#0ab8c4,#079da9);color:#fff;display:flex;align-items:center;justify-content:center;gap:9px;font-size:13px;font-weight:800;box-shadow:0 8px 18px rgba(8,174,184,.2);cursor:pointer}
+ .qaOverviewMainGrid{display:grid;grid-template-columns:1.32fr 1fr 1.05fr;gap:12px;min-height:0}
+ .qaOverviewBottomGrid{display:grid;grid-template-columns:1.05fr 1fr .9fr;gap:12px;min-height:0}
+ .qaOverviewCompact .qaDashCard{padding:14px 16px!important;border-radius:16px!important;min-height:0;overflow:hidden}
+ .qaOverviewCompact .qaDashHead{margin-bottom:8px!important;align-items:center!important}
+ .qaOverviewCompact .qaDashHead h2{font-size:16px!important;line-height:1.15!important}
+ .qaOverviewCompact .qaDashHead>button{border:0;background:#eef8fa;color:#078b96;border-radius:9px;padding:6px 9px;font-size:10px;font-weight:750;cursor:pointer}
+ .qaOverviewCompact .qaStatusPill{font-size:9px;padding:5px 8px}
+ .qaOverviewCompact .qaPerformanceCard .qaRealChart{height:135px!important;padding:8px 5px 0!important}
+ .qaOverviewCompact .qaPerformanceCard .qaRealChart>div>span{width:min(28px,55%)!important}
+ .qaOverviewCompact .qaPerformanceCard .qaRealChart b{font-size:9px!important}
+ .qaOverviewCompact .qaPerformanceCard .qaRealChart small{font-size:9px!important}
+ .qaHealthCompact{height:calc(100% - 30px);display:grid;grid-template-columns:120px 1fr;align-items:center;gap:14px}
+ .qaHealthRing{width:104px;height:104px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(#08aeb8 calc(var(--score,100)*1%),#e8f2f5 0);position:relative}
+ .qaHealthRing:after{content:"";position:absolute;inset:10px;background:#fff;border-radius:50%}
+ .qaHealthRing strong{position:relative;z-index:1;font-size:25px;color:#173158}
+ .qaOverviewCompact .qaHealthList{gap:10px!important}
+ .qaOverviewCompact .qaHealthList>div{font-size:11px!important;gap:7px!important}
+ .qaOverviewCompact .qaHealthList svg{width:17px!important;height:17px!important;color:#18ad69!important}
+ .qaQuickGridCompact{grid-template-columns:1fr 1fr!important;gap:8px!important}
+ .qaOverviewCompact .qaQuickGridCompact button{height:58px!important;min-height:0!important;padding:9px 10px!important}
+ .qaOverviewCompact .qaQuickGridCompact button>svg{width:31px!important;height:31px!important;padding:6px!important}
+ .qaOverviewCompact .qaQuickGridCompact b{font-size:11px!important}
+ .qaOverviewCompact .qaQuickGridCompact small{display:none!important}
+ .qaOverviewCompact .qaPopularTable>div{min-height:48px!important;grid-template-columns:18px 38px 1fr auto!important;gap:8px!important;padding:4px 0!important}
+ .qaOverviewCompact .qaPopularTable img{width:38px!important;height:38px!important;border-radius:8px!important}
+ .qaOverviewCompact .qaPopularTable .qaRank{font-size:10px!important}
+ .qaOverviewCompact .qaPopularTable b,.qaOverviewCompact .qaPopularTable strong{font-size:10px!important}
+ .qaOverviewCompact .qaPopularTable small{font-size:8.5px!important}
+ .qaOverviewCompact .qaFeedbackMini>div{padding:8px 0!important}
+ .qaOverviewCompact .qaFeedbackMini b{font-size:10px!important}
+ .qaOverviewCompact .qaFeedbackMini span{font-size:10px!important;line-height:1.25!important}
+ .qaCompactEmpty{height:calc(100% - 30px);min-height:100px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;border:1px dashed #d4e3ea;border-radius:11px;color:#74879d;font-size:10px;background:#f8fcfd}
+ .qaCompactEmpty svg{color:#08aeb8}
+}
+@media(max-width:1200px) and (min-width:901px){
+ .qaOverviewTop{grid-template-columns:repeat(4,1fr) 145px}
+ .qaOverviewCompact .qaDashboardMetric span{font-size:10px!important}
+ .qaHealthCompact{grid-template-columns:92px 1fr}.qaHealthRing{width:82px;height:82px}.qaHealthRing strong{font-size:21px}
+}
