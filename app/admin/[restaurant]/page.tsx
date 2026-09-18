@@ -15,7 +15,7 @@ type Feedback={id:string;rating:number;comment:string;customerName:string;create
 type Stats={todayViews:number;totalViews:number;averageRating:number;feedbackCount:number;pendingCalls:number;dailyViews:{day:string;count:number}[];topProducts:{id:string;name:string;image:string;price:number;views:number}[]};
 type Data={restaurant:Restaurant;categories:Category[];products:Product[];calls:Call[];feedback:Feedback[];stats:Stats};
 type Tab='overview'|'menu'|'categories'|'qr'|'restaurant'|'calls'|'feedback'|'stats'|'settings';
-const PREVIEW_DATA:Data={restaurant:{id:'preview',slug:'makarilla',name:'Makarilla',logo:'',cover:'',description:'İyi malzeme. İyi tarif. İyi lezzet.',phone:'0532 429 02 90',address:'Karşıyaka, İzmir',instagram:'makarilla',wifiName:'Makarilla',wifiPassword:'',iban:'',directionsUrl:'',openingHours:{Pazartesi:'11:00 - 23:00',Salı:'11:00 - 23:00',Çarşamba:'11:00 - 23:00',Perşembe:'11:00 - 23:00',Cuma:'11:00 - 23:30',Cumartesi:'11:00 - 23:30',Pazar:'11:00 - 23:00'},themeColor:'#14b8c4'},categories:[{id:'c1',name:'Makarnalar',isActive:true,sortOrder:1},{id:'c2',name:'Wraplar',isActive:true,sortOrder:2},{id:'c3',name:'Salatalar',isActive:true,sortOrder:3},{id:'c4',name:'Tatlılar',isActive:true,sortOrder:4}],products:[{id:'p1',categoryId:'c1',name:'Bolonez Makarna',description:'Özel bolonez sos ile',price:299,image:'/makarilla_tabak.png',allergens:[],isActive:true,sortOrder:1},{id:'p2',categoryId:'c1',name:'Alfredo Makarna',description:'Kremalı alfredo sos',price:289,image:'/makarilla_tabak.png',allergens:[],isActive:true,sortOrder:2},{id:'p3',categoryId:'c2',name:'Tavuk Wrap',description:'Izgara tavuk ve özel sos',price:239,image:'/wrap_banner.png',allergens:[],isActive:true,sortOrder:3}],calls:[],feedback:[],stats:{todayViews:28,totalViews:468,averageRating:4.8,feedbackCount:12,pendingCalls:0,dailyViews:[{day:'Pzt',count:18},{day:'Sal',count:22},{day:'Çar',count:17},{day:'Per',count:28},{day:'Cum',count:25},{day:'Cmt',count:31},{day:'Paz',count:24}],topProducts:[{id:'p1',name:'Bolonez Makarna',image:'/makarilla_tabak.png',price:299,views:124},{id:'p2',name:'Alfredo Makarna',image:'/makarilla_tabak.png',price:289,views:98},{id:'p3',name:'Tavuk Wrap',image:'/wrap_banner.png',price:239,views:76}]}};
+const PREVIEW_DATA:Data={restaurant:{id:'preview',slug:'makarilla',name:'Makarilla',logo:'',cover:'',description:'İyi malzeme. İyi tarif. İyi lezzet.',phone:'0532 429 02 90',address:'Karşıyaka, İzmir',instagram:'makarilla',wifiName:'Makarilla',wifiPassword:'',iban:'',directionsUrl:'',openingHours:{Pazartesi:'11:00 - 23:00',Salı:'11:00 - 23:00',Çarşamba:'11:00 - 23:00',Perşembe:'11:00 - 23:00',Cuma:'11:00 - 23:30',Cumartesi:'11:00 - 23:30',Pazar:'11:00 - 23:00'},themeColor:'#14b8c4'},categories:[{id:'c1',name:'Makarnalar',isActive:true,sortOrder:1},{id:'c2',name:'Wraplar',isActive:true,sortOrder:2},{id:'c3',name:'Salatalar',isActive:true,sortOrder:3},{id:'c4',name:'Tatlılar',isActive:true,sortOrder:4}],products:[{id:'p1',categoryId:'c1',name:'Bolonez Makarna',description:'Özel bolonez sos ile',price:299,image:'/makarilla_tabak.png',allergens:[],isActive:true,sortOrder:1},{id:'p2',categoryId:'c1',name:'Alfredo Makarna',description:'Kremalı alfredo sos',price:289,image:'/makarilla_tabak.png',allergens:[],isActive:true,sortOrder:2},{id:'p3',categoryId:'c2',name:'Tavuk Wrap',description:'Izgara tavuk ve özel sos',price:239,image:'/wrap_banner.png',allergens:[],isActive:true,sortOrder:3}],calls:[],feedback:[{id:'f1',rating:5,comment:'Lezzet harikaydı, tekrar geleceğim.',customerName:'Misafir',createdAt:'2026-09-16T19:20:00.000Z'},{id:'f2',rating:5,comment:'Servis çok hızlıydı.',customerName:'Misafir',createdAt:'2026-09-14T18:10:00.000Z'},{id:'f3',rating:4,comment:'Makarna biraz daha sıcak olabilirdi.',customerName:'Misafir',createdAt:'2026-09-12T20:05:00.000Z'}],stats:{todayViews:28,totalViews:468,averageRating:4.8,feedbackCount:12,pendingCalls:0,dailyViews:[{day:'Pzt',count:18},{day:'Sal',count:22},{day:'Çar',count:17},{day:'Per',count:28},{day:'Cum',count:25},{day:'Cmt',count:31},{day:'Paz',count:24}],topProducts:[{id:'p1',name:'Bolonez Makarna',image:'/makarilla_tabak.png',price:299,views:124},{id:'p2',name:'Alfredo Makarna',image:'/makarilla_tabak.png',price:289,views:98},{id:'p3',name:'Tavuk Wrap',image:'/wrap_banner.png',price:239,views:76}]}};
 
 
 export default function Page(){
@@ -48,20 +48,6 @@ export default function Page(){
       <button className="ptIconBtn ptNotification" onClick={()=>setTab('calls')}><Bell size={18}/>{data.stats.pendingCalls>0&&<i>{data.stats.pendingCalls}</i>}</button>
       <button className="ptProfile"><span>MA</span><div><b>Makarilla</b><small>Yönetici</small></div><ChevronDown size={15}/></button>
     </header>
-
-    {tab!=="overview"&&(
-     <div className="ptUtilityRow">
-       <div className="ptUtilityCard"><QrCode size={18}/><div><b>QR Menü</b><span><i/> Yayında</span></div></div>
-       <div className="ptUtilityCard"><Utensils size={18}/><div><b>{products.length} Ürün</b><span><i/> {products.filter(p=>p.isActive).length} aktif</span></div></div>
-       <div className="ptUtilityCard"><Tags size={18}/><div><b>{categories.length} Kategori</b><span><i/> Güncel</span></div></div>
-       <button className="ptSoftButton" onClick={()=>setTab('menu')}><LayoutGrid size={16}/> Menüyü Yönet</button>
-       <button className="ptSoftButton" onClick={()=>setTab('qr')}><QrCode size={16}/> QR Kod</button>
-       <button className="ptSoftButton" onClick={()=>setTab('feedback')}><MessageSquareText size={16}/> Geri Bildirimler</button>
-       <button className="ptIconBtn"><MoreHorizontal size={18}/></button>
-     </div>
- 
-    )}
-
 <div className="ptContent">
       <section className="qaMain ptAdminSurface">
        {tab==='overview'&&<Overview data={data} setTab={setTab} resolve={id=>action({action:'resolveCall',id})}/>} 
