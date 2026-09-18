@@ -79,7 +79,71 @@ export default function Page(){
 }
 
 function Title({title,sub,action}:{title:string;sub:string;action?:React.ReactNode}){return <div className="qaTitleRow"><div><h1>{title}</h1><p>{sub}</p></div>{action}</div>}
-function Overview({data,setTab,resolve}:{data:Data;setTab:(t:Tab)=>void;resolve:(id:string)=>void}){const{products,categories,stats}=data,active=products.filter(p=>p.isActive).length,missingImages=products.filter(p=>!p.image?.trim()).length,missingDescriptions=products.filter(p=>!p.description?.trim()).length,healthIssues=missingImages+missingDescriptions+products.filter(p=>!p.isActive).length,healthScore=products.length?Math.max(0,100-Math.round((healthIssues/(products.length*3))*100)):0,pending=data.calls.filter(c=>c.status==='pending').slice(0,3),top=stats.topProducts.length?stats.topProducts:products.slice(0,4).map(p=>({id:p.id,name:p.name,image:p.image,price:p.price,views:0}));return <div className="qaPage qaOverviewDashboard"><div className="qaGreeting"><h1>Genel Bakış</h1><p>{data.restaurant.name} menünüzün güncel durumu ve hızlı yönetim alanları.</p></div><div className="qaMetricGrid qaOverviewMetrics"><Metric icon={<Eye size={17}/>} value={String(stats.todayViews)} label="Bugünkü Görüntülenme" note={`${stats.totalViews} toplam görüntülenme`}/><Metric icon={<Utensils size={17}/>} value={String(products.length)} label="Menü Ürünleri" note={`${active} ürün yayında`}/><Metric icon={<Star size={17}/>} value={stats.feedbackCount?stats.averageRating.toFixed(1):'—'} label="Müşteri Puanı" note={stats.feedbackCount?`${stats.feedbackCount} geri bildirim`:'Henüz geri bildirim yok'}/><Metric icon={<Bell size={17}/>} value={String(stats.pendingCalls)} label="Bekleyen Çağrı" note={stats.pendingCalls?'Yanıt bekleyen masa var':'Bekleyen çağrı yok'}/></div><div className="qaOverviewSplit"><section className="qaDashCard"><div className="qaDashHead"><div><h2>Menü Performansı</h2><p>Son 7 günlük QR menü görüntülenmeleri.</p></div></div><MiniChart rows={stats.dailyViews}/></section><section className="qaDashCard"><div className="qaDashHead"><div><h2>Canlı Çağrılar</h2><p>Bekleyen masa çağrıları.</p></div><Bell size={18}/></div>{pending.length?<div className="qaCallMini">{pending.map(c=><div key={c.id}><b>Masa {c.tableNo}</b><small>{ago(c.createdAt)}</small><button onClick={()=>resolve(c.id)}>Tamamlandı</button></div>)}</div>:<Empty icon={<Bell/>} title="Bekleyen çağrı yok" text="Yeni çağrılar burada görünecek."/>}</section></div><div className="qaOverviewSplit qaOverviewBottom"><section className="qaDashCard"><div className="qaDashHead"><div><h2>Hızlı Yönetim</h2><p>En sık kullanılan işlemlere tek tıkla geçin.</p></div></div><div className="qaQuickGrid"><Quick icon={<Plus/>} title="Ürün Ekle / Düzenle" sub="Menü içeriklerini yönet" on={()=>setTab('menu')}/><Quick icon={<Tags/>} title="Kategorileri Yönet" sub={`${categories.length} kategori mevcut`} on={()=>setTab('categories')}/><Quick icon={<QrCode/>} title="QR Kod" sub="Menü bağlantısını aç" on={()=>setTab('qr')}/><Quick icon={<Store/>} title="Restoran Bilgileri" sub="Profil ve iletişim bilgileri" on={()=>setTab('restaurant')}/></div></section><section className="qaDashCard qaHealthCard"><div className="qaDashHead"><div><h2>Menü Sağlığı</h2><p>Menünüzün eksik ve güçlü yönleri.</p></div><Activity size={18}/></div><div className="qaHealthScore"><strong>{healthScore}%</strong><span>tamamlanma</span></div><div className="qaHealthList"><div><Utensils/><span>{active}/{products.length} ürün yayında</span></div><div><ImageOff/><span>{missingImages?`${missingImages} üründe görsel eksik`:'Tüm ürünlerde görsel var'}</span></div><div><AlertCircle/><span>{missingDescriptions?`${missingDescriptions} üründe açıklama eksik`:'Tüm ürünlerde açıklama var'}</span></div></div></section></div><div className="qaOverviewSplit qaOverviewBottom"><section className="qaDashCard"><div className="qaDashHead"><div><h2>Öne Çıkan Ürünler</h2><p>Ürün görüntülenmeleri arttıkça sıralama otomatik güncellenir.</p></div></div><div className="qaPopularList">{top.slice(0,4).map((p,i)=><div key={p.id}><span>{i+1}</span><img src={p.image||'/makarilla_tabak.png'} alt=""/><div><b>{p.name}</b><small>{p.views} görüntülenme</small></div><strong>₺{p.price}</strong></div>)}</div></section><section className="qaDashCard"><div className="qaDashHead"><div><h2>Son Geri Bildirimler</h2><p>Müşteri deneyiminin son durumu.</p></div><MessageSquareText/></div>{data.feedback.length?<div className="qaFeedbackMini">{data.feedback.slice(0,3).map(f=><div key={f.id}><b>{'★'.repeat(f.rating)}{'☆'.repeat(5-f.rating)}</b><span>{f.comment||'Yorum bırakılmadı.'}</span></div>)}</div>:<Empty icon={<MessageSquareText/>} title="Henüz geri bildirim yok" text="İlk müşteri geri bildirimi burada görünecek."/>}</section></div></div>}
+function Overview({data,setTab,resolve}:{data:Data;setTab:(t:Tab)=>void;resolve:(id:string)=>void}){
+ const{products,categories,stats}=data;
+ const active=products.filter(p=>p.isActive).length;
+ const missingImages=products.filter(p=>!p.image?.trim()).length;
+ const missingDescriptions=products.filter(p=>!p.description?.trim()).length;
+ const healthIssues=missingImages+missingDescriptions+products.filter(p=>!p.isActive).length;
+ const healthScore=products.length?Math.max(0,100-Math.round((healthIssues/(products.length*3))*100)):0;
+ const pending=data.calls.filter(c=>c.status==='pending').slice(0,3);
+ const top=stats.topProducts.length?stats.topProducts:products.slice(0,4).map(p=>({id:p.id,name:p.name,image:p.image,price:p.price,views:0}));
+ return <div className="qaPage qaOverviewDashboard qaOverviewRedesign">
+  <div className="qaGreeting">
+   <h1>Genel Bakış</h1>
+   <p>{data.restaurant.name} QR menünüzün performansını ve yönetim durumunu tek ekrandan takip edin.</p>
+  </div>
+
+  <div className="qaMetricGrid qaOverviewMetrics">
+   <Metric icon={<Eye size={18}/>} value={String(stats.todayViews)} label="Bugünkü Görüntülenme" note={`${stats.totalViews} toplam görüntülenme`}/>
+   <Metric icon={<Utensils size={18}/>} value={String(products.length)} label="Menü Ürünleri" note={`${active} ürün yayında`}/>
+   <Metric icon={<Star size={18}/>} value={stats.feedbackCount?stats.averageRating.toFixed(1):'—'} label="Müşteri Puanı" note={stats.feedbackCount?`${stats.feedbackCount} geri bildirim`:'Henüz geri bildirim yok'}/>
+   <Metric icon={<Bell size={18}/>} value={String(stats.pendingCalls)} label="Bekleyen Çağrı" note={stats.pendingCalls?'Yanıt bekleyen masa var':'Bekleyen çağrı yok'}/>
+  </div>
+
+  <div className="qaOverviewPrimary">
+   <section className="qaDashCard qaPerformanceCard">
+    <div className="qaDashHead"><div><h2>Menü Performansı</h2><p>Son 7 günlük QR menü görüntülenmeleri.</p></div><span className="qaStatusPill">Son 7 gün</span></div>
+    <MiniChart rows={stats.dailyViews}/>
+   </section>
+   <section className="qaDashCard qaHealthCard">
+    <div className="qaDashHead"><div><h2>Menü Sağlığı</h2><p>Menünüzün yayın kalitesini kontrol edin.</p></div><Activity size={18}/></div>
+    <div className="qaHealthHero"><strong>{healthScore}%</strong><span>Tamamlanma</span></div>
+    <div className="qaHealthList">
+     <div><Utensils/><span><b>{active}/{products.length}</b> ürün yayında</span></div>
+     <div><ImageOff/><span>{missingImages?<><b>{missingImages}</b> üründe görsel eksik</>:<>Tüm ürünlerde görsel var</>}</span></div>
+     <div><AlertCircle/><span>{missingDescriptions?<><b>{missingDescriptions}</b> üründe açıklama eksik</>:<>Tüm ürünlerde açıklama var</>}</span></div>
+    </div>
+   </section>
+  </div>
+
+  <section className="qaDashCard qaQuickSection">
+   <div className="qaDashHead"><div><h2>Hızlı Yönetim</h2><p>Sık kullanılan işlemlere tek tıkla ulaşın.</p></div></div>
+   <div className="qaQuickGrid qaQuickGridWide">
+    <Quick icon={<Plus/>} title="Ürün Ekle / Düzenle" sub="Menü içeriklerini yönetin" on={()=>setTab('menu')}/>
+    <Quick icon={<Tags/>} title="Kategorileri Yönet" sub={`${categories.length} kategori mevcut`} on={()=>setTab('categories')}/>
+    <Quick icon={<QrCode/>} title="QR Kod" sub="Menü bağlantısını görüntüleyin" on={()=>setTab('qr')}/>
+    <Quick icon={<Store/>} title="Restoran Bilgileri" sub="Profil ve iletişim bilgileri" on={()=>setTab('restaurant')}/>
+   </div>
+  </section>
+
+  <div className="qaOverviewSecondary">
+   <section className="qaDashCard">
+    <div className="qaDashHead"><div><h2>Öne Çıkan Ürünler</h2><p>En çok görüntülenen ürünler.</p></div><button onClick={()=>setTab('menu')}>Tümünü Gör</button></div>
+    <div className="qaPopularList qaPopularTable">{top.slice(0,4).map((p,i)=><div key={p.id}><span className="qaRank">{i+1}</span><img src={p.image||'/makarilla_tabak.png'} alt=""/><div><b>{p.name}</b><small>{p.views} görüntülenme</small></div><strong>₺{p.price}</strong></div>)}</div>
+   </section>
+   <section className="qaDashCard">
+    <div className="qaDashHead"><div><h2>Son Geri Bildirimler</h2><p>Müşteri deneyiminin son durumu.</p></div><button onClick={()=>setTab('feedback')}>Tümünü Gör</button></div>
+    {data.feedback.length?<div className="qaFeedbackMini">{data.feedback.slice(0,3).map(f=><div key={f.id}><b>{'★'.repeat(f.rating)}{'☆'.repeat(5-f.rating)}</b><span>{f.comment||'Yorum bırakılmadı.'}</span></div>)}</div>:<Empty icon={<MessageSquareText/>} title="Henüz geri bildirim yok" text="İlk müşteri geri bildirimi burada görünecek."/>}
+   </section>
+  </div>
+
+  <section className="qaDashCard qaCallsStrip">
+   <div className="qaDashHead"><div><h2>Canlı Çağrılar</h2><p>Bekleyen masa çağrılarını yönetin.</p></div><Bell size={18}/></div>
+   {pending.length?<div className="qaCallMini">{pending.map(c=><div key={c.id}><b>Masa {c.tableNo}</b><small>{ago(c.createdAt)}</small><button onClick={()=>resolve(c.id)}>Tamamlandı</button></div>)}</div>:<div className="qaCallsEmpty"><Bell size={18}/><span>Şu anda bekleyen garson çağrısı yok.</span></div>}
+  </section>
+ </div>
+}
 function Metric({icon,value,label,note}:{icon:React.ReactNode;value:string;label:string;note:string}){return <div className="qaMetric qaDashboardMetric"><i>{icon}</i><strong>{value}</strong><span>{label}</span><small>{note}</small></div>}
 function Quick({icon,title,sub,on}:{icon:React.ReactNode;title:string;sub:string;on:()=>void}){return <button onClick={on}>{icon}<span><b>{title}</b><small>{sub}</small></span></button>}
 function Empty({icon,title,text}:{icon:React.ReactNode;title:string;text:string}){return <div className="qaEmptyState">{icon}<b>{title}</b><span>{text}</span></div>}
