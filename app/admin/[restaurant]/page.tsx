@@ -5,7 +5,7 @@ import './typography.css';
 import './sections.css';
 import { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'next/navigation';
-import {Activity,AlertCircle,BarChart3,Bell,ChevronLeft,Edit3,Eye,GripVertical,Home,ImageOff,MessageSquareText,MoreVertical,Plus,QrCode,Search,Settings,Star,Store,Tags,Trash2,Utensils,Wifi,MapPin,Phone,Instagram,CheckCircle2,Clock,ExternalLink,Save} from 'lucide-react';
+import {Activity,AlertCircle,BarChart3,Bell,ChevronDown,ChevronLeft,Edit3,Eye,GripVertical,Home,ImageOff,LayoutGrid,Menu,MessageSquareText,MoreHorizontal,MoreVertical,Plus,QrCode,Search,Settings,Star,Store,Tags,Trash2,Utensils,Wifi,MapPin,Phone,Instagram,CheckCircle2,Clock,ExternalLink,Save} from 'lucide-react';
 
 type Category={id:string;name:string;isActive:boolean;sortOrder:number};
 type Product={id:string;categoryId:string;name:string;description:string;price:number;image:string;allergens?:string[];isActive:boolean;sortOrder:number};
@@ -31,20 +31,49 @@ export default function Page(){
  if(error||!data)return <main className="qrAdminPremium"><div style={{padding:40}}><h1>{error}</h1></div></main>;
  const nav:[Tab,string,any][]=[['overview','Genel Bakış',Home],['menu','Menüm',Utensils],['categories','Kategoriler',Tags],['qr','QR Kod',QrCode],['restaurant','Restoran Bilgileri',Store],['calls','Garson Çağrıları',Bell],['feedback','Geri Bildirimler',Star],['stats','İstatistikler',BarChart3],['settings','Ayarlar',Settings]];
  const openNew=()=>{setEditing({id:`new-${Date.now()}`,categoryId:category==='all'?(categories[0]?.id||''):category,name:'',description:'',price:0,image:'',allergens:[],isActive:true,sortOrder:products.length+1});setIsNew(true)};
- return <main className="qrAdminPremium">
-  <header className="qaTop"><button className="qaBrand" onClick={()=>setTab('overview')}><span>panel</span>takip<small>QR MENÜ</small></button><div className="qaTopRestaurant"><div className="qaRestaurantThumb">{data.restaurant.name[0]}</div><div><b>{data.restaurant.name}</b><small>{saving?'Kaydediliyor...':'Yönetim Paneli'}</small></div></div><div className="qaTopActions"><button className="qaBell" onClick={()=>setTab('calls')}><Bell size={18}/>{data.stats.pendingCalls>0&&<i>{data.stats.pendingCalls}</i>}</button><div className="qaAvatar">{data.restaurant.name.slice(0,2).toUpperCase()}</div></div></header>
-  <aside className="qaSide">{nav.map(([id,label,I])=><button key={id} className={tab===id?'active':''} onClick={()=>setTab(id)}><I size={17}/>{label}{id==='calls'&&data.stats.pendingCalls>0&&<em>{data.stats.pendingCalls}</em>}</button>)}</aside>
-  <section className="qaMain">
-   {tab==='overview'&&<Overview data={data} setTab={setTab} resolve={id=>action({action:'resolveCall',id})}/>} 
-   {tab==='menu'&&<div className="qaPage"><Title title="Menüm" sub="Ürünleri, fiyatları ve menü görünürlüğünü yönetin." action={<button className="qaAdd" onClick={openNew}><Plus size={15}/>Ürün Ekle</button>}/><label className="qaSearch"><Search size={16}/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Ürün ara..."/></label><div className="qaCategoryChips"><button className={category==='all'?'active':''} onClick={()=>setCategory('all')}>Tümü</button>{categories.map(c=><button key={c.id} className={category===c.id?'active':''} onClick={()=>setCategory(c.id)}>{c.name}</button>)}</div><div className="qaProductList">{filtered.map(p=><div className="qaProductRow" key={p.id} onClick={()=>{setEditing(p);setIsNew(false)}}><img src={p.image||'/makarilla_tabak.png'} alt=""/><div><b>{p.name}</b><small>{categories.find(c=>c.id===p.categoryId)?.name}</small><strong>₺{p.price}</strong></div><button className={p.isActive?'qaToggle on':'qaToggle'} onClick={e=>{e.stopPropagation();void persist(products.map(x=>x.id===p.id?{...x,isActive:!x.isActive}:x))}}><i/></button><MoreVertical size={18}/></div>)}</div></div>}
-   {tab==='categories'&&<Categories cats={categories} products={products} save={c=>action({action:'saveCategory',category:c})} del={id=>action({action:'deleteCategory',id})}/>} 
-   {tab==='qr'&&<QrSection restaurant={data.restaurant}/>} 
-   {tab==='restaurant'&&<RestaurantSection restaurant={data.restaurant} save={r=>action({action:'updateRestaurant',restaurant:r})}/>} 
-   {tab==='calls'&&<CallsSection calls={data.calls} resolve={id=>action({action:'resolveCall',id})}/>} 
-   {tab==='feedback'&&<FeedbackSection items={data.feedback} stats={data.stats}/>} 
-   {tab==='stats'&&<StatsSection stats={data.stats}/>} 
-   {tab==='settings'&&<SettingsSection restaurant={data.restaurant} save={r=>action({action:'updateRestaurant',restaurant:r})}/>} 
+ return <main className="qrAdminPremium ptShell">
+  <aside className="ptSidebar">
+    <button className="ptBrand" onClick={()=>setTab('overview')}><span><b>Panel</b><strong>Takip</strong></span><small>Restoranların Büyüme Ortağı</small></button>
+    <nav className="ptNav">{nav.map(([id,label,I])=><button key={id} className={tab===id?'active':''} onClick={()=>setTab(id)}><I size={18}/><span>{label}</span>{id==='calls'&&data.stats.pendingCalls>0&&<em>{data.stats.pendingCalls}</em>}</button>)}</nav>
+    <div className="ptGrowCard"><div className="ptBars">▂ ▅ ▇</div><b>Menünüz dijitalde.<br/>Kontrol sizde.</b><i/></div>
+    <div className="ptVersion"><b>PanelTakip.com</b><span>QR Menü</span></div>
+  </aside>
+
+  <section className="ptWorkspace">
+    <header className="ptTopbar">
+      <button className="ptMobileMenu"><Menu size={18}/></button>
+      <label className="ptSearch"><Search size={18}/><input placeholder="Menü, ürün veya kategori ara..." value={query} onChange={e=>setQuery(e.target.value)}/><kbd>⌘ K</kbd></label>
+      <div className="ptDateCard"><span>18 Eylül 2026</span><b>QR Menü Yönetimi</b></div>
+      <button className="ptRestaurant"><Store size={18}/><span><b>{data.restaurant.name}</b><small>Karşıyaka, İzmir</small></span><ChevronDown size={15}/></button>
+      <button className="ptIconBtn ptNotification" onClick={()=>setTab('calls')}><Bell size={18}/>{data.stats.pendingCalls>0&&<i>{data.stats.pendingCalls}</i>}</button>
+      <button className="ptProfile"><span>MA</span><div><b>Makarilla</b><small>Yönetici</small></div><ChevronDown size={15}/></button>
+    </header>
+
+    <div className="ptUtilityRow">
+      <div className="ptUtilityCard"><QrCode size={18}/><div><b>QR Menü</b><span><i/> Yayında</span></div></div>
+      <div className="ptUtilityCard"><Utensils size={18}/><div><b>{products.length} Ürün</b><span><i/> {products.filter(p=>p.isActive).length} aktif</span></div></div>
+      <div className="ptUtilityCard"><Tags size={18}/><div><b>{categories.length} Kategori</b><span><i/> Güncel</span></div></div>
+      <button className="ptSoftButton" onClick={()=>setTab('menu')}><LayoutGrid size={16}/> Menüyü Yönet</button>
+      <button className="ptSoftButton" onClick={()=>setTab('qr')}><QrCode size={16}/> QR Kod</button>
+      <button className="ptSoftButton" onClick={()=>setTab('feedback')}><MessageSquareText size={16}/> Geri Bildirimler</button>
+      <button className="ptIconBtn"><MoreHorizontal size={18}/></button>
+    </div>
+
+    <div className="ptContent">
+      <section className="qaMain ptAdminSurface">
+       {tab==='overview'&&<Overview data={data} setTab={setTab} resolve={id=>action({action:'resolveCall',id})}/>} 
+       {tab==='menu'&&<div className="qaPage"><Title title="Menüm" sub="Ürünleri, fiyatları ve menü görünürlüğünü yönetin." action={<button className="qaAdd" onClick={openNew}><Plus size={15}/>Ürün Ekle</button>}/><label className="qaSearch"><Search size={16}/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Ürün ara..."/></label><div className="qaCategoryChips"><button className={category==='all'?'active':''} onClick={()=>setCategory('all')}>Tümü</button>{categories.map(c=><button key={c.id} className={category===c.id?'active':''} onClick={()=>setCategory(c.id)}>{c.name}</button>)}</div><div className="qaProductList">{filtered.map(p=><div className="qaProductRow" key={p.id} onClick={()=>{setEditing(p);setIsNew(false)}}><img src={p.image||'/makarilla_tabak.png'} alt=""/><div><b>{p.name}</b><small>{categories.find(c=>c.id===p.categoryId)?.name}</small><strong>₺{p.price}</strong></div><button className={p.isActive?'qaToggle on':'qaToggle'} onClick={e=>{e.stopPropagation();void persist(products.map(x=>x.id===p.id?{...x,isActive:!x.isActive}:x))}}><i/></button><MoreVertical size={18}/></div>)}</div></div>}
+       {tab==='categories'&&<Categories cats={categories} products={products} save={c=>action({action:'saveCategory',category:c})} del={id=>action({action:'deleteCategory',id})}/>} 
+       {tab==='qr'&&<QrSection restaurant={data.restaurant}/>} 
+       {tab==='restaurant'&&<RestaurantSection restaurant={data.restaurant} save={r=>action({action:'updateRestaurant',restaurant:r})}/>} 
+       {tab==='calls'&&<CallsSection calls={data.calls} resolve={id=>action({action:'resolveCall',id})}/>} 
+       {tab==='feedback'&&<FeedbackSection items={data.feedback} stats={data.stats}/>} 
+       {tab==='stats'&&<StatsSection stats={data.stats}/>} 
+       {tab==='settings'&&<SettingsSection restaurant={data.restaurant} save={r=>action({action:'updateRestaurant',restaurant:r})}/>} 
+      </section>
+    </div>
   </section>
+
   {editing&&<Editor p={editing} cats={categories} isNew={isNew} close={()=>{setEditing(null);setIsNew(false)}} save={async p=>{setEditing(null);setIsNew(false);await persist(isNew?[...products,p]:products.map(x=>x.id===p.id?p:x))}} del={async id=>{if(confirm('Bu ürünü silmek istiyor musunuz?')){setEditing(null);await persist(products.filter(x=>x.id!==id))}}}/>} 
  </main>
 }
