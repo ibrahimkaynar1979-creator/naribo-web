@@ -1,1 +1,159 @@
-.qaBell{position:relative}.qaBell>i{position:absolute;right:-3px;top:-4px;min-width:17px;height:17px;border-radius:9px;background:var(--coral);color:#fff;font-size:9px;font-style:normal;display:grid;place-items:center}.qaSide button em{margin-left:auto;background:var(--coral);color:#fff;border-radius:9px;min-width:18px;height:18px;display:grid;place-items:center;font-size:9px;font-style:normal}.qaTitleRow .qaAdd svg{width:15px}.qaManageCard{background:#fffdf9;border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 10px 28px rgba(91,61,44,.04)}.qaManageCard h2{font-family:Georgia,serif;font-size:20px;margin:0 0 16px}.qaTwoCols,.qaFormCards{display:grid;grid-template-columns:1fr 1fr;gap:16px}.qaManageCard label{display:flex;flex-direction:column;gap:6px;font-size:11px;font-weight:800;margin:0 0 13px}.qaManageCard input,.qaInlineEditor input{height:42px;border:1px solid #e7dcd3;border-radius:11px;background:#fff;padding:0 12px;outline:none}.qaManageCard input:focus,.qaInlineEditor input:focus{border-color:#efaaa1}.qaManageCard input[type=color]{padding:4px;width:72px}.qaSecondary,.qaQrCard a{height:40px;border:1px solid #efc8bc;background:#fff5ef;color:var(--coralDark);border-radius:11px;padding:0 14px;font-weight:800;font-size:10px;display:inline-flex;align-items:center;gap:7px;text-decoration:none}.qaInfo{margin-top:18px;border-radius:13px;background:#edf6f7;padding:13px;display:flex;flex-direction:column;gap:4px}.qaInfo b{font-size:10px}.qaInfo span{font-size:9px;line-height:1.45;color:#5f6c6e}.qaQrCard{text-align:center}.qaQrVisual{width:180px;height:180px;margin:0 auto 14px;border:1px dashed #e7cfc3;border-radius:18px;display:grid;place-items:center;background:#fff9f5;color:var(--ink)}.qaQrCard p{font-size:10px;color:var(--muted);line-height:1.5}.qaQrCard a{margin-top:8px}.qaInlineEditor{position:fixed;right:24px;bottom:24px;width:340px;background:#fffdf9;border:1px solid var(--line);box-shadow:0 18px 60px #49322826;border-radius:18px;padding:18px;z-index:60}.qaInlineEditor h3{font-family:Georgia,serif;font-size:20px;margin:0 0 13px}.qaInlineEditor>label{display:flex;align-items:center;gap:7px;font-size:10px;margin:12px 0}.qaInlineEditor>label input{width:auto;height:auto}.qaInlineEditor>div{display:flex;justify-content:flex-end;gap:7px}.qaInlineEditor button{border:0;border-radius:10px;padding:9px 12px;font-size:9px;font-weight:800}.qaInlineEditor .primary{background:var(--coral);color:#fff}.qaInlineEditor .danger{background:#fff0ee;color:#c73f39}.qaCallList{display:grid;gap:9px}.qaCallList>div{display:grid;grid-template-columns:42px 1fr auto auto;align-items:center;gap:12px;padding:13px;border:1px solid #eee5dd;border-radius:14px}.qaCallList>div.pending{background:#fff8f3;border-color:#f1cfc2}.qaCallList i{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--peachSoft);color:var(--coral);font-style:normal}.qaCallList i svg{width:17px}.qaCallList>div>div{display:flex;flex-direction:column;gap:2px}.qaCallList b{font-size:11px}.qaCallList span,.qaCallList small{font-size:9px;color:var(--muted)}.qaCallList strong{font-size:9px;color:#776c65}.qaCallList button{border:0;border-radius:10px;background:var(--coral);color:#fff;padding:8px 10px;font-size:9px;font-weight:800;display:flex;align-items:center;gap:5px}.qaCallList button svg{width:14px}.qaCallMini{display:grid;gap:7px}.qaCallMini>div{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:7px;border-bottom:1px solid #f0e7df;padding:7px 0}.qaCallMini b{font-size:9px}.qaCallMini small{font-size:8px;color:var(--muted)}.qaCallMini button{border:0;background:#fff0e9;color:var(--coralDark);font-size:8px;font-weight:800;border-radius:8px;padding:6px}.qaFeedbackList{display:grid;gap:10px}.qaFeedbackList article{background:#fffdf9;border:1px solid var(--line);border-radius:15px;padding:15px}.qaFeedbackList article>div{display:flex;justify-content:space-between}.qaFeedbackList b{font-size:11px}.qaFeedbackList span{color:#e79b27;font-size:13px;letter-spacing:1px}.qaFeedbackList p{font-size:10px;line-height:1.5;margin:10px 0;color:#554d48}.qaFeedbackList small{font-size:9px;color:var(--muted)}.qaFeedbackMini{display:grid;gap:7px}.qaFeedbackMini>div{display:flex;flex-direction:column;border-bottom:1px solid #f0e7df;padding:6px 0}.qaFeedbackMini b{font-size:10px;color:#e79b27;letter-spacing:1px}.qaFeedbackMini span{font-size:8px;color:#615852;margin-top:2px}.qaRealChart{height:145px;display:grid;grid-template-columns:repeat(7,1fr);gap:9px;align-items:end;padding:10px 6px 0}.qaRealChart>div{height:100%;display:grid;grid-template-rows:1fr auto auto;justify-items:center;align-items:end;gap:3px}.qaRealChart>div>span{width:min(32px,70%);min-height:5px;background:linear-gradient(180deg,#f58a77,var(--coral));border-radius:7px 7px 3px 3px}.qaRealChart b{font-size:8px}.qaRealChart small{font-size:8px;color:var(--muted);text-transform:capitalize}.qaStatProducts{display:grid}.qaStatProducts>div{display:grid;grid-template-columns:22px 40px 1fr auto;gap:8px;align-items:center;padding:7px 0;border-bottom:1px solid #f0e7df}.qaStatProducts img{width:40px;height:40px;border-radius:10px;object-fit:cover}.qaStatProducts b,.qaStatProducts strong,.qaStatProducts span{font-size:10px}.qaThemePreview{height:90px;border-radius:15px;color:#fff;font-family:Georgia,serif;font-size:25px;display:grid;place-items:center;margin-top:18px}.qaNote{font-size:10px;line-height:1.5;background:#fff6ef;border-radius:12px;padding:12px;color:#6e625b}.qaHealthList svg{width:15px}.qaPopularList>div>span{font-size:9px;color:#a88f80}@media(min-width:901px){.qaPage:not(.qaOverviewDashboard){max-width:1120px}.qaSide{overflow:auto}.qaSide button{height:39px}.qaMain:has(.qaPage:not(.qaOverviewDashboard)){max-width:none}.qaRealChart{height:135px}}@media(max-width:700px){.qaTwoCols,.qaFormCards{grid-template-columns:1fr}.qaManageCard{padding:15px}.qaInlineEditor{left:12px;right:12px;bottom:12px;width:auto}.qaCallList>div{grid-template-columns:38px 1fr}.qaCallList strong,.qaCallList button{grid-column:2}.qaRealChart{gap:4px}.qaRealChart>div>span{width:70%}.qaSide{overflow:visible}}
+/* QR admin inner pages — aligned with PanelTakip order-panel UI */
+.ptAdminSurface .qaPage{height:auto;min-height:100%;padding:2px}
+.ptAdminSurface .qaTitleRow{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:0 0 10px!important}
+.ptAdminSurface .qaTitleRow>div{min-width:0}
+.ptAdminSurface .qaTitleRow h1{font-size:17px!important;font-weight:800!important;letter-spacing:-.25px!important;color:#173158!important}
+.ptAdminSurface .qaTitleRow p{font-size:8.5px!important;color:#7386a0!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ptAdminSurface .qaTitleRow .qaAdd svg{width:14px;height:14px}
+
+/* Shared raised surfaces */
+.ptAdminSurface .qaManageCard,
+.ptAdminSurface .qaProductList,
+.ptAdminSurface .qaCategoryList,
+.ptAdminSurface .qaFeedbackList article{
+  background:rgba(255,255,255,.78)!important;
+  border:1px solid rgba(255,255,255,.95)!important;
+  border-radius:16px!important;
+  box-shadow:0 9px 22px rgba(50,79,103,.10),inset 0 1px 0 #fff!important;
+}
+.ptAdminSurface .qaManageCard{padding:14px!important}
+.ptAdminSurface .qaManageCard h2{
+  margin:0 0 11px!important;font-size:11px!important;line-height:1.2!important;
+  font-weight:800!important;color:#173158!important;letter-spacing:0!important
+}
+.ptAdminSurface .qaTwoCols,.ptAdminSurface .qaFormCards{display:grid;grid-template-columns:1fr 1fr;gap:10px!important}
+
+/* Menu page */
+.ptAdminSurface .qaSearch{
+  width:min(360px,100%)!important;height:38px!important;margin:0 0 9px!important;
+  padding:0 12px!important;border:1px solid #d8e6ee!important;border-radius:12px!important;
+  background:rgba(255,255,255,.82)!important;color:#72859b!important;
+  box-shadow:0 5px 14px rgba(50,78,105,.06)!important;
+}
+.ptAdminSurface .qaSearch input{font-size:10px!important;color:#223653!important}
+.ptAdminSurface .qaCategoryChips{display:flex;gap:6px;overflow:auto;padding:0 0 9px}
+.ptAdminSurface .qaCategoryChips button{
+  min-height:30px;padding:0 10px;border:1px solid #dce7ed!important;border-radius:10px!important;
+  background:rgba(255,255,255,.68)!important;color:#5d7290!important;font-size:8.5px!important;
+  font-weight:650!important;box-shadow:0 4px 10px rgba(50,78,105,.05)
+}
+.ptAdminSurface .qaCategoryChips button.active{
+  background:linear-gradient(135deg,#0bb8c3,#089aa7)!important;color:#fff!important;border-color:transparent!important;
+  box-shadow:0 7px 16px rgba(7,161,173,.20)!important
+}
+.ptAdminSurface .qaProductList{overflow:hidden!important}
+.ptAdminSurface .qaProductRow{
+  min-height:58px!important;padding:7px 10px!important;
+  display:grid!important;grid-template-columns:42px minmax(0,1fr) 44px 22px!important;gap:9px!important;
+  align-items:center!important;border-bottom:1px solid rgba(208,222,232,.68)!important;background:transparent!important;
+  cursor:pointer!important
+}
+.ptAdminSurface .qaProductRow:hover{background:rgba(231,248,251,.68)!important}
+.ptAdminSurface .qaProductRow:last-child{border-bottom:0!important}
+.ptAdminSurface .qaProductRow img{width:42px!important;height:42px!important;border-radius:9px!important;object-fit:cover!important}
+.ptAdminSurface .qaProductRow>div{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;grid-template-rows:auto auto!important;column-gap:12px!important}
+.ptAdminSurface .qaProductRow b{font-size:9.5px!important;color:#173158!important}
+.ptAdminSurface .qaProductRow small{font-size:7.5px!important;color:#8293a7!important}
+.ptAdminSurface .qaProductRow strong{grid-column:2;grid-row:1/3;align-self:center;font-size:9px!important;color:#173158!important}
+.ptAdminSurface .qaToggle{width:34px!important;height:20px!important;border-radius:999px!important;background:#cfdbe3!important}
+.ptAdminSurface .qaToggle i{width:16px!important;height:16px!important}
+.ptAdminSurface .qaToggle.on{background:#0bb8c3!important}
+
+/* Categories */
+.ptAdminSurface .qaCategoryList{overflow:hidden!important}
+.ptAdminSurface .qaCategoryList>div{
+  min-height:58px!important;padding:7px 11px!important;display:grid!important;
+  grid-template-columns:18px 42px minmax(0,1fr) 32px!important;gap:9px!important;align-items:center!important;
+  border-bottom:1px solid rgba(208,222,232,.68)!important
+}
+.ptAdminSurface .qaCategoryList>div:last-child{border-bottom:0!important}
+.ptAdminSurface .qaCategoryList img{width:42px!important;height:42px!important;border-radius:9px!important;object-fit:cover!important}
+.ptAdminSurface .qaCategoryList b{font-size:9.5px!important;color:#173158!important}
+.ptAdminSurface .qaCategoryList small{font-size:7.5px!important;color:#8293a7!important}
+.ptAdminSurface .qaCategoryList>div>button{width:30px;height:30px;border:0;border-radius:9px;background:#eef4f7!important;color:#58708d!important}
+
+/* QR page */
+.ptAdminSurface .qaQrCard{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:330px}
+.ptAdminSurface .qaQrVisual{
+  width:132px!important;height:132px!important;margin:4px auto 12px!important;border:1px dashed #c8dbe5!important;
+  border-radius:16px!important;background:#f7fbfd!important;color:#102650!important;display:grid!important;place-items:center!important
+}
+.ptAdminSurface .qaQrVisual svg{width:84px!important;height:84px!important}
+.ptAdminSurface .qaQrCard h2{font-size:17px!important;margin:0 0 5px!important}
+.ptAdminSurface .qaQrCard p{max-width:390px;font-size:8px!important;line-height:1.45!important;color:#7b8ca2!important}
+.ptAdminSurface .qaQrCard a,.ptAdminSurface .qaSecondary{
+  height:36px!important;border:1px solid #bfe4e8!important;background:#eefbfc!important;color:#087f8a!important;
+  border-radius:10px!important;padding:0 12px!important;font-size:8.5px!important;font-weight:750!important;
+  display:inline-flex!important;align-items:center!important;gap:6px!important;text-decoration:none!important
+}
+.ptAdminSurface .qaManageCard label{display:flex;flex-direction:column;gap:5px;font-size:8.5px!important;font-weight:700!important;color:#526b86!important;margin-bottom:10px!important}
+.ptAdminSurface .qaManageCard input,.ptAdminSurface .qaInlineEditor input{
+  height:38px!important;border:1px solid #d8e6ee!important;border-radius:10px!important;background:rgba(255,255,255,.82)!important;
+  padding:0 11px!important;outline:none!important;color:#253d5a!important;font-size:9px!important
+}
+.ptAdminSurface .qaManageCard input:focus,.ptAdminSurface .qaInlineEditor input:focus{border-color:#19b6c1!important;box-shadow:0 0 0 3px rgba(20,184,196,.08)!important}
+.ptAdminSurface .qaInfo{margin-top:12px!important;border-radius:11px!important;background:#eaf6fa!important;padding:11px!important;display:flex!important;flex-direction:column!important;gap:3px!important}
+.ptAdminSurface .qaInfo b{font-size:8.5px!important;color:#173158!important}.ptAdminSurface .qaInfo span{font-size:7.5px!important;line-height:1.45!important;color:#688099!important}
+
+/* Restaurant + settings */
+.ptAdminSurface .qaFormCards .qaManageCard{min-height:100%}
+.ptAdminSurface .qaManageCard input[type=color]{width:68px!important;padding:4px!important}
+.ptAdminSurface .qaThemePreview{
+  height:72px!important;border-radius:12px!important;color:#fff!important;font-size:17px!important;font-weight:800!important;
+  display:grid!important;place-items:center!important;margin-top:12px!important
+}
+.ptAdminSurface .qaNote{font-size:8px!important;line-height:1.45!important;background:#eef6fa!important;border-radius:10px!important;padding:10px!important;color:#60758d!important}
+
+/* Calls */
+.ptAdminSurface .qaCallList{display:grid;gap:7px}
+.ptAdminSurface .qaCallList>div{
+  min-height:58px;display:grid;grid-template-columns:36px minmax(0,1fr) auto auto;align-items:center;gap:9px;
+  padding:8px 10px;border:1px solid #dce7ed;border-radius:12px;background:rgba(255,255,255,.64)
+}
+.ptAdminSurface .qaCallList>div.pending{background:#eefbfc;border-color:#bee7ea}
+.ptAdminSurface .qaCallList i{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:#e6f7f9;color:#08aeb8;font-style:normal}
+.ptAdminSurface .qaCallList b{font-size:9px!important;color:#173158!important}.ptAdminSurface .qaCallList span,.ptAdminSurface .qaCallList small{font-size:7.5px!important;color:#7d8fa3!important}
+.ptAdminSurface .qaCallList strong{font-size:8px!important;color:#526a84!important}
+.ptAdminSurface .qaCallList button{height:31px;border:0;border-radius:9px;background:linear-gradient(135deg,#0bb8c3,#089aa7);color:#fff;padding:0 9px;font-size:8px;font-weight:750;display:flex;align-items:center;gap:4px}
+
+/* Feedback */
+.ptAdminSurface .qaFeedbackList{display:grid;gap:8px}
+.ptAdminSurface .qaFeedbackList article{padding:11px 12px!important}
+.ptAdminSurface .qaFeedbackList article>div{display:flex;justify-content:space-between;gap:12px}
+.ptAdminSurface .qaFeedbackList b{font-size:9.5px!important;color:#173158!important}.ptAdminSurface .qaFeedbackList span{color:#d99a2b!important;font-size:10px!important;letter-spacing:.6px}
+.ptAdminSurface .qaFeedbackList p{font-size:8.5px!important;line-height:1.45!important;margin:7px 0!important;color:#52677f!important}.ptAdminSurface .qaFeedbackList small{font-size:7.5px!important;color:#8596a8!important}
+
+/* Stats */
+.ptAdminSurface .qaRealChart{height:128px!important;display:grid;grid-template-columns:repeat(7,1fr);gap:8px;align-items:end;padding:9px 6px 0}
+.ptAdminSurface .qaRealChart>div{height:100%;display:grid;grid-template-rows:1fr auto auto;justify-items:center;align-items:end;gap:3px}
+.ptAdminSurface .qaRealChart>div>span{width:min(26px,66%);min-height:5px;background:linear-gradient(180deg,#16c1cc,#078d99)!important;border-radius:7px 7px 3px 3px}
+.ptAdminSurface .qaRealChart b{font-size:7px!important}.ptAdminSurface .qaRealChart small{font-size:7px!important;color:#8293a7!important}
+.ptAdminSurface .qaStatProducts{display:grid}
+.ptAdminSurface .qaStatProducts>div{display:grid;grid-template-columns:20px 34px minmax(0,1fr) auto;gap:7px;align-items:center;padding:6px 0;border-bottom:1px solid #e4edf2}
+.ptAdminSurface .qaStatProducts img{width:34px;height:34px;border-radius:8px;object-fit:cover}.ptAdminSurface .qaStatProducts b,.ptAdminSurface .qaStatProducts strong,.ptAdminSurface .qaStatProducts span{font-size:8.5px!important}
+
+/* Editors */
+.qaInlineEditor{
+  position:fixed;right:24px;bottom:24px;width:340px;background:#f5fbfd!important;border:1px solid #d7e7ee!important;
+  box-shadow:0 18px 50px rgba(31,59,82,.18)!important;border-radius:16px!important;padding:16px!important;z-index:80
+}
+.qaInlineEditor h3{font-size:14px!important;font-weight:800!important;color:#173158!important;margin:0 0 11px!important}
+.qaInlineEditor>label{display:flex;align-items:center;gap:7px;font-size:8.5px;margin:10px 0}.qaInlineEditor>label input{width:auto!important;height:auto!important}
+.qaInlineEditor>div{display:flex;justify-content:flex-end;gap:6px}.qaInlineEditor button{border:0;border-radius:9px;padding:8px 11px;font-size:8px;font-weight:800}
+.qaInlineEditor .primary{background:#08aeb8;color:#fff}.qaInlineEditor .danger{background:#ffecef;color:#d6455d}
+.qaEditorBackdrop{background:rgba(16,38,80,.14)!important}.qaEditor{background:#f6fbfd!important;box-shadow:-18px 0 42px rgba(32,62,88,.16)!important}
+.qaEditor header h2{font-family:inherit!important;font-size:14px!important;color:#173158!important}.qaEditorPhoto{border-radius:14px!important}.qaEditor input,.qaEditor textarea,.qaEditor select{border-color:#d8e6ee!important}.qaSave{background:linear-gradient(135deg,#0bb8c3,#089aa7)!important}
+
+/* empty states */
+.ptAdminSurface .qaEmptyState{border:1px dashed #cbdde7!important;background:rgba(247,251,253,.82)!important;border-radius:12px!important}
+.ptAdminSurface .qaEmptyState>svg{width:18px!important;height:18px!important;color:#08aeb8!important}.ptAdminSurface .qaEmptyState b{font-size:8px!important;color:#35516e!important}.ptAdminSurface .qaEmptyState span{font-size:7px!important;color:#8293a2!important}
+
+@media(min-width:901px){
+  .ptAdminSurface .qaPage:not(.qaOverviewDashboard){max-width:none!important}
+}
+@media(max-width:900px){
+  .ptAdminSurface .qaTwoCols,.ptAdminSurface .qaFormCards{grid-template-columns:1fr!important}
+  .ptAdminSurface .qaQrCard{min-height:260px}
+  .qaInlineEditor{left:12px;right:12px;bottom:12px;width:auto}
+  .ptAdminSurface .qaCallList>div{grid-template-columns:34px 1fr}.ptAdminSurface .qaCallList strong,.ptAdminSurface .qaCallList button{grid-column:2}
+}
