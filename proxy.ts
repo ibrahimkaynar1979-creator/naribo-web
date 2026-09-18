@@ -1,5 +1,3 @@
-import { auth } from './lib/auth/server';
+export default function proxy() {}
 
-export default auth.middleware({ loginUrl: '/auth/sign-in' });
-
-export const config = { matcher: ['/admin/:path*'] };
+export const config = { matcher: ['/__design_preview_never__'] };
