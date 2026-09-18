@@ -27,3 +27,33 @@
 
 @media(max-width:1050px){.ptDateCard{display:none}.ptUtilityCard:nth-child(3){display:none}}
 @media(max-width:900px){.qrAdminPremium.ptShell{display:block;height:auto;min-height:100vh;overflow:auto}.ptSidebar{display:none}.ptWorkspace{display:block;height:auto;overflow:visible;padding:10px}.ptTopbar{height:52px}.ptMobileMenu{display:grid;place-items:center;border:0;background:#fff;border-radius:11px;width:40px;height:40px}.ptSearch{min-width:0}.ptProfile div,.ptRestaurant span,.ptDateCard{display:none}.ptUtilityRow{overflow-x:auto}.ptContent{min-height:calc(100vh - 130px)}.ptAdminSurface.qaMain{overflow:visible!important}.ptAdminSurface .qaOverviewSplit{grid-template-columns:1fr!important}}
+
+
+/* Readability pass — preserve geometry, restore desktop legibility */
+@media(min-width:901px){
+  .ptBrand small{font-size:10px!important}
+  .ptNav button{font-size:13px!important;font-weight:650!important}
+  .ptVersion{font-size:10px!important}.ptVersion b{font-size:11px!important}
+  .ptSearch input{font-size:13px!important}.ptSearch kbd{font-size:10px!important}
+  .ptDateCard span{font-size:10px!important}.ptDateCard b{font-size:12px!important}
+  .ptRestaurant b,.ptProfile b{font-size:12px!important}.ptRestaurant small,.ptProfile small{font-size:10px!important}
+  .ptUtilityCard b{font-size:12px!important}.ptUtilityCard span{font-size:10px!important}.ptSoftButton{font-size:11px!important}
+  .ptAdminSurface .qaGreeting h1,.ptAdminSurface .qaTitleRow h1{font-size:22px!important}
+  .ptAdminSurface .qaGreeting p,.ptAdminSurface .qaTitleRow p{font-size:11px!important}
+  .ptAdminSurface .qaDashboardMetric strong{font-size:22px!important}
+  .ptAdminSurface .qaDashboardMetric span{font-size:11px!important}
+  .ptAdminSurface .qaDashboardMetric small{font-size:9px!important}
+  .ptAdminSurface .qaDashHead h2{font-size:16px!important;line-height:1.2!important}
+  .ptAdminSurface .qaDashHead p{font-size:10px!important;line-height:1.35!important}
+  .ptAdminSurface .qaQuickGrid b{font-size:10px!important}
+  .ptAdminSurface .qaQuickGrid small{font-size:9px!important}
+  .ptAdminSurface .qaHealthScore strong{font-size:27px!important}
+  .ptAdminSurface .qaHealthList>div{font-size:9px!important}
+  .ptAdminSurface .qaPopularList b,.ptAdminSurface .qaPopularList strong{font-size:9px!important}
+  .ptAdminSurface .qaPopularList small{font-size:8px!important}
+  .ptAdminSurface .qaEmptyState b,.ptAdminSurface .qaEmptyChart b{font-size:10px!important}
+  .ptAdminSurface .qaEmptyState span,.ptAdminSurface .qaEmptyChart span{font-size:9px!important}
+  .ptAdminSurface .qaAdd,.ptAdminSurface .qaSave{font-size:11px!important}
+  .ptAdminSurface .qaManageCard h2{font-size:16px!important}
+  .ptAdminSurface .qaQrCard h2{font-size:22px!important}
+}
