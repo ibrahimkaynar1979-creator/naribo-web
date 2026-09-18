@@ -1,18 +1,156 @@
-/* PanelTakip app visual system — admin preview only */
-.qrAdminPremium{--ink:#111827;--muted:#6b7280;--bg:#f5f7f9;--card:#fff;--line:#e5e7eb;--coral:#14b8c4;--coralDark:#0f9da8;--peach:#d9f5f7;--peachSoft:#ecfbfc;--blue:#e8f7f8;background:#f5f7f9;color:#111827;font-family:Inter,Arial,sans-serif!important;font-weight:500;-webkit-font-smoothing:antialiased}
-.qrAdminPremium *{font-family:Inter,Arial,sans-serif!important}
-.qaTop{background:#fff!important;border-bottom:1px solid #e5e7eb!important;box-shadow:none!important;height:68px!important}
-.qaBrand{background:#111827!important;color:#fff!important;border:0!important}.qaBrand span{color:#fff!important}.qaBrand small{color:#8ee8ed!important}
-.qaTopRestaurant b{font-size:13px;font-weight:800}.qaTopRestaurant small{font-size:11px;font-weight:500;color:#6b7280}.qaRestaurantThumb,.qaAvatar{background:#e8f7f8!important;color:#0f9da8!important;border:1px solid #ccecef!important}
-.qaSide{background:#111827!important;border:0!important;padding:18px 12px!important}
-.qaSide button{height:42px!important;border-radius:9px!important;color:#aeb7c5!important;font-size:12px!important;font-weight:650!important;border:0!important;background:transparent!important;margin-bottom:3px}
-.qaSide button svg{color:#8e9aaa}.qaSide button:hover{background:#1b2533!important;color:#fff!important}.qaSide button.active{background:#172d35!important;color:#5ee2e8!important;box-shadow:inset 3px 0 #14b8c4!important}.qaSide button.active svg{color:#14b8c4!important}
-.qaMain{background:#f5f7f9!important}.qaPage{color:#111827}.qaTitleRow h1,.qaGreeting h1{font-size:24px!important;line-height:1.15!important;font-weight:800!important;letter-spacing:-.5px!important;color:#111827!important}.qaTitleRow p,.qaGreeting p{font-size:12px!important;font-weight:500!important;color:#6b7280!important}
-.qaOverviewDashboard{display:flex!important;flex-direction:column!important}.qaGreeting{order:1!important;padding:0!important;margin:0 0 16px!important}.qaGreeting:after,.qaGreeting h1:before,.qaGreeting p:before{display:none!important;content:none!important}.qaGreeting h1{font-size:24px!important}.qaGreeting p{font-size:12px!important;margin-top:5px!important}
-.qaOverviewMetrics{order:2!important;gap:12px!important;margin:0 0 14px!important}.qaDashboardMetric,.qaMetric,.qaDashCard,.qaManageCard,.qaFeedbackList article{background:#fff!important;border:1px solid #e5e7eb!important;border-radius:12px!important;box-shadow:0 1px 2px rgba(16,24,40,.03)!important}
-.qaDashboardMetric{min-height:96px!important;padding:15px!important}.qaDashboardMetric>i{background:#e8f7f8!important;color:#0f9da8!important;border-radius:9px!important}.qaDashboardMetric strong{font-size:26px!important;font-weight:800!important;color:#111827!important}.qaDashboardMetric span{font-size:11px!important;font-weight:700!important;color:#374151!important}.qaDashboardMetric small{font-size:9px!important;font-weight:500!important;color:#8a94a3!important}
-.qaOverviewDashboard:after{display:none!important;content:none!important}.qaOverviewSplit{gap:12px!important;margin-bottom:12px!important}.qaOverviewSplit:nth-of-type(1){order:3!important}.qaOverviewSplit:nth-of-type(2){order:4!important}.qaOverviewSplit:nth-of-type(3){order:5!important}.qaDashCard{padding:16px!important}.qaDashHead h2{font-size:14px!important;font-weight:800!important;color:#111827!important}.qaDashHead p{font-size:10px!important;font-weight:500!important;color:#7b8492!important}
-.qaQuickGrid button{background:#f8fafb!important;border:1px solid #e5e7eb!important;border-radius:10px!important;min-height:78px!important}.qaQuickGrid button>svg{background:#e8f7f8!important;color:#0f9da8!important;border-radius:8px!important}.qaQuickGrid b{font-size:10px!important;font-weight:750!important}.qaQuickGrid small{font-size:9px!important;color:#7b8492!important}
-.qaRealChart>div>span{background:#14b8c4!important}.qaHealthScore strong{color:#0f9da8!important}.qaAdd,.qaSave,.qaCallList button{background:#14b8c4!important;color:#fff!important;border-radius:9px!important}.qaSecondary,.qaQrCard a{border-color:#b9e7ea!important;background:#f0fbfc!important;color:#0f8f99!important}.qaCategoryChips button.active{background:#14b8c4!important;color:#fff!important;border-color:#14b8c4!important}.qaToggle.on{background:#14b8c4!important}
-.qaProductRow,.qaSearch,.qaInlineEditor{border-color:#e5e7eb!important;background:#fff!important}.qaProductRow{border-radius:10px!important}.qaInlineEditor{box-shadow:0 18px 50px rgba(17,24,39,.16)!important}
-@media(max-width:700px){.qaSide{background:#111827!important}.qaTop{height:auto!important}}
+/* PanelTakip app design system for Makarilla admin preview */
+.qrAdminPremium{
+  --pt-navy:#14345b;--pt-navy-2:#0f2a4a;--pt-turq:#1bb7c4;--pt-turq-2:#0fa5b1;
+  --pt-bg:#f5fbfd;--pt-panel:#ffffff;--pt-line:#dbeaf0;--pt-muted:#6e8395;--pt-text:#17324f;
+  min-height:100vh;background:var(--pt-bg)!important;color:var(--pt-text)!important;
+  font-family:Inter,Arial,sans-serif!important;font-size:13px!important;font-weight:500!important;
+}
+.qrAdminPremium *{font-family:Inter,Arial,sans-serif!important;box-sizing:border-box}
+.qrAdminPremium button,.qrAdminPremium input,.qrAdminPremium textarea,.qrAdminPremium select{font-family:Inter,Arial,sans-serif!important}
+
+/* Shell geometry: same family as PanelTakip Sipariş */
+.qaTop{
+  height:76px!important;left:176px!important;right:0!important;width:auto!important;
+  margin-left:176px!important;padding:0 20px!important;background:#fff!important;
+  border-bottom:1px solid var(--pt-line)!important;box-shadow:none!important;
+}
+.qaBrand{display:none!important}
+.qaTopRestaurant{margin-left:0!important;gap:10px!important}
+.qaRestaurantThumb,.qaAvatar{
+  width:38px!important;height:38px!important;border-radius:12px!important;
+  background:#eaf8fa!important;color:var(--pt-turq-2)!important;border:1px solid #cdecef!important;
+  font-size:11px!important;font-weight:800!important;
+}
+.qaTopRestaurant b{font-size:13px!important;font-weight:800!important;color:var(--pt-text)!important}
+.qaTopRestaurant small{font-size:10px!important;font-weight:500!important;color:var(--pt-muted)!important}
+.qaTopActions{gap:8px!important}
+.qaBell{width:38px!important;height:38px!important;border:1px solid var(--pt-line)!important;background:#fff!important;color:var(--pt-navy)!important;border-radius:12px!important}
+
+/* Sidebar */
+.qaSide{
+  position:fixed!important;left:0!important;top:0!important;bottom:0!important;width:176px!important;
+  padding:88px 10px 18px!important;background:#f4fbfd!important;border-right:1px solid var(--pt-line)!important;
+  z-index:35!important;
+}
+.qaSide:before{
+  content:'PanelTakip';position:absolute;left:17px;top:23px;color:var(--pt-navy);
+  font-size:21px;font-weight:900;letter-spacing:-1.1px;
+}
+.qaSide:after{
+  content:'Restoranların Büyüme Ortağı';position:absolute;left:17px;top:49px;color:#6f8ba0;
+  font-size:7px;font-weight:700;letter-spacing:.1px;
+}
+.qaSide button{
+  width:100%!important;height:40px!important;margin:2px 0!important;padding:0 11px!important;
+  border:0!important;border-radius:9px!important;background:transparent!important;
+  color:#27496d!important;font-size:11px!important;font-weight:650!important;gap:9px!important;
+}
+.qaSide button svg{width:17px!important;height:17px!important;color:#355a7c!important}
+.qaSide button:hover{background:#ebf8fa!important}
+.qaSide button.active{
+  background:linear-gradient(90deg,#dff7f9,#eefcfd)!important;color:#0a8793!important;
+  box-shadow:inset 3px 0 0 var(--pt-turq)!important;font-weight:800!important;
+}
+.qaSide button.active svg{color:var(--pt-turq-2)!important}
+.qaSide button em{background:var(--pt-turq)!important}
+
+/* Main */
+.qaMain{
+  margin-left:176px!important;padding:18px 20px 42px!important;max-width:none!important;background:var(--pt-bg)!important;
+}
+.qaPage{max-width:none!important;width:100%!important}
+.qaTitleRow{margin-bottom:14px!important;align-items:center!important}
+.qaTitleRow h1,.qaGreeting h1{
+  font-size:22px!important;line-height:1.15!important;font-weight:800!important;letter-spacing:-.35px!important;
+  color:var(--pt-text)!important;margin:0!important;
+}
+.qaTitleRow p,.qaGreeting p{
+  font-size:10px!important;line-height:1.4!important;font-weight:500!important;color:var(--pt-muted)!important;margin:4px 0 0!important;
+}
+.qaGreeting{padding:0!important;margin:0 0 12px!important}
+.qaGreeting:after,.qaGreeting h1:before,.qaGreeting p:before{display:none!important;content:none!important}
+.qaGreeting h1{font-size:22px!important}
+.qaGreeting p{font-size:10px!important}
+
+/* Cards */
+.qaMetric,.qaDashboardMetric,.qaDashCard,.qaManageCard,.qaFeedbackList article,.qaProductList,.qaCategoryList{
+  background:#fff!important;border:1px solid var(--pt-line)!important;border-radius:12px!important;
+  box-shadow:0 2px 10px rgba(25,65,91,.035)!important;
+}
+.qaOverviewMetrics{gap:10px!important;margin:0 0 12px!important}
+.qaDashboardMetric{
+  min-height:78px!important;padding:11px 12px!important;grid-template-columns:34px 1fr!important;
+  column-gap:9px!important;
+}
+.qaDashboardMetric>i{
+  width:32px!important;height:32px!important;border-radius:10px!important;background:#e8f8fa!important;color:var(--pt-turq-2)!important;
+}
+.qaDashboardMetric strong{font-size:22px!important;line-height:1!important;font-weight:800!important;color:var(--pt-text)!important}
+.qaDashboardMetric span{font-size:9px!important;font-weight:750!important;color:#294968!important}
+.qaDashboardMetric small{font-size:8px!important;font-weight:500!important;color:#8093a4!important;margin-top:2px!important}
+
+.qaOverviewSplit{gap:10px!important;margin-bottom:10px!important}
+.qaDashCard{padding:13px 14px!important}
+.qaDashHead{margin-bottom:8px!important}
+.qaDashHead h2{font-size:13px!important;line-height:1.1!important;font-weight:800!important;color:var(--pt-text)!important}
+.qaDashHead p{font-size:8px!important;line-height:1.35!important;font-weight:500!important;color:var(--pt-muted)!important;margin-top:3px!important}
+.qaDashHead>svg{color:var(--pt-turq-2)!important;width:16px!important;height:16px!important}
+.qaOverviewDashboard:after{display:none!important;content:none!important}
+
+.qaQuickGrid{gap:7px!important}
+.qaQuickGrid button{
+  min-height:54px!important;padding:8px 9px!important;background:#f8fcfd!important;border:1px solid var(--pt-line)!important;
+  border-radius:10px!important;gap:8px!important;
+}
+.qaQuickGrid button>svg{
+  width:28px!important;height:28px!important;padding:6px!important;border-radius:8px!important;
+  background:#e8f8fa!important;color:var(--pt-turq-2)!important;
+}
+.qaQuickGrid b{font-size:8px!important;font-weight:750!important;color:#294968!important}
+.qaQuickGrid small{font-size:7px!important;font-weight:500!important;color:#8396a6!important;margin-top:1px!important}
+
+.qaHealthCard:after{background:#dff6f855!important}
+.qaHealthScore{margin:2px 0 9px!important}
+.qaHealthScore strong{font-size:28px!important;font-weight:800!important;color:var(--pt-turq-2)!important}
+.qaHealthScore span{font-size:7px!important;color:#7f92a3!important}
+.qaHealthList{gap:5px!important}.qaHealthList>div{font-size:7px!important;color:#4b647a!important;gap:5px!important}
+.qaHealthList svg{width:12px!important;height:12px!important;color:var(--pt-turq-2)!important}
+
+.qaPopularList>div{min-height:38px!important;grid-template-columns:16px 31px 1fr auto!important;gap:6px!important}
+.qaPopularList img{width:31px!important;height:31px!important;border-radius:8px!important}
+.qaPopularList b,.qaPopularList strong{font-size:7px!important;font-weight:750!important;color:#294968!important}
+.qaPopularList small{font-size:6px!important;color:#8597a7!important}
+.qaEmptyState,.qaEmptyChart{background:#f8fcfd!important;border-color:#dcebf0!important;min-height:92px!important}
+.qaEmptyState b,.qaEmptyChart b{font-size:8px!important;color:#35516e!important}
+.qaEmptyState span,.qaEmptyChart span{font-size:7px!important;color:#8293a2!important}
+.qaEmptyState>svg,.qaEmptyChart svg{color:var(--pt-turq-2)!important}
+
+/* Forms / lists */
+.qaAdd,.qaSave,.qaCallList button{
+  height:38px!important;border-radius:9px!important;background:var(--pt-turq)!important;color:#fff!important;
+  font-size:10px!important;font-weight:750!important;
+}
+.qaSearch{height:40px!important;border-color:var(--pt-line)!important;border-radius:10px!important;background:#fff!important}
+.qaCategoryChips button{border-color:var(--pt-line)!important;background:#f8fcfd!important;color:#42617d!important}
+.qaCategoryChips button.active{background:var(--pt-turq)!important;color:#fff!important;border-color:var(--pt-turq)!important}
+.qaProductRow{min-height:66px!important;border-color:#edf4f6!important}
+.qaProductRow img{border-radius:9px!important}
+.qaProductRow b,.qaProductRow strong{font-size:10px!important;color:#294968!important}
+.qaProductRow small{font-size:8px!important;color:#8195a5!important}
+.qaToggle.on{background:var(--pt-turq)!important}
+.qaManageCard h2,.qaInlineEditor h3{font-family:Inter,Arial,sans-serif!important;font-size:14px!important;font-weight:800!important;color:var(--pt-text)!important}
+.qaManageCard label,.qaEditor label{font-size:9px!important;font-weight:700!important;color:#3b5873!important}
+.qaManageCard input,.qaInlineEditor input,.qaEditor input,.qaEditor textarea,.qaEditor select{border-color:var(--pt-line)!important;background:#fff!important}
+.qaSecondary,.qaQrCard a{border-color:#bfe8eb!important;background:#eefbfc!important;color:#0b8f9a!important}
+.qaInfo{background:#eef8fb!important}
+.qaInlineEditor,.qaEditor{background:#f8fcfd!important;border-color:var(--pt-line)!important}
+
+/* Mobile */
+@media(max-width:900px){
+  .qaTop{margin-left:0!important;left:0!important;padding:0 14px!important;height:64px!important}
+  .qaSide{display:none!important}
+  .qaMain{margin-left:0!important;padding:14px 14px 86px!important}
+  .qaTitleRow h1,.qaGreeting h1{font-size:20px!important}
+  .qaMobileNav{background:#fff!important;border-top:1px solid var(--pt-line)!important}
+  .qaMobileNav button.active{color:var(--pt-turq-2)!important}
+}
