@@ -594,3 +594,13 @@ button.qaCategoryMenuRow{grid-template-columns:minmax(0,1fr) auto!important;curs
 .ptConfirmActions .secondary{background:#fff;border:1px solid #cfdde5;color:#24445f}
 .ptConfirmActions .danger{background:#d9554c;border:1px solid #d9554c;color:#fff}
 .ptConfirmActions button:hover{filter:brightness(.98)}
+
+/* Workbench pagination + category destructive action */
+.qaPagination{display:flex;align-items:center;justify-content:center;gap:5px;padding:10px 8px 4px;margin-top:auto}
+.qaPagination button{width:29px;height:29px;border:1px solid #d5e3ea;border-radius:8px;background:#fff;color:#47657a;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.qaPagination button.active{background:#0daebe;border-color:#0daebe;color:#fff}
+.qaPagination button:disabled{opacity:.35;cursor:default}
+.qaCategoryMenuDelete{width:28px;height:28px;flex:0 0 28px;border:0;border-radius:7px;background:transparent;color:#91a8b7;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.qaCategoryMenuDelete:hover{background:#fff0ef;color:#d9534f}
+.qaCategoryMenuRow{gap:5px}
+.qaCategoryMenuSelect{min-width:0}
