@@ -58,11 +58,18 @@ export default function Page(){
   <section className="qaCategoryRail">
    <div className="qaPanelHead"><div><h2>Kategoriler</h2><p>Menü gruplarını yönetin.</p></div><button onClick={addCategory}><Plus size={14}/></button></div>
    <div className="qaCategoryList">
-    <div className={category==='all'?'qaCategoryRow fixed active':'qaCategoryRow fixed'}><button onClick={()=>setCategory('all')}><span><LayoutGrid size={16}/><b>Tümü</b></span><em>{products.length}</em></button></div>
-    {[...categories].sort((a,b)=>a.sortOrder-b.sortOrder).map(cat=><div key={cat.id} className={category===cat.id?'qaCategoryRow active':'qaCategoryRow'} draggable onDragStart={()=>setDragCat(cat.id)} onDragOver={e=>e.preventDefault()} onDrop={()=>dragCat&&reorderCategory(dragCat,cat.id)}>
+    <button type="button" className={category==='all'?'qaCategoryAll active':'qaCategoryAll'} onClick={()=>setCategory('all')}>
+      <span className="qaCategoryMain"><LayoutGrid size={16}/><b>Tümü</b></span>
+      <span className="qaCategoryCount">{products.length} ürün</span>
+    </button>
+    {[...categories].sort((a,b)=>a.sortOrder-b.sortOrder).map((cat,index)=><div key={cat.id} className={category===cat.id?'qaCategoryItem active':'qaCategoryItem'} draggable onDragStart={()=>setDragCat(cat.id)} onDragEnd={()=>setDragCat(null)} onDragOver={e=>{e.preventDefault();e.dataTransfer.dropEffect='move'}} onDrop={e=>{e.preventDefault();if(dragCat)reorderCategory(dragCat,cat.id)}}>
+      <span className="qaCategoryOrder">{index+1}</span>
       <span className="qaCatGrip" title="Sürükleyerek sırala"><GripVertical size={15}/></span>
-      <button onClick={()=>setCategory(cat.id)}><span><Tags size={16}/><b>{cat.name}</b></span><em>{products.filter(p=>p.categoryId===cat.id).length}</em></button>
-      <button className="qaCatEdit" onClick={()=>setCatDraft(cat)}><Edit3 size={13}/></button>
+      <button type="button" className="qaCategorySelect" onClick={()=>setCategory(cat.id)}>
+        <span className="qaCategoryMain"><Tags size={15}/><b>{cat.name}</b></span>
+        <span className="qaCategoryCount">{products.filter(p=>p.categoryId===cat.id).length} ürün</span>
+      </button>
+      <button type="button" className="qaCatEdit" title="Kategoriyi düzenle" onClick={()=>setCatDraft(cat)}><Edit3 size={13}/></button>
     </div>)}
    </div>
    {catDraft&&<div className="qaCategoryPopover">
