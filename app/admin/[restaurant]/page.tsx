@@ -20,14 +20,16 @@ const PREVIEW_DATA:Data={restaurant:{id:'preview',slug:'makarilla',name:'Makaril
 
 export default function Page(){
  const params=useParams<{restaurant:string}>(),slug=String(params.restaurant||'').toLowerCase();
- const[data,setData]=useState<Data|null>(PREVIEW_DATA),[loading,setLoading]=useState(false),[error,setError]=useState(''),[saving,setSaving]=useState(false),[tab,setTab]=useState<Tab>('overview'),[query,setQuery]=useState(''),[category,setCategory]=useState('all'),[editing,setEditing]=useState<Product|null>(null),[isNew,setIsNew]=useState(false);
+ const[data,setData]=useState<Data|null>(PREVIEW_DATA),[loading,setLoading]=useState(false),[error,setError]=useState(''),[saving,setSaving]=useState(false),[tab,setTab]=useState<Tab>('overview'),[query,setQuery]=useState(''),[category,setCategory]=useState('all'),[editing,setEditing]=useState<Product|null>(null),[isNew,setIsNew]=useState(false),[catDraft,setCatDraft]=useState<Category|null>(null),[dragCat,setDragCat]=useState<string|null>(null);
  const load=async(silent=false)=>{setData(PREVIEW_DATA);setError('');setLoading(false)};
  useEffect(()=>{},[slug]);
  useEffect(()=>{},[slug]);
  const action=async(body:any)=>true;
  const products=data?.products||[],categories=data?.categories||[],filtered=useMemo(()=>products.filter(p=>(category==='all'||p.categoryId===category)&&(!query||`${p.name} ${p.description}`.toLocaleLowerCase('tr-TR').includes(query.toLocaleLowerCase('tr-TR')))),[products,category,query]);
  const persist=async(next:Product[])=>{if(data)setData({...data,products:next})};
- const addCategory=()=>{if(!data)return;const name=window.prompt('Yeni kategori adı');if(!name?.trim())return;const next={id:`c-${Date.now()}`,name:name.trim(),isActive:true,sortOrder:categories.length+1};setData({...data,categories:[...categories,next]});setCategory(next.id)};
+ const addCategory=()=>setCatDraft({id:'',name:'',isActive:true,sortOrder:categories.length+1});
+ const saveCategoryLocal=(draft:Category)=>{if(!data||!draft.name.trim())return;const item={...draft,id:draft.id||`c-${Date.now()}`,name:draft.name.trim()};const next=draft.id?categories.map(x=>x.id===draft.id?item:x):[...categories,item];setData({...data,categories:next});setCategory(item.id);setCatDraft(null)};
+ const reorderCategory=(fromId:string,toId:string)=>{if(!data||fromId===toId)return;const list=[...categories].sort((a,b)=>a.sortOrder-b.sortOrder),from=list.findIndex(x=>x.id===fromId),to=list.findIndex(x=>x.id===toId);if(from<0||to<0)return;const [moved]=list.splice(from,1);list.splice(to,0,moved);const next=list.map((x,i)=>({...x,sortOrder:i+1}));setData({...data,categories:next});setDragCat(null)};
  if(loading)return <main className="qrAdminPremium"><div style={{padding:40}}>Panel yükleniyor...</div></main>;
  if(error||!data)return <main className="qrAdminPremium"><div style={{padding:40}}><h1>{error}</h1></div></main>;
  const nav:[Tab,string,any][]=[['overview','Genel Bakış',Home],['menu','Menüm',Utensils],['categories','Kategoriler',Tags],['qr','QR Kod',QrCode],['restaurant','Restoran Bilgileri',Store],['calls','Garson Çağrıları',Bell],['feedback','Geri Bildirimler',Star],['stats','İstatistikler',BarChart3],['settings','Ayarlar',Settings]];
@@ -56,9 +58,18 @@ export default function Page(){
   <section className="qaCategoryRail">
    <div className="qaPanelHead"><div><h2>Kategoriler</h2><p>Menü gruplarını yönetin.</p></div><button onClick={addCategory}><Plus size={14}/></button></div>
    <div className="qaCategoryList">
-    <button className={category==='all'?'active':''} onClick={()=>setCategory('all')}><span><LayoutGrid size={16}/><b>Tümü</b></span><em>{products.length}</em></button>
-    {categories.map(cat=><button key={cat.id} className={category===cat.id?'active':''} onClick={()=>setCategory(cat.id)}><span><Tags size={16}/><b>{cat.name}</b></span><em>{products.filter(p=>p.categoryId===cat.id).length}</em></button>)}
+    <div className={category==='all'?'qaCategoryRow fixed active':'qaCategoryRow fixed'}><button onClick={()=>setCategory('all')}><span><LayoutGrid size={16}/><b>Tümü</b></span><em>{products.length}</em></button></div>
+    {[...categories].sort((a,b)=>a.sortOrder-b.sortOrder).map(cat=><div key={cat.id} className={category===cat.id?'qaCategoryRow active':'qaCategoryRow'} draggable onDragStart={()=>setDragCat(cat.id)} onDragOver={e=>e.preventDefault()} onDrop={()=>dragCat&&reorderCategory(dragCat,cat.id)}>
+      <span className="qaCatGrip" title="Sürükleyerek sırala"><GripVertical size={15}/></span>
+      <button onClick={()=>setCategory(cat.id)}><span><Tags size={16}/><b>{cat.name}</b></span><em>{products.filter(p=>p.categoryId===cat.id).length}</em></button>
+      <button className="qaCatEdit" onClick={()=>setCatDraft(cat)}><Edit3 size={13}/></button>
+    </div>)}
    </div>
+   {catDraft&&<div className="qaCategoryPopover">
+    <div className="qaCategoryPopoverHead"><div><b>{catDraft.id?'Kategori Düzenle':'Yeni Kategori'}</b><small>Menünüzde görünecek kategori adını girin.</small></div><button onClick={()=>setCatDraft(null)}>×</button></div>
+    <label>Kategori Adı<input autoFocus value={catDraft.name} onChange={e=>setCatDraft({...catDraft,name:e.target.value})} onKeyDown={e=>{if(e.key==='Enter')saveCategoryLocal(catDraft);if(e.key==='Escape')setCatDraft(null)}} placeholder="Örn. İçecekler"/></label>
+    <div className="qaCategoryPopoverActions"><button onClick={()=>setCatDraft(null)}>İptal</button><button className="primary" disabled={!catDraft.name.trim()} onClick={()=>saveCategoryLocal(catDraft)}>{catDraft.id?'Kaydet':'Kategori Ekle'}</button></div>
+   </div>}
   </section>
   <section className="qaMenuRail">
    <div className="qaPanelHead"><div><h2>Menüm</h2><p>Ürünleri seçin ve düzenleyin.</p></div><button onClick={openNew}><Plus size={14}/></button></div>
