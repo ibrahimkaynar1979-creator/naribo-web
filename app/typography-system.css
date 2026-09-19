@@ -8,18 +8,18 @@
 }
 
 /* Hero hariç bütün ana bölüm başlıkları aynı tipografik ölçüyü kullanır. */
-main section[class] h2 {
+main:not(.qrAdminPremium) section[class] h2 {
   font-size: var(--naribo-section-title-desktop) !important;
   line-height: .98 !important;
   letter-spacing: -2px !important;
   font-weight: 900 !important;
 }
 
-main section[class] .sectionKicker,
-main section[class] [class*="Kicker"],
-main section[class] .gpK,
-main section[class] .fcK,
-main section[class] .qrK {
+main:not(.qrAdminPremium) section[class] .sectionKicker,
+main:not(.qrAdminPremium) section[class] [class*="Kicker"],
+main:not(.qrAdminPremium) section[class] .gpK,
+main:not(.qrAdminPremium) section[class] .fcK,
+main:not(.qrAdminPremium) section[class] .qrK {
   font-size: var(--naribo-section-kicker-desktop) !important;
   line-height: 1.1 !important;
   font-weight: 800 !important;
@@ -28,18 +28,18 @@ main section[class] .qrK {
 
 @media (max-width: 760px) {
   /* KİLİTLİ REFERANS: Reklamdan Siparişe */
-  main section[class] h2 {
+  main:not(.qrAdminPremium) section[class] h2 {
     font-size: var(--naribo-section-title-mobile) !important;
     line-height: .98 !important;
     letter-spacing: -1px !important;
     font-weight: 900 !important;
   }
 
-  main section[class] .sectionKicker,
-  main section[class] [class*="Kicker"],
-  main section[class] .gpK,
-  main section[class] .fcK,
-  main section[class] .qrK {
+  main:not(.qrAdminPremium) section[class] .sectionKicker,
+  main:not(.qrAdminPremium) section[class] [class*="Kicker"],
+  main:not(.qrAdminPremium) section[class] .gpK,
+  main:not(.qrAdminPremium) section[class] .fcK,
+  main:not(.qrAdminPremium) section[class] .qrK {
     font-size: var(--naribo-section-kicker-mobile) !important;
     line-height: 1.1 !important;
     letter-spacing: 4px !important;
