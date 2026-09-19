@@ -5,7 +5,7 @@ import './typography.css';
 import './sections.css';
 import { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'next/navigation';
-import {Activity,AlertCircle,BarChart3,Bell,ChevronDown,ChevronLeft,Edit3,Eye,GripVertical,Home,ImageOff,LayoutGrid,Menu,MessageSquareText,MoreHorizontal,MoreVertical,Plus,QrCode,Search,Settings,Star,Store,Tags,Trash2,Utensils,Wifi,MapPin,Phone,Instagram,CheckCircle2,Clock,ExternalLink,Save} from 'lucide-react';
+import {Activity,AlertCircle,BarChart3,Bell,ChevronDown,ChevronLeft,ChevronRight,Edit3,Eye,GripVertical,Home,ImageOff,LayoutGrid,Menu,MessageSquareText,MoreHorizontal,MoreVertical,Plus,QrCode,Search,Settings,Star,Store,Tags,Trash2,Utensils,Wifi,MapPin,Phone,Instagram,CheckCircle2,Clock,ExternalLink,Save} from 'lucide-react';
 
 type Category={id:string;name:string;isActive:boolean;sortOrder:number};
 type Product={id:string;categoryId:string;name:string;description:string;price:number;image:string;allergens?:string[];isActive:boolean;sortOrder:number};
@@ -69,32 +69,72 @@ export default function Page(){
 
 function Title({title,sub,action}:{title:string;sub:string;action?:React.ReactNode}){return <div className="qaTitleRow"><div><h1>{title}</h1><p>{sub}</p></div>{action}</div>}
 function Overview({data,setTab,resolve}:{data:Data;setTab:(t:Tab)=>void;resolve:(id:string)=>void}){
- const{products,categories,stats}=data;
+ const{restaurant,products,categories,stats}=data;
  const active=products.filter(p=>p.isActive).length;
+ const activeCats=categories.filter(c=>c.isActive).length;
  const missingImages=products.filter(p=>!p.image?.trim()).length;
  const missingDescriptions=products.filter(p=>!p.description?.trim()).length;
- const healthIssues=missingImages+missingDescriptions+products.filter(p=>!p.isActive).length;
- const healthScore=products.length?Math.max(0,100-Math.round((healthIssues/(products.length*3))*100)):0;
- const pending=data.calls.filter(c=>c.status==='pending').slice(0,3);
  const top=stats.topProducts.length?stats.topProducts:products.slice(0,3).map(p=>({id:p.id,name:p.name,image:p.image,price:p.price,views:0}));
- return <div className="qaPage qaOverviewDashboard qaOverviewCompact">
-  <div className="qaOverviewTop">
-   <Metric icon={<Eye size={18}/>} value={String(stats.todayViews)} label="QR Görüntüleme" note="Bugün"/>
-   <Metric icon={<Utensils size={18}/>} value={String(products.length)} label="Menü Ürünü" note={`${active} aktif`}/>
-   <Metric icon={<Star size={18}/>} value={stats.feedbackCount?stats.averageRating.toFixed(1):"—"} label="Müşteri Puanı" note={`${stats.feedbackCount} geri bildirim`}/>
-   <Metric icon={<Bell size={18}/>} value={String(stats.pendingCalls)} label="Bekleyen Çağrı" note={stats.pendingCalls?"Yanıt bekliyor":"Aktif çağrı yok"}/>
-   <button className="qaPrimaryAction" onClick={()=>setTab("menu")}><Plus size={18}/><span>Ürün Ekle</span></button>
-  </div>
-  <div className="qaOverviewMainGrid">
-   <section className="qaDashCard qaPerformanceCard"><div className="qaDashHead"><div><h2>Menü Performansı</h2></div><span className="qaStatusPill">Son 7 gün</span></div><MiniChart rows={stats.dailyViews}/></section>
-   <section className="qaDashCard qaHealthCard"><div className="qaDashHead"><div><h2>Menü Sağlığı</h2></div></div><div className="qaHealthCompact"><div className="qaHealthRing"><strong>{healthScore}%</strong></div><div className="qaHealthList"><div><CheckCircle2/><span><b>{active}/{products.length}</b> ürün yayında</span></div><div><CheckCircle2/><span>{missingImages?`${missingImages} görsel eksik`:"Görsel var"}</span></div><div><CheckCircle2/><span>{missingDescriptions?`${missingDescriptions} açıklama eksik`:"Açıklama var"}</span></div></div></div></section>
-   <section className="qaDashCard qaQuickCompact"><div className="qaDashHead"><div><h2>Hızlı İşlemler</h2></div></div><div className="qaQuickGrid qaQuickGridCompact"><Quick icon={<Plus/>} title="Ürün Düzenle" sub="" on={()=>setTab("menu")}/><Quick icon={<Tags/>} title="Kategorileri Yönet" sub="" on={()=>setTab("categories")}/><Quick icon={<QrCode/>} title="QR Kod" sub="" on={()=>setTab("qr")}/><Quick icon={<Store/>} title="Restoran Bilgileri" sub="" on={()=>setTab("restaurant")}/></div></section>
-  </div>
-  <div className="qaOverviewBottomGrid">
-   <section className="qaDashCard"><div className="qaDashHead"><div><h2>Öne Çıkan Ürünler</h2></div><button onClick={()=>setTab("menu")}>Tümünü Gör</button></div><div className="qaPopularList qaPopularTable">{top.slice(0,3).map((p,i)=><div key={p.id}><span className="qaRank">{i+1}</span><img src={p.image||"/makarilla_tabak.png"} alt=""/><div><b>{p.name}</b><small>{p.views} görüntülenme</small></div><strong>₺{p.price}</strong></div>)}</div></section>
-   <section className="qaDashCard"><div className="qaDashHead"><div><h2>Son Geri Bildirimler</h2></div><button onClick={()=>setTab("feedback")}>Tümünü Gör</button></div>{data.feedback.length?<div className="qaFeedbackMini">{data.feedback.slice(0,3).map(f=><div key={f.id}><b>{"★".repeat(f.rating)}{"☆".repeat(5-f.rating)}</b><span>{f.comment||"Yorum bırakılmadı."}</span></div>)}</div>:<div className="qaCompactEmpty"><MessageSquareText size={18}/><span>Henüz geri bildirim yok.</span></div>}</section>
-   <section className="qaDashCard"><div className="qaDashHead"><div><h2>Garson Çağrıları</h2></div><button onClick={()=>setTab("calls")}>Tümünü Gör</button></div>{pending.length?<div className="qaCallMini">{pending.map(c=><div key={c.id}><b>Masa {c.tableNo}</b><small>{ago(c.createdAt)}</small><button onClick={()=>resolve(c.id)}>Tamamlandı</button></div>)}</div>:<div className="qaCompactEmpty qaCompactCall"><Bell size={24}/><span>Aktif garson çağrısı yok.</span></div>}</section>
-  </div>
+ const recent=data.feedback.slice(0,3);
+ const healthOk=active===products.length&&missingImages===0&&missingDescriptions===0&&Boolean(restaurant.name&&restaurant.phone&&restaurant.address);
+ const menuUrl=`https://makarilla.menu.paneltakip.com/menu/${restaurant.slug}`;
+ return <div className="qaPage qaOverviewHome">
+  <section className="qaOverviewHero">
+   <div className="qaOverviewHello">
+    <span>Merhaba, {restaurant.name}</span>
+    <div className="qaOverviewTitleLine"><h1>{restaurant.name} QR Menü</h1><span className="qaLiveBadge"><i/>Yayında</span></div>
+    <p>Menünüz yayında! İşte hızlı yönetim alanınız.</p>
+   </div>
+   <div className="qaOverviewHeroActions">
+    <a href={menuUrl} target="_blank" rel="noreferrer" className="qaGhostAction"><ExternalLink size={15}/>Menüyü Görüntüle</a>
+    <button className="qaHeroAdd" onClick={()=>setTab("menu")}><Plus size={16}/>Ürün Ekle</button>
+   </div>
+   <button className="qaQrPreviewCard" onClick={()=>setTab("qr")}>
+    <span className="qaQrPreviewIcon"><QrCode size={44}/></span>
+    <span><b>QR Menünüz</b><small>Müşterileriniz bu kodla menünüze ulaşır.</small><em>QR Kodu Görüntüle <ChevronRight size={13}/></em></span>
+   </button>
+  </section>
+
+  <section className="qaOverviewSummary">
+   <div><i><Utensils/></i><span><strong>{products.length}</strong><b>Ürün</b><small>{active}’ü yayında</small></span></div>
+   <div><i><Tags/></i><span><strong>{activeCats}</strong><b>Kategori</b><small>Aktif</small></span></div>
+   <div><i><QrCode/></i><span><strong>QR Menü</strong><b>Aktif</b><small>Müşteriler erişebiliyor</small></span></div>
+   <div><i><BarChart3/></i><span><strong>{stats.todayViews}</strong><b>Menü Görüntülenme</b><small>Bugün</small></span></div>
+  </section>
+
+  <section className="qaOverviewQuick">
+   <div className="qaOverviewSectionHead"><div><h2>Hızlı Yönetim</h2><p>Menünüzü kolayca yönetin, müşterilerinize en iyi deneyimi sunun.</p></div></div>
+   <div className="qaOverviewQuickGrid">
+    <button onClick={()=>setTab("menu")}><i><Utensils/></i><span><b>Ürünler</b><small>Ürün ekleyin, düzenleyin, fiyat ve açıklamaları yönetin.</small></span><em><ChevronRight/></em></button>
+    <button onClick={()=>setTab("categories")}><i><Tags/></i><span><b>Kategoriler</b><small>Kategorilerinizi oluşturun, sıralayın, düzenleyin.</small></span><em><ChevronRight/></em></button>
+    <button onClick={()=>setTab("qr")}><i><QrCode/></i><span><b>QR Kod</b><small>QR kodunuzu indirin, masalarda ve görsellerde kullanın.</small></span><em><ChevronRight/></em></button>
+    <button onClick={()=>setTab("restaurant")}><i><Store/></i><span><b>Restoran Bilgileri</b><small>İşletme adı, adres, telefon ve çalışma bilgileri.</small></span><em><ChevronRight/></em></button>
+    <button onClick={()=>setTab("calls")}><i><Bell/></i><span><b>Garson Çağrıları</b><small>Masa çağrılarını yönetin, anlık bildirimleri takip edin.</small></span><em><ChevronRight/></em></button>
+    <button onClick={()=>setTab("feedback")}><i><MessageSquareText/></i><span><b>Geri Bildirimler</b><small>Müşteri yorumlarını görün, memnuniyeti takip edin.</small></span><em><ChevronRight/></em></button>
+   </div>
+  </section>
+
+  <section className="qaOverviewHealth">
+   <div className="qaHealthLead"><i><CheckCircle2/></i><span><b>Menü Sağlığı</b><small>QR menünüz yayında ve her şey hazır.</small></span></div>
+   <div className="qaHealthChecks">
+    <span><CheckCircle2/><b>{active}/{products.length}</b> ürün yayında</span>
+    <span><CheckCircle2/>Ürün görselleri {missingImages?"eksik":"tamam"}</span>
+    <span><CheckCircle2/>Kategoriler {activeCats?"aktif":"eksik"}</span>
+    <span><CheckCircle2/>İşletme bilgileri {restaurant.phone&&restaurant.address?"tamam":"eksik"}</span>
+   </div>
+   <div className={healthOk?"qaHealthMessage success":"qaHealthMessage"}><b>{healthOk?"Harika!":"Kontrol gerekli"}</b><small>{healthOk?"Menünüz sorunsuz şekilde yayında.":"Eksik alanları tamamlayın."}</small></div>
+  </section>
+
+  <section className="qaOverviewFooterGrid">
+   <div className="qaOverviewListCard">
+    <div className="qaOverviewCardHead"><div><h2>Öne Çıkan Ürünler</h2><p>Müşterilerinizin en çok ilgisini çeken lezzetler.</p></div><button onClick={()=>setTab("menu")}>Tümünü Gör <ChevronRight/></button></div>
+    <div className="qaOverviewProducts">{top.slice(0,3).map((p,i)=><div key={p.id}><span>{i+1}</span><img src={p.image||"/makarilla_tabak.png"} alt=""/><div><b>{p.name}</b><small>{p.views} görüntülenme</small></div><strong>₺{p.price}</strong></div>)}</div>
+   </div>
+   <div className="qaOverviewListCard">
+    <div className="qaOverviewCardHead"><div><h2>Son Geri Bildirimler</h2><p>Müşterilerinizin menünüz hakkındaki yorumları.</p></div><button onClick={()=>setTab("feedback")}>Tümünü Gör <ChevronRight/></button></div>
+    <div className="qaOverviewFeedback">{recent.length?recent.map(f=><div key={f.id}><span className="qaStars">{"★".repeat(f.rating)}{"☆".repeat(5-f.rating)}</span><b>{f.comment||"Yorum bırakılmadı."}</b><small>{new Date(f.createdAt).toLocaleDateString("tr-TR")}</small></div>):<div className="qaFeedbackEmpty"><MessageSquareText/><span>Henüz geri bildirim yok.</span></div>}</div>
+   </div>
+  </section>
  </div>
 }
 function Metric({icon,value,label,note}:{icon:React.ReactNode;value:string;label:string;note:string}){return <div className="qaMetric qaDashboardMetric"><i>{icon}</i><strong>{value}</strong><span>{label}</span><small>{note}</small></div>}
