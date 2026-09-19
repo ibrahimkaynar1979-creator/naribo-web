@@ -428,3 +428,19 @@
 .qaCatEdit{display:flex!important;align-items:center!important;justify-content:center!important;width:28px!important;height:28px!important;border:0!important;background:transparent!important;color:#6c879b!important;border-radius:7px!important}
 .qaCatEdit:hover{background:#edf8fa!important;color:#079eaa!important}
 .qaCategoryRow.active{background:#eefbfc!important;border-color:#bde9ed!important;border-radius:9px!important}
+
+/* Rebuilt category list — names, counts and sortable order */
+.qaCategoryList{display:flex!important;flex-direction:column!important;gap:7px!important;padding:7px 8px 12px!important;overflow-y:auto!important;overflow-x:hidden!important}
+.qaCategoryAll,.qaCategoryItem{box-sizing:border-box!important;width:100%!important;min-height:48px!important;border:1px solid #e0ebf0!important;border-radius:10px!important;background:#fff!important;color:#173158!important}
+.qaCategoryAll{display:flex!important;align-items:center!important;justify-content:space-between!important;padding:0 11px!important;cursor:pointer!important}
+.qaCategoryItem{display:grid!important;grid-template-columns:22px 18px minmax(0,1fr) 30px!important;align-items:center!important;padding:0 6px 0 5px!important;cursor:grab!important}
+.qaCategoryItem:active{cursor:grabbing!important}
+.qaCategoryAll.active,.qaCategoryItem.active{background:#eafafb!important;border-color:#9edfe4!important}
+.qaCategoryOrder{display:flex!important;align-items:center!important;justify-content:center!important;width:20px!important;height:24px!important;border-radius:7px!important;background:#edf5f8!important;color:#5d788d!important;font-size:10px!important;font-weight:800!important}
+.qaCategorySelect{height:46px!important;width:100%!important;min-width:0!important;border:0!important;background:transparent!important;padding:0 4px!important;display:flex!important;align-items:center!important;justify-content:space-between!important;gap:6px!important;color:#173158!important;text-align:left!important}
+.qaCategoryMain{display:flex!important;align-items:center!important;gap:7px!important;min-width:0!important}
+.qaCategoryMain b{display:block!important;min-width:0!important;font-size:11.5px!important;line-height:1.2!important;font-weight:800!important;color:#102d54!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+.qaCategoryCount{flex:0 0 auto!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;height:23px!important;padding:0 7px!important;border-radius:8px!important;background:#edf5f8!important;color:#4e6b80!important;font-size:9px!important;font-weight:800!important;white-space:nowrap!important}
+.qaCategoryAll.active .qaCategoryCount,.qaCategoryItem.active .qaCategoryCount{background:#fff!important;color:#078a95!important}
+.qaCategoryItem .qaCatGrip{width:18px!important;color:#8ba3b5!important}
+.qaCategoryItem .qaCatEdit{opacity:1!important;width:28px!important;height:28px!important}
