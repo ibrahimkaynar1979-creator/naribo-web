@@ -355,3 +355,34 @@
   .qaMenuWorkbench{grid-template-columns:170px 250px minmax(420px,1.45fr) 285px;gap:8px}
   .qaPhoneCompact{width:270px!important}
 }
+
+/* Category rail interaction — PanelTakip native popover */
+.qaCategoryRail{position:relative}
+.qaCategoryList{gap:4px}
+.qaCategoryList .qaCategoryRow{height:42px;flex:0 0 42px;display:grid;grid-template-columns:20px minmax(0,1fr) 27px;align-items:center;border:1px solid transparent;border-radius:9px;color:#31516f;transition:.15s ease}
+.qaCategoryList .qaCategoryRow.fixed{grid-template-columns:1fr}
+.qaCategoryList .qaCategoryRow.active{background:#eefafb;border-color:#bce7ea;color:#087f8c}
+.qaCategoryList .qaCategoryRow:not(.fixed):hover{background:#f7fbfd;border-color:#e1edf2}
+.qaCategoryList .qaCategoryRow>button{height:40px!important;min-width:0;border:0!important;background:transparent!important;padding:0 5px!important}
+.qaCategoryList .qaCategoryRow>button:first-of-type{display:flex;align-items:center;justify-content:space-between;color:inherit;text-align:left}
+.qaCategoryList .qaCategoryRow>button:first-of-type span{display:flex;align-items:center;gap:6px;min-width:0}
+.qaCategoryList .qaCategoryRow>button:first-of-type b{font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.qaCategoryList .qaCategoryRow>button:first-of-type em{font-style:normal;font-size:9px;font-weight:800;background:#eef5f8;padding:3px 6px;border-radius:8px}
+.qaCatGrip{display:grid;place-items:center;color:#9aabbb;cursor:grab}
+.qaCatGrip:active{cursor:grabbing}
+.qaCategoryList .qaCatEdit{width:27px!important;padding:0!important;display:grid!important;place-items:center!important;color:#7890a6!important;opacity:0}
+.qaCategoryRow:hover .qaCatEdit,.qaCategoryRow.active .qaCatEdit{opacity:1}
+.qaCategoryPopover{position:absolute;z-index:30;top:52px;left:10px;width:300px;padding:14px;background:#fff;border:1px solid #dce8ef;border-radius:14px;box-shadow:0 18px 46px rgba(21,52,76,.18)}
+.qaCategoryPopover:before{content:"";position:absolute;top:-6px;right:14px;width:11px;height:11px;background:#fff;border-left:1px solid #dce8ef;border-top:1px solid #dce8ef;transform:rotate(45deg)}
+.qaCategoryPopoverHead{display:flex;justify-content:space-between;gap:12px;margin-bottom:12px}
+.qaCategoryPopoverHead>div{display:flex;flex-direction:column;gap:3px}
+.qaCategoryPopoverHead b{font-size:14px;color:#082a58}
+.qaCategoryPopoverHead small{font-size:10px;line-height:1.35;color:#71869d}
+.qaCategoryPopoverHead>button{width:25px;height:25px;border:0;border-radius:7px;background:#f1f6f8;color:#506a80;font-size:18px;line-height:1}
+.qaCategoryPopover label{display:flex;flex-direction:column;gap:6px;font-size:10.5px;font-weight:750;color:#173158}
+.qaCategoryPopover input{height:38px;border:1px solid #cfe0e9;border-radius:9px;padding:0 10px;outline:0;font-size:12px;color:#173158}
+.qaCategoryPopover input:focus{border-color:#08aeba;box-shadow:0 0 0 3px rgba(8,174,186,.1)}
+.qaCategoryPopoverActions{display:flex;justify-content:flex-end;gap:7px;margin-top:12px}
+.qaCategoryPopoverActions button{height:34px;padding:0 13px;border:1px solid #d6e3ea;border-radius:9px;background:#fff;color:#31516f;font-size:10.5px;font-weight:750}
+.qaCategoryPopoverActions button.primary{border-color:#08aeba;background:#08aeba;color:#fff}
+.qaCategoryPopoverActions button:disabled{opacity:.45;cursor:not-allowed}
