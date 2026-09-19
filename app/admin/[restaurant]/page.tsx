@@ -8,7 +8,7 @@ import { useParams } from 'next/navigation';
 import {Activity,AlertCircle,BarChart3,Bell,ChevronDown,ChevronLeft,ChevronRight,Edit3,Eye,GripVertical,Home,ImageOff,LayoutGrid,Menu,MessageSquareText,MoreHorizontal,MoreVertical,Plus,QrCode,Search,Settings,Star,Store,Tags,Trash2,Utensils,Wifi,MapPin,Phone,Instagram,CheckCircle2,Clock,ExternalLink,Save} from 'lucide-react';
 
 type Category={id:string;name:string;isActive:boolean;sortOrder:number};
-type Product={id:string;categoryId:string;name:string;description:string;price:number;image:string;allergens?:string[];calories?:number;isActive:boolean;sortOrder:number};
+type Product={id:string;categoryId:string;name:string;description:string;price:number;image:string;allergens?:string[];calories?:number;featured?:boolean;stockStatus?:'in'|'out';isActive:boolean;sortOrder:number};
 type Restaurant={id:string;slug:string;name:string;logo:string;cover:string;description:string;phone:string;address:string;instagram:string;wifiName:string;wifiPassword:string;iban:string;directionsUrl:string;openingHours:Record<string,string>;themeColor:string};
 type Call={id:string;tableNo:string;note:string;status:string;createdAt:string;resolvedAt?:string};
 type Feedback={id:string;rating:number;comment:string;customerName:string;createdAt:string};
@@ -20,20 +20,22 @@ const PREVIEW_DATA:Data={restaurant:{id:'preview',slug:'makarilla',name:'Makaril
 
 export default function Page(){
  const params=useParams<{restaurant:string}>(),slug=String(params.restaurant||'').toLowerCase();
- const[data,setData]=useState<Data|null>(PREVIEW_DATA),[loading,setLoading]=useState(false),[error,setError]=useState(''),[saving,setSaving]=useState(false),[tab,setTab]=useState<Tab>('overview'),[query,setQuery]=useState(''),[category,setCategory]=useState('all'),[editing,setEditing]=useState<Product|null>(null),[isNew,setIsNew]=useState(false),[catDraft,setCatDraft]=useState<Category|null>(null),[dragCat,setDragCat]=useState<string|null>(null);
+ const[data,setData]=useState<Data|null>(PREVIEW_DATA),[loading,setLoading]=useState(false),[error,setError]=useState(''),[saving,setSaving]=useState(false),[tab,setTab]=useState<Tab>('overview'),[query,setQuery]=useState(''),[category,setCategory]=useState('all'),[editing,setEditing]=useState<Product|null>(null),[isNew,setIsNew]=useState(false),[catDraft,setCatDraft]=useState<Category|null>(null),[dragCat,setDragCat]=useState<string|null>(null),[dragProduct,setDragProduct]=useState<string|null>(null);
  const load=async(silent=false)=>{setData(PREVIEW_DATA);setError('');setLoading(false)};
  useEffect(()=>{},[slug]);
  useEffect(()=>{},[slug]);
  const action=async(body:any)=>true;
- const products=data?.products||[],categories=data?.categories||[],filtered=useMemo(()=>products.filter(p=>(category==='all'||p.categoryId===category)&&(!query||`${p.name} ${p.description}`.toLocaleLowerCase('tr-TR').includes(query.toLocaleLowerCase('tr-TR')))),[products,category,query]);
+ const products=data?.products||[],categories=data?.categories||[],filtered=useMemo(()=>[...products].sort((a,b)=>a.sortOrder-b.sortOrder).filter(p=>(category==='all'||p.categoryId===category)&&(!query||`${p.name} ${p.description}`.toLocaleLowerCase('tr-TR').includes(query.toLocaleLowerCase('tr-TR')))),[products,category,query]);
  const persist=async(next:Product[])=>{if(data)setData({...data,products:next})};
  const addCategory=()=>setCatDraft({id:'',name:'',isActive:true,sortOrder:categories.length+1});
  const saveCategoryLocal=(draft:Category)=>{if(!data||!draft.name.trim())return;const item={...draft,id:draft.id||`c-${Date.now()}`,name:draft.name.trim()};const next=draft.id?categories.map(x=>x.id===draft.id?item:x):[...categories,item];setData({...data,categories:next});setCategory(item.id);setCatDraft(null)};
  const reorderCategory=(fromId:string,toId:string)=>{if(!data||fromId===toId)return;const list=[...categories].sort((a,b)=>a.sortOrder-b.sortOrder),from=list.findIndex(x=>x.id===fromId),to=list.findIndex(x=>x.id===toId);if(from<0||to<0)return;const [moved]=list.splice(from,1);list.splice(to,0,moved);const next=list.map((x,i)=>({...x,sortOrder:i+1}));setData({...data,categories:next});setDragCat(null)};
+ const reorderProduct=(fromId:string,toId:string)=>{if(!data||fromId===toId)return;const list=[...products].sort((a,b)=>a.sortOrder-b.sortOrder),from=list.findIndex(x=>x.id===fromId),to=list.findIndex(x=>x.id===toId);if(from<0||to<0)return;const [moved]=list.splice(from,1);list.splice(to,0,moved);const next=list.map((x,i)=>({...x,sortOrder:i+1}));setData({...data,products:next});setDragProduct(null)};
+ const toggleProductActive=(id:string)=>{if(!data)return;setData({...data,products:products.map(p=>p.id===id?{...p,isActive:!p.isActive}:p)})};
  if(loading)return <main className="qrAdminPremium"><div style={{padding:40}}>Panel yükleniyor...</div></main>;
  if(error||!data)return <main className="qrAdminPremium"><div style={{padding:40}}><h1>{error}</h1></div></main>;
  const nav:[Tab,string,any][]=[['overview','Genel Bakış',Home],['menu','Menüm',Utensils],['categories','Kategoriler',Tags],['qr','QR Kod',QrCode],['restaurant','Restoran Bilgileri',Store],['calls','Garson Çağrıları',Bell],['feedback','Geri Bildirimler',Star],['stats','İstatistikler',BarChart3],['settings','Ayarlar',Settings]];
- const openNew=()=>{setEditing({id:`new-${Date.now()}`,categoryId:category==='all'?(categories[0]?.id||''):category,name:'',description:'',price:0,image:'',allergens:[],isActive:true,sortOrder:products.length+1});setIsNew(true)};
+ const openNew=()=>{setEditing({id:`new-${Date.now()}`,categoryId:category==='all'?(categories[0]?.id||''):category,name:'',description:'',price:0,image:'',allergens:[],calories:undefined,featured:false,stockStatus:'in',isActive:true,sortOrder:products.length+1});setIsNew(true)};
  return <main className="qrAdminPremium ptShell">
   <aside className="ptSidebar">
     <button className="ptBrand" onClick={()=>setTab('overview')}><span><b>Panel</b><strong>Takip</strong></span><small>Restoranların Büyüme Ortağı</small></button>
@@ -77,7 +79,14 @@ export default function Page(){
   <section className="qaMenuRail">
    <div className="qaPanelHead"><div><h2>Menüm</h2><p>Ürünleri seçin ve düzenleyin.</p></div><button onClick={openNew}><Plus size={14}/></button></div>
    <label className="qaSearch qaWorkbenchSearch"><Search size={16}/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Ürün ara..."/></label>
-   <div className="qaWorkbenchProducts">{filtered.map(p=><button className={editing?.id===p.id?'active':''} key={p.id} onClick={()=>{setEditing(p);setIsNew(false)}}><img src={p.image||'/makarilla_tabak.png'} alt=""/><span><b>{p.name}</b><small>{categories.find(c=>c.id===p.categoryId)?.name||'Kategori'}</small></span><strong>₺{p.price}</strong><i className={p.isActive?'on':''}><em/></i><MoreVertical size={16}/></button>)}</div>
+   <div className="qaWorkbenchProducts">{filtered.map(p=><div className={editing?.id===p.id?'qaProductSortableRow active':'qaProductSortableRow'} key={p.id} draggable onDragStart={()=>setDragProduct(p.id)} onDragEnd={()=>setDragProduct(null)} onDragOver={e=>{e.preventDefault();e.dataTransfer.dropEffect='move'}} onDrop={e=>{e.preventDefault();if(dragProduct)reorderProduct(dragProduct,p.id)}} onClick={()=>{setEditing(p);setIsNew(false)}}>
+      <span className="qaProductDrag" title="Sürükleyerek sırala"><GripVertical size={15}/></span>
+      <img src={p.image||'/makarilla_tabak.png'} alt=""/>
+      <span className="qaProductInfo"><b>{p.name}</b><small>{categories.find(c=>c.id===p.categoryId)?.name||'Kategori'}</small></span>
+      <strong className="qaProductPrice">₺{p.price}</strong>
+      <button type="button" className={p.isActive?'qaProductToggle on':'qaProductToggle'} title={p.isActive?'Yayından kaldır':'Yayınla'} onClick={e=>{e.stopPropagation();toggleProductActive(p.id)}}><i/></button>
+      <button type="button" className="qaProductEditBtn" title="Ürünü düzenle" onClick={e=>{e.stopPropagation();setEditing(p);setIsNew(false)}}><Edit3 size={14}/></button>
+    </div>)}</div>
   </section>
   <Editor key={(editing||products[0])?.id||'new'} p={editing||products[0]||{id:'new',categoryId:categories[0]?.id||'',name:'',description:'',price:0,image:'',allergens:[],isActive:true,sortOrder:1}} cats={categories} isNew={isNew||!products.length} close={()=>{setEditing(products[0]||null);setIsNew(false)}} save={async p=>{await persist((isNew||!products.some(x=>x.id===p.id))?[...products,p]:products.map(x=>x.id===p.id?p:x));setEditing(p);setIsNew(false)}} del={async id=>{if(confirm('Bu ürünü silmek istiyor musunuz?')){const next=products.filter(x=>x.id!==id);await persist(next);setEditing(next[0]||null);setIsNew(false)}}}/>
  </div>}
@@ -201,7 +210,7 @@ function Editor({p,cats,isNew,close,save,del}:{p:Product;cats:Category[];isNew:b
      </div>
     </div>
     <div className="qaEditorSplit"><label>Fiyat *<div className="qaPrice"><span>₺</span><input type="number" min="0" value={d.price} onChange={e=>setD({...d,price:Number(e.target.value)})}/></div></label><div className="qaToggleField"><span><b>Menüde Göster</b><small>QR menüde yayınlansın.</small></span><button type="button" className={d.isActive?'qaToggle on':'qaToggle'} onClick={()=>setD({...d,isActive:!d.isActive})}><i/></button></div></div>
-    <div className="qaEditorSplit qaSecondaryRow"><div className="qaToggleField"><span><b>Öne Çıkan Ürün</b><small>Üst sıralarda göster.</small></span><button type="button" className="qaToggle"><i/></button></div><label>Stok Durumu<select defaultValue="var"><option value="var">Stokta Var</option><option value="yok">Stokta Yok</option></select></label></div>
+    <div className="qaEditorSplit qaSecondaryRow"><div className="qaToggleField"><span><b>Öne Çıkan Ürün</b><small>Üst sıralarda göster.</small></span><button type="button" className={d.featured?'qaToggle on':'qaToggle'} onClick={()=>setD({...d,featured:!d.featured})}><i/></button></div><label>Stok Durumu<select value={d.stockStatus||'in'} onChange={e=>setD({...d,stockStatus:e.target.value as 'in'|'out'})}><option value="in">Stokta Var</option><option value="out">Stokta Yok</option></select></label></div>
     <div className="qaNutritionBox">
       <div className="qaNutritionHead"><div><b>Beslenme & Alerjen</b><small>Müşterinin menüde göreceği ek bilgiler.</small></div><label>Kalori (kcal)<input type="number" min="0" step="1" value={d.calories??''} placeholder="Örn. 620" onChange={e=>setD({...d,calories:e.target.value===''?undefined:Number(e.target.value)})}/></label></div>
       <div className="qaAllergenChips">{ALLERGENS.map(a=><button type="button" key={a} className={(d.allergens||[]).includes(a)?'active':''} onClick={()=>toggleAllergen(a)}>{a}</button>)}</div>
