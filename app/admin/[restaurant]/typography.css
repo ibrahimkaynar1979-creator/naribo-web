@@ -356,3 +356,40 @@
   font-weight:800!important;
   color:#102650!important;
 }
+
+
+/* 2026-09-19 — QR admin typography cleanup: one coherent product type system */
+.qrAdminPremium.ptShell,
+.qrAdminPremium.ptShell button,
+.qrAdminPremium.ptShell input,
+.qrAdminPremium.ptShell select,
+.qrAdminPremium.ptShell textarea{
+  font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif!important;
+}
+.qaOverviewTitleLine h1,
+.qaOverviewSectionHead h2,
+.qaOverviewCardHead h2,
+.qaOverviewQuick h2,
+.qaOverviewFooterGrid h2,
+.qaOverviewListCard h2{
+  font-size:25px!important;
+  line-height:1.12!important;
+  letter-spacing:-.45px!important;
+  font-weight:750!important;
+}
+.qaOverviewHello>span{font-size:13px!important;font-weight:500!important}
+.qaOverviewHello p,
+.qaOverviewSectionHead p,
+.qaOverviewCardHead p{font-size:11px!important;line-height:1.4!important;font-weight:400!important}
+.qaOverviewSummary strong{font-size:17px!important;font-weight:750!important}
+.qaOverviewSummary b{font-size:11px!important;font-weight:700!important}
+.qaOverviewSummary small{font-size:9.5px!important;line-height:1.3!important}
+.qaOverviewQuickGrid button b{font-size:11.5px!important;font-weight:700!important}
+.qaOverviewQuickGrid button small{font-size:9.5px!important;font-weight:400!important;line-height:1.35!important}
+.qaHealthLead b{font-size:11.5px!important;font-weight:700!important}
+.qaHealthLead small,.qaHealthChecks span{font-size:9.5px!important;line-height:1.35!important}
+.qaOverviewProducts b,.qaOverviewProducts strong{font-size:10.5px!important;font-weight:700!important}
+.qaOverviewProducts small{font-size:9px!important;line-height:1.3!important}
+.qaOverviewFeedback b{font-size:10px!important;font-weight:500!important}
+.qaOverviewFeedback small{font-size:9px!important}
+.ptNav button,.ptNav a{font-weight:650!important}
