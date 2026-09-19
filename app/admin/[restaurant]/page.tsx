@@ -51,7 +51,15 @@ export default function Page(){
 <div className="ptContent">
       <section className="qaMain ptAdminSurface">
        {tab==='overview'&&<Overview data={data} setTab={setTab} resolve={id=>action({action:'resolveCall',id})}/>} 
-       {tab==='menu'&&<div className="qaPage qaMenuPage"><Title title="Menüm" sub="Ürünleri, fiyatları ve görünürlüğü yönetin." action={<button className="qaAdd" onClick={openNew}><Plus size={15}/>Ürün Ekle</button>}/><div className="qaMenuToolbar"><label className="qaSearch"><Search size={16}/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Ürün ara..."/></label><div className="qaCategoryChips"><button className={category==='all'?'active':''} onClick={()=>setCategory('all')}>Tümü</button>{categories.map(c=><button key={c.id} className={category===c.id?'active':''} onClick={()=>setCategory(c.id)}>{c.name}</button>)}</div></div><div className="qaProductList qaProductTable">{filtered.map(p=><div className="qaProductRow" key={p.id} onClick={()=>{setEditing(p);setIsNew(false)}}><img src={p.image||'/makarilla_tabak.png'} alt=""/><div className="qaProductInfo"><b>{p.name}</b><small>{categories.find(c=>c.id===p.categoryId)?.name} · {p.isActive?'Yayında':'Pasif'}</small></div><strong className="qaProductPrice">₺{p.price}</strong><button className={p.isActive?'qaToggle on':'qaToggle'} onClick={e=>{e.stopPropagation();void persist(products.map(x=>x.id===p.id?{...x,isActive:!x.isActive}:x))}}><i/></button><button className="qaRowMore" onClick={e=>e.stopPropagation()}><MoreVertical size={18}/></button></div>)}</div></div>}
+       {tab==='menu'&&<div className="qaMenuWorkbench">
+  <section className="qaMenuRail">
+   <div className="qaMenuRailHead"><div><h1>Menüm</h1><p>Ürünleri, fiyatları ve görünürlüğü yönetin.</p></div><button className="qaMiniAdd" onClick={openNew}><Plus size={14}/>Yeni Ürün</button></div>
+   <div className="qaCategoryChips qaWorkbenchChips"><button className={category==='all'?'active':''} onClick={()=>setCategory('all')}>Tümü <b>{products.length}</b></button>{categories.map(c=><button key={c.id} className={category===c.id?'active':''} onClick={()=>setCategory(c.id)}>{c.name} <b>{products.filter(p=>p.categoryId===c.id).length}</b></button>)}</div>
+   <label className="qaSearch qaWorkbenchSearch"><Search size={16}/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Ürün ara..."/></label>
+   <div className="qaWorkbenchProducts">{filtered.map(p=><button className={editing?.id===p.id?'active':''} key={p.id} onClick={()=>{setEditing(p);setIsNew(false)}}><img src={p.image||'/makarilla_tabak.png'} alt=""/><span><b>{p.name}</b><small>{categories.find(c=>c.id===p.categoryId)?.name||'Kategori'}</small></span><strong>₺{p.price}</strong><i className={p.isActive?'on':''}><em/></i><MoreVertical size={16}/></button>)}</div>
+  </section>
+  <Editor key={(editing||products[0])?.id||'new'} p={editing||products[0]||{id:'new',categoryId:categories[0]?.id||'',name:'',description:'',price:0,image:'',allergens:[],isActive:true,sortOrder:1}} cats={categories} isNew={isNew||!products.length} close={()=>{setEditing(products[0]||null);setIsNew(false)}} save={async p=>{await persist((isNew||!products.some(x=>x.id===p.id))?[...products,p]:products.map(x=>x.id===p.id?p:x));setEditing(p);setIsNew(false)}} del={async id=>{if(confirm('Bu ürünü silmek istiyor musunuz?')){const next=products.filter(x=>x.id!==id);await persist(next);setEditing(next[0]||null);setIsNew(false)}}}/>
+ </div>}
        {tab==='categories'&&<Categories cats={categories} products={products} save={c=>action({action:'saveCategory',category:c})} del={id=>action({action:'deleteCategory',id})}/>} 
        {tab==='qr'&&<QrSection restaurant={data.restaurant}/>} 
        {tab==='restaurant'&&<RestaurantSection restaurant={data.restaurant} save={r=>action({action:'updateRestaurant',restaurant:r})}/>} 
@@ -62,8 +70,6 @@ export default function Page(){
       </section>
     </div>
   </section>
-
-  {editing&&<Editor p={editing} cats={categories} isNew={isNew} close={()=>{setEditing(null);setIsNew(false)}} save={async p=>{setEditing(null);setIsNew(false);await persist(isNew?[...products,p]:products.map(x=>x.id===p.id?p:x))}} del={async id=>{if(confirm('Bu ürünü silmek istiyor musunuz?')){setEditing(null);await persist(products.filter(x=>x.id!==id))}}}/>} 
  </main>
 }
 
@@ -157,42 +163,42 @@ function ago(v:string){const m=Math.max(0,Math.round((Date.now()-new Date(v).get
 function Editor({p,cats,isNew,close,save,del}:{p:Product;cats:Category[];isNew:boolean;close:()=>void;save:(p:Product)=>void;del:(id:string)=>void}){
  const[d,setD]=useState(p);
  const cat=cats.find(c=>c.id===d.categoryId)?.name||"Kategori";
- return <div className="qaEditorBackdrop"><div className="qaProductEditorPage">
-  <div className="qaProductEditorTop">
-   <button className="qaBackBtn" onClick={close}><ChevronLeft size={18}/></button>
-   <div><span>Menüm /</span><h2>{isNew?'Ürün Ekle':'Ürün Düzenle'}</h2><p>Ürün bilgilerini girin, QR menünüzde nasıl görüneceğini anında önizleyin.</p></div>
-  </div>
-  <div className="qaProductEditorGrid">
-   <section className="qaProductFormCard">
-    <h3>Temel Bilgiler</h3>
+ return <>
+  <section className="qaWorkbenchEditor">
+   <div className="qaWorkbenchTitle"><div><h2>Ürün Ekle / Düzenle</h2><p>Ürün bilgilerini girin, sağda QR menünüzde nasıl görüneceğini canlı olarak izleyin.</p></div></div>
+   <div className="qaWorkbenchForm">
     <div className="qaEditorTwo">
      <label>Ürün Adı *<input placeholder="Örn: Tavuklu Fettuccine" value={d.name} maxLength={100} onChange={e=>setD({...d,name:e.target.value})}/><small>{d.name.length}/100</small></label>
      <label>Kategori *<select value={d.categoryId} onChange={e=>setD({...d,categoryId:e.target.value})}>{cats.map(c=><option key={c.id} value={c.id}>{c.name}</option>)}</select></label>
     </div>
     <label>Açıklama<textarea placeholder="Ürününüzün içeriğini ve lezzetini anlatın..." maxLength={300} value={d.description} onChange={e=>setD({...d,description:e.target.value})}/><small>{d.description.length}/300</small></label>
-    <div className="qaPhotoBlock"><b>Ürün Fotoğrafı</b><div className="qaPhotoUpload">
-      <div className="qaUploadBox"><ImageOff size={28}/><strong>Fotoğraf URL</strong><span>JPG, PNG veya WEBP</span></div>
-      <label className="qaImageUrl">Görsel adresi<input value={d.image} onChange={e=>setD({...d,image:e.target.value})} placeholder="/urun-gorseli.png"/></label>
-    </div></div>
-    <div className="qaPriceVisibility"><label>Fiyat (₺) *<div className="qaPrice"><span>₺</span><input type="number" value={d.price} onChange={e=>setD({...d,price:Number(e.target.value)})}/></div></label><div><b>Menüde Göster</b><small>Bu ürün QR menünüzde görünsün mü?</small><button className={d.isActive?'qaToggle on':'qaToggle'} onClick={()=>setD({...d,isActive:!d.isActive})}><i/></button></div></div>
-    <footer><button className="qaCancel" onClick={close}>İptal</button>{!isNew&&<button className="qaDelete" onClick={()=>del(d.id)}><Trash2 size={15}/>Sil</button>}<button className="qaSaveProduct" disabled={!d.name.trim()} onClick={()=>save({...d,name:d.name.trim()})}><CheckCircle2 size={16}/>{isNew?'Ürünü Kaydet':'Değişiklikleri Kaydet'}</button></footer>
-   </section>
-   <aside className="qaLivePreview">
-    <header><div><Eye size={20}/><span><b>QR Menü Önizleme</b><small>Ürününüz QR menünüzde bu şekilde görünecek.</small></span></div><span className="qaMobileBadge">Mobil</span></header>
-    <div className="qaPhone">
-     <div className="qaPhoneNotch"/>
-     <div className="qaPhoneScreen">
-      <div className="qaPreviewBrand">Makarilla<small>PASTA & MORE</small></div>
-      <div className="qaPreviewCat">{cat}</div>
-      <img src={d.image||'/makarilla_tabak.png'} alt="Ürün önizleme"/>
-      <h4>{d.name||'Ürün Adı'}</h4>
-      <p>{d.description||'Ürün açıklaması burada görünecek.'}</p>
-      <strong>₺{Number(d.price||0).toLocaleString('tr-TR')}</strong>
-      <button>Ürünü İncele</button>
-     </div>
+    <div className="qaWorkbenchPhotos"><b>Ürün Fotoğrafları</b><div><button type="button" className="qaUploadTile"><ImageOff size={26}/><strong>Fotoğraf Yükle</strong><small>JPG, PNG veya WEBP</small></button><label className="qaImageField">Görsel adresi<input value={d.image} onChange={e=>setD({...d,image:e.target.value})} placeholder="/urun-gorseli.png"/></label></div></div>
+    <div className="qaEditorSplit">
+     <label>Fiyat *<div className="qaPrice"><span>₺</span><input type="number" value={d.price} onChange={e=>setD({...d,price:Number(e.target.value)})}/></div></label>
+     <div className="qaToggleField"><span><b>Menüde Göster</b><small>Bu ürün QR menünüzde görünsün mü?</small></span><button type="button" className={d.isActive?'qaToggle on':'qaToggle'} onClick={()=>setD({...d,isActive:!d.isActive})}><i/></button></div>
     </div>
-    <div className="qaPreviewChecks"><b>Görünüm Detayları</b><span><CheckCircle2/>Ürün fotoğrafı</span><span><CheckCircle2/>Ürün adı</span><span><CheckCircle2/>Açıklama</span><span><CheckCircle2/>Fiyat</span><span><CheckCircle2/>{cat} altında listelenir</span></div>
-   </aside>
-  </div>
- </div></div>
+    <div className="qaEditorSplit qaSecondaryRow">
+     <div className="qaToggleField"><span><b>Öne Çıkan Ürün</b><small>Bu ürünü QR menüde üst sıralarda göster.</small></span><button type="button" className="qaToggle"><i/></button></div>
+     <label>Stok Durumu<select defaultValue="var"><option value="var">Stokta Var</option><option value="yok">Stokta Yok</option></select></label>
+    </div>
+    <div className="qaWorkbenchActions"><button className="qaClean" type="button" onClick={()=>setD({...p,name:'',description:'',price:0,image:''})}><Trash2 size={15}/>Temizle</button>{!isNew&&<button className="qaDelete" type="button" onClick={()=>del(d.id)}>Sil</button>}<button className="qaSaveProduct" disabled={!d.name.trim()} onClick={()=>save({...d,name:d.name.trim()})}><CheckCircle2 size={16}/>{isNew?'Ürünü Kaydet':'Değişiklikleri Kaydet'}</button></div>
+   </div>
+  </section>
+  <aside className="qaWorkbenchPreview">
+   <header><div><Eye size={20}/><span><b>QR Menü Önizleme</b><small>Ürününüz müşterilere bu şekilde görünecek.</small></span></div><span className="qaMobileBadge">Mobil</span></header>
+   <div className="qaPhone qaPhoneCompact">
+    <div className="qaPhoneNotch"/>
+    <div className="qaPhoneScreen">
+     <div className="qaPreviewBrand">Makarilla<small>PASTA & MORE</small></div>
+     <div className="qaPreviewCats"><span className="active">Makarna</span><span>Wraplar</span><span>Salatalar</span><span>Tatlılar</span></div>
+     <img src={d.image||'/makarilla_tabak.png'} alt="Ürün önizleme"/>
+     <div className="qaPreviewNameRow"><h4>{d.name||'Ürün Adı'}</h4><strong>₺{Number(d.price||0).toLocaleString('tr-TR')}</strong></div>
+     <p>{d.description||'Ürün açıklaması burada görünecek.'}</p>
+     <div className="qaPreviewBadges"><span>TAZE<br/>İÇERİK</span><span>ÖZEL<br/>SOS</span><span>BOL<br/>LEZZET</span></div>
+     <button>Sepete Ekle</button>
+     <footer>Makarilla<small>İyi yemek, iyi hisset.</small></footer>
+    </div>
+   </div>
+  </aside>
+ </>;
 }
