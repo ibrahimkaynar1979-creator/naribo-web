@@ -20,7 +20,7 @@ const PREVIEW_DATA:Data={restaurant:{id:'preview',slug:'makarilla',name:'Makaril
 
 export default function Page(){
  const params=useParams<{restaurant:string}>(),slug=String(params.restaurant||'').toLowerCase();
- const[data,setData]=useState<Data|null>(PREVIEW_DATA),[loading,setLoading]=useState(false),[error,setError]=useState(''),[saving,setSaving]=useState(false),[tab,setTab]=useState<Tab>('overview'),[query,setQuery]=useState(''),[category,setCategory]=useState('all'),[editing,setEditing]=useState<Product|null>(null),[isNew,setIsNew]=useState(false),[catDraft,setCatDraft]=useState<Category|null>(null),[dragCat,setDragCat]=useState<string|null>(null),[dragProduct,setDragProduct]=useState<string|null>(null);
+ const[data,setData]=useState<Data|null>(PREVIEW_DATA),[loading,setLoading]=useState(false),[error,setError]=useState(''),[saving,setSaving]=useState(false),[tab,setTab]=useState<Tab>('overview'),[query,setQuery]=useState(''),[category,setCategory]=useState('all'),[editing,setEditing]=useState<Product|null>(null),[isNew,setIsNew]=useState(false),[catDraft,setCatDraft]=useState<Category|null>(null),[dragCat,setDragCat]=useState<string|null>(null),[dragProduct,setDragProduct]=useState<string|null>(null),[deleteProductId,setDeleteProductId]=useState<string|null>(null);
  const load=async(silent=false)=>{setData(PREVIEW_DATA);setError('');setLoading(false)};
  useEffect(()=>{},[slug]);
  useEffect(()=>{},[slug]);
@@ -88,7 +88,7 @@ export default function Page(){
       <button type="button" className="qaProductEditBtn" title="Ürünü düzenle" onClick={e=>{e.stopPropagation();setEditing(p);setIsNew(false)}}><Edit3 size={14}/></button>
     </div>)}</div>
   </section>
-  <Editor key={(editing||products[0])?.id||'new'} p={editing||products[0]||{id:'new',categoryId:categories[0]?.id||'',name:'',description:'',price:0,image:'',allergens:[],isActive:true,sortOrder:1}} cats={categories} isNew={isNew||!products.length} close={()=>{setEditing(products[0]||null);setIsNew(false)}} save={async p=>{await persist((isNew||!products.some(x=>x.id===p.id))?[...products,p]:products.map(x=>x.id===p.id?p:x));setEditing(p);setIsNew(false)}} del={async id=>{if(confirm('Bu ürünü silmek istiyor musunuz?')){const next=products.filter(x=>x.id!==id);await persist(next);setEditing(next[0]||null);setIsNew(false)}}}/>
+  <Editor key={(editing||products[0])?.id||'new'} p={editing||products[0]||{id:'new',categoryId:categories[0]?.id||'',name:'',description:'',price:0,image:'',allergens:[],isActive:true,sortOrder:1}} cats={categories} isNew={isNew||!products.length} close={()=>{setEditing(products[0]||null);setIsNew(false)}} save={async p=>{await persist((isNew||!products.some(x=>x.id===p.id))?[...products,p]:products.map(x=>x.id===p.id?p:x));setEditing(p);setIsNew(false)}} del={id=>setDeleteProductId(id)}/>
  </div>}
        {tab==='categories'&&<Categories cats={categories} products={products} save={c=>action({action:'saveCategory',category:c})} del={id=>action({action:'deleteCategory',id})}/>} 
        {tab==='qr'&&<QrSection restaurant={data.restaurant}/>} 
@@ -100,6 +100,19 @@ export default function Page(){
       </section>
     </div>
   </section>
+  {deleteProductId&&<div className="ptConfirmOverlay" role="dialog" aria-modal="true" aria-labelledby="ptConfirmTitle">
+    <div className="ptConfirmCard">
+      <div className="ptConfirmIcon"><Trash2 size={21}/></div>
+      <div className="ptConfirmCopy">
+        <h3 id="ptConfirmTitle">Ürünü silmek istiyor musunuz?</h3>
+        <p>Bu ürün menünüzden kaldırılacak. Bu işlem geri alınamaz.</p>
+      </div>
+      <div className="ptConfirmActions">
+        <button type="button" className="secondary" onClick={()=>setDeleteProductId(null)}>Vazgeç</button>
+        <button type="button" className="danger" onClick={async()=>{const id=deleteProductId;const next=products.filter(x=>x.id!==id);await persist(next);setEditing(next[0]||null);setIsNew(false);setDeleteProductId(null)}}><Trash2 size={14}/>Ürünü Sil</button>
+      </div>
+    </div>
+  </div>}
  </main>
 }
 
