@@ -65,10 +65,8 @@ export default function Page(){
     {[...categories].sort((a,b)=>a.sortOrder-b.sortOrder).map((cat,index)=><div key={cat.id} className={category===cat.id?'qaCategoryItem active':'qaCategoryItem'} draggable onDragStart={()=>setDragCat(cat.id)} onDragEnd={()=>setDragCat(null)} onDragOver={e=>{e.preventDefault();e.dataTransfer.dropEffect='move'}} onDrop={e=>{e.preventDefault();if(dragCat)reorderCategory(dragCat,cat.id)}}>
       <span className="qaCategoryOrder">{index+1}</span>
       <span className="qaCatGrip" title="Sürükleyerek sırala"><GripVertical size={15}/></span>
-      <button type="button" className="qaCategorySelect" onClick={()=>setCategory(cat.id)}>
-        <span className="qaCategoryMain"><Tags size={15}/><b>{cat.name}</b></span>
-        <span className="qaCategoryCount">{products.filter(p=>p.categoryId===cat.id).length} ürün</span>
-      </button>
+      <button type="button" className="qaCategorySelect" onClick={()=>setCategory(cat.id)}><b>{cat.name}</b></button>
+      <span className="qaCategoryCount">{products.filter(p=>p.categoryId===cat.id).length}</span>
       <button type="button" className="qaCatEdit" title="Kategoriyi düzenle" onClick={()=>setCatDraft(cat)}><Edit3 size={13}/></button>
     </div>)}
    </div>
