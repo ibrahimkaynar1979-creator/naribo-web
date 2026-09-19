@@ -184,3 +184,34 @@
  .qaStatsGrid{display:grid;grid-template-columns:1.25fr 1fr .7fr;gap:14px}.qaStatsGrid>.qaManageCard{min-height:330px!important}.qaStatsChart .qaRealChart{height:220px!important}.qaInsightCard>div{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid #edf2f5}.qaInsightCard span{font-size:10px;color:#71869b}.qaInsightCard b{font-size:17px;color:#173158}
  .qaSettingsGrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}.qaSettingsGrid>.qaManageCard{min-height:300px!important}.qaSettingsGrid h2{font-size:16px!important;margin-bottom:10px!important}.qaSettingRow{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:15px;border-bottom:1px solid #edf2f5}.qaSettingRow:last-child{border-bottom:0}.qaSettingRow b{font-size:11px;display:block}.qaSettingRow span{font-size:9px;color:#74879d;display:block;margin-top:3px}.qaSwitch{width:40px;height:22px;border:0;border-radius:999px;background:#ccd8df;padding:3px;cursor:pointer}.qaSwitch i{display:block;width:16px;height:16px;border-radius:50%;background:#fff;transition:.2s}.qaSwitch.on{background:#08aeb8}.qaSwitch.on i{transform:translateX(18px)}
 }
+
+
+/* 2026-09-19 — rebuilt Menu list layout */
+@media(min-width:901px){
+ .qaMenuPage{max-width:none!important}
+ .qaMenuPage>.qaTitleRow{margin:0 0 14px!important;align-items:flex-start!important}
+ .qaMenuPage>.qaTitleRow h1{font-size:22px!important;line-height:1.1!important}
+ .qaMenuPage>.qaTitleRow p{font-size:11px!important;line-height:1.35!important;margin-top:4px!important}
+ .qaMenuPage .qaAdd{height:40px!important;padding:0 16px!important;border-radius:10px!important;font-size:11px!important}
+ .qaMenuToolbar{display:flex!important;align-items:center!important;gap:10px!important;margin:0 0 12px!important}
+ .qaMenuToolbar .qaSearch{width:330px!important;height:40px!important;margin:0!important;flex:0 0 330px!important}
+ .qaMenuToolbar .qaSearch input{font-size:11px!important}
+ .qaMenuToolbar .qaCategoryChips{display:flex!important;align-items:center!important;gap:7px!important;padding:0!important;overflow:auto!important}
+ .qaMenuToolbar .qaCategoryChips button{height:32px!important;min-height:32px!important;padding:0 12px!important;font-size:9.5px!important;border-radius:9px!important}
+ .qaProductTable{height:auto!important;min-height:0!important;background:rgba(255,255,255,.88)!important;border:1px solid #dce8ee!important;border-radius:15px!important;overflow:hidden!important;box-shadow:0 8px 22px rgba(31,70,99,.06)!important}
+ .qaProductTable .qaProductRow{
+   min-height:72px!important;height:72px!important;padding:8px 14px!important;
+   display:grid!important;grid-template-columns:56px minmax(260px,1fr) 130px 92px 54px 38px!important;
+   gap:14px!important;align-items:center!important;border-bottom:1px solid #e1ebf0!important
+ }
+ .qaProductTable .qaProductRow>img{width:54px!important;height:54px!important;border-radius:11px!important;object-fit:cover!important}
+ .qaProductTable .qaProductInfo{display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:center!important;gap:4px!important;min-width:0!important}
+ .qaProductTable .qaProductInfo b{font-size:12.5px!important;line-height:1.2!important;font-weight:800!important;color:#173158!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;max-width:100%!important}
+ .qaProductTable .qaProductInfo small{font-size:10.5px!important;line-height:1.25!important;color:#74879d!important;white-space:nowrap!important}
+ .qaProductTable .qaProductPrice{font-size:12.5px!important;font-weight:800!important;text-align:right!important;color:#173158!important}
+ .qaProductTable .qaToggle{justify-self:center!important;width:38px!important;height:22px!important}
+ .qaProductTable .qaToggle i{width:18px!important;height:18px!important}
+ .qaProductTable .qaRowMore{width:34px!important;height:34px!important;display:grid!important;place-items:center!important;border-radius:9px!important}
+ .qaProductTable .qaRowMore:hover{background:#eef7f9!important}
+ .qaProductTable .qaProductRow:last-child{border-bottom:0!important}
+}
