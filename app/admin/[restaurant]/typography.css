@@ -279,3 +279,43 @@
   .qaOverviewTop>*{margin-bottom:8px}
   .qaOverviewMainGrid>*,.qaOverviewBottomGrid>*{margin-bottom:8px}
 }
+
+
+/* 2026-09-19 — QR overview rebuilt to mirror PanelTakip product geometry */
+.ptWorkspaceOverview .ptContent{overflow:auto}
+.qaOverviewHome{padding:4px 6px 12px!important;display:flex;flex-direction:column;gap:12px}
+.qaOverviewHero{min-height:104px;display:grid;grid-template-columns:minmax(320px,1fr) auto 245px;align-items:center;gap:16px;padding:4px 10px}
+.qaOverviewHello>span{font-size:13px;color:#4f6784}.qaOverviewTitleLine{display:flex;align-items:center;gap:10px;margin-top:2px}
+.qaOverviewTitleLine h1{margin:0;font-size:25px;line-height:1.08;color:#102650;letter-spacing:-.5px}
+.qaOverviewHello p{margin:5px 0 0;font-size:12px;color:#71839b}
+.qaLiveBadge{display:inline-flex;align-items:center;gap:5px;padding:5px 9px;border-radius:999px;background:#dff7e8;color:#18884c;font-size:10px;font-weight:800}.qaLiveBadge i{width:7px;height:7px;border-radius:50%;background:#1eb467}
+.qaOverviewHeroActions{display:flex;gap:9px}.qaGhostAction,.qaHeroAdd{height:40px;border-radius:10px;padding:0 14px;display:inline-flex;align-items:center;justify-content:center;gap:7px;font-size:10.5px;font-weight:750;text-decoration:none;white-space:nowrap}
+.qaGhostAction{border:1px solid #9fc7d8;color:#173b67;background:#fff}.qaHeroAdd{border:0;color:#fff;background:linear-gradient(135deg,#13bec9,#05a2ae);min-width:118px}
+.qaQrPreviewCard{height:84px;border:1px solid rgba(255,255,255,.95);border-radius:13px;background:rgba(255,255,255,.82);box-shadow:0 7px 18px rgba(50,79,103,.08);display:grid;grid-template-columns:66px 1fr;gap:10px;align-items:center;text-align:left;padding:9px 12px;color:#173158}
+.qaQrPreviewIcon{height:62px;width:62px;border:1px solid #dbe7ec;background:#fff;border-radius:8px;display:grid;place-items:center;color:#102650}.qaQrPreviewCard>span:last-child{display:flex;flex-direction:column;gap:3px}.qaQrPreviewCard b{font-size:11px}.qaQrPreviewCard small{font-size:8.5px;line-height:1.25;color:#75879c}.qaQrPreviewCard em{display:flex;align-items:center;gap:2px;color:#078f9a;font-style:normal;font-size:8.5px;font-weight:750}
+
+.qaOverviewSummary{min-height:76px;border-radius:13px;background:rgba(255,255,255,.84);border:1px solid rgba(255,255,255,.95);box-shadow:0 7px 18px rgba(50,79,103,.08);display:grid;grid-template-columns:repeat(4,1fr);padding:8px 6px}
+.qaOverviewSummary>div{display:flex;align-items:center;gap:10px;padding:4px 16px;border-right:1px solid #e2ebf0}.qaOverviewSummary>div:last-child{border-right:0}
+.qaOverviewSummary i{width:43px;height:43px;border-radius:50%;display:grid;place-items:center;background:#e7f8fa;color:#08aeb8}.qaOverviewSummary i svg{width:21px;height:21px}
+.qaOverviewSummary span{display:grid;grid-template-columns:auto 1fr;column-gap:5px;align-items:baseline}.qaOverviewSummary strong{font-size:17px;color:#102c72}.qaOverviewSummary b{font-size:10px;color:#18325c}.qaOverviewSummary small{grid-column:1/3;font-size:9px;color:#788aa0;margin-top:2px}
+
+.qaOverviewSectionHead h2,.qaOverviewCardHead h2{margin:0;font-size:17px;color:#102650;letter-spacing:-.2px}.qaOverviewSectionHead p,.qaOverviewCardHead p{margin:2px 0 0;font-size:10px;color:#71839b}
+.qaOverviewQuickGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px}
+.qaOverviewQuickGrid button{min-height:70px;border:1px solid rgba(255,255,255,.96);border-radius:12px;background:rgba(255,255,255,.84);box-shadow:0 6px 16px rgba(50,79,103,.07);display:grid;grid-template-columns:48px 1fr 30px;gap:9px;align-items:center;padding:9px 12px;text-align:left;color:#173158;cursor:pointer}
+.qaOverviewQuickGrid button>i{width:44px;height:44px;border-radius:50%;background:#e7f8fa;color:#08aeb8;display:grid;place-items:center}.qaOverviewQuickGrid button>i svg{width:22px;height:22px}
+.qaOverviewQuickGrid button>span{display:flex;flex-direction:column;gap:3px}.qaOverviewQuickGrid button b{font-size:11px}.qaOverviewQuickGrid button small{font-size:9px;line-height:1.25;color:#6f8199}
+.qaOverviewQuickGrid button>em{width:28px;height:28px;border-radius:50%;background:#e7f8fa;color:#079aa6;display:grid;place-items:center}.qaOverviewQuickGrid button>em svg{width:16px;height:16px}
+
+.qaOverviewHealth{min-height:72px;border:1px solid #bdebd5;border-radius:12px;background:rgba(248,255,251,.88);display:grid;grid-template-columns:260px 1fr 210px;align-items:center;gap:12px;padding:8px 14px}
+.qaHealthLead{display:flex;align-items:center;gap:10px}.qaHealthLead>i{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:#17ad63;color:#fff}.qaHealthLead>i svg{width:25px;height:25px}
+.qaHealthLead span{display:flex;flex-direction:column;gap:2px}.qaHealthLead b{font-size:12px;color:#173158}.qaHealthLead small{font-size:9px;color:#6e8195}
+.qaHealthChecks{display:grid;grid-template-columns:1fr 1fr;gap:6px 18px}.qaHealthChecks span{display:flex;align-items:center;gap:5px;font-size:9px;color:#53677d}.qaHealthChecks svg{width:13px;height:13px;color:#18ad69}
+.qaHealthMessage{border-radius:9px;padding:8px 12px;background:#fff4df;color:#8a6415;display:flex;flex-direction:column}.qaHealthMessage.success{background:#e5f8ed;color:#16864a}.qaHealthMessage b{font-size:10px}.qaHealthMessage small{font-size:8.5px;margin-top:2px}
+
+.qaOverviewFooterGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.qaOverviewListCard{min-height:168px;border:1px solid rgba(255,255,255,.95);border-radius:13px;background:rgba(255,255,255,.84);box-shadow:0 7px 18px rgba(50,79,103,.08);padding:11px 14px}
+.qaOverviewCardHead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.qaOverviewCardHead h2{font-size:14px}.qaOverviewCardHead p{font-size:9px}.qaOverviewCardHead button{border:0;background:#eaf8fa;color:#078f9a;border-radius:8px;padding:6px 8px;display:flex;align-items:center;gap:2px;font-size:8.5px;font-weight:750}.qaOverviewCardHead button svg{width:12px;height:12px}
+.qaOverviewProducts>div{min-height:36px;display:grid;grid-template-columns:18px 35px 1fr auto;gap:7px;align-items:center;border-bottom:1px solid #e9eff3;padding:3px 0}.qaOverviewProducts>div:last-child{border-bottom:0}.qaOverviewProducts>div>span{font-size:9px;color:#73859a}.qaOverviewProducts img{width:32px;height:32px;border-radius:50%;object-fit:cover}.qaOverviewProducts div div{display:flex;flex-direction:column}.qaOverviewProducts b,.qaOverviewProducts strong{font-size:9.5px;color:#173158}.qaOverviewProducts small{font-size:8px;color:#8191a3}
+.qaOverviewFeedback>div{min-height:37px;display:grid;grid-template-columns:90px 1fr auto;gap:8px;align-items:center;border-bottom:1px solid #e9eff3;padding:4px 0}.qaOverviewFeedback>div:last-child{border-bottom:0}.qaStars{font-size:11px;color:#f2ad00;letter-spacing:.3px}.qaOverviewFeedback b{font-size:9px;font-weight:550;color:#273d5a}.qaOverviewFeedback small{font-size:8px;color:#8191a3}.qaFeedbackEmpty{display:flex!important;justify-content:center;gap:7px;color:#788a9e;border:0!important}
+
+@media(max-width:1150px){.qaOverviewHero{grid-template-columns:1fr auto}.qaQrPreviewCard{display:none}.qaOverviewHealth{grid-template-columns:220px 1fr}.qaHealthMessage{display:none}}
+@media(max-width:900px){.qaOverviewHero{display:block}.qaOverviewHeroActions{margin-top:12px}.qaOverviewSummary{grid-template-columns:1fr 1fr}.qaOverviewSummary>div:nth-child(2){border-right:0}.qaOverviewQuickGrid{grid-template-columns:1fr}.qaOverviewHealth{grid-template-columns:1fr}.qaHealthChecks{grid-template-columns:1fr}.qaOverviewFooterGrid{grid-template-columns:1fr}}
