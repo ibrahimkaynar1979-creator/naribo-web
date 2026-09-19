@@ -393,3 +393,36 @@
 .qaOverviewFeedback b{font-size:10px!important;font-weight:500!important}
 .qaOverviewFeedback small{font-size:9px!important}
 .ptNav button,.ptNav a{font-weight:650!important}
+
+
+/* 2026-09-19 — final overview typography alignment */
+.qaOverviewTitleLine h1,
+.qaOverviewSectionHead h2,
+.qaOverviewCardHead h2,
+.qaOverviewQuick h2,
+.qaOverviewFooterGrid h2,
+.qaOverviewListCard h2{
+  font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif!important;
+  font-size:25px!important;
+  line-height:1.08!important;
+  letter-spacing:-.5px!important;
+  font-weight:800!important;
+}
+.qaOverviewHello p,
+.qaOverviewSectionHead p,
+.qaOverviewCardHead p{
+  font-size:12px!important;
+  line-height:1.4!important;
+  font-weight:450!important;
+  color:#687d98!important;
+}
+.qaOverviewQuickGrid button b{font-size:12px!important}
+.qaOverviewQuickGrid button small{font-size:10.5px!important;line-height:1.35!important}
+.qaHealthLead b{font-size:12px!important}
+.qaHealthLead small,.qaHealthChecks span{font-size:10.5px!important}
+.qaHealthMessage b{font-size:11px!important}
+.qaHealthMessage small{font-size:9.5px!important}
+.qaOverviewProducts b,.qaOverviewProducts strong{font-size:11px!important}
+.qaOverviewProducts small{font-size:9.5px!important}
+.qaOverviewFeedback b{font-size:10.5px!important}
+.qaOverviewFeedback small{font-size:9.5px!important}
