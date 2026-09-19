@@ -368,3 +368,16 @@
 .qaOverviewFeedback small{
   font-size:8.5px!important;
 }
+
+
+/* Match overview section titles to the Makarilla QR Menu title scale */
+.qaOverviewSectionHead h2,
+.qaOverviewCardHead h2,
+.qaOverviewQuick h2,
+.qaOverviewFooterGrid h2,
+.qaOverviewListCard h2{
+  font-size:22px!important;
+  line-height:1.15!important;
+  letter-spacing:-.35px!important;
+  font-weight:800!important;
+}
