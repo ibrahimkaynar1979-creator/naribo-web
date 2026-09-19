@@ -25,8 +25,6 @@ export default function Page(){
  useEffect(()=>{},[slug]);
  useEffect(()=>{},[slug]);
  useEffect(()=>{setProductPage(1)},[category,query]);
- useEffect(()=>{if(categoryPage>categoryPageCount)setCategoryPage(categoryPageCount)},[categoryPage,categoryPageCount]);
- useEffect(()=>{if(productPage>productPageCount)setProductPage(productPageCount)},[productPage,productPageCount]);
  const action=async(body:any)=>true;
  const products=data?.products||[],categories=data?.categories||[],filtered=useMemo(()=>[...products].sort((a,b)=>a.sortOrder-b.sortOrder).filter(p=>(category==='all'||p.categoryId===category)&&(!query||`${p.name} ${p.description}`.toLocaleLowerCase('tr-TR').includes(query.toLocaleLowerCase('tr-TR')))),[products,category,query]);
  const CATEGORY_PAGE_SIZE=5,PRODUCT_PAGE_SIZE=6;
@@ -35,6 +33,8 @@ export default function Page(){
  const productPageCount=Math.max(1,Math.ceil(filtered.length/PRODUCT_PAGE_SIZE));
  const visibleCategories=sortedCategories.slice((categoryPage-1)*CATEGORY_PAGE_SIZE,categoryPage*CATEGORY_PAGE_SIZE);
  const visibleProducts=filtered.slice((productPage-1)*PRODUCT_PAGE_SIZE,productPage*PRODUCT_PAGE_SIZE);
+ useEffect(()=>{if(categoryPage>categoryPageCount)setCategoryPage(categoryPageCount)},[categoryPage,categoryPageCount]);
+ useEffect(()=>{if(productPage>productPageCount)setProductPage(productPageCount)},[productPage,productPageCount]);
  const persist=async(next:Product[])=>{if(data)setData({...data,products:next})};
  const addCategory=()=>setCatDraft({id:'',name:'',isActive:true,sortOrder:categories.length+1});
  const saveCategoryLocal=(draft:Category)=>{if(!data||!draft.name.trim())return;const item={...draft,id:draft.id||`c-${Date.now()}`,name:draft.name.trim()};const next=draft.id?categories.map(x=>x.id===draft.id?item:x):[...categories,item];setData({...data,categories:next});setCategory(item.id);setCatDraft(null)};
