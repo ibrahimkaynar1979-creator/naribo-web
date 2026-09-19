@@ -413,3 +413,18 @@
 .qaAllergenChips button.active{border-color:#08aeba;background:#e9fafb;color:#07828d}
 .qaPreviewNutrition{display:flex;gap:5px;flex-wrap:wrap;margin:6px 0 7px;padding-top:6px;border-top:1px solid #edf2f4}
 .qaPreviewNutrition span{font-size:6px;font-weight:750;color:#526a80;background:#f3f8fa;border-radius:5px;padding:3px 5px}
+
+/* Category rail readability + proportion */
+.qaMenuWorkbench{grid-template-columns:minmax(245px,.78fr) minmax(330px,1.02fr) minmax(560px,1.72fr) minmax(390px,1.18fr)!important}
+.qaCategoryRail{min-width:245px!important}
+.qaCategoryList{padding:4px 8px 10px!important}
+.qaCategoryRow{min-height:46px!important;display:grid!important;grid-template-columns:24px minmax(0,1fr) 28px!important;align-items:center!important;border-bottom:1px solid #e5eef3!important}
+.qaCategoryRow.fixed{grid-template-columns:minmax(0,1fr)!important}
+.qaCategoryRow>button:not(.qaCatEdit){width:100%!important;min-width:0!important;display:flex!important;align-items:center!important;justify-content:space-between!important;padding:0 4px!important;color:#173158!important}
+.qaCategoryRow>button:not(.qaCatEdit)>span{display:flex!important;align-items:center!important;gap:8px!important;min-width:0!important}
+.qaCategoryRow b{display:block!important;font-size:11px!important;line-height:1.2!important;font-weight:750!important;color:#102d54!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+.qaCategoryRow em{display:flex!important;align-items:center!important;justify-content:center!important;min-width:24px!important;height:24px!important;padding:0 6px!important;border-radius:8px!important;background:#edf6f8!important;color:#31546d!important;font-size:10px!important;font-style:normal!important;font-weight:800!important}
+.qaCatGrip{display:flex!important;align-items:center!important;justify-content:center!important;color:#8ba3b5!important;cursor:grab!important}
+.qaCatEdit{display:flex!important;align-items:center!important;justify-content:center!important;width:28px!important;height:28px!important;border:0!important;background:transparent!important;color:#6c879b!important;border-radius:7px!important}
+.qaCatEdit:hover{background:#edf8fa!important;color:#079eaa!important}
+.qaCategoryRow.active{background:#eefbfc!important;border-color:#bde9ed!important;border-radius:9px!important}
