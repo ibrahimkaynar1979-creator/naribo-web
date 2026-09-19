@@ -162,50 +162,26 @@ function SettingsSection({restaurant,save}:{restaurant:Restaurant;save:(r:Restau
 function ago(v:string){const m=Math.max(0,Math.round((Date.now()-new Date(v).getTime())/60000));return m<1?'Şimdi':m<60?`${m} dk önce`:`${Math.floor(m/60)} sa önce`}
 function Editor({p,cats,isNew,close,save,del}:{p:Product;cats:Category[];isNew:boolean;close:()=>void;save:(p:Product)=>void;del:(id:string)=>void}){
  const[d,setD]=useState(p);
- const cat=cats.find(c=>c.id===d.categoryId)?.name||"Kategori";
+ const pickPhoto=(file?:File)=>{if(!file)return;if(file.size>5*1024*1024){alert('Fotoğraf en fazla 5 MB olabilir.');return}const reader=new FileReader();reader.onload=()=>setD(v=>({...v,image:String(reader.result||'')}));reader.readAsDataURL(file)};
  return <>
   <section className="qaWorkbenchEditor">
-   <div className="qaWorkbenchTitle"><div><h2>Ürün Ekle / Düzenle</h2><p>Ürün bilgilerini girin, sağda QR menünüzde nasıl görüneceğini canlı olarak izleyin.</p></div></div>
+   <div className="qaWorkbenchTitle"><h2>Ürün Ekle / Düzenle</h2><p>Bilgileri düzenleyin; değişiklikleri sağdaki QR menü önizlemesinde anında görün.</p></div>
    <div className="qaWorkbenchForm">
-    <div className="qaEditorTwo">
-     <label>Ürün Adı *<input placeholder="Örn: Tavuklu Fettuccine" value={d.name} maxLength={100} onChange={e=>setD({...d,name:e.target.value})}/><small>{d.name.length}/100</small></label>
-     <label>Kategori *<select value={d.categoryId} onChange={e=>setD({...d,categoryId:e.target.value})}>{cats.map(c=><option key={c.id} value={c.id}>{c.name}</option>)}</select></label>
+    <div className="qaEditorTwo"><label>Ürün Adı *<input value={d.name} maxLength={100} onChange={e=>setD({...d,name:e.target.value})}/><small>{d.name.length}/100</small></label><label>Kategori *<select value={d.categoryId} onChange={e=>setD({...d,categoryId:e.target.value})}>{cats.map(c=><option key={c.id} value={c.id}>{c.name}</option>)}</select></label></div>
+    <label>Açıklama<textarea maxLength={300} value={d.description} onChange={e=>setD({...d,description:e.target.value})}/><small>{d.description.length}/300</small></label>
+    <div className="qaPhotoCard">
+     <div className="qaPhotoTitle"><b>Ürün Fotoğrafı</b><small>JPG, PNG veya WEBP · Maksimum 5 MB</small></div>
+     <div className="qaPhotoRow">
+      <label className="qaPhotoThumb"><input type="file" accept="image/png,image/jpeg,image/webp" onChange={e=>pickPhoto(e.target.files?.[0])}/>{d.image?<img src={d.image} alt="Ürün fotoğrafı"/>:<ImageOff size={28}/>}</label>
+      <div className="qaPhotoControls"><label className="qaPhotoChange"><input type="file" accept="image/png,image/jpeg,image/webp" onChange={e=>pickPhoto(e.target.files?.[0])}/><ImageOff size={15}/>{d.image?'Fotoğrafı Değiştir':'Fotoğraf Yükle'}</label><span>Fotoğraf sağdaki QR menü önizlemesine anında yansır.</span></div>
+      {d.image&&<button type="button" className="qaPhotoRemove" onClick={()=>setD({...d,image:''})}><Trash2 size={15}/></button>}
+     </div>
     </div>
-    <label>Açıklama<textarea placeholder="Ürününüzün içeriğini ve lezzetini anlatın..." maxLength={300} value={d.description} onChange={e=>setD({...d,description:e.target.value})}/><small>{d.description.length}/300</small></label>
-    <div className="qaWorkbenchPhotos"><b>Ürün Fotoğrafı</b><div className="qaUploadArea">
-      <label className="qaUploadTile">
-       <input type="file" accept="image/png,image/jpeg,image/webp" onChange={e=>{const file=e.target.files?.[0];if(!file)return;if(file.size>5*1024*1024){alert('Fotoğraf en fazla 5 MB olabilir.');e.currentTarget.value='';return;}const reader=new FileReader();reader.onload=()=>setD({...d,image:String(reader.result||'')});reader.readAsDataURL(file)}}/>
-       {d.image?<img src={d.image} alt="Yüklenen ürün fotoğrafı"/>:<ImageOff size={27}/>}
-       <span><strong>{d.image?'Fotoğrafı Değiştir':'Fotoğraf Yükle'}</strong><small>JPG, PNG veya WEBP · Maksimum 5 MB</small></span>
-      </label>
-      {d.image&&<button type="button" className="qaRemovePhoto" onClick={()=>setD({...d,image:''})}><Trash2 size={14}/>Fotoğrafı Kaldır</button>}
-     </div></div>
-    <div className="qaEditorSplit">
-     <label>Fiyat *<div className="qaPrice"><span>₺</span><input type="number" value={d.price} onChange={e=>setD({...d,price:Number(e.target.value)})}/></div></label>
-     <div className="qaToggleField"><span><b>Menüde Göster</b><small>Bu ürün QR menünüzde görünsün mü?</small></span><button type="button" className={d.isActive?'qaToggle on':'qaToggle'} onClick={()=>setD({...d,isActive:!d.isActive})}><i/></button></div>
-    </div>
-    <div className="qaEditorSplit qaSecondaryRow">
-     <div className="qaToggleField"><span><b>Öne Çıkan Ürün</b><small>Bu ürünü QR menüde üst sıralarda göster.</small></span><button type="button" className="qaToggle"><i/></button></div>
-     <label>Stok Durumu<select defaultValue="var"><option value="var">Stokta Var</option><option value="yok">Stokta Yok</option></select></label>
-    </div>
-    <div className="qaWorkbenchActions">{isNew?<button className="qaClean" type="button" onClick={()=>setD({...p,name:'',description:'',price:0,image:''})}><Trash2 size={15}/>Temizle</button>:<button className="qaDelete" type="button" onClick={()=>del(d.id)}><Trash2 size={15}/>Ürünü Sil</button>}<button className="qaSaveProduct" disabled={!d.name.trim()} onClick={()=>save({...d,name:d.name.trim()})}><CheckCircle2 size={16}/>{isNew?'Ürünü Kaydet':'Değişiklikleri Kaydet'}</button></div>
+    <div className="qaEditorSplit"><label>Fiyat *<div className="qaPrice"><span>₺</span><input type="number" min="0" value={d.price} onChange={e=>setD({...d,price:Number(e.target.value)})}/></div></label><div className="qaToggleField"><span><b>Menüde Göster</b><small>QR menüde yayınlansın.</small></span><button type="button" className={d.isActive?'qaToggle on':'qaToggle'} onClick={()=>setD({...d,isActive:!d.isActive})}><i/></button></div></div>
+    <div className="qaEditorSplit qaSecondaryRow"><div className="qaToggleField"><span><b>Öne Çıkan Ürün</b><small>Üst sıralarda göster.</small></span><button type="button" className="qaToggle"><i/></button></div><label>Stok Durumu<select defaultValue="var"><option value="var">Stokta Var</option><option value="yok">Stokta Yok</option></select></label></div>
+    <div className="qaWorkbenchActions">{!isNew&&<button className="qaDelete" type="button" onClick={()=>del(d.id)}><Trash2 size={15}/>Ürünü Sil</button>}<button className="qaSaveProduct" disabled={!d.name.trim()} onClick={()=>save({...d,name:d.name.trim()})}><CheckCircle2 size={16}/>{isNew?'Ürünü Kaydet':'Değişiklikleri Kaydet'}</button></div>
    </div>
   </section>
-  <aside className="qaWorkbenchPreview">
-   <header><div><Eye size={20}/><span><b>QR Menü Önizleme</b><small>Ürününüz müşterilere bu şekilde görünecek.</small></span></div><span className="qaMobileBadge">Mobil</span></header>
-   <div className="qaPhone qaPhoneCompact">
-    <div className="qaPhoneNotch"/>
-    <div className="qaPhoneScreen">
-     <div className="qaPreviewBrand">Makarilla<small>PASTA & MORE</small></div>
-     <div className="qaPreviewCats"><span className="active">Makarna</span><span>Wraplar</span><span>Salatalar</span><span>Tatlılar</span></div>
-     <img src={d.image||'/makarilla_tabak.png'} alt="Ürün önizleme"/>
-     <div className="qaPreviewNameRow"><h4>{d.name||'Ürün Adı'}</h4><strong>₺{Number(d.price||0).toLocaleString('tr-TR')}</strong></div>
-     <p>{d.description||'Ürün açıklaması burada görünecek.'}</p>
-     <div className="qaPreviewBadges"><span>TAZE<br/>İÇERİK</span><span>ÖZEL<br/>SOS</span><span>BOL<br/>LEZZET</span></div>
-     <button>Sepete Ekle</button>
-     <footer>Makarilla<small>İyi yemek, iyi hisset.</small></footer>
-    </div>
-   </div>
-  </aside>
+  <aside className="qaWorkbenchPreview"><header><div><Eye size={20}/><span><b>QR Menü Önizleme</b><small>Müşterinin telefonunda görünecek görünüm.</small></span></div><span className="qaMobileBadge">Mobil</span></header><div className="qaPhone qaPhoneCompact"><div className="qaPhoneNotch"/><div className="qaPhoneScreen"><div className="qaPreviewBrand">Makarilla<small>PASTA & MORE</small></div><div className="qaPreviewCats"><span className="active">Makarna</span><span>Wraplar</span><span>Salatalar</span><span>Tatlılar</span></div><img src={d.image||'/makarilla_tabak.png'} alt="Ürün önizleme"/><div className="qaPreviewNameRow"><h4>{d.name||'Ürün Adı'}</h4><strong>₺{Number(d.price||0).toLocaleString('tr-TR')}</strong></div><p>{d.description||'Ürün açıklaması burada görünecek.'}</p><div className="qaPreviewBadges"><span>TAZE<br/>İÇERİK</span><span>ÖZEL<br/>SOS</span><span>BOL<br/>LEZZET</span></div><button>Sepete Ekle</button><footer>Makarilla<small>İyi yemek, iyi hisset.</small></footer></div></div></aside>
  </>;
 }
