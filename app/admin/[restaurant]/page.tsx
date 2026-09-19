@@ -157,7 +157,7 @@ function ago(v:string){const m=Math.max(0,Math.round((Date.now()-new Date(v).get
 function Editor({p,cats,isNew,close,save,del}:{p:Product;cats:Category[];isNew:boolean;close:()=>void;save:(p:Product)=>void;del:(id:string)=>void}){
  const[d,setD]=useState(p);
  const cat=cats.find(c=>c.id===d.categoryId)?.name||"Kategori";
- return <div className="qaProductEditorPage">
+ return <div className="qaEditorBackdrop"><div className="qaProductEditorPage">
   <div className="qaProductEditorTop">
    <button className="qaBackBtn" onClick={close}><ChevronLeft size={18}/></button>
    <div><span>Menüm /</span><h2>{isNew?'Ürün Ekle':'Ürün Düzenle'}</h2><p>Ürün bilgilerini girin, QR menünüzde nasıl görüneceğini anında önizleyin.</p></div>
@@ -194,5 +194,5 @@ function Editor({p,cats,isNew,close,save,del}:{p:Product;cats:Category[];isNew:b
     <div className="qaPreviewChecks"><b>Görünüm Detayları</b><span><CheckCircle2/>Ürün fotoğrafı</span><span><CheckCircle2/>Ürün adı</span><span><CheckCircle2/>Açıklama</span><span><CheckCircle2/>Fiyat</span><span><CheckCircle2/>{cat} altında listelenir</span></div>
    </aside>
   </div>
- </div>
+ </div></div>
 }
