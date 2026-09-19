@@ -40,7 +40,7 @@ export default function Page(){
     <div className="ptVersion"><b>PanelTakip.com</b><span>QR Menü</span></div>
   </aside>
 
-  <section className={`ptWorkspace ${tab==="overview"?"ptWorkspaceOverview":""}`}>
+  <section className={`ptWorkspace ${tab==="overview"?"ptWorkspaceOverview":tab==="menu"?"ptWorkspaceMenu":""}`}>
     <header className="ptTopbar">
       <button className="ptMobileMenu"><Menu size={18}/></button>
       <label className="ptSearch"><Search size={18}/><input placeholder="Menü, ürün veya kategori ara..." value={query} onChange={e=>setQuery(e.target.value)}/><kbd>⌘ K</kbd></label>
