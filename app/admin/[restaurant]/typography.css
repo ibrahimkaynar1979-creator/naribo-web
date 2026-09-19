@@ -803,3 +803,84 @@
     height:16px!important;
   }
 }
+
+
+/* Overview final readability balance v9 */
+@media(min-width:901px){
+  .qaOverviewCompact{
+    grid-template-rows:58px 250px 172px!important;
+  }
+
+  .qaOverviewCompact .qaDashHead h2{
+    font-size:13px!important;
+  }
+  .qaOverviewCompact .qaStatusPill{
+    font-size:8.5px!important;
+  }
+
+  .qaOverviewCompact .qaPerformanceCard .qaRealChart{
+    height:174px!important;
+    align-items:center!important;
+    padding-top:10px!important;
+  }
+  .qaOverviewCompact .qaPerformanceCard .qaRealChart>div>span{
+    max-height:118px!important;
+  }
+  .qaOverviewCompact .qaPerformanceCard .qaRealChart b{
+    font-size:9.5px!important;
+  }
+  .qaOverviewCompact .qaPerformanceCard .qaRealChart small{
+    font-size:9px!important;
+  }
+
+  .qaHealthCompact{
+    grid-template-columns:90px 1fr!important;
+    gap:11px!important;
+  }
+  .qaHealthRing{
+    width:80px!important;
+    height:80px!important;
+  }
+  .qaHealthRing strong{
+    font-size:20px!important;
+  }
+  .qaOverviewCompact .qaHealthList>div{
+    font-size:10.5px!important;
+  }
+
+  .qaOverviewCompact .qaQuickGridCompact button{
+    height:42px!important;
+    min-height:42px!important;
+  }
+  .qaOverviewCompact .qaQuickGridCompact b{
+    font-size:10px!important;
+  }
+
+  .qaOverviewBottomGrid .qaPopularTable>div{
+    min-height:32px!important;
+    grid-template-columns:14px 32px 1fr auto!important;
+  }
+  .qaOverviewBottomGrid .qaPopularTable img{
+    width:32px!important;
+    height:32px!important;
+  }
+  .qaOverviewBottomGrid .qaPopularTable b,
+  .qaOverviewBottomGrid .qaPopularTable strong{
+    font-size:10px!important;
+  }
+  .qaOverviewBottomGrid .qaPopularTable small{
+    font-size:8.5px!important;
+  }
+  .qaOverviewBottomGrid .qaFeedbackMini>div{
+    padding:5px 0!important;
+  }
+  .qaOverviewBottomGrid .qaFeedbackMini b{
+    font-size:10.5px!important;
+  }
+  .qaOverviewBottomGrid .qaFeedbackMini span{
+    font-size:9.5px!important;
+  }
+  .qaOverviewBottomGrid .qaCompactEmpty{
+    font-size:9.5px!important;
+  }
+}
