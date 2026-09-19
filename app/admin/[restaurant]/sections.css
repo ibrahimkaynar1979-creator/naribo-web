@@ -518,3 +518,46 @@
 }
 .qaCategoryLine .qaCatGrip,.qaCategoryLine .qaCatEdit{display:flex!important;align-items:center!important;justify-content:center!important}
 .qaCategoryLine .qaCatEdit{width:28px!important;height:28px!important}
+
+/* Category card rebuilt to use the same visual rhythm as Menum */
+.qaCategoryMenuList{
+  margin:8px 8px 0!important;border:1px solid #d9e6ed!important;border-radius:11px!important;
+  overflow:hidden!important;background:#fff!important;
+}
+.qaCategoryMenuRow{
+  box-sizing:border-box!important;width:100%!important;height:60px!important;min-height:60px!important;
+  display:grid!important;grid-template-columns:26px minmax(0,1fr) 34px!important;
+  align-items:center!important;gap:7px!important;padding:0 9px!important;
+  border:0!important;border-bottom:1px solid #dfe8ed!important;border-radius:0!important;
+  background:#fff!important;color:#123258!important;text-align:left!important;
+}
+button.qaCategoryMenuRow{grid-template-columns:minmax(0,1fr) auto!important;cursor:pointer!important}
+.qaCategoryMenuRow:last-child{border-bottom:0!important}
+.qaCategoryMenuRow.active{background:#f0fbfc!important;box-shadow:inset 3px 0 0 #08aeba!important}
+.qaCategoryMenuName{display:flex!important;align-items:center!important;gap:9px!important;min-width:0!important}
+.qaCategoryMenuName b,.qaCategoryMenuSelect b{
+  display:block!important;font-size:12.5px!important;line-height:1.25!important;font-weight:800!important;
+  color:#102d54!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;
+}
+.qaCategoryMenuMeta{
+  display:inline-flex!important;align-items:center!important;justify-content:center!important;
+  height:26px!important;padding:0 8px!important;border-radius:8px!important;background:#edf5f8!important;
+  color:#47657c!important;font-size:10px!important;font-weight:800!important;white-space:nowrap!important;
+}
+.qaCategoryDrag{display:flex!important;align-items:center!important;justify-content:center!important;color:#8aa3b6!important;cursor:grab!important}
+.qaCategoryDrag:active{cursor:grabbing!important}
+.qaCategoryMenuSelect{
+  min-width:0!important;border:0!important;background:transparent!important;padding:0!important;
+  display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:3px!important;
+  text-align:left!important;cursor:pointer!important;overflow:hidden!important;
+}
+.qaCategoryMenuSelect small{
+  display:block!important;width:100%!important;font-size:10px!important;line-height:1.2!important;
+  font-weight:500!important;color:#6f879a!important;white-space:nowrap!important;
+}
+.qaCategoryMenuEdit{
+  width:32px!important;height:32px!important;border:0!important;border-radius:8px!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  background:transparent!important;color:#69869a!important;cursor:pointer!important;
+}
+.qaCategoryMenuEdit:hover{background:#eaf7f9!important;color:#078f9a!important}
