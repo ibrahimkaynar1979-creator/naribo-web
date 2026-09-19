@@ -8,7 +8,7 @@ import { useParams } from 'next/navigation';
 import {Activity,AlertCircle,BarChart3,Bell,ChevronDown,ChevronLeft,ChevronRight,Edit3,Eye,GripVertical,Home,ImageOff,LayoutGrid,Menu,MessageSquareText,MoreHorizontal,MoreVertical,Plus,QrCode,Search,Settings,Star,Store,Tags,Trash2,Utensils,Wifi,MapPin,Phone,Instagram,CheckCircle2,Clock,ExternalLink,Save} from 'lucide-react';
 
 type Category={id:string;name:string;isActive:boolean;sortOrder:number};
-type Product={id:string;categoryId:string;name:string;description:string;price:number;image:string;allergens?:string[];isActive:boolean;sortOrder:number};
+type Product={id:string;categoryId:string;name:string;description:string;price:number;image:string;allergens?:string[];calories?:number;isActive:boolean;sortOrder:number};
 type Restaurant={id:string;slug:string;name:string;logo:string;cover:string;description:string;phone:string;address:string;instagram:string;wifiName:string;wifiPassword:string;iban:string;directionsUrl:string;openingHours:Record<string,string>;themeColor:string};
 type Call={id:string;tableNo:string;note:string;status:string;createdAt:string;resolvedAt?:string};
 type Feedback={id:string;rating:number;comment:string;customerName:string;createdAt:string};
@@ -180,6 +180,8 @@ function SettingsSection({restaurant,save}:{restaurant:Restaurant;save:(r:Restau
 function ago(v:string){const m=Math.max(0,Math.round((Date.now()-new Date(v).getTime())/60000));return m<1?'Şimdi':m<60?`${m} dk önce`:`${Math.floor(m/60)} sa önce`}
 function Editor({p,cats,isNew,close,save,del}:{p:Product;cats:Category[];isNew:boolean;close:()=>void;save:(p:Product)=>void;del:(id:string)=>void}){
  const[d,setD]=useState(p);
+ const ALLERGENS=['Gluten','Süt','Yumurta','Yer Fıstığı','Kuruyemiş','Soya','Balık','Kabuklu Deniz Ürünü','Susam'];
+ const toggleAllergen=(name:string)=>setD(v=>({...v,allergens:(v.allergens||[]).includes(name)?(v.allergens||[]).filter(x=>x!==name):[...(v.allergens||[]),name]}));
  const pickPhoto=(file?:File)=>{if(!file)return;if(file.size>5*1024*1024){alert('Fotoğraf en fazla 5 MB olabilir.');return}const reader=new FileReader();reader.onload=()=>setD(v=>({...v,image:String(reader.result||'')}));reader.readAsDataURL(file)};
  return <>
   <section className="qaWorkbenchEditor">
@@ -197,9 +199,13 @@ function Editor({p,cats,isNew,close,save,del}:{p:Product;cats:Category[];isNew:b
     </div>
     <div className="qaEditorSplit"><label>Fiyat *<div className="qaPrice"><span>₺</span><input type="number" min="0" value={d.price} onChange={e=>setD({...d,price:Number(e.target.value)})}/></div></label><div className="qaToggleField"><span><b>Menüde Göster</b><small>QR menüde yayınlansın.</small></span><button type="button" className={d.isActive?'qaToggle on':'qaToggle'} onClick={()=>setD({...d,isActive:!d.isActive})}><i/></button></div></div>
     <div className="qaEditorSplit qaSecondaryRow"><div className="qaToggleField"><span><b>Öne Çıkan Ürün</b><small>Üst sıralarda göster.</small></span><button type="button" className="qaToggle"><i/></button></div><label>Stok Durumu<select defaultValue="var"><option value="var">Stokta Var</option><option value="yok">Stokta Yok</option></select></label></div>
+    <div className="qaNutritionBox">
+      <div className="qaNutritionHead"><div><b>Beslenme & Alerjen</b><small>Müşterinin menüde göreceği ek bilgiler.</small></div><label>Kalori (kcal)<input type="number" min="0" step="1" value={d.calories??''} placeholder="Örn. 620" onChange={e=>setD({...d,calories:e.target.value===''?undefined:Number(e.target.value)})}/></label></div>
+      <div className="qaAllergenChips">{ALLERGENS.map(a=><button type="button" key={a} className={(d.allergens||[]).includes(a)?'active':''} onClick={()=>toggleAllergen(a)}>{a}</button>)}</div>
+    </div>
     <div className="qaWorkbenchActions">{!isNew&&<button className="qaDelete" type="button" onClick={()=>del(d.id)}><Trash2 size={15}/>Ürünü Sil</button>}<button className="qaSaveProduct" disabled={!d.name.trim()} onClick={()=>save({...d,name:d.name.trim()})}><CheckCircle2 size={16}/>{isNew?'Ürünü Kaydet':'Değişiklikleri Kaydet'}</button></div>
    </div>
   </section>
-  <aside className="qaWorkbenchPreview"><header><div><Eye size={20}/><span><b>QR Menü Önizleme</b><small>Müşterinin telefonunda görünecek görünüm.</small></span></div><span className="qaMobileBadge">Mobil</span></header><div className="qaPhone qaPhoneCompact"><div className="qaPhoneNotch"/><div className="qaPhoneScreen"><div className="qaPreviewBrand">Makarilla<small>PASTA & MORE</small></div><div className="qaPreviewCats"><span className="active">Makarna</span><span>Wraplar</span><span>Salatalar</span><span>Tatlılar</span></div><img src={d.image||'/makarilla_tabak.png'} alt="Ürün önizleme"/><div className="qaPreviewNameRow"><h4>{d.name||'Ürün Adı'}</h4><strong>₺{Number(d.price||0).toLocaleString('tr-TR')}</strong></div><p>{d.description||'Ürün açıklaması burada görünecek.'}</p><div className="qaPreviewBadges"><span>TAZE<br/>İÇERİK</span><span>ÖZEL<br/>SOS</span><span>BOL<br/>LEZZET</span></div><button>Sepete Ekle</button><footer>Makarilla<small>İyi yemek, iyi hisset.</small></footer></div></div></aside>
+  <aside className="qaWorkbenchPreview"><header><div><Eye size={20}/><span><b>QR Menü Önizleme</b><small>Müşterinin telefonunda görünecek görünüm.</small></span></div><span className="qaMobileBadge">Mobil</span></header><div className="qaPhone qaPhoneCompact"><div className="qaPhoneNotch"/><div className="qaPhoneScreen"><div className="qaPreviewBrand">Makarilla<small>PASTA & MORE</small></div><div className="qaPreviewCats"><span className="active">Makarna</span><span>Wraplar</span><span>Salatalar</span><span>Tatlılar</span></div><img src={d.image||'/makarilla_tabak.png'} alt="Ürün önizleme"/><div className="qaPreviewNameRow"><h4>{d.name||'Ürün Adı'}</h4><strong>₺{Number(d.price||0).toLocaleString('tr-TR')}</strong></div><p>{d.description||'Ürün açıklaması burada görünecek.'}</p><div className="qaPreviewBadges"><span>TAZE<br/>İÇERİK</span><span>ÖZEL<br/>SOS</span><span>BOL<br/>LEZZET</span></div>{(d.calories||((d.allergens||[]).length>0))&&<div className="qaPreviewNutrition">{d.calories?<span>{d.calories} kcal</span>:null}{(d.allergens||[]).length>0?<span>Alerjen: {(d.allergens||[]).join(', ')}</span>:null}</div>}<button>Sepete Ekle</button><footer>Makarilla<small>İyi yemek, iyi hisset.</small></footer></div></div></aside>
  </>;
 }
