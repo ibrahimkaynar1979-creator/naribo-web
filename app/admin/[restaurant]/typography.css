@@ -522,3 +522,118 @@
   .ptRestaurant span,.ptProfile div{min-width:0}
   .ptRestaurant b,.ptRestaurant small,.ptProfile b,.ptProfile small{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 }
+
+
+/* 2026-09-19 — rebuild overview top-right control geometry */
+.ptWorkspaceOverview .ptTopbar{
+  gap:7px!important;
+}
+.ptWorkspaceOverview .ptDateCard,
+.ptWorkspaceOverview .ptRestaurant,
+.ptWorkspaceOverview .ptIconBtn,
+.ptWorkspaceOverview .ptProfile{
+  height:42px!important;
+  border-radius:12px!important;
+}
+.ptWorkspaceOverview .ptDateCard{min-width:118px!important}
+.ptWorkspaceOverview .ptRestaurant{min-width:126px!important}
+.ptWorkspaceOverview .ptProfile{min-width:122px!important}
+.ptWorkspaceOverview .ptProfile,
+.ptWorkspaceOverview .ptRestaurant{
+  overflow:hidden!important;
+}
+.ptWorkspaceOverview .ptRestaurant span,
+.ptWorkspaceOverview .ptProfile div{
+  min-width:0!important;
+}
+.ptWorkspaceOverview .ptRestaurant b,
+.ptWorkspaceOverview .ptRestaurant small,
+.ptWorkspaceOverview .ptProfile b,
+.ptWorkspaceOverview .ptProfile small{
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  white-space:nowrap!important;
+}
+
+.ptWorkspaceOverview .qaOverviewHero{
+  min-height:82px!important;
+  grid-template-columns:minmax(320px,1fr) 1fr!important;
+  gap:14px!important;
+  padding:0 8px 2px!important;
+}
+.ptWorkspaceOverview .qaOverviewHello{
+  align-self:center!important;
+}
+.ptWorkspaceOverview .qaOverviewHeroActions{
+  grid-column:2!important;
+  display:grid!important;
+  grid-template-columns:150px 120px 235px!important;
+  justify-content:end!important;
+  align-items:center!important;
+  gap:8px!important;
+}
+.ptWorkspaceOverview .qaGhostAction,
+.ptWorkspaceOverview .qaHeroAdd{
+  height:44px!important;
+  min-height:44px!important;
+  width:100%!important;
+  padding:0 12px!important;
+  border-radius:10px!important;
+  font-size:11px!important;
+}
+.ptWorkspaceOverview .qaQrPreviewCard{
+  height:68px!important;
+  width:235px!important;
+  min-width:235px!important;
+  border-radius:11px!important;
+  grid-template-columns:52px 1fr!important;
+  gap:9px!important;
+  padding:6px 10px!important;
+  box-shadow:0 6px 16px rgba(50,79,103,.08)!important;
+}
+.ptWorkspaceOverview .qaQrPreviewIcon{
+  width:50px!important;
+  height:50px!important;
+  border-radius:8px!important;
+}
+.ptWorkspaceOverview .qaQrPreviewIcon svg{
+  width:36px!important;
+  height:36px!important;
+}
+.ptWorkspaceOverview .qaQrPreviewCard>span:last-child{
+  gap:1px!important;
+}
+.ptWorkspaceOverview .qaQrPreviewCard b{
+  font-size:12.5px!important;
+  line-height:1.15!important;
+  font-weight:800!important;
+}
+.ptWorkspaceOverview .qaQrPreviewCard small{
+  font-size:10.5px!important;
+  line-height:1.25!important;
+  color:#667b92!important;
+  max-width:150px!important;
+}
+.ptWorkspaceOverview .qaQrPreviewCard em{
+  font-size:10px!important;
+  line-height:1.2!important;
+  font-weight:750!important;
+}
+.ptWorkspaceOverview .qaOverviewSummary{
+  margin-top:12px!important;
+}
+
+@media(max-width:1320px){
+  .ptWorkspaceOverview .qaOverviewHero{
+    grid-template-columns:minmax(280px,1fr) auto!important;
+  }
+  .ptWorkspaceOverview .qaOverviewHeroActions{
+    grid-template-columns:140px 112px 215px!important;
+  }
+  .ptWorkspaceOverview .qaQrPreviewCard{
+    width:215px!important;
+    min-width:215px!important;
+  }
+  .ptWorkspaceOverview .ptProfile{min-width:108px!important}
+  .ptWorkspaceOverview .ptRestaurant{min-width:114px!important}
+}
