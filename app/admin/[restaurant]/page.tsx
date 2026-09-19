@@ -27,6 +27,7 @@ export default function Page(){
  const action=async(body:any)=>true;
  const products=data?.products||[],categories=data?.categories||[],filtered=useMemo(()=>products.filter(p=>(category==='all'||p.categoryId===category)&&(!query||`${p.name} ${p.description}`.toLocaleLowerCase('tr-TR').includes(query.toLocaleLowerCase('tr-TR')))),[products,category,query]);
  const persist=async(next:Product[])=>{if(data)setData({...data,products:next})};
+ const addCategory=()=>{if(!data)return;const name=window.prompt('Yeni kategori adı');if(!name?.trim())return;const next={id:`c-${Date.now()}`,name:name.trim(),isActive:true,sortOrder:categories.length+1};setData({...data,categories:[...categories,next]});setCategory(next.id)};
  if(loading)return <main className="qrAdminPremium"><div style={{padding:40}}>Panel yükleniyor...</div></main>;
  if(error||!data)return <main className="qrAdminPremium"><div style={{padding:40}}><h1>{error}</h1></div></main>;
  const nav:[Tab,string,any][]=[['overview','Genel Bakış',Home],['menu','Menüm',Utensils],['categories','Kategoriler',Tags],['qr','QR Kod',QrCode],['restaurant','Restoran Bilgileri',Store],['calls','Garson Çağrıları',Bell],['feedback','Geri Bildirimler',Star],['stats','İstatistikler',BarChart3],['settings','Ayarlar',Settings]];
@@ -52,14 +53,20 @@ export default function Page(){
       <section className="qaMain ptAdminSurface">
        {tab==='overview'&&<Overview data={data} setTab={setTab} resolve={id=>action({action:'resolveCall',id})}/>} 
        {tab==='menu'&&<div className="qaMenuWorkbench">
+  <section className="qaCategoryRail">
+   <div className="qaPanelHead"><div><h2>Kategoriler</h2><p>Menü gruplarını yönetin.</p></div><button onClick={addCategory}><Plus size={14}/></button></div>
+   <div className="qaCategoryList">
+    <button className={category==='all'?'active':''} onClick={()=>setCategory('all')}><span><LayoutGrid size={16}/><b>Tümü</b></span><em>{products.length}</em></button>
+    {categories.map(cat=><button key={cat.id} className={category===cat.id?'active':''} onClick={()=>setCategory(cat.id)}><span><Tags size={16}/><b>{cat.name}</b></span><em>{products.filter(p=>p.categoryId===cat.id).length}</em></button>)}
+   </div>
+  </section>
   <section className="qaMenuRail">
-   <div className="qaMenuRailHead"><div><h1>Menüm</h1><p>Ürünleri, fiyatları ve görünürlüğü yönetin.</p></div><button className="qaMiniAdd" onClick={openNew}><Plus size={14}/>Yeni Ürün</button></div>
-   <div className="qaCategoryChips qaWorkbenchChips"><button className={category==='all'?'active':''} onClick={()=>setCategory('all')}>Tümü <b>{products.length}</b></button>{categories.map(c=><button key={c.id} className={category===c.id?'active':''} onClick={()=>setCategory(c.id)}>{c.name} <b>{products.filter(p=>p.categoryId===c.id).length}</b></button>)}</div>
+   <div className="qaPanelHead"><div><h2>Menüm</h2><p>Ürünleri seçin ve düzenleyin.</p></div><button onClick={openNew}><Plus size={14}/></button></div>
    <label className="qaSearch qaWorkbenchSearch"><Search size={16}/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Ürün ara..."/></label>
    <div className="qaWorkbenchProducts">{filtered.map(p=><button className={editing?.id===p.id?'active':''} key={p.id} onClick={()=>{setEditing(p);setIsNew(false)}}><img src={p.image||'/makarilla_tabak.png'} alt=""/><span><b>{p.name}</b><small>{categories.find(c=>c.id===p.categoryId)?.name||'Kategori'}</small></span><strong>₺{p.price}</strong><i className={p.isActive?'on':''}><em/></i><MoreVertical size={16}/></button>)}</div>
   </section>
   <Editor key={(editing||products[0])?.id||'new'} p={editing||products[0]||{id:'new',categoryId:categories[0]?.id||'',name:'',description:'',price:0,image:'',allergens:[],isActive:true,sortOrder:1}} cats={categories} isNew={isNew||!products.length} close={()=>{setEditing(products[0]||null);setIsNew(false)}} save={async p=>{await persist((isNew||!products.some(x=>x.id===p.id))?[...products,p]:products.map(x=>x.id===p.id?p:x));setEditing(p);setIsNew(false)}} del={async id=>{if(confirm('Bu ürünü silmek istiyor musunuz?')){const next=products.filter(x=>x.id!==id);await persist(next);setEditing(next[0]||null);setIsNew(false)}}}/>
- </div>}
+ </div>}}
        {tab==='categories'&&<Categories cats={categories} products={products} save={c=>action({action:'saveCategory',category:c})} del={id=>action({action:'deleteCategory',id})}/>} 
        {tab==='qr'&&<QrSection restaurant={data.restaurant}/>} 
        {tab==='restaurant'&&<RestaurantSection restaurant={data.restaurant} save={r=>action({action:'updateRestaurant',restaurant:r})}/>} 
