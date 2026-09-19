@@ -339,3 +339,20 @@
 .qaOverviewProducts small{font-size:8.5px!important}
 .qaOverviewFeedback b{font-size:9.5px!important}
 .qaOverviewFeedback small{font-size:8.5px!important}
+
+
+/* Exact shared overview title style = "Makarilla QR Menü" */
+.qaOverviewTitleLine h1,
+.qaOverviewSectionHead h2,
+.qaOverviewCardHead h2,
+.qaOverviewQuick h2,
+.qaOverviewFooterGrid h2,
+.qaOverviewListCard h2{
+  margin:0!important;
+  font-family:inherit!important;
+  font-size:25px!important;
+  line-height:1.08!important;
+  letter-spacing:-.5px!important;
+  font-weight:800!important;
+  color:#102650!important;
+}
