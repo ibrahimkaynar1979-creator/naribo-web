@@ -171,7 +171,7 @@ function Editor({p,cats,isNew,close,save,del}:{p:Product;cats:Category[];isNew:b
     </div>
     <label>Açıklama<textarea placeholder="Ürününüzün içeriğini ve lezzetini anlatın..." maxLength={300} value={d.description} onChange={e=>setD({...d,description:e.target.value})}/><small>{d.description.length}/300</small></label>
     <div className="qaPhotoBlock"><b>Ürün Fotoğrafı</b><div className="qaPhotoUpload">
-      <div className="qaUploadBox"><ImageIcon size={28}/><strong>Fotoğraf URL</strong><span>JPG, PNG veya WEBP</span></div>
+      <div className="qaUploadBox"><ImageOff size={28}/><strong>Fotoğraf URL</strong><span>JPG, PNG veya WEBP</span></div>
       <label className="qaImageUrl">Görsel adresi<input value={d.image} onChange={e=>setD({...d,image:e.target.value})} placeholder="/urun-gorseli.png"/></label>
     </div></div>
     <div className="qaPriceVisibility"><label>Fiyat (₺) *<div className="qaPrice"><span>₺</span><input type="number" value={d.price} onChange={e=>setD({...d,price:Number(e.target.value)})}/></div></label><div><b>Menüde Göster</b><small>Bu ürün QR menünüzde görünsün mü?</small><button className={d.isActive?'qaToggle on':'qaToggle'} onClick={()=>setD({...d,isActive:!d.isActive})}><i/></button></div></div>
