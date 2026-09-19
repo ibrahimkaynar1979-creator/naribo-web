@@ -377,3 +377,122 @@
     width:20px!important;height:20px!important;
   }
 }
+
+
+/* Overview final polish v6 */
+@media(min-width:901px){
+  .qaOverviewCompact{
+    grid-template-rows:72px minmax(205px,1.12fr) minmax(142px,.68fr)!important;
+  }
+  .qaOverviewTop{
+    grid-template-columns:repeat(4,minmax(0,1fr)) minmax(145px,.82fr)!important;
+  }
+  .qaPrimaryAction{
+    max-width:none!important;
+    font-weight:800!important;
+  }
+
+  /* Use the middle row instead of leaving large dead areas */
+  .qaOverviewCompact .qaPerformanceCard .qaRealChart{
+    height:158px!important;
+    padding:10px 6px 0!important;
+    align-items:end!important;
+  }
+  .qaOverviewCompact .qaPerformanceCard .qaRealChart>div>span{
+    width:min(30px,56%)!important;
+  }
+  .qaOverviewCompact .qaPerformanceCard .qaRealChart b{
+    font-size:9px!important;
+  }
+  .qaOverviewCompact .qaPerformanceCard .qaRealChart small{
+    font-size:9px!important;
+  }
+
+  .qaHealthCompact{
+    height:calc(100% - 28px)!important;
+    grid-template-columns:116px 1fr!important;
+    align-items:center!important;
+    justify-content:center!important;
+    gap:14px!important;
+    padding:4px 6px 8px!important;
+  }
+  .qaHealthRing{
+    width:108px!important;
+    height:108px!important;
+  }
+  .qaHealthRing:after{inset:11px!important}
+  .qaHealthRing strong{font-size:25px!important}
+  .qaOverviewCompact .qaHealthList{
+    gap:11px!important;
+    align-content:center!important;
+  }
+  .qaOverviewCompact .qaHealthList>div{
+    font-size:11px!important;
+    line-height:1.25!important;
+  }
+  .qaOverviewCompact .qaHealthList svg{
+    width:16px!important;height:16px!important;
+  }
+
+  .qaOverviewCompact .qaQuickGridCompact{
+    height:calc(100% - 30px)!important;
+    align-content:center!important;
+    gap:8px!important;
+  }
+  .qaOverviewCompact .qaQuickGridCompact button{
+    height:58px!important;
+    min-height:58px!important;
+    padding:9px 10px!important;
+  }
+  .qaOverviewCompact .qaQuickGridCompact button>svg{
+    width:31px!important;height:31px!important;
+  }
+  .qaOverviewCompact .qaQuickGridCompact b{
+    font-size:10.5px!important;
+  }
+
+  /* Bottom row should be information-dense, not oversized */
+  .qaOverviewBottomGrid .qaDashCard{
+    padding:10px 13px!important;
+  }
+  .qaOverviewBottomGrid .qaDashHead{
+    margin-bottom:4px!important;
+  }
+  .qaOverviewBottomGrid .qaPopularTable>div{
+    min-height:36px!important;
+    grid-template-columns:16px 40px 1fr auto!important;
+    padding:2px 0!important;
+  }
+  .qaOverviewBottomGrid .qaPopularTable img{
+    width:40px!important;height:40px!important;
+  }
+  .qaOverviewBottomGrid .qaPopularTable b,
+  .qaOverviewBottomGrid .qaPopularTable strong{
+    font-size:10px!important;
+  }
+  .qaOverviewBottomGrid .qaPopularTable small{
+    font-size:8.5px!important;
+  }
+  .qaOverviewBottomGrid .qaFeedbackMini>div{
+    padding:5px 0!important;
+  }
+  .qaOverviewBottomGrid .qaFeedbackMini b{
+    font-size:11px!important;
+    color:#e5a900!important;
+    letter-spacing:.4px!important;
+  }
+  .qaOverviewBottomGrid .qaFeedbackMini span{
+    font-size:10px!important;
+    color:#334155!important;
+  }
+  .qaOverviewBottomGrid .qaCompactEmpty{
+    min-height:68px!important;
+    height:calc(100% - 26px)!important;
+  }
+  .qaOverviewBottomGrid .qaCompactEmpty b{
+    font-size:11px!important;
+  }
+  .qaOverviewBottomGrid .qaCompactEmpty span{
+    font-size:9px!important;
+  }
+}
