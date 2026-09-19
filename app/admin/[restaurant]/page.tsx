@@ -20,12 +20,21 @@ const PREVIEW_DATA:Data={restaurant:{id:'preview',slug:'makarilla',name:'Makaril
 
 export default function Page(){
  const params=useParams<{restaurant:string}>(),slug=String(params.restaurant||'').toLowerCase();
- const[data,setData]=useState<Data|null>(PREVIEW_DATA),[loading,setLoading]=useState(false),[error,setError]=useState(''),[saving,setSaving]=useState(false),[tab,setTab]=useState<Tab>('overview'),[query,setQuery]=useState(''),[category,setCategory]=useState('all'),[editing,setEditing]=useState<Product|null>(null),[isNew,setIsNew]=useState(false),[catDraft,setCatDraft]=useState<Category|null>(null),[dragCat,setDragCat]=useState<string|null>(null),[dragProduct,setDragProduct]=useState<string|null>(null),[deleteProductId,setDeleteProductId]=useState<string|null>(null);
+ const[data,setData]=useState<Data|null>(PREVIEW_DATA),[loading,setLoading]=useState(false),[error,setError]=useState(''),[saving,setSaving]=useState(false),[tab,setTab]=useState<Tab>('overview'),[query,setQuery]=useState(''),[category,setCategory]=useState('all'),[editing,setEditing]=useState<Product|null>(null),[isNew,setIsNew]=useState(false),[catDraft,setCatDraft]=useState<Category|null>(null),[dragCat,setDragCat]=useState<string|null>(null),[dragProduct,setDragProduct]=useState<string|null>(null),[deleteProductId,setDeleteProductId]=useState<string|null>(null),[deleteCategoryState,setDeleteCategoryState]=useState<{id:string;step:1|2}|null>(null),[categoryPage,setCategoryPage]=useState(1),[productPage,setProductPage]=useState(1);
  const load=async(silent=false)=>{setData(PREVIEW_DATA);setError('');setLoading(false)};
  useEffect(()=>{},[slug]);
  useEffect(()=>{},[slug]);
+ useEffect(()=>{setProductPage(1)},[category,query]);
+ useEffect(()=>{if(categoryPage>categoryPageCount)setCategoryPage(categoryPageCount)},[categoryPage,categoryPageCount]);
+ useEffect(()=>{if(productPage>productPageCount)setProductPage(productPageCount)},[productPage,productPageCount]);
  const action=async(body:any)=>true;
  const products=data?.products||[],categories=data?.categories||[],filtered=useMemo(()=>[...products].sort((a,b)=>a.sortOrder-b.sortOrder).filter(p=>(category==='all'||p.categoryId===category)&&(!query||`${p.name} ${p.description}`.toLocaleLowerCase('tr-TR').includes(query.toLocaleLowerCase('tr-TR')))),[products,category,query]);
+ const CATEGORY_PAGE_SIZE=5,PRODUCT_PAGE_SIZE=6;
+ const sortedCategories=useMemo(()=>[...categories].sort((a,b)=>a.sortOrder-b.sortOrder),[categories]);
+ const categoryPageCount=Math.max(1,Math.ceil(sortedCategories.length/CATEGORY_PAGE_SIZE));
+ const productPageCount=Math.max(1,Math.ceil(filtered.length/PRODUCT_PAGE_SIZE));
+ const visibleCategories=sortedCategories.slice((categoryPage-1)*CATEGORY_PAGE_SIZE,categoryPage*CATEGORY_PAGE_SIZE);
+ const visibleProducts=filtered.slice((productPage-1)*PRODUCT_PAGE_SIZE,productPage*PRODUCT_PAGE_SIZE);
  const persist=async(next:Product[])=>{if(data)setData({...data,products:next})};
  const addCategory=()=>setCatDraft({id:'',name:'',isActive:true,sortOrder:categories.length+1});
  const saveCategoryLocal=(draft:Category)=>{if(!data||!draft.name.trim())return;const item={...draft,id:draft.id||`c-${Date.now()}`,name:draft.name.trim()};const next=draft.id?categories.map(x=>x.id===draft.id?item:x):[...categories,item];setData({...data,categories:next});setCategory(item.id);setCatDraft(null)};
@@ -64,12 +73,14 @@ export default function Page(){
       <span className="qaCategoryMenuName"><LayoutGrid size={15}/><b>Tümü</b></span>
       <span className="qaCategoryMenuMeta">{products.length} ürün</span>
     </button>
-    {[...categories].sort((a,b)=>a.sortOrder-b.sortOrder).map(cat=><div key={cat.id} className={category===cat.id?'qaCategoryMenuRow active':'qaCategoryMenuRow'} draggable onDragStart={()=>setDragCat(cat.id)} onDragEnd={()=>setDragCat(null)} onDragOver={e=>{e.preventDefault();e.dataTransfer.dropEffect='move'}} onDrop={e=>{e.preventDefault();if(dragCat)reorderCategory(dragCat,cat.id)}}>
+    {visibleCategories.map(cat=><div key={cat.id} className={category===cat.id?'qaCategoryMenuRow active':'qaCategoryMenuRow'} draggable onDragStart={()=>setDragCat(cat.id)} onDragEnd={()=>setDragCat(null)} onDragOver={e=>{e.preventDefault();e.dataTransfer.dropEffect='move'}} onDrop={e=>{e.preventDefault();if(dragCat)reorderCategory(dragCat,cat.id)}}>
       <span className="qaCategoryDrag" title="Sürükleyerek sırala"><GripVertical size={16}/></span>
       <button type="button" className="qaCategoryMenuSelect" onClick={()=>setCategory(cat.id)}><b>{cat.name}</b><small>{products.filter(p=>p.categoryId===cat.id).length} ürün</small></button>
       <button type="button" className="qaCategoryMenuEdit" title="Kategoriyi düzenle" onClick={()=>setCatDraft(cat)}><Edit3 size={14}/></button>
+      <button type="button" className="qaCategoryMenuDelete" title="Kategoriyi sil" onClick={()=>setDeleteCategoryState({id:cat.id,step:1})}><Trash2 size={14}/></button>
     </div>)}
    </div>
+   {categoryPageCount>1&&<Pagination page={categoryPage} count={categoryPageCount} setPage={setCategoryPage}/>} 
    {catDraft&&<div className="qaCategoryPopover">
     <div className="qaCategoryPopoverHead"><div><b>{catDraft.id?'Kategori Düzenle':'Yeni Kategori'}</b><small>Menünüzde görünecek kategori adını girin.</small></div><button onClick={()=>setCatDraft(null)}>×</button></div>
     <label>Kategori Adı<input autoFocus value={catDraft.name} onChange={e=>setCatDraft({...catDraft,name:e.target.value})} onKeyDown={e=>{if(e.key==='Enter')saveCategoryLocal(catDraft);if(e.key==='Escape')setCatDraft(null)}} placeholder="Örn. İçecekler"/></label>
@@ -79,7 +90,7 @@ export default function Page(){
   <section className="qaMenuRail">
    <div className="qaPanelHead"><div><h2>Menüm</h2><p>Ürünleri seçin ve düzenleyin.</p></div><button onClick={openNew}><Plus size={14}/></button></div>
    <label className="qaSearch qaWorkbenchSearch"><Search size={16}/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Ürün ara..."/></label>
-   <div className="qaWorkbenchProducts">{filtered.map(p=><div className={editing?.id===p.id?'qaProductSortableRow active':'qaProductSortableRow'} key={p.id} draggable onDragStart={()=>setDragProduct(p.id)} onDragEnd={()=>setDragProduct(null)} onDragOver={e=>{e.preventDefault();e.dataTransfer.dropEffect='move'}} onDrop={e=>{e.preventDefault();if(dragProduct)reorderProduct(dragProduct,p.id)}} onClick={()=>{setEditing(p);setIsNew(false)}}>
+   <div className="qaWorkbenchProducts">{visibleProducts.map(p=><div className={editing?.id===p.id?'qaProductSortableRow active':'qaProductSortableRow'} key={p.id} draggable onDragStart={()=>setDragProduct(p.id)} onDragEnd={()=>setDragProduct(null)} onDragOver={e=>{e.preventDefault();e.dataTransfer.dropEffect='move'}} onDrop={e=>{e.preventDefault();if(dragProduct)reorderProduct(dragProduct,p.id)}} onClick={()=>{setEditing(p);setIsNew(false)}}>
       <span className="qaProductDrag" title="Sürükleyerek sırala"><GripVertical size={15}/></span>
       <img src={p.image||'/makarilla_tabak.png'} alt=""/>
       <span className="qaProductInfo"><b>{p.name}</b><small>{categories.find(c=>c.id===p.categoryId)?.name||'Kategori'}</small></span>
@@ -87,6 +98,7 @@ export default function Page(){
       <button type="button" className={p.isActive?'qaProductToggle on':'qaProductToggle'} title={p.isActive?'Yayından kaldır':'Yayınla'} onClick={e=>{e.stopPropagation();toggleProductActive(p.id)}}><i/></button>
       <button type="button" className="qaProductEditBtn" title="Ürünü düzenle" onClick={e=>{e.stopPropagation();setEditing(p);setIsNew(false)}}><Edit3 size={14}/></button>
     </div>)}</div>
+   {productPageCount>1&&<Pagination page={productPage} count={productPageCount} setPage={setProductPage}/>}
   </section>
   <Editor key={(editing||products[0])?.id||'new'} p={editing||products[0]||{id:'new',categoryId:categories[0]?.id||'',name:'',description:'',price:0,image:'',allergens:[],isActive:true,sortOrder:1}} cats={categories} isNew={isNew||!products.length} close={()=>{setEditing(products[0]||null);setIsNew(false)}} save={async p=>{await persist((isNew||!products.some(x=>x.id===p.id))?[...products,p]:products.map(x=>x.id===p.id?p:x));setEditing(p);setIsNew(false)}} del={id=>setDeleteProductId(id)}/>
  </div>}
@@ -113,9 +125,23 @@ export default function Page(){
       </div>
     </div>
   </div>}
+  {deleteCategoryState&&(()=>{const target=categories.find(x=>x.id===deleteCategoryState.id);const itemCount=products.filter(p=>p.categoryId===deleteCategoryState.id).length;const fallback=sortedCategories.find(x=>x.id!==deleteCategoryState.id);return <div className="ptConfirmOverlay" role="dialog" aria-modal="true">
+    <div className="ptConfirmCard">
+      <div className="ptConfirmIcon"><Trash2 size={21}/></div>
+      <div className="ptConfirmCopy">
+        <h3>{deleteCategoryState.step===1?'Kategoriyi silmek istiyor musunuz?':'Son kez onaylayın'}</h3>
+        <p>{deleteCategoryState.step===1?<><b>{target?.name||'Kategori'}</b> kategorisini silme işlemini başlatıyorsunuz.</>:itemCount>0?<><b>{target?.name||'Kategori'}</b> silinecek. İçindeki {itemCount} ürün {fallback?<><b>{fallback.name}</b> kategorisine taşınacak.</>:'kategorisiz kalacak.'} Bu işlem geri alınamaz.</>:<><b>{target?.name||'Kategori'}</b> kalıcı olarak silinecek. Bu işlem geri alınamaz.</>}</p>
+      </div>
+      <div className="ptConfirmActions">
+        <button type="button" className="secondary" onClick={()=>setDeleteCategoryState(null)}>Vazgeç</button>
+        {deleteCategoryState.step===1?<button type="button" className="danger" onClick={()=>setDeleteCategoryState({id:deleteCategoryState.id,step:2})}>Evet, Devam Et</button>:<button type="button" className="danger" onClick={()=>{if(!data)return;const id=deleteCategoryState.id;const remaining=sortedCategories.filter(x=>x.id!==id).map((x,i)=>({...x,sortOrder:i+1}));const fallbackId=remaining[0]?.id||'';const nextProducts=products.map(p=>p.categoryId===id?{...p,categoryId:fallbackId}:p);setData({...data,categories:remaining,products:nextProducts});if(category===id)setCategory('all');if(catDraft?.id===id)setCatDraft(null);setDeleteCategoryState(null);setCategoryPage(1)}}><Trash2 size={14}/>Kategoriyi Sil</button>}
+      </div>
+    </div>
+  </div>})()}
  </main>
 }
 
+function Pagination({page,count,setPage}:{page:number;count:number;setPage:(n:number)=>void}){return <div className="qaPagination"><button type="button" disabled={page===1} onClick={()=>setPage(Math.max(1,page-1))}><ChevronLeft size={13}/></button>{Array.from({length:count},(_,i)=>i+1).map(n=><button type="button" key={n} className={n===page?'active':''} onClick={()=>setPage(n)}>{n}</button>)}<button type="button" disabled={page===count} onClick={()=>setPage(Math.min(count,page+1))}><ChevronRight size={13}/></button></div>}
 function Title({title,sub,action}:{title:string;sub:string;action?:React.ReactNode}){return <div className="qaTitleRow"><div><h1>{title}</h1><p>{sub}</p></div>{action}</div>}
 function Overview({data,setTab,resolve}:{data:Data;setTab:(t:Tab)=>void;resolve:(id:string)=>void}){
  const{restaurant,products,categories,stats}=data;
