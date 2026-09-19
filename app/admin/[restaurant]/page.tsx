@@ -172,7 +172,14 @@ function Editor({p,cats,isNew,close,save,del}:{p:Product;cats:Category[];isNew:b
      <label>Kategori *<select value={d.categoryId} onChange={e=>setD({...d,categoryId:e.target.value})}>{cats.map(c=><option key={c.id} value={c.id}>{c.name}</option>)}</select></label>
     </div>
     <label>Açıklama<textarea placeholder="Ürününüzün içeriğini ve lezzetini anlatın..." maxLength={300} value={d.description} onChange={e=>setD({...d,description:e.target.value})}/><small>{d.description.length}/300</small></label>
-    <div className="qaWorkbenchPhotos"><b>Ürün Fotoğrafları</b><div><button type="button" className="qaUploadTile"><ImageOff size={26}/><strong>Fotoğraf Yükle</strong><small>JPG, PNG veya WEBP</small></button><label className="qaImageField">Görsel adresi<input value={d.image} onChange={e=>setD({...d,image:e.target.value})} placeholder="/urun-gorseli.png"/></label></div></div>
+    <div className="qaWorkbenchPhotos"><b>Ürün Fotoğrafı</b><div className="qaUploadArea">
+      <label className="qaUploadTile">
+       <input type="file" accept="image/png,image/jpeg,image/webp" onChange={e=>{const file=e.target.files?.[0];if(!file)return;if(file.size>5*1024*1024){alert('Fotoğraf en fazla 5 MB olabilir.');e.currentTarget.value='';return;}const reader=new FileReader();reader.onload=()=>setD({...d,image:String(reader.result||'')});reader.readAsDataURL(file)}}/>
+       {d.image?<img src={d.image} alt="Yüklenen ürün fotoğrafı"/>:<ImageOff size={27}/>}
+       <span><strong>{d.image?'Fotoğrafı Değiştir':'Fotoğraf Yükle'}</strong><small>JPG, PNG veya WEBP · Maksimum 5 MB</small></span>
+      </label>
+      {d.image&&<button type="button" className="qaRemovePhoto" onClick={()=>setD({...d,image:''})}><Trash2 size={14}/>Fotoğrafı Kaldır</button>}
+     </div></div>
     <div className="qaEditorSplit">
      <label>Fiyat *<div className="qaPrice"><span>₺</span><input type="number" value={d.price} onChange={e=>setD({...d,price:Number(e.target.value)})}/></div></label>
      <div className="qaToggleField"><span><b>Menüde Göster</b><small>Bu ürün QR menünüzde görünsün mü?</small></span><button type="button" className={d.isActive?'qaToggle on':'qaToggle'} onClick={()=>setD({...d,isActive:!d.isActive})}><i/></button></div>
@@ -181,7 +188,7 @@ function Editor({p,cats,isNew,close,save,del}:{p:Product;cats:Category[];isNew:b
      <div className="qaToggleField"><span><b>Öne Çıkan Ürün</b><small>Bu ürünü QR menüde üst sıralarda göster.</small></span><button type="button" className="qaToggle"><i/></button></div>
      <label>Stok Durumu<select defaultValue="var"><option value="var">Stokta Var</option><option value="yok">Stokta Yok</option></select></label>
     </div>
-    <div className="qaWorkbenchActions"><button className="qaClean" type="button" onClick={()=>setD({...p,name:'',description:'',price:0,image:''})}><Trash2 size={15}/>Temizle</button>{!isNew&&<button className="qaDelete" type="button" onClick={()=>del(d.id)}>Sil</button>}<button className="qaSaveProduct" disabled={!d.name.trim()} onClick={()=>save({...d,name:d.name.trim()})}><CheckCircle2 size={16}/>{isNew?'Ürünü Kaydet':'Değişiklikleri Kaydet'}</button></div>
+    <div className="qaWorkbenchActions">{isNew?<button className="qaClean" type="button" onClick={()=>setD({...p,name:'',description:'',price:0,image:''})}><Trash2 size={15}/>Temizle</button>:<button className="qaDelete" type="button" onClick={()=>del(d.id)}><Trash2 size={15}/>Ürünü Sil</button>}<button className="qaSaveProduct" disabled={!d.name.trim()} onClick={()=>save({...d,name:d.name.trim()})}><CheckCircle2 size={16}/>{isNew?'Ürünü Kaydet':'Değişiklikleri Kaydet'}</button></div>
    </div>
   </section>
   <aside className="qaWorkbenchPreview">
