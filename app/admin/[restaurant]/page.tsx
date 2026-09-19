@@ -236,7 +236,7 @@ function Editor({restaurant,p,cats,isNew,close,save,del}:{restaurant:Restaurant;
  const ALLERGENS=['Gluten','Süt','Yumurta','Yer Fıstığı','Kuruyemiş','Soya','Balık','Kabuklu Deniz Ürünü','Susam'];
  const toggleAllergen=(name:string)=>setD(v=>({...v,allergens:(v.allergens||[]).includes(name)?(v.allergens||[]).filter(x=>x!==name):[...(v.allergens||[]),name]}));
  const pickPhoto=(file?:File)=>{if(!file)return;if(file.size>5*1024*1024){alert('Fotoğraf en fazla 5 MB olabilir.');return}const reader=new FileReader();reader.onload=()=>setD(v=>({...v,image:String(reader.result||'')}));reader.readAsDataURL(file)};
- const handleSave=async()=>{if(!d.name.trim()||savingNow)return;const wasNew=isNew;setSavingNow(true);try{await save({...d,name:d.name.trim()});setSaveNotice(wasNew?'added':'saved');window.setTimeout(()=>setSaveNotice(null),2600)}finally{setSavingNow(false)}};
+ const handleSave=async()=>{if(!d.name.trim()||savingNow)return;const wasNew=isNew;setSavingNow(true);try{await save({...d,name:d.name.trim()});setSaveNotice(wasNew?'added':'saved');window.setTimeout(()=>setSaveNotice(null),3000)}finally{setSavingNow(false)}};
  return <>
   <section className="qaWorkbenchEditor">
    <div className="qaWorkbenchTitle"><h2>Ürün Ekle / Düzenle</h2><p>Bilgileri düzenleyin; değişiklikleri sağdaki QR menü önizlemesinde anında görün.</p></div>
@@ -257,12 +257,12 @@ function Editor({restaurant,p,cats,isNew,close,save,del}:{restaurant:Restaurant;
       <div className="qaNutritionHead"><div><b>Beslenme & Alerjen</b><small>Müşterinin menüde göreceği ek bilgiler.</small></div><label>Kalori (kcal)<input type="number" min="0" step="1" value={d.calories??''} placeholder="Örn. 620" onChange={e=>setD({...d,calories:e.target.value===''?undefined:Number(e.target.value)})}/></label></div>
       <div className="qaAllergenChips">{ALLERGENS.map(a=><button type="button" key={a} className={(d.allergens||[]).includes(a)?'active':''} onClick={()=>toggleAllergen(a)}>{a}</button>)}</div>
     </div>
-    {saveNotice&&<div className="qaSaveNotice"><div className="qaSaveNoticeIcon"><CheckCircle2 size={18}/></div><div><b>{saveNotice==='added'?'Ürün eklendi':'Değişiklikler kaydedildi'}</b><span>{saveNotice==='added'?'Ürün menünüze başarıyla eklendi.':'Yaptığınız değişiklikler başarıyla kaydedildi.'}</span></div></div>}
     <div className="qaWorkbenchActions">{!isNew&&<button className="qaDelete" type="button" onClick={()=>del(d.id)}><Trash2 size={15}/>Ürünü Sil</button>}<button className="qaSaveProduct" disabled={!d.name.trim()||savingNow} onClick={handleSave}><CheckCircle2 size={16}/>{savingNow?'Kaydediliyor…':isNew?'Ürünü Kaydet':'Değişiklikleri Kaydet'}</button></div>
    </div>
   </section>
   <aside className="qaWorkbenchPreview">
    <header><div><Eye size={20}/><span><b>QR Menü Önizleme</b><small>Müşterinin göreceği ürün detay ekranı.</small></span></div><span className="qaMobileBadge">Mobil</span></header>
+   <div className="qaPreviewStage">
    <div className="qaLiveMenuPhone">
     <div className="qaLiveMenuTop">
       <button type="button" className="qaLiveClose" aria-label="Kapat">×</button>
@@ -287,6 +287,8 @@ function Editor({restaurant,p,cats,isNew,close,save,del}:{restaurant:Restaurant;
       <div><MoreHorizontal size={18}/><span>Daha Fazla</span></div>
     </div>
    </div>
+   </div>
   </aside>
+  {saveNotice&&<div className="qaSaveToast" role="status" aria-live="polite"><div className="qaSaveToastIcon"><CheckCircle2 size={18}/></div><div><b>{saveNotice==='added'?'Ürün eklendi':'Değişiklikler kaydedildi'}</b><span>{saveNotice==='added'?'Ürün menünüze başarıyla eklendi.':'Ürün bilgileri başarıyla güncellendi.'}</span></div></div>}
  </>;
 }
