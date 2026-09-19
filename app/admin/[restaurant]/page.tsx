@@ -57,16 +57,15 @@ export default function Page(){
        {tab==='menu'&&<div className="qaMenuWorkbench">
   <section className="qaCategoryRail">
    <div className="qaPanelHead"><div><h2>Kategoriler</h2><p>Menü gruplarını yönetin.</p></div><button onClick={addCategory}><Plus size={14}/></button></div>
-   <div className="qaCategoryList">
-    <button type="button" className={category==='all'?'qaCategoryLine qaCategoryAll active':'qaCategoryLine qaCategoryAll'} onClick={()=>setCategory('all')}>
-      <span className="qaCategoryLineMain"><LayoutGrid size={15}/><b>Tümü</b></span>
-      <span className="qaCategoryLineCount">{products.length}</span>
+   <div className="qaCategoryMenuList">
+    <button type="button" className={category==='all'?'qaCategoryMenuRow active':'qaCategoryMenuRow'} onClick={()=>setCategory('all')}>
+      <span className="qaCategoryMenuName"><LayoutGrid size={15}/><b>Tümü</b></span>
+      <span className="qaCategoryMenuMeta">{products.length} ürün</span>
     </button>
-    {[...categories].sort((a,b)=>a.sortOrder-b.sortOrder).map(cat=><div key={cat.id} className={category===cat.id?'qaCategoryLine active':'qaCategoryLine'} draggable onDragStart={()=>setDragCat(cat.id)} onDragEnd={()=>setDragCat(null)} onDragOver={e=>{e.preventDefault();e.dataTransfer.dropEffect='move'}} onDrop={e=>{e.preventDefault();if(dragCat)reorderCategory(dragCat,cat.id)}}>
-      <span className="qaCatGrip" title="Sürükleyerek sırala"><GripVertical size={15}/></span>
-      <button type="button" className="qaCategoryLineSelect" onClick={()=>setCategory(cat.id)}><b>{cat.name}</b></button>
-      <span className="qaCategoryLineCount">{products.filter(p=>p.categoryId===cat.id).length}</span>
-      <button type="button" className="qaCatEdit" title="Kategoriyi düzenle" onClick={()=>setCatDraft(cat)}><Edit3 size={13}/></button>
+    {[...categories].sort((a,b)=>a.sortOrder-b.sortOrder).map(cat=><div key={cat.id} className={category===cat.id?'qaCategoryMenuRow active':'qaCategoryMenuRow'} draggable onDragStart={()=>setDragCat(cat.id)} onDragEnd={()=>setDragCat(null)} onDragOver={e=>{e.preventDefault();e.dataTransfer.dropEffect='move'}} onDrop={e=>{e.preventDefault();if(dragCat)reorderCategory(dragCat,cat.id)}}>
+      <span className="qaCategoryDrag" title="Sürükleyerek sırala"><GripVertical size={16}/></span>
+      <button type="button" className="qaCategoryMenuSelect" onClick={()=>setCategory(cat.id)}><b>{cat.name}</b><small>{products.filter(p=>p.categoryId===cat.id).length} ürün</small></button>
+      <button type="button" className="qaCategoryMenuEdit" title="Kategoriyi düzenle" onClick={()=>setCatDraft(cat)}><Edit3 size={14}/></button>
     </div>)}
    </div>
    {catDraft&&<div className="qaCategoryPopover">
