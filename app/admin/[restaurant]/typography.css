@@ -170,3 +170,210 @@
  .qaOverviewCompact .qaDashboardMetric span{font-size:10px!important}
  .qaHealthCompact{grid-template-columns:92px 1fr}.qaHealthRing{width:82px;height:82px}.qaHealthRing strong{font-size:21px}
 }
+
+
+/* Local overview refinement v5 — compact like PanelTakip order screen, readable type */
+@media(min-width:901px){
+  .ptWorkspaceOverview{grid-template-rows:60px minmax(0,1fr)!important}
+  .ptWorkspaceOverview .ptTopbar{height:60px!important}
+  .ptWorkspaceOverview .ptContent{
+    padding:12px 14px!important;
+    overflow:hidden!important;
+  }
+  .ptWorkspaceOverview .ptAdminSurface.qaMain{
+    height:100%!important;
+    min-height:0!important;
+    overflow:hidden!important;
+  }
+
+  .qaOverviewCompact{
+    height:100%!important;
+    display:grid!important;
+    grid-template-rows:72px minmax(170px,.95fr) minmax(175px,.82fr)!important;
+    gap:10px!important;
+    padding:0!important;
+  }
+
+  .qaOverviewTop{
+    display:grid!important;
+    grid-template-columns:repeat(4,minmax(0,1fr)) minmax(160px,.92fr)!important;
+    gap:8px!important;
+  }
+  .qaOverviewCompact .qaDashboardMetric{
+    height:72px!important;
+    min-height:72px!important;
+    padding:9px 12px!important;
+    grid-template-columns:34px 1fr!important;
+    grid-template-rows:auto auto auto!important;
+    column-gap:9px!important;
+    align-content:center!important;
+  }
+  .qaOverviewCompact .qaDashboardMetric>i{
+    width:32px!important;height:32px!important;border-radius:9px!important;
+  }
+  .qaOverviewCompact .qaDashboardMetric strong{
+    font-size:20px!important;line-height:1!important;
+  }
+  .qaOverviewCompact .qaDashboardMetric span{
+    font-size:11px!important;line-height:1.15!important;font-weight:750!important;
+  }
+  .qaOverviewCompact .qaDashboardMetric small{
+    font-size:9px!important;line-height:1.1!important;margin-top:2px!important;
+  }
+  .qaPrimaryAction{
+    height:72px!important;
+    border-radius:13px!important;
+    font-size:12px!important;
+  }
+
+  .qaOverviewMainGrid{
+    display:grid!important;
+    grid-template-columns:1.22fr .92fr .98fr!important;
+    gap:10px!important;
+    min-height:0!important;
+  }
+  .qaOverviewBottomGrid{
+    display:grid!important;
+    grid-template-columns:1.08fr .98fr .94fr!important;
+    gap:10px!important;
+    min-height:0!important;
+  }
+
+  .qaOverviewCompact .qaDashCard{
+    padding:12px 14px!important;
+    border-radius:15px!important;
+    min-height:0!important;
+    overflow:hidden!important;
+  }
+  .qaOverviewCompact .qaDashHead{
+    min-height:24px!important;
+    margin:0 0 7px!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:space-between!important;
+    gap:8px!important;
+  }
+  .qaOverviewCompact .qaDashHead>div{
+    min-width:0!important;
+  }
+  .qaOverviewCompact .qaDashHead h2{
+    margin:0!important;
+    font-size:14px!important;
+    line-height:1.2!important;
+    letter-spacing:-.1px!important;
+    white-space:nowrap!important;
+  }
+  .qaOverviewCompact .qaDashHead p{
+    margin:2px 0 0!important;
+    font-size:9px!important;
+    line-height:1.2!important;
+  }
+  .qaOverviewCompact .qaDashHead>button{
+    flex:0 0 auto!important;
+    font-size:9px!important;
+    padding:5px 8px!important;
+  }
+  .qaOverviewCompact .qaStatusPill{
+    flex:0 0 auto!important;
+    font-size:9px!important;
+    padding:4px 7px!important;
+  }
+
+  .qaOverviewCompact .qaPerformanceCard .qaRealChart{
+    height:118px!important;
+    padding:6px 4px 0!important;
+  }
+  .qaOverviewCompact .qaPerformanceCard .qaRealChart>div{
+    gap:2px!important;
+  }
+  .qaOverviewCompact .qaPerformanceCard .qaRealChart>div>span{
+    width:min(24px,50%)!important;
+  }
+  .qaOverviewCompact .qaPerformanceCard .qaRealChart b{
+    font-size:8px!important;
+  }
+  .qaOverviewCompact .qaPerformanceCard .qaRealChart small{
+    font-size:8px!important;
+  }
+
+  .qaHealthCompact{
+    height:calc(100% - 28px)!important;
+    grid-template-columns:96px 1fr!important;
+    gap:10px!important;
+  }
+  .qaHealthRing{
+    width:88px!important;height:88px!important;
+  }
+  .qaHealthRing:after{inset:9px!important}
+  .qaHealthRing strong{
+    font-size:22px!important;
+  }
+  .qaOverviewCompact .qaHealthList{
+    gap:8px!important;
+  }
+  .qaOverviewCompact .qaHealthList>div{
+    font-size:10px!important;
+    gap:6px!important;
+  }
+  .qaOverviewCompact .qaHealthList svg{
+    width:15px!important;height:15px!important;
+  }
+
+  .qaOverviewCompact .qaQuickGridCompact{
+    grid-template-columns:1fr 1fr!important;
+    gap:6px!important;
+  }
+  .qaOverviewCompact .qaQuickGridCompact button{
+    height:50px!important;
+    min-height:50px!important;
+    padding:7px 8px!important;
+  }
+  .qaOverviewCompact .qaQuickGridCompact button>svg{
+    width:28px!important;height:28px!important;padding:5px!important;
+  }
+  .qaOverviewCompact .qaQuickGridCompact b{
+    font-size:10px!important;
+  }
+
+  .qaOverviewCompact .qaPopularTable>div{
+    min-height:42px!important;
+    grid-template-columns:16px 34px 1fr auto!important;
+    gap:7px!important;
+    padding:3px 0!important;
+  }
+  .qaOverviewCompact .qaPopularTable img{
+    width:34px!important;height:34px!important;border-radius:7px!important;
+  }
+  .qaOverviewCompact .qaPopularTable .qaRank{
+    font-size:9px!important;
+  }
+  .qaOverviewCompact .qaPopularTable b,
+  .qaOverviewCompact .qaPopularTable strong{
+    font-size:9px!important;
+  }
+  .qaOverviewCompact .qaPopularTable small{
+    font-size:7.5px!important;
+  }
+
+  .qaOverviewCompact .qaFeedbackMini>div{
+    padding:6px 0!important;
+  }
+  .qaOverviewCompact .qaFeedbackMini b{
+    font-size:9px!important;
+    letter-spacing:.2px!important;
+  }
+  .qaOverviewCompact .qaFeedbackMini span{
+    font-size:9px!important;
+    line-height:1.2!important;
+  }
+
+  .qaOverviewCompact .qaCompactEmpty{
+    min-height:82px!important;
+    height:calc(100% - 28px)!important;
+    gap:5px!important;
+    font-size:9px!important;
+  }
+  .qaOverviewCompact .qaCompactEmpty svg{
+    width:20px!important;height:20px!important;
+  }
+}
