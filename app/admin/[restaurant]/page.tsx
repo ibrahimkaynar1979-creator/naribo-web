@@ -154,4 +154,45 @@ function FeedbackSection({items,stats}:{items:Feedback[];stats:Stats}){const pos
 function StatsSection({stats}:{stats:Stats}){const peak=stats.dailyViews.length?Math.max(...stats.dailyViews.map(x=>x.count)):0;return <div className="qaPage qaStatsPage"><Title title="İstatistikler" sub="QR menünüzün kullanım ve ürün performansını takip edin."/><div className="qaStatsMetrics"><Metric icon={<Eye/>} value={String(stats.todayViews)} label="Bugün" note="Menü görüntülenmesi"/><Metric icon={<BarChart3/>} value={String(stats.totalViews)} label="Toplam" note="Menü görüntülenmesi"/><Metric icon={<Star/>} value={stats.feedbackCount?stats.averageRating.toFixed(1):'—'} label="Müşteri Puanı" note={`${stats.feedbackCount} değerlendirme`}/><Metric icon={<Activity/>} value={String(peak)} label="En Yoğun Gün" note="Görüntülenme"/></div><div className="qaStatsGrid"><section className="qaManageCard qaStatsChart"><div className="qaDashHead"><div><h2>Son 7 Gün</h2><p>QR menü görüntülenmeleri.</p></div><span className="qaStatusPill">7 gün</span></div><MiniChart rows={stats.dailyViews}/></section><section className="qaManageCard"><div className="qaDashHead"><div><h2>En Çok İncelenen Ürünler</h2><p>Ürün ilgisine göre sıralama.</p></div></div><div className="qaStatProducts">{stats.topProducts.map((p,i)=><div key={p.id}><b>{i+1}</b><img src={p.image||'/makarilla_tabak.png'} alt=""/><span>{p.name}</span><strong>{p.views}</strong></div>)}</div></section><section className="qaManageCard qaInsightCard"><h2>Hızlı İçgörü</h2><div><span>Toplam görüntülenme</span><b>{stats.totalViews}</b></div><div><span>Bugünkü pay</span><b>{stats.totalViews?Math.round(stats.todayViews/stats.totalViews*100):0}%</b></div><div><span>Bekleyen çağrı</span><b>{stats.pendingCalls}</b></div></section></div></div>}
 function SettingsSection({restaurant,save}:{restaurant:Restaurant;save:(r:Restaurant)=>void}){const[d,setD]=useState(restaurant),[notifications,setNotifications]=useState(true),[calls,setCalls]=useState(true),[feedback,setFeedback]=useState(true);return <div className="qaPage qaSettingsPage"><Title title="Ayarlar" sub="QR menü, bildirim ve hesap tercihlerini yönetin." action={<button className="qaAdd" onClick={()=>save(d)}><Save/>Kaydet</button>}/><div className="qaSettingsGrid"><section className="qaManageCard"><h2>Menü Ayarları</h2><div className="qaSettingRow"><div><b>Menü yayında</b><span>Müşteriler QR menüyü görüntüleyebilir.</span></div><button className="qaSwitch on"><i/></button></div><div className="qaSettingRow"><div><b>Tema rengi</b><span>Menüde kullanılan ana vurgu rengi.</span></div><div className="qaColorRow"><input type="color" value={d.themeColor||'#14b8c4'} onChange={e=>setD({...d,themeColor:e.target.value})}/></div></div></section><section className="qaManageCard"><h2>Bildirimler</h2><div className="qaSettingRow"><div><b>Garson çağrıları</b><span>Yeni çağrılarda bildirim göster.</span></div><button className={calls?'qaSwitch on':'qaSwitch'} onClick={()=>setCalls(!calls)}><i/></button></div><div className="qaSettingRow"><div><b>Geri bildirimler</b><span>Yeni yorumlarda bildirim göster.</span></div><button className={feedback?'qaSwitch on':'qaSwitch'} onClick={()=>setFeedback(!feedback)}><i/></button></div><div className="qaSettingRow"><div><b>Genel bildirimler</b><span>Panel bildirimlerini açık tut.</span></div><button className={notifications?'qaSwitch on':'qaSwitch'} onClick={()=>setNotifications(!notifications)}><i/></button></div></section><section className="qaManageCard"><h2>Hesap & Güvenlik</h2><div className="qaSettingRow"><div><b>Yönetici hesabı</b><span>Makarilla · Yönetici</span></div><button className="qaSecondary">Hesabı Yönet</button></div><div className="qaSettingRow"><div><b>Şifre</b><span>Giriş güvenliğinizi güncelleyin.</span></div><button className="qaSecondary">Şifreyi Değiştir</button></div></section></div></div>}
 function ago(v:string){const m=Math.max(0,Math.round((Date.now()-new Date(v).getTime())/60000));return m<1?'Şimdi':m<60?`${m} dk önce`:`${Math.floor(m/60)} sa önce`}
-function Editor({p,cats,isNew,close,save,del}:{p:Product;cats:Category[];isNew:boolean;close:()=>void;save:(p:Product)=>void;del:(id:string)=>void}){const[d,setD]=useState(p);return <div className="qaEditorBackdrop"><section className="qaEditor"><header><button onClick={close}><ChevronLeft/></button><h2>{isNew?'Ürün Ekle':'Ürün Düzenle'}</h2><button disabled={isNew} onClick={()=>del(d.id)}><Trash2/></button></header><div className="qaEditorPhoto"><img src={d.image||'/makarilla_tabak.png'} alt=""/></div><label>Ürün Adı<input value={d.name} onChange={e=>setD({...d,name:e.target.value})}/></label><label>Açıklama<textarea value={d.description} onChange={e=>setD({...d,description:e.target.value})}/></label><label>Görsel URL<input value={d.image} onChange={e=>setD({...d,image:e.target.value})}/></label><div className="qaFormGrid"><label>Kategori<select value={d.categoryId} onChange={e=>setD({...d,categoryId:e.target.value})}>{cats.map(c=><option key={c.id} value={c.id}>{c.name}</option>)}</select></label><label>Fiyat<div className="qaPrice"><span>₺</span><input type="number" value={d.price} onChange={e=>setD({...d,price:Number(e.target.value)})}/></div></label></div><div className="qaVisibility"><span>Menüde Göster</span><button className={d.isActive?'qaToggle on':'qaToggle'} onClick={()=>setD({...d,isActive:!d.isActive})}><i/></button></div><button className="qaSave" disabled={!d.name.trim()} onClick={()=>save({...d,name:d.name.trim()})}>Değişiklikleri Kaydet</button></section></div>}
+function Editor({p,cats,isNew,close,save,del}:{p:Product;cats:Category[];isNew:boolean;close:()=>void;save:(p:Product)=>void;del:(id:string)=>void}){
+ const[d,setD]=useState(p);
+ const cat=cats.find(c=>c.id===d.categoryId)?.name||"Kategori";
+ return <div className="qaProductEditorPage">
+  <div className="qaProductEditorTop">
+   <button className="qaBackBtn" onClick={close}><ChevronLeft size={18}/></button>
+   <div><span>Menüm /</span><h2>{isNew?'Ürün Ekle':'Ürün Düzenle'}</h2><p>Ürün bilgilerini girin, QR menünüzde nasıl görüneceğini anında önizleyin.</p></div>
+  </div>
+  <div className="qaProductEditorGrid">
+   <section className="qaProductFormCard">
+    <h3>Temel Bilgiler</h3>
+    <div className="qaEditorTwo">
+     <label>Ürün Adı *<input placeholder="Örn: Tavuklu Fettuccine" value={d.name} maxLength={100} onChange={e=>setD({...d,name:e.target.value})}/><small>{d.name.length}/100</small></label>
+     <label>Kategori *<select value={d.categoryId} onChange={e=>setD({...d,categoryId:e.target.value})}>{cats.map(c=><option key={c.id} value={c.id}>{c.name}</option>)}</select></label>
+    </div>
+    <label>Açıklama<textarea placeholder="Ürününüzün içeriğini ve lezzetini anlatın..." maxLength={300} value={d.description} onChange={e=>setD({...d,description:e.target.value})}/><small>{d.description.length}/300</small></label>
+    <div className="qaPhotoBlock"><b>Ürün Fotoğrafı</b><div className="qaPhotoUpload">
+      <div className="qaUploadBox"><ImageIcon size={28}/><strong>Fotoğraf URL</strong><span>JPG, PNG veya WEBP</span></div>
+      <label className="qaImageUrl">Görsel adresi<input value={d.image} onChange={e=>setD({...d,image:e.target.value})} placeholder="/urun-gorseli.png"/></label>
+    </div></div>
+    <div className="qaPriceVisibility"><label>Fiyat (₺) *<div className="qaPrice"><span>₺</span><input type="number" value={d.price} onChange={e=>setD({...d,price:Number(e.target.value)})}/></div></label><div><b>Menüde Göster</b><small>Bu ürün QR menünüzde görünsün mü?</small><button className={d.isActive?'qaToggle on':'qaToggle'} onClick={()=>setD({...d,isActive:!d.isActive})}><i/></button></div></div>
+    <footer><button className="qaCancel" onClick={close}>İptal</button>{!isNew&&<button className="qaDelete" onClick={()=>del(d.id)}><Trash2 size={15}/>Sil</button>}<button className="qaSaveProduct" disabled={!d.name.trim()} onClick={()=>save({...d,name:d.name.trim()})}><CheckCircle2 size={16}/>{isNew?'Ürünü Kaydet':'Değişiklikleri Kaydet'}</button></footer>
+   </section>
+   <aside className="qaLivePreview">
+    <header><div><Eye size={20}/><span><b>QR Menü Önizleme</b><small>Ürününüz QR menünüzde bu şekilde görünecek.</small></span></div><span className="qaMobileBadge">Mobil</span></header>
+    <div className="qaPhone">
+     <div className="qaPhoneNotch"/>
+     <div className="qaPhoneScreen">
+      <div className="qaPreviewBrand">Makarilla<small>PASTA & MORE</small></div>
+      <div className="qaPreviewCat">{cat}</div>
+      <img src={d.image||'/makarilla_tabak.png'} alt="Ürün önizleme"/>
+      <h4>{d.name||'Ürün Adı'}</h4>
+      <p>{d.description||'Ürün açıklaması burada görünecek.'}</p>
+      <strong>₺{Number(d.price||0).toLocaleString('tr-TR')}</strong>
+      <button>Ürünü İncele</button>
+     </div>
+    </div>
+    <div className="qaPreviewChecks"><b>Görünüm Detayları</b><span><CheckCircle2/>Ürün fotoğrafı</span><span><CheckCircle2/>Ürün adı</span><span><CheckCircle2/>Açıklama</span><span><CheckCircle2/>Fiyat</span><span><CheckCircle2/>{cat} altında listelenir</span></div>
+   </aside>
+  </div>
+ </div>
+}
