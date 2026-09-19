@@ -82,17 +82,21 @@ function Overview({data,setTab,resolve}:{data:Data;setTab:(t:Tab)=>void;resolve:
   <section className="qaOverviewHero">
    <div className="qaOverviewHello">
     <span>Merhaba, {restaurant.name}</span>
-    <div className="qaOverviewTitleLine"><h1>{restaurant.name} QR Menü</h1><span className="qaLiveBadge"><i/>Yayında</span></div>
+    <div className="qaOverviewTitleLine">
+     <h1>{restaurant.name} QR Menü</h1>
+     <span className="qaLiveBadge"><i/>Yayında</span>
+     <button className="qaQrInlineCard" onClick={()=>setTab("qr")}>
+      <span className="qaQrInlineIcon"><QrCode size={28}/></span>
+      <span><b>QR Menü</b><small>Kodu görüntüle</small></span>
+      <ChevronRight size={14}/>
+     </button>
+    </div>
     <p>Menünüz yayında! İşte hızlı yönetim alanınız.</p>
    </div>
    <div className="qaOverviewHeroActions">
     <a href={menuUrl} target="_blank" rel="noreferrer" className="qaGhostAction"><ExternalLink size={15}/>Menüyü Görüntüle</a>
     <button className="qaHeroAdd" onClick={()=>setTab("menu")}><Plus size={16}/>Ürün Ekle</button>
    </div>
-   <button className="qaQrPreviewCard" onClick={()=>setTab("qr")}>
-    <span className="qaQrPreviewIcon"><QrCode size={44}/></span>
-    <span><b>QR Menünüz</b><small>Müşterileriniz bu kodla menünüze ulaşır.</small><em>QR Kodu Görüntüle <ChevronRight size={13}/></em></span>
-   </button>
   </section>
 
   <section className="qaOverviewSummary">
